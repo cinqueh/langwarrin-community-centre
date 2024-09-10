@@ -1,0 +1,144 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #133e29; /* Dark green background */
+  padding: 10px 20px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.subText {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: lighter;
+}
+
+.nav {
+  display: flex;
+  gap: 20px; /* Spacing between nav items */
+}
+
+.navItem {
+  color: #f5f5f5;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.navItem:hover {
+  text-decoration: underline;
+}
+
+.membershipButton {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 5px 15px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.membershipButton:hover {
+  background-color: #e2e2e2;
+}
+
+.footer {
+  background-color: #133e29; /* Dark green background */
+  padding: 40px 20px;
+  text-align: center;
+  color: #f5f5f5;
+  font-family: 'Arial', sans-serif;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contactSection,
+.logoSection,
+.addressSection {
+  flex: 1;
+  margin: 10px;
+  min-width: 250px;
+}
+
+.contactTitle,
+.addressTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.logoText {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.subText {
+  font-size: 18px;
+  font-weight: lighter;
+  color: #e2e2e2;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.button {
+  background-color: #f5f5f5;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.button:hover {
+  background-color: #e2e2e2;
+}
+
+.copyright {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #e2e2e2;
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .logoText {
+    font-size: 28px;
+  }
+
+  .contactTitle,
+  .addressTitle {
+    font-size: 20px;
+  }
+}
