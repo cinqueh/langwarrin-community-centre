@@ -1,6 +1,6 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import { RoomBookingCardLeft, RoomBookingCardRight } from "./components/Room Booking/RoomBookingCard"
+import { RoomBookingCardLeft, RoomBookingCardRight } from "./components/room-booking/room-booking-card"
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 

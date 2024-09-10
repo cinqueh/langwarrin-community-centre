@@ -19,6 +19,16 @@ jest.mock("../../../components/builder", () => ({
   RenderBuilderContent: jest.fn(() => <div>Mocked Content</div>),
 }));
 
+// // mock the Header component
+// jest.mock("../../../components/layout/footer", () => ({
+//   Footer: jest.fn(() => <div>Footer</div>),
+// }));
+
+// // mock the Footer component
+// jest.mock("../../../components/layout/header", () => ({
+//   Header: jest.fn(() => <div>Header</div>),
+// }));
+
 // run the unit tests
 describe('Builder Page Component', () => {
 

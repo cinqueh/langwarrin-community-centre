@@ -5,6 +5,9 @@ import { BuilderContent, builder } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import "../builder-registry";
 
+import Header from "./layout/header";
+import Footer from "./layout/footer";
+
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>;
 
 // Builder Public API Key set in .env file
@@ -17,7 +20,11 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   // If "content" has a value or the page is being previewed in Builder,
   // render the BuilderComponent with the specified content and model props.
   if (content || isPreviewing) {
-    return <BuilderComponent content={content} model={model} />;
+    return <>
+          <Header/>
+          <BuilderComponent content={content} model={model} />
+          <Footer/>
+    </>;
   }
   // If the "content" is falsy and the page is
   // not being previewed in Builder, render the
