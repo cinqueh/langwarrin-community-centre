@@ -11,116 +11,12 @@ import {
   ImageCard,
   ActivitiesCard,
   YouthGroupCard,
-  ParentsInfoCard
+  ParentsInfoCard,
 } from "./components/children/children-group-card";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-const parentsInfoCardParameters = [
-  {
-    name: "information1title",
-    type: "string",
-    defaultValue: "Information 1 Title",
-  },
-  {
-    name: "information1link",
-    type: "string",
-    defaultValue: "Information 1 Link",
-  },
-  {
-    name: "information2title",
-    type: "string",
-    defaultValue: "Information 2 Title",
-  },
-  {
-    name: "information2link",
-    type: "string",
-    defaultValue: "Information 2 Link",
-  },
-  {
-    name: "information3title",
-    type: "string",
-    defaultValue: "Information 3 Title",
-  },
-  {
-    name: "information3link",
-    type: "string",
-    defaultValue: "Information 3 Link",
-  },
-];
-
-const youthGroupCardParameters = [
-  {
-    name: "imageUrl1",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], // allowed file types
-  },
-  {
-    name: "altText1",
-    type: "string",
-    description:
-      "This is the alternative text for the image, used for accessibility and SEO",
-  },
-  {
-    name: "infoTitle",
-    type: "string",
-    defaultValue: "Information Title",
-  },
-  {
-    name: "infoDescription",
-    type: "string",
-    defaultValue: "Information Description",
-  },
-];
-
-const activityCardParameters = [
-  {
-    name: "activity1Title",
-    type: "string",
-    defaultValue: "Activity 1 Title",
-  },
-  {
-    name: "activity1Description",
-    type: "string",
-    defaultValue: "Activity 1 Description",
-  },
-  {
-    name: "activity2Title",
-    type: "string",
-    defaultValue: "Activity 2 Title",
-  },
-  {
-    name: "activity2Description",
-    type: "string",
-    defaultValue: "Activity 2 Description",
-  },
-];
-
-const imageCardParameters = [
-  {
-    name: "imageUrl1",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], // allowed file types
-  },
-  {
-    name: "altText1",
-    type: "string",
-    description:
-      "This is the alternative text for the image, used for accessibility and SEO",
-  },
-  {
-    name: "imageUrl2",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], // allowed file types
-  },
-  {
-    name: "altText2",
-    type: "string",
-    description:
-      "This is the alternative text for the image, used for accessibility and SEO",
-  },
-];
-
+// Childcare page
 const titleCardParameters = [
   {
     name: "pageTitle",
@@ -129,11 +25,11 @@ const titleCardParameters = [
   },
 ];
 
-const CommunityChildcareCardParameters = [
+const communityChildcareCardParameters = [
   {
     name: "imageUrl",
     type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], // allowed file types
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
   },
   {
     name: "altText",
@@ -201,6 +97,113 @@ const childrenGroupCardParameters = [
   },
 ];
 
+const imageCardParameters = [
+  {
+    name: "imageUrl1",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
+  },
+  {
+    name: "altText1",
+    type: "string",
+    description:
+      "This is the alternative text for the image, used for accessibility and SEO",
+  },
+  {
+    name: "imageUrl2",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
+  },
+  {
+    name: "altText2",
+    type: "string",
+    description:
+      "This is the alternative text for the image, used for accessibility and SEO",
+  },
+];
+
+const activityCardParameters = [
+  {
+    name: "activity1Title",
+    type: "string",
+    defaultValue: "Activity 1 Title",
+  },
+  {
+    name: "activity1Description",
+    type: "string",
+    defaultValue: "Activity 1 Description",
+  },
+  {
+    name: "activity2Title",
+    type: "string",
+    defaultValue: "Activity 2 Title",
+  },
+  {
+    name: "activity2Description",
+    type: "string",
+    defaultValue: "Activity 2 Description",
+  },
+];
+
+const youthGroupCardParameters = [
+  {
+    name: "imageUrl1",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
+  },
+  {
+    name: "altText1",
+    type: "string",
+    description:
+      "This is the alternative text for the image, used for accessibility and SEO",
+  },
+  {
+    name: "infoTitle",
+    type: "string",
+    defaultValue: "Information Title",
+  },
+  {
+    name: "infoDescription",
+    type: "string",
+    defaultValue: "Information Description",
+  },
+];
+
+const parentsInfoCardParameters = [
+  {
+    name: "information1title",
+    type: "string",
+    defaultValue: "Information 1 Title",
+  },
+  {
+    name: "information1link",
+    type: "string",
+    defaultValue: "Information 1 Link",
+  },
+  {
+    name: "information2title",
+    type: "string",
+    defaultValue: "Information 2 Title",
+  },
+  {
+    name: "information2link",
+    type: "string",
+    defaultValue: "Information 2 Link",
+  },
+  {
+    name: "information3title",
+    type: "string",
+    defaultValue: "Information 3 Title",
+  },
+  {
+    name: "information3link",
+    type: "string",
+    defaultValue: "Information 3 Link",
+  },
+];
+
+// End of Childcare page
+
 const roomBookingParameters = [
   {
     name: "imageUrl",
@@ -240,15 +243,7 @@ const roomBookingParameters = [
   },
 ];
 
-Builder.registerComponent(ActivitiesCard, {
-  name: "Activities Card",
-  inputs: activityCardParameters,
-});
-
-Builder.registerComponent(ImageCard, {
-  name: "Image Card",
-  inputs: imageCardParameters,
-});
+// Childcare page components
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
   inputs: titleCardParameters,
@@ -256,7 +251,7 @@ Builder.registerComponent(TitleCard, {
 
 Builder.registerComponent(CommunityChildcareCard, {
   name: "Community childcare Card",
-  inputs: CommunityChildcareCardParameters,
+  inputs: communityChildcareCardParameters,
 });
 
 Builder.registerComponent(ChildrenGroupCard, {
@@ -264,14 +259,14 @@ Builder.registerComponent(ChildrenGroupCard, {
   inputs: childrenGroupCardParameters,
 });
 
-Builder.registerComponent(RoomBookingCardLeft, {
-  name: "Room Booking Card Left",
-  inputs: roomBookingParameters,
+Builder.registerComponent(ImageCard, {
+  name: "Image Card",
+  inputs: imageCardParameters,
 });
 
-Builder.registerComponent(RoomBookingCardRight, {
-  name: "Room Booking Card Right",
-  inputs: roomBookingParameters,
+Builder.registerComponent(ActivitiesCard, {
+  name: "Activities Card",
+  inputs: activityCardParameters,
 });
 
 Builder.registerComponent(YouthGroupCard, {
@@ -283,3 +278,17 @@ Builder.registerComponent(ParentsInfoCard, {
   name: "Parents Info Card",
   inputs: parentsInfoCardParameters,
 });
+
+// End of Childcare page components
+
+
+Builder.registerComponent(RoomBookingCardLeft, {
+  name: "Room Booking Card Left",
+  inputs: roomBookingParameters,
+});
+
+Builder.registerComponent(RoomBookingCardRight, {
+  name: "Room Booking Card Right",
+  inputs: roomBookingParameters,
+});
+

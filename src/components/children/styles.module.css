@@ -15,6 +15,28 @@
   font-weight: bold;
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .titleCardContainer {
+    padding: 20px 10px; 
+  }
+
+  .title {
+    font-size: 36px; 
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .titleCardContainer {
+    padding: 15px 5px; 
+  }
+
+  .title {
+    font-size: 28px; 
+  }
+}
+
 /* Button styles */
 .buttonContainer {
   flex: 1;
@@ -95,6 +117,7 @@
 @media (max-width: 1024px) {
   .communityChildcareContainer {
     flex-direction: column; 
+    padding: 20px;;
   }
 
   .communityChildcareImageContainer {
@@ -106,8 +129,8 @@
     height: auto; 
   }
 }
-/* ----------------------------------- */
-.container {
+/* Children Group Card section */
+.childrenGroupCardContainer {
   display: flex; 
   gap: 20px; 
   background-color: #eeede4; 
@@ -115,27 +138,27 @@
   align-items: stretch;
 }
 
-.childcareInfo {
+.childcareInfoBox {
   flex: 1;
   background-color: #004223;
   color: #eeede4;
   padding: 20px;
 }
 
-.header {
+.childcareInfoHeader {
   font-size: 24px;
   margin: 0;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.description {
+.childcareInfoDescription {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 20px; 
 }
 
-.programs {
+.programsContainer {
   flex: 1; 
   display: flex;
   flex-direction: column;
@@ -175,8 +198,30 @@
   justify-content: flex-end; 
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .childrenGroupCardContainer {
+    flex-direction: column; 
+    padding: 20px; 
+  }
 
-/* ----------------------------------- */
+  .programsContainer {
+    flex-direction: column; 
+  }
+
+  .programCard {
+    flex-direction: column; 
+    align-items: flex-start; 
+    height: auto; 
+  }
+
+  .programButtonContainer {
+    justify-content: flex-start; 
+    margin-top: 10px; 
+  }
+}
+
+/* Image Card Styles */
 .imageCardContainer {
   display: flex;
   gap: 20px;
@@ -191,17 +236,25 @@
   height: auto; 
   object-fit: cover; 
 }
+
+/* Responsive styles */
+/* Get rid of the images on small screens */
+@media (max-width: 768px) {
+  .twoImage {
+    display: none; /* Hide image on small screens */
+  }
+}
+
 /* ----------------------------------- */
 .activitiesContainer {
   display: flex; 
   gap: 20px;
   background-color: #eeede4; 
   padding: 20px 40px;
-  text-align: center; 
 }
 
 .activityCard {
-  min-height: 600px;
+  min-height: 550px;
   flex: 1; 
   background-color: #3f5d41; 
   color: #eeede4;
@@ -215,15 +268,35 @@
   font-size: 34px;
   font-weight: bold;
   margin: 0 0 20px 0; 
+  text-align: center;
 }
 
 .activityDescription {
   font-size: 18px;
   line-height: 1.5;
   flex: 1; 
+  margin-bottom: 20px;
 }
 
-/* ----------------------------------- */
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .activitiesContainer {
+    flex-direction: column; 
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .activityTitle {
+    font-size: 28px; 
+  }
+
+  .activityDescription {
+    font-size: 16px; 
+  }
+}
+
+/* Youth Group Card Styles */
 .youthGroupContainer {
   display: flex; 
   background-color: #eeede4; 
@@ -267,7 +340,38 @@
   margin: 30px 10px; 
 }
 
-/* ----------------------------------- */
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .youthGroupContainer {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .youthGroupInfoTitle {
+    font-size: 28px; 
+
+  }
+  .youthGroupInfoDescription {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .youthGroupContainer {
+    padding: 20px; 
+  }
+
+  .youthGroupInfoTitle {
+    font-size: 24px; 
+  }
+
+  .youthGroupInfoDescription {
+    font-size: 14px; 
+  }
+}
+
+
+/* Information for parents card styles */
 .infoCardsContainer {
   display: flex; 
   gap: 20px; 
@@ -297,4 +401,38 @@
   font-size: 37px;
   font-weight: bold;
   margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .infoCardsContainer {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .infoCard {
+    min-height: auto;
+    padding: 15px; 
+    width: 100%;
+  }
+
+  .infoTitle {
+    font-size: 30px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .infoCardsContainer {
+    padding: 20px; 
+  }
+
+  .infoCard {
+    min-height: auto;
+    padding: 10px; 
+    width: 100%;
+  }
+
+  .infoTitle {
+    font-size: 24px; 
+  }
 }

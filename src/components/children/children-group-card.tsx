@@ -16,23 +16,7 @@ interface CommunityChildcareCardProps {
   description: string;
 }
 
-interface ActivityCardProps {
-  activity1Title: string;
-  activity1Description: string;
-  activity2Title: string;
-  activity2Description: string;
-}
-
-interface ParentsInfoCardProps {
-  information1title: string;
-  information1link: string;
-  information2title: string;
-  information2link: string;
-  information3title: string;
-  information3link: string;
-}
-
-interface ProgramProps {
+interface ChildrenGroupCardProps {
   pageTitle: string;
   childcareInfoTitle: string;
   childcareInfoDescription: string;
@@ -44,6 +28,11 @@ interface ProgramProps {
   program2Description: string;
 }
 
+interface ProgramCardProps {
+  title: string;
+  description: string;
+}
+
 interface ImageCardProps {
   imageUrl1: string;
   altText1: string;
@@ -52,12 +41,32 @@ interface ImageCardProps {
   altText2: string;
 }
 
+interface SingleActivityCardProps {
+  title: string;
+  description: string;
+}
+
+interface ActivityCardProps {
+  activity1Title: string;
+  activity1Description: string;
+  activity2Title: string;
+  activity2Description: string;
+}
+
 interface YouthGroupCardProps {
   imageUrl1: string;
   altText1: string;
 
   infoTitle: string;
   infoDescription: string;
+}
+interface ParentsInfoCardProps {
+  information1title: string;
+  information1link: string;
+  information2title: string;
+  information2link: string;
+  information3title: string;
+  information3link: string;
 }
 
 // the title block
@@ -91,42 +100,49 @@ const CommunityChildcareCard = (props: CommunityChildcareCardProps) => {
   );
 };
 
-const ChildrenGroupCard = (props: ProgramProps) => {
+// Children group card (possum group, koala group)
+const ProgramCard = (props: ProgramCardProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.programCard}>
+      <div className={styles.programText}>
+        <h2 className={styles.programHeader}>{props.title}</h2>
+        <p className={styles.programDescription}>{props.description}</p>
+      </div>
+      <div className={styles.programButtonContainer}>
+        <button className={styles.buttonLight}>Register</button>
+      </div>
+    </div>
+  );
+};
+
+// Children Group Card section
+const ChildrenGroupCard = (props: ChildrenGroupCardProps) => {
+  return (
+    <div className={styles.childrenGroupCardContainer}>
       {/* Childcare Information Section */}
-      <div className={styles.childcareInfo}>
-        <h2 className={styles.header}>{props.childcareInfoTitle}</h2>
-        <p className={styles.description}>{props.childcareInfoDescription}</p>
-        <h2 className={styles.header}>{props.costTitle}</h2>
-        <p className={styles.description}>{props.costDescription}</p>
+      <div className={styles.childcareInfoBox}>
+        <h2 className={styles.childcareInfoHeader}>
+          {props.childcareInfoTitle}
+        </h2>
+        <p className={styles.childcareInfoDescription}>
+          {props.childcareInfoDescription}
+        </p>
+        <h2 className={styles.childcareInfoHeader}>{props.costTitle}</h2>
+        <p className={styles.childcareInfoDescription}>
+          {props.costDescription}
+        </p>
       </div>
 
       {/* Programs Section */}
-      <div className={styles.programs}>
-        <div className={styles.programCard}>
-          <div className={styles.programText}>
-            <h2 className={styles.programHeader}>{props.program1Title}</h2>
-            <p className={styles.programDescription}>
-              {props.program1Description}
-            </p>
-          </div>
-          <div className={styles.programButtonContainer}>
-            <button className={styles.buttonLight}>Register</button>
-          </div>
-        </div>
-
-        <div className={styles.programCard}>
-          <div className={styles.programText}>
-            <h2 className={styles.programHeader}>{props.program1Title}</h2>
-            <p className={styles.programDescription}>
-              {props.program1Description}
-            </p>
-          </div>
-          <div className={styles.programButtonContainer}>
-            <button className={styles.buttonLight}>Register</button>
-          </div>
-        </div>
+      <div className={styles.programsContainer}>
+        <ProgramCard
+          title={props.program1Title}
+          description={props.program1Description}
+        />
+        <ProgramCard
+          title={props.program2Title}
+          description={props.program2Description}
+        />
       </div>
     </div>
   );
@@ -149,30 +165,35 @@ const ImageCard = (props: ImageCardProps) => {
   );
 };
 
-const ActivitiesCard = (props: ActivityCardProps) => {
+const ActivityCard = (props: SingleActivityCardProps) => {
   return (
-    <div className={styles.activitiesContainer}>
-      {/* Activity 1 */}
-      <div className={styles.activityCard}>
-        <h2 className={styles.activityTitle}>{props.activity1Title}</h2>
-        <p className={styles.activityDescription}>
-          {props.activity1Description}
-        </p>
-        <button className={styles.buttonLight}>Register</button>
-      </div>
-
-      {/* Activity 2 */}
-      <div className={styles.activityCard}>
-        <h2 className={styles.activityTitle}>{props.activity2Title}</h2>
-        <p className={styles.activityDescription}>
-          {props.activity2Description}
-        </p>
-        <button className={styles.buttonLight}>Register</button>
-      </div>
+    <div className={styles.activityCard}>
+      <h2 className={styles.activityTitle}>{props.title}</h2>
+      <p className={styles.activityDescription}>{props.description}</p>
+      <button className={styles.buttonLight}>Register</button>
     </div>
   );
 };
 
+const ActivitiesCard = (props: ActivityCardProps) => {
+  return (
+    <div className={styles.activitiesContainer}>
+      {/* Activity 1 */}
+      <ActivityCard
+        title={props.activity1Title}
+        description={props.activity1Description}
+      />
+
+      {/* Activity 2 */}
+      <ActivityCard
+        title={props.activity2Title}
+        description={props.activity2Description}
+      />
+    </div>
+  );
+};
+
+// Youth Group Card
 const YouthGroupCard = (props: YouthGroupCardProps) => {
   return (
     <div className={styles.youthGroupContainer}>
@@ -197,6 +218,7 @@ const YouthGroupCard = (props: YouthGroupCardProps) => {
   );
 };
 
+// Information for parents card
 const ParentsInfoCard = (props: ParentsInfoCardProps) => {
   return (
     <div className={styles.infoCardsContainer}>
