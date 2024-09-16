@@ -237,15 +237,12 @@
   object-fit: cover; 
 }
 
-/* Responsive styles */
-/* Get rid of the images on small screens */
 @media (max-width: 768px) {
   .twoImage {
-    display: none; /* Hide image on small screens */
+    display: none; 
   }
 }
 
-/* ----------------------------------- */
 .activitiesContainer {
   display: flex; 
   gap: 20px;
