@@ -1,4 +1,4 @@
-import { SignOut } from "@/components/admin/sign-out";
+import SignOut from "@/components/admin/sign-out";
 import { auth } from "@/../auth";
 
 export default async function Dashboard() {
