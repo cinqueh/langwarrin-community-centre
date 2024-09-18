@@ -8,7 +8,6 @@ import {
   TitleCard,
   ChildrenGroupCard,
   CommunityChildcareCard,
-  ImageCard,
   ActivitiesCard,
   YouthGroupCard,
   ParentsInfoCard,
@@ -97,31 +96,6 @@ const childrenGroupCardParameters = [
   },
 ];
 
-const imageCardParameters = [
-  {
-    name: "imageUrl1",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
-  },
-  {
-    name: "altText1",
-    type: "string",
-    description:
-      "This is the alternative text for the image, used for accessibility and SEO",
-  },
-  {
-    name: "imageUrl2",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
-  },
-  {
-    name: "altText2",
-    type: "string",
-    description:
-      "This is the alternative text for the image, used for accessibility and SEO",
-  },
-];
-
 const activityCardParameters = [
   {
     name: "activity1Title",
@@ -149,7 +123,7 @@ const youthGroupCardParameters = [
   {
     name: "imageUrl1",
     type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], 
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
   },
   {
     name: "altText1",
@@ -259,11 +233,6 @@ Builder.registerComponent(ChildrenGroupCard, {
   inputs: childrenGroupCardParameters,
 });
 
-Builder.registerComponent(ImageCard, {
-  name: "Image Card",
-  inputs: imageCardParameters,
-});
-
 Builder.registerComponent(ActivitiesCard, {
   name: "Activities Card",
   inputs: activityCardParameters,
@@ -281,7 +250,6 @@ Builder.registerComponent(ParentsInfoCard, {
 
 // End of Childcare page components
 
-
 Builder.registerComponent(RoomBookingCardLeft, {
   name: "Room Booking Card Left",
   inputs: roomBookingParameters,
@@ -291,4 +259,3 @@ Builder.registerComponent(RoomBookingCardRight, {
   name: "Room Booking Card Right",
   inputs: roomBookingParameters,
 });
-

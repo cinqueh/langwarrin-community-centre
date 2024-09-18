@@ -109,7 +109,7 @@ const ProgramCard = (props: ProgramCardProps) => {
         <p className={styles.programDescription}>{props.description}</p>
       </div>
       <div className={styles.programButtonContainer}>
-        <button className={styles.buttonLight}>Register</button>
+        <button className={styles.buttonLight}>Enquire</button>
       </div>
     </div>
   );
@@ -148,29 +148,13 @@ const ChildrenGroupCard = (props: ChildrenGroupCardProps) => {
   );
 };
 
-const ImageCard = (props: ImageCardProps) => {
-  return (
-    <div className={styles.imageCardContainer}>
-      <img
-        src={props.imageUrl1}
-        alt={props.altText1}
-        className={styles.twoImage}
-      />
-      <img
-        src={props.imageUrl2}
-        alt={props.altText2}
-        className={styles.twoImage}
-      />
-    </div>
-  );
-};
 
 const ActivityCard = (props: SingleActivityCardProps) => {
   return (
     <div className={styles.activityCard}>
       <h2 className={styles.activityTitle}>{props.title}</h2>
       <p className={styles.activityDescription}>{props.description}</p>
-      <button className={styles.buttonLight}>Register</button>
+      <button className={styles.buttonLight}>Enquire</button>
     </div>
   );
 };
@@ -244,7 +228,6 @@ export {
   TitleCard,
   CommunityChildcareCard,
   ChildrenGroupCard,
-  ImageCard,
   ActivitiesCard,
   YouthGroupCard,
   ParentsInfoCard,

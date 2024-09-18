@@ -82,12 +82,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 5px solid #f8a429;
 }
 
 .communityChildcareContent {
   flex: 2;
-  background-color: #004223;
+  background-color: #638B66;
   color: #eeede4;
   padding: 30px;
   display: flex;
@@ -167,7 +166,7 @@
 }
 
 .programCard {
-  background-color: #3f5d41; 
+  background-color: #38603A; 
   color: #eeede4;
   padding: 20px;
   display: flex;
@@ -221,28 +220,7 @@
   }
 }
 
-/* Image Card Styles */
-.imageCardContainer {
-  display: flex;
-  gap: 20px;
-  background-color: #eeede4;
-  padding: 20px; 
-}
-
-.twoImage {
-  flex: 1; 
-  max-width: 50%; 
-  max-height: 250px;
-  height: auto; 
-  object-fit: cover; 
-}
-
-@media (max-width: 768px) {
-  .twoImage {
-    display: none; 
-  }
-}
-
+/* Activities Card Styles */
 .activitiesContainer {
   display: flex; 
   gap: 20px;
