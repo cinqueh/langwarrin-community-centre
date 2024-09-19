@@ -4,10 +4,9 @@ import MemberService from "../../../backend/service/member-service";
 function isMemberDTO(body: any): body is MemberDTO {
     return (
       typeof body === 'object' &&
-      typeof body.memberId === 'number' &&
       typeof body.title === 'string' &&
-      (body.approved === undefined || typeof body.approved === 'string') && 
-      (!body.person || typeof body.person === 'object')
+      (typeof body.person === 'object') &&
+      (typeof body.person.address === 'object')
     );
 }
 
@@ -37,6 +36,7 @@ export async function POST(request: Request) {
             }
         );
     } catch (error) {
+        console.log(error);
         return new Response(
             JSON.stringify({ error: 'Failed to process request' }),
             {

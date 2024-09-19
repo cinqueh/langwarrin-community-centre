@@ -29,6 +29,9 @@ export default class MemberService {
     private mapper: MemberMapper;
 
     public async addMember(member: MemberDTO) { // : Promise<MemberDTO[]> {
+
+        member.submitDate = new Date();
+
         const response = await this.repository.addMember(member);
 
         return this.handleResponse(response, (data) => data);
