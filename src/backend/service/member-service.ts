@@ -3,6 +3,7 @@ import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import MemberMapper, { Member } from "../mapper/member-mapper";
 import MemberRepository from "../repository/member-repository";
+import { DatabaseError } from "../util/errors";
 
 
 export default class MemberService {
@@ -19,33 +20,33 @@ export default class MemberService {
         }
     }
 
-    public async addMember(member: MemberDTO) { // : Promise<MemberDTO[]> {
-        const repository = new MemberRepository();
+    public constructor(){
+        this.repository = new MemberRepository();
+        this.mapper = new MemberMapper();
+    }
 
-        const response = await repository.addMember(member);
+    private repository: MemberRepository;
+    private mapper: MemberMapper;
+
+    public async addMember(member: MemberDTO) { // : Promise<MemberDTO[]> {
+        const response = await this.repository.addMember(member);
 
         return this.handleResponse(response, (data) => data);
     }
 
     public async getMember(id: number) {
-        const repository = new MemberRepository();
-        const mapper = new MemberMapper();
-
-        const response = await repository.get(id);
+        const response = await this.repository.get(id);
 
         return this.handleResponse(response, 
-            (members) => members.length == 0 ? undefined : mapper.mapTo(members[0]));
+            (members) => members.length == 0 ? undefined : this.mapper.mapTo(members[0]));
     }
 
     public async getAllMembers() {
-        const repository = new MemberRepository();
-        const mapper = new MemberMapper();
-
-        const response = await repository.getAllMembers();
+        const response = await this.repository.getAllMembers();
 
         return this.handleResponse(response as PostgrestSingleResponse<Member[]>, 
             (data) => data.map(member => 
-                mapper.mapTo(member)
+                this.mapper.mapTo(member)
             )
         );
     }

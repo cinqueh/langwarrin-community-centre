@@ -1,8 +1,7 @@
-import supertest from "supertest";
-import { createServer } from "http";
-import { POST } from "../../../../app/api/member/route"; 
+import { POST } from "../../../../app/api/member/route";
 import { MemberDTO } from "../../../../backend/dto/member";
 import MemberService from "../../../../backend/service/member-service";
+import 'whatwg-fetch';
 
 // Mock the MemberService
 jest.mock("../../../../backend/service/member-service");
@@ -11,20 +10,10 @@ const mockAddMember = jest.fn();
   addMember: mockAddMember,
 }));
 
-// Utility function to run the API handler using `supertest`
-const runApiHandler = (handler: any, method: string, body?: any) => {
-  const server = createServer((req, res) => {
-    req.method = method;
-    req.headers['content-type'] = 'application/json';
-    handler(req, res);
-  });
-
-  const request = supertest(server);
-
-  if (method === "POST") {
-    return request.post("/").send(body); // Use the `.send()` method to send a request body
-  }
-};
+// Mock NextRequest
+const mockNextRequest = (body: any) => ({
+  json: jest.fn().mockResolvedValue(body),
+});
 
 const validMemberDTO: MemberDTO = {
   memberId: 1,
@@ -45,45 +34,53 @@ const validMemberDTO: MemberDTO = {
 };
 
 describe("Member API - POST Handler", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
 
-  // Test for a valid MemberDTO
-  it("should return 200 with valid MemberDTO", async () => {
-    // Mock the service response
-    mockAddMember.mockResolvedValue(validMemberDTO);
+    // Test for a valid MemberDTO
+    it("should return 200 with valid MemberDTO", async () => {
+      // Mock the service response
+      mockAddMember.mockResolvedValue(validMemberDTO);
 
-    // Use supertest to send a POST request
-    const response = await runApiHandler(POST, "POST", validMemberDTO);
+      // Mock NextRequest
+      const req = mockNextRequest(validMemberDTO);
 
-    // Verify the response
-    expect(response?.status).toBe(200);
-    expect(response?.body).toEqual(validMemberDTO);
-  });
+      // Call the POST handler
+      const response = await POST(req as any);
 
-  // Test for an invalid MemberDTO
-  it("should return 400 with invalid input", async () => {
-    const invalidBody = { title: "Ms." }; // Missing required fields like memberId, submitDate
+      // Verify the response
+      const json = await response.json();
+      expect(response.status).toBe(200);
+      expect(json).toEqual({...validMemberDTO, submitDate: "2024-09-19T09:11:22.027Z"});
+    });
 
-    // Use supertest to send a POST request
-    const response = await runApiHandler(POST, "POST", invalidBody);
+    // Test for an invalid MemberDTO
+    it("should return 400 with invalid input", async () => {
+      const invalidBody = { title: "Ms." }; // Missing required fields like memberId, submitDate
 
-    // Verify the response
-    expect(response?.status).toBe(400);
-    expect(response?.body.error).toBe("Invalid input.");
-  });
+      const req = mockNextRequest(invalidBody);
 
-  // Test for handling errors in the service layer
-  it("should return 500 if the service throws an error", async () => {
-    // Mock the service to throw an error
-    mockAddMember.mockRejectedValue(new Error("Service Error"));
+      const response = await POST(req as any);
+      const json = await response.json();
 
-    // Use supertest to send a POST request
-    const response = await runApiHandler(POST, "POST", validMemberDTO);
+      // Verify the response
+      expect(response.status).toBe(400);
+      expect(json.error).toBe("Invalid input.");
+    });
 
-    // Verify the response
-    expect(response?.status).toBe(500);
-    expect(response?.body.error).toBe("Failed to process request");
-  });
+    // Test for handling errors in the service layer
+    it("should return 500 if the service throws an error", async () => {
+      // Mock the service to throw an error
+      mockAddMember.mockRejectedValue(new Error("Service Error"));
+
+      const req = mockNextRequest(validMemberDTO);
+
+      const response = await POST(req as any);
+      const json = await response.json();
+
+      // Verify the response
+      expect(response.status).toBe(500);
+      expect(json.error).toBe("Failed to process request");
+    });
 });

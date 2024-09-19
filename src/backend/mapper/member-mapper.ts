@@ -31,9 +31,6 @@ export type Member = {
 export default class MemberMapper implements Mapper<Member, MemberDTO> {
 
     public mapTo(member: Member): MemberDTO {
-
-        console.log(member);
-
         const personMapper = new PersonMapper();
 
         return new MemberDTO({

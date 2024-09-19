@@ -6,7 +6,6 @@ function isMemberDTO(body: any): body is MemberDTO {
       typeof body === 'object' &&
       typeof body.memberId === 'number' &&
       typeof body.title === 'string' &&
-      typeof body.submitDate === 'string' &&
       (body.approved === undefined || typeof body.approved === 'string') && 
       (!body.person || typeof body.person === 'object')
     );
@@ -17,7 +16,7 @@ export async function POST(request: Request) {
         const body = await request.json();
 
         // Validate the body
-        if (!isMemberDTO(request)) {
+        if (!isMemberDTO(body)) {
             return new Response(
                 JSON.stringify({ error: 'Invalid input.' }),
                 {
