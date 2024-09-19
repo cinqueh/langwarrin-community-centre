@@ -1,7 +1,7 @@
-import RoomInformation from "@/backend/dto/room/room-dto";
-import { BuilderOptions } from "@/backend/service/builder-service";
+import RoomInformation from "../../backend/dto/room/room-dto";
+import { BuilderOptions } from "../../backend/service/builder-service";
 import { NodeNextRequest } from "next/dist/server/base-http/node";
-import Mapper from "../mapper";
+import Mapper from "./mapper";
 
 interface RoomBookingOptionsData extends BuilderOptions {
     roomName: string;
