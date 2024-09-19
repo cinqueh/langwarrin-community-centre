@@ -61,10 +61,10 @@ export default class BuilderService {
     public async getAllOptionsMapped<T>(componentName: string, mapper: Mapper<BuilderOptions, T>) {
         try {
             return (await this.getAllComponents(componentName))
-            .filter(item => item?.component?.options)
-            .map(item => {
-                const options = item?.component?.options as BuilderOptions;
-                return mapper.mapTo(options);
+              .filter(item => item?.component?.options)
+              .map(item => {
+                  const options = item?.component?.options as BuilderOptions;
+                  return mapper.mapTo(options);
             });
         }
         catch {
