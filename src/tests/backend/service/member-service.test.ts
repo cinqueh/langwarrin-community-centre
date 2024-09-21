@@ -4,6 +4,7 @@ import MemberMapper from "../../../backend/mapper/member-mapper";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { MemberDTO } from "../../../backend/dto/member";
 import { Member } from "../../../backend/mapper/member-mapper";
+import { DatabaseError } from "../../../backend/util/errors";
 
 // Mock the MemberRepository and MemberMapper
 jest.mock("../../../backend/repository/member-repository");
@@ -13,18 +14,25 @@ describe('MemberService', () => {
     let memberService: MemberService;
     let memberRepositoryMock: jest.Mocked<MemberRepository>;
     let memberMapperMock: jest.Mocked<MemberMapper>;
+    let consoleErrorMock: jest.SpyInstance;
 
     beforeEach(() => {
+        // Mock console.error
+        consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+
         // Create mocked instances of the dependencies
-        memberRepositoryMock = new (MemberRepository as jest.Mock)() as jest.Mocked<MemberRepository>;
+        memberRepositoryMock = new (MemberRepository as unknown as jest.Mock)() as jest.Mocked<MemberRepository>;
         memberMapperMock = new (MemberMapper as jest.Mock)() as jest.Mocked<MemberMapper>;
 
-        // Override the constructor to return the mocked instances
-        (MemberRepository as jest.Mock).mockImplementation(() => memberRepositoryMock);
-        (MemberMapper as jest.Mock).mockImplementation(() => memberMapperMock);
-
-        // Create a new instance of MemberService
+        // Create a new instance of MemberService with mocked repository and mapper
         memberService = new MemberService();
+        memberService['repository'] = memberRepositoryMock;  // Inject mocked repository
+        memberService['mapper'] = memberMapperMock;          // Inject mocked mapper
+    });
+
+    afterEach(() => {
+        // Restore the original console.error after each test
+        consoleErrorMock.mockRestore();
     });
 
     describe('addMember', () => {
@@ -80,8 +88,9 @@ describe('MemberService', () => {
 
             memberRepositoryMock.addMember.mockResolvedValue(response);
 
-            await expect(memberService.addMember(memberDTO)).rejects.toThrow("Database error");
+            await expect(memberService.addMember(memberDTO)).rejects.toThrow(DatabaseError);
             expect(memberRepositoryMock.addMember).toHaveBeenCalledWith(memberDTO);
+            expect(consoleErrorMock).toHaveBeenCalledWith(response.error); // Ensure the error was logged
         });
     });
 
@@ -123,7 +132,7 @@ describe('MemberService', () => {
 
             memberMapperMock.mapTo.mockReturnValue(mappedMemberDTO);
 
-            const result = await memberService.getMember(1);
+            const result = await memberService.get(1);
 
             expect(memberRepositoryMock.get).toHaveBeenCalledWith(1);
             expect(memberMapperMock.mapTo).toHaveBeenCalledWith(member);
@@ -141,7 +150,7 @@ describe('MemberService', () => {
 
             memberRepositoryMock.get.mockResolvedValue(response);
 
-            const result = await memberService.getMember(1);
+            const result = await memberService.get(1);
 
             expect(memberRepositoryMock.get).toHaveBeenCalledWith(1);
             expect(result).toBeUndefined();
@@ -158,12 +167,12 @@ describe('MemberService', () => {
 
             memberRepositoryMock.get.mockResolvedValue(response);
 
-            await expect(memberService.getMember(1)).rejects.toThrow("Database error");
+            await expect(memberService.get(1)).rejects.toThrow(DatabaseError);
         });
     });
 
-    describe('getAllMembers', () => {
-        it('should call repository.getAllMembers and return mapped members on success', async () => {
+    describe('getAll', () => {
+        it('should call repository.getAll and return mapped members on success', async () => {
             const members: Member[] = [
                 {
                     memberid: 1,
@@ -187,7 +196,7 @@ describe('MemberService', () => {
                 count: null // Ensure count is provided
             };
 
-            memberRepositoryMock.getAllMembers.mockResolvedValue(response);
+            memberRepositoryMock.getAll.mockResolvedValue(response);
 
             const mappedMemberDTO: MemberDTO = {
                 memberId: 1,
@@ -203,9 +212,9 @@ describe('MemberService', () => {
 
             memberMapperMock.mapTo.mockReturnValue(mappedMemberDTO);
 
-            const result = await memberService.getAllMembers();
+            const result = await memberService.getAll();
 
-            expect(memberRepositoryMock.getAllMembers).toHaveBeenCalled();
+            expect(memberRepositoryMock.getAll).toHaveBeenCalled();
             expect(memberMapperMock.mapTo).toHaveBeenCalledWith(members[0]);
             expect(result).toEqual([mappedMemberDTO]);
         });
@@ -219,9 +228,9 @@ describe('MemberService', () => {
                 count: null // Ensure count is provided
             };
 
-            memberRepositoryMock.getAllMembers.mockResolvedValue(response);
+            memberRepositoryMock.getAll.mockResolvedValue(response);
 
-            await expect(memberService.getAllMembers()).rejects.toThrow("Database error");
+            await expect(memberService.getAll()).rejects.toThrow(DatabaseError);
         });
     });
 });

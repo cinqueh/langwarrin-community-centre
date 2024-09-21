@@ -27,7 +27,7 @@ export default class MemberRepository extends BaseRepository {
             .rpc('add_full_member', addMemberData);
     }
 
-    public async get(id: number) {
+    public override async get(id: number) {
         const client = this.getSupabaseClient();
 
         return await client
@@ -44,7 +44,7 @@ export default class MemberRepository extends BaseRepository {
             .eq('memberid', id);
     }
 
-    public async getAllMembers() {
+    public override async getAll() {
         
         const client = this.getSupabaseClient();
 
