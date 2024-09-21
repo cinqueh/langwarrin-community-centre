@@ -73,7 +73,7 @@ describe('MemberRepository', () => {
 
     describe('getAllMembers', () => {
         it('should call select to retrieve all members', async () => {
-            await repository.getAllMembers();
+            await repository.getAll();
 
             expect(mockClient.from).toHaveBeenCalledWith('member');
             expect(mockSelect).toHaveBeenCalledWith(`
