@@ -2,7 +2,7 @@ import { GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import BaseRepository from "./base-repository";
 
-export default class InquiryRepository extends BaseRepository {
+export default class GeneralInquiryRepository extends BaseRepository {
 
     public async addGeneralInquiry(inquiry: GeneralInquiryDTO) {
 

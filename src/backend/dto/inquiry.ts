@@ -35,23 +35,22 @@ export class GeneralInquiryDTO extends InquiryDTO {
     }
 }
 
-// Feedback inquiries always have a person + address
-// export class FeedbackInquiryDTO extends InquiryDTO {
-//     programName: string;
-//     feedback: string;
+// Feedback inquiries should always have a person + address
+export class FeedbackInquiryDTO extends InquiryDTO {
+    programName: string;
+    feedback: string;
 
-//     constructor(
-//         inquiryId: number,
-//         date: Date,
-//         person: PersonDTO,
-//         notes: string,
-//         programName: string,
-//         feedback: string,
-//         address: AddressDTO
-//     ) {
-//         super(inquiryId, date, person, notes);
-//         this.person.address = address;
-//         this.programName = programName;
-//         this.feedback = feedback;
-//     }
-// }
+    constructor(data: {
+        date: Date,
+        person: PersonDTO,
+        programName: string,
+        feedback: string,
+        inquiryId?: number,
+        notes?: string,
+    }) {
+        super(data);
+
+        this.programName = data.programName;
+        this.feedback = data.feedback;
+    }
+}
