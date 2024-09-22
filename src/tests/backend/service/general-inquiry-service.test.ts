@@ -1,6 +1,6 @@
 import GeneralInquiryService from "../../../backend/service/general-inquiry-service";
 import GeneralInquiryRepository from "../../../backend/repository/general-inquiry-repository";
-import GeneralInquiryMapper from "../../../backend/mapper/inquiry-mapper";
+import { GeneralInquiryMapper } from "../../../backend/mapper/inquiry-mapper";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { GeneralInquiryDTO } from "../../../backend/dto/inquiry";
 import { DatabaseError, DataValidationError } from "../../../backend/util/errors";

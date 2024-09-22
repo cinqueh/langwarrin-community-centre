@@ -1,5 +1,5 @@
 import { GeneralInquiryDTO } from "../dto/inquiry";
-import GeneralInquiryMapper, { GeneralInquiry } from "../mapper/inquiry-mapper";
+import { GeneralInquiry, GeneralInquiryMapper } from "../mapper/inquiry-mapper";
 import GeneralInquiryRepository from "../repository/general-inquiry-repository";
 import DatabaseService from "./database-service";
 
