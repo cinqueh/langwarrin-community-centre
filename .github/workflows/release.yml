@@ -25,4 +25,4 @@ jobs:
       - name: Create Pre-release (using semantic-release)
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
