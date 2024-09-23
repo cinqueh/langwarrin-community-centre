@@ -1,9 +1,9 @@
-name: Release on Develop Merge
+name: Release on Main Merge
 
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   release:
@@ -25,4 +25,4 @@ jobs:
       - name: Create Pre-release (using semantic-release)
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
