@@ -1,0 +1,172 @@
+/* styles/global.css */
+.pageContainer {
+  background-color: #eeede4;
+  padding: 20px 40px;
+  margin: 0;
+  font-family: "Prompt", sans-serif;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  font-size: 55px;
+  font-weight: 600;
+  margin: 20px 0;
+  text-align: center;
+}
+
+h3 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 20px 0;
+  text-align: center;
+}
+
+h4 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+p {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 15px 0;
+}
+
+/* Green Button */
+.button-green {
+  background-color: #004223;
+  color: #efeee4;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-green:hover {
+  background-color: #003017;
+}
+
+/* White Button */
+.button-white {
+  background-color: #eeede4;
+  color: #004223;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-white:hover {
+  background-color: #004223;
+  color: #eeede4;
+}
+
+.titleContainer {
+  text-align: center;
+  color: #004223;
+}
+
+/* Container for information (without padding) */
+.lightGreenInformationContainer {
+  background-color: #638b66;
+  padding: 1px 40px;
+}
+
+.darkGreenInformationContainer {
+  background-color: #004223;
+  padding: 1px 40px;
+}
+
+/* dark green */
+.darkGreenContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #004223;
+  color: #eeede4;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.darkGreenContainer img {
+    max-width: 100%;
+    height: auto;
+  }
+
+/* medium green */
+.mediumGreenContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #38603a;
+  color: #eeede4;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediumGreenContainer img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* light green */
+.lightGreenContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #638b66;
+  color: #eeede4;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightGreenContainer img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* style for program card */
+.cardTitleWrapper {
+    min-height: 110px;
+  }
+
+
+.divider {
+  margin: 20px 0;
+}
+
+/* style for information card with button */ 
+.contentWrapper {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+  }
+  
+  .textContent {
+    flex: 4; 
+    text-align: left;
+  }
+  
+  .buttonContainer {
+    flex: 1; 
+    text-align: right; 
+  }
