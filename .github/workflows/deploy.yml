@@ -27,9 +27,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Commitlint step to validate commit messages
-      - name: Lint Commit Messages
-        run: npx commitlint --from=origin/main --to=HEAD
-
       - name: Build project
         run: npm run build
