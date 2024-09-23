@@ -38,7 +38,7 @@ const LightGreenInformationCard = (props: InformationCardProps) => {
   return (
     <div className="lightGreenInformationContainer">
       <h4>{props.title}</h4>
-      <p>{props.description}</p>
+      <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
     </div>
   );
 };
@@ -47,7 +47,7 @@ const DarkGreenInformationCard = (props: InformationCardProps) => {
   return (
     <div className="darkGreenInformationContainer">
       <h4>{props.title}</h4>
-      <p>{props.description}</p>
+      <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
     </div>
   );
 };
@@ -58,10 +58,10 @@ const InformationCardWithButton = (props: InformationCardProps) => {
       <div className="contentWrapper">
         <div className="textContent">
           <h4>{props.title}</h4>
-          <p>{props.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
         </div>
         <div className="buttonContainer">
-          <button className="button-secondary">Book Online Now</button>
+          <button className="button-white">Book Online Now</button>
         </div>
       </div>
     </div>
@@ -92,16 +92,16 @@ interface ProgramCardProps {
 }
 
 const DarkGreenProgramCard = (props: ProgramCardProps) => {
-    return (
-      <div className="darkGreenContainer">
-        <img src={props.imageUrl} alt={props.altText} />
-        <div className="cardTitleWrapper">
-          <h4>{props.title}</h4>
-        </div>
-        <button className="button-white">More Info</button>
+  return (
+    <div className="darkGreenContainer">
+      <img src={props.imageUrl} alt={props.altText} />
+      <div className="cardTitleWrapper">
+        <h4>{props.title}</h4>
       </div>
-    );
-  };
+      <button className="button-white">More Info</button>
+    </div>
+  );
+};
 
 const MediumGreenProgramCard = (props: ProgramCardProps) => {
   return (
@@ -126,7 +126,6 @@ const LightGreenProgramCard = (props: ProgramCardProps) => {
     </div>
   );
 };
-
 
 const divider = () => {
   return <div className="divider"></div>;

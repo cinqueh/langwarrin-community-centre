@@ -80,7 +80,7 @@ const informationCardParameters = [
   },
   {
     name: "description",
-    type: "string",
+    type: "richText",
     defaultValue: "Description",
   },
 ];
