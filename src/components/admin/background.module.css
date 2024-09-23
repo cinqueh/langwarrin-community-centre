@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap');
+
+.tableWrapper {
+    background-color: #eeeff3;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    font-family: 'Prompt', sans-serif;
+  }
+  
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.tableHeader h1 {
+    margin-left: 0.5rem;
+    font-size: 1.8rem;
+    padding-bottom: 0px;
+    font-weight: 800;
+    color: #2B2B2B;
+}

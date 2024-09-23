@@ -14,10 +14,12 @@
     "@builder.io/react": "^5.0.1",
     "@builder.io/sdk": "^3.0.1",
     "@supabase/supabase-js": "^2.45.4",
+    "file-saver": "^2.0.5",
     "next": "^14.2.12",
     "next-auth": "^5.0.0-beta.20",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -26,10 +28,12 @@
     "@babel/preset-typescript": "^7.24.7",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
+    "@types/file-saver": "^2.0.7",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-table": "^7.7.20",
     "@types/supertest": "^6.0.2",
     "babel-jest": "^29.7.0",
     "eslint": "^8",
