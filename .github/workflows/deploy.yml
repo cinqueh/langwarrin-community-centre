@@ -33,8 +33,3 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-      - name: Release version (using semantic-release)
-        run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
