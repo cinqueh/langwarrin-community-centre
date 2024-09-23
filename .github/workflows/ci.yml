@@ -82,6 +82,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          # Fetch all branches, or you can specifically fetch develop
+          fetch-depth: 0  # Fetch full history
+
+      - name: Fetch develop branch
+        run: git fetch origin develop
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
