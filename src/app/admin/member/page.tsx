@@ -1,8 +1,9 @@
-import { auth } from "@/../auth";
-import TableComponent from "@/components/admin/display-table";
+import { auth } from "../../../../auth";
+import TableComponent from "../../../components/admin/display-table";
 import { Column } from "react-table";
-import MemberService from "@/backend/service/member-service";
-import { TableWrapper } from "@/components/admin/background";
+import MemberService from "../../../backend/service/member-service";
+import { TableWrapper } from "../../../components/admin/background";
+import AdminHeader from "@/components/admin/admin-header";
 
 type Member = {
     id: number;
@@ -70,12 +71,14 @@ export default async function Dashboard() {
     }))
 
     return (
-        <TableWrapper title={'Memberships'}>
-            <TableComponent 
-              data={formattedData} 
-              columns={userColumns} 
-              descriptor={'Community Members'}
-              linkedUrl={'member'}/>
-        </TableWrapper>
+      <AdminHeader>
+          <TableWrapper title={'Memberships'}>
+              <TableComponent 
+                data={formattedData} 
+                columns={userColumns} 
+                descriptor={'Community Members'}
+                linkedUrl={'member'}/>
+          </TableWrapper>
+      </AdminHeader>
     );
 }

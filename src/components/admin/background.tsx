@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import styles from './background.module.css';
+import styles from './shared.module.css';
 
 interface TableWrapperProps {
     children: ReactNode;

@@ -2,7 +2,7 @@
 
 import { useTable, Column, Row } from 'react-table';
 import { useRouter } from 'next/navigation'; // Use next/navigation for client-side routing
-import styles from "./styles.module.css";
+import styles from "./table.module.css";
 import { useState } from 'react';
 import { saveAs } from 'file-saver';
 
