@@ -1,0 +1,18 @@
+.backgroundSection {
+  margin-top: -50px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -110px;
+  padding: 0;
+  width: 100vw; 
+  position: relative;
+  left: calc(-50vw + 50%); 
+}
+
+  .backgroundSection img {
+    position: relative;
+    border-radius: 0;
+    max-width: 100%;
+    height: auto;
+  }

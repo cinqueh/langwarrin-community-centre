@@ -4,9 +4,11 @@ import { BuilderComponent, useIsPreviewing } from "@builder.io/react";
 import { BuilderContent, builder } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import "../builder-registry";
+import '../styles/global.css';
 
 import Header from "./layout/header";
 import Footer from "./layout/footer";
+
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>;
 
@@ -19,10 +21,13 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   const isPreviewing = useIsPreviewing();
   // If "content" has a value or the page is being previewed in Builder,
   // render the BuilderComponent with the specified content and model props.
+  // TODO: this is a temp fix add css styles here
   if (content || isPreviewing) {
     return <>
           <Header/>
+          <div className="pageContainer">
           <BuilderComponent content={content} model={model} />
+          </div>
           <Footer/>
     </>;
   }
