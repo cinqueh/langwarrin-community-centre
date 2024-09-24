@@ -1,0 +1,61 @@
+.mainBanner {
+    background-color: #EEEDE4; 
+    padding: 60px 20px; 
+    text-align: center;
+    color: #ffffff; 
+  }
+
+  .bannerContent {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bannerTitle {
+    font-size: 100px; 
+    font-weight: bolder;
+    color: #006335; 
+    text-shadow: 2px 7px 7px #363636; 
+    font-family: anton;
+  }
+
+  .bannerTitle2 {
+    font-size: 55px; 
+    font-weight: 900;
+    color: #006335;
+    margin-top: -40px; 
+    font-family: prompt;
+  }
+
+  .bannerSubtitle {
+    font-size: 24px;
+    font-style: italic;
+    color: #006335; 
+    margin-top: 0px;
+    font-family: prompt;
+  }
+
+  .joinButton {
+    background-color: #006335;
+    color: #ffffff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: prompt;
+  }
+
+  .joinButton:hover {
+    background-color: #e2e2e2; 
+  }
+
+  .bannerNote {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    color: #006335; 
+    margin-top: 9px;
+    font-family: prompt;
+  }
