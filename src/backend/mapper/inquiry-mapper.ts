@@ -2,10 +2,15 @@ import {
   FeedbackInquiryDTO,
   GeneralInquiryDTO,
   ProgramCourseInquiryDTO,
+  ChildcareInquiryDTO,
+  ChildcareInquirySessionDTO,
 } from "../dto/inquiry";
 import Mapper from "./mapper";
 import { Person, PersonMapper } from "./person-mapper";
-import { AddressDTO } from "../dto/person"; // Import AddressDTO
+import {Child, ChildMapper, ChildcareProgram, ChildcareProgramMapper, ChildcareSession, ChildcareSessionMapper} from "./childcare-mapper"
+import { ChildDTO } from "../dto/childcare/child";
+import { ChildcareProgramDTO } from "../dto/childcare/childcareprogram";
+import { ChildcareSessionDTO } from "../dto/childcare/childcaresession";
 
 export type Inquiry = {
   inquiryid: number;
@@ -35,6 +40,23 @@ export type ProgramCourseInquiry = {
   programname: string;
   howheardaboutprogram: string;
   inquiry: Inquiry;
+};
+
+// ChildcareInquiry Entity
+export type ChildcareInquiry = {
+  inquiryid: number;
+  child: ChildDTO;
+  childcareprogram?: ChildcareProgramDTO;
+  childcaresession?: ChildcareSessionDTO;
+  person: Person;
+  notes?: string;
+};
+
+// ChildcareInquirySession Entity
+export type ChildcareInquirySession = {
+  inquiryid: number;
+  childid: number;
+  childcaresessionid: number;
 };
 
 export class GeneralInquiryMapper implements Mapper<GeneralInquiry, GeneralInquiryDTO> {
@@ -84,6 +106,55 @@ export class ProgramCourseInquiryMapper implements Mapper<ProgramCourseInquiry, 
       programName: inquiry.programname,
       howHeardAboutProgram: inquiry.howheardaboutprogram,
       notes: inquiry?.inquiry?.notes
+    });
+  }
+}
+
+// Childcare Inquiry Mapper
+export class ChildcareInquiryMapper implements Mapper<ChildcareInquiry, ChildcareInquiryDTO> {
+  private personMapper = new PersonMapper();
+  private childMapper = new ChildMapper();
+  private programMapper = new ChildcareProgramMapper();
+  private sessionMapper = new ChildcareSessionMapper();
+
+  public mapTo(inquiry: ChildcareInquiry): ChildcareInquiryDTO {
+    return new ChildcareInquiryDTO({
+      date: new Date(),
+      person: this.personMapper.mapTo(inquiry.person),
+      // Mapping from Child (entity) to ChildDTO
+      child: this.childMapper.mapTo({
+        childid: inquiry.child.childId!,
+        childage: inquiry.child.childAge,
+        childfirstname: inquiry.child.childFirstName,
+        childsurname: inquiry.child.childSurname,
+      }),
+      // Mapping from ChildcareProgram (entity) to ChildcareProgramDTO
+      childcareProgram: inquiry.childcareprogram ? this.programMapper.mapTo({
+        childcareprogramid: inquiry.childcareprogram.childcareProgramId!,
+        childcaresessionid: inquiry.childcareprogram.childcareSessionId,
+        programname: inquiry.childcareprogram.programName
+      }) : undefined,
+      // Mapping from ChildcareSession (entity) to ChildcareSessionDTO
+      childcareSession: inquiry.childcaresession ? this.sessionMapper.mapTo({
+        childcaresessionid: inquiry.childcaresession.childcareSessionId!,
+        day: inquiry.childcaresession.day,
+        starttime: inquiry.childcaresession.startTime,
+        endtime: inquiry.childcaresession.endTime
+      }) : undefined,
+      inquiryId: inquiry.inquiryid,
+      notes: inquiry.notes,
+    });
+  }
+}
+
+
+// Childcare Inquiry Session Mapper
+export class ChildcareInquirySessionMapper implements Mapper<ChildcareInquirySession, ChildcareInquirySessionDTO> {
+  public mapTo(session: ChildcareInquirySession): ChildcareInquirySessionDTO {
+    return new ChildcareInquirySessionDTO({
+      inquiryId: session.inquiryid,
+      childId: session.childid,
+      childcareSessionId: session.childcaresessionid,
     });
   }
 }
