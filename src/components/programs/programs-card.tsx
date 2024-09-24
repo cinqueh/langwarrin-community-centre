@@ -1,7 +1,6 @@
 "use client"; // Since you might need client-side interactivity
 
 import React from "react";
-import "../../styles/global.css"; // Importing the global CSS file
 import styles from "./programs-card.module.css"; // Importing the CSS Module
 
 interface TitleCardProps {
