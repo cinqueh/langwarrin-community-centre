@@ -1,36 +1,52 @@
 "use client"; // Since you might need client-side interactivity
 
-// import Image from 'next/image';
 import React from "react";
-import styles from "./styles.module.css"; // Importing the CSS Module
+import styles from "./styles.module.css";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  contactTitle: string;
+  contactPhone: string;
+  contactEmail: string;
+  contactButtonText: string;
+  logoText: string;
+  subText: string;
+  memberButtonText: string;
+  addressTitle: string;
+  addressLine: string;
+  openingDays: string;
+  openingTimes: string;
+  copyrightText: string;
+}
+
+const Footer = (props: FooterProps) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.contactSection}>
-          <h3 className={styles.contactTitle}>Contact Us</h3>
-          <p className={styles.text}>📞 (03) 9789 7653</p>
-          <p className={styles.text}>✉️ reception@langwarrincc.org.au</p>
-          <button className={styles.button}>Enquire Online</button>
+          <h3 className={styles.contactTitle}>{props.contactTitle}</h3>
+          <p className={styles.text}>{props.contactPhone}</p>
+          <p className={styles.text}>{props.contactEmail}</p>
+          <button className="button-white" style={{ marginTop: "10px" }}>{props.contactButtonText}</button>
         </div>
-        
+
         <div className={styles.logoSection}>
-          <h1 className={styles.logoText}>LANGWARRIN</h1>
-          <h2 className={styles.subText}>Community Centre</h2>
-          <button className={styles.button}>Become a Member</button>
+          <h1 className={styles.logoText}>{props.logoText}</h1>
+          <h2 className={styles.subText}>{props.subText}</h2>
+          <button className="button-white" style={{ marginTop: "10px" }}>
+            {props.memberButtonText}
+          </button>
         </div>
 
         <div className={styles.addressSection}>
-          <h3 className={styles.addressTitle}>Address</h3>
-          <p className={styles.text}>2 Lang Rd, Langwarrin VIC 3910</p>
-          <p className={styles.text}>Monday to Friday</p>
-          <p className={styles.text}>9:00AM - 4:30PM</p>
+          <h3 className={styles.addressTitle}>{props.addressTitle}</h3>
+          <p className={styles.text}>{props.addressLine}</p>
+          <p className={styles.text}>{props.openingDays}</p>
+          <p className={styles.text}>{props.openingTimes}</p>
         </div>
       </div>
-      
+
       <div className={styles.copyright}>
-        <p>Copyright © 2014 All Rights Reserved. Langwarrin Community Centre</p>
+        <p>{props.copyrightText}</p>
       </div>
     </footer>
   );

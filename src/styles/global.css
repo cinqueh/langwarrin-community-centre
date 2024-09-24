@@ -1,10 +1,11 @@
 /* styles/global.css */
 .pageContainer {
   background-color: #eeede4;
-  padding: 20px 40px;
   margin: 0;
   font-family: "Prompt", sans-serif;
+  padding: 20px 40px;
 }
+
 
 h1 {
   font-size: 120px;
@@ -103,9 +104,9 @@ p {
 }
 
 .darkGreenContainer img {
-    max-width: 100%;
-    height: auto;
-  }
+  max-width: 100%;
+  height: auto;
+}
 
 /* medium green */
 .mediumGreenContainer {
@@ -145,27 +146,26 @@ p {
 
 /* style for program card */
 .cardTitleWrapper {
-    min-height: 110px;
-  }
-
+  min-height: 110px;
+}
 
 .divider {
   margin: 20px 0;
 }
 
-/* style for information card with button */ 
+/* style for information card with button */
 .contentWrapper {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-  }
-  
-  .textContent {
-    flex: 4; 
-    text-align: left;
-  }
-  
-  .buttonContainer {
-    flex: 1; 
-    text-align: right; 
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textContent {
+  flex: 4;
+  text-align: left;
+}
+
+.buttonContainer {
+  flex: 1;
+  text-align: right;
+}

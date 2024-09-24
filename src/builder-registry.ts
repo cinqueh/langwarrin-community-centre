@@ -21,13 +21,135 @@ import {
 
 import homeimage from "./components/home-image/home-image";
 import WhiteFeatureCard from "./components/feature-card/feature-card";
-import { WhiteNewsCard, GreenNewsCard } from "./components/news-section/news-scetion";
+import {
+  WhiteNewsCard,
+  GreenNewsCard,
+} from "./components/news-section/news-scetion";
 import ContactUs from "./components/contact-us/contact-us-card";
 import MainBanner from "./components/main-banner/main-banner";
 import { GreenTitleCard } from "./components/title-card/title-card";
 import { FacebookEmbed } from "./components/facebook-card/facebook-card";
+import Header from "./components/layout/header";
+import Footer from "./components/layout/footer";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+
+// Header parameters
+export const headerInputs = [
+  {
+    name: "logoUrl",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
+    helperText: "Upload the logo image.",
+  },
+  {
+    name: "logoAlt",
+    type: "string",
+    defaultValue: "Langwarrin Community Centre Logo",
+    helperText: "Enter the alternative text for the logo.",
+  },
+  {
+    name: "navItems",
+    type: "list",
+    subFields: [
+      {
+        name: "label",
+        type: "string",
+        defaultValue: "Home",
+        helperText: "Enter the label for the navigation item.",
+      },
+      {
+        name: "link",
+        type: "url",
+        defaultValue: "#",
+        helperText: "Enter the link for the navigation item.",
+      },
+    ],
+    helperText: "Add multiple navigation items.",
+  },
+  {
+    name: "membershipText",
+    type: "string",
+    defaultValue: "Become a Member",
+    helperText: "Enter the text for the membership button.",
+  },
+];
+
+// Footer parameters
+export const footerInputs = [
+  {
+    name: "contactTitle",
+    type: "string",
+    defaultValue: "Contact Us",
+    helperText: "Enter the title for the contact section.",
+  },
+  {
+    name: "contactPhone",
+    type: "string",
+    defaultValue: "123-456-7890",
+    helperText: "Enter the contact phone number.",
+  },
+  {
+    name: "contactEmail",
+    type: "string",
+    defaultValue: "info@example.com",
+    helperText: "Enter the contact email address.",
+  },
+  {
+    name: "contactButtonText",
+    type: "string",
+    defaultValue: "Get In Touch",
+    helperText: "Enter the text for the contact button.",
+  },
+  {
+    name: "logoText",
+    type: "string",
+    defaultValue: "Company Logo",
+    helperText: "Enter the logo text.",
+  },
+  {
+    name: "subText",
+    type: "string",
+    defaultValue: "Empowering the community",
+    helperText: "Enter the subtext for the logo section.",
+  },
+  {
+    name: "memberButtonText",
+    type: "string",
+    defaultValue: "Become a Member",
+    helperText: "Enter the text for the membership button.",
+  },
+  {
+    name: "addressTitle",
+    type: "string",
+    defaultValue: "Address",
+    helperText: "Enter the title for the address section.",
+  },
+  {
+    name: "addressLine",
+    type: "string",
+    defaultValue: "123 Main St",
+    helperText: "Enter the first address line.",
+  },
+  {
+    name: "openingDays",
+    type: "string",
+    defaultValue: "Monday to Friday",
+    helperText: "Enter the days open.",
+  },
+  {
+    name: "openingTimes",
+    type: "string",
+    defaultValue: "9:00am - 4:00pm",
+    helperText: "Enter the time open.",
+  },
+  {
+    name: "copyrightText",
+    type: "string",
+    defaultValue: "© 2024 Company Name. All rights reserved.",
+    helperText: "Enter the copyright text.",
+  },
+];
 
 // Programs card parameters
 const newsCardParameters = [
@@ -293,9 +415,19 @@ const mainBannerParameters = [
   },
 ];
 
-
-
 // Register components
+// Header
+// Register Header component with the section model
+Builder.registerComponent(Header, {
+  name: "Header",
+  inputs: headerInputs,
+});
+
+// Register Footer component with the section model
+Builder.registerComponent(Footer, {
+  name: "Footer",
+  inputs: footerInputs,
+});
 
 // homepage components
 
