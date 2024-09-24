@@ -1,4 +1,7 @@
 import { AddressDTO, PersonDTO } from "./person";
+import { ChildcareSessionDTO } from "./childcare/childcaresession"; // Import from childcare folder
+import { ChildDTO } from "./childcare/child"; // Import child DTO for Childcare Inquiry
+import { ChildcareProgramDTO } from "./childcare/childcareprogram"; // Import childcare program DTO for Childcare Inquiry
 
 class InquiryDTO {
   inquiryId?: number;
@@ -81,5 +84,44 @@ export class ProgramCourseInquiryDTO extends InquiryDTO {
     this.emergencyNumber = data.emergencyNumber;
     this.programName = data.programName;
     this.howHeardAboutProgram = data.howHeardAboutProgram;
+  }
+}
+
+// Childcare Inquiry with child, childcare program and session details
+export class ChildcareInquiryDTO extends InquiryDTO {
+  child: ChildDTO; 
+  childcareProgram?: ChildcareProgramDTO; 
+  childcareSession?: ChildcareSessionDTO; 
+
+  constructor(data: {
+    date: Date,
+    person: PersonDTO,
+    child: ChildDTO,
+    childcareProgram?: ChildcareProgramDTO,
+    childcareSession?: ChildcareSessionDTO,
+    inquiryId?: number,
+    notes?: string
+  }) {
+    super(data);
+    this.child = data.child;
+    this.childcareProgram = data.childcareProgram;
+    this.childcareSession = data.childcareSession;
+  }
+}
+
+// Childcare Inquiry Session with childcare session details
+export class ChildcareInquirySessionDTO {
+  inquiryId: number;
+  childId: number;
+  childcareSessionId: number;
+
+  constructor(data: {
+    inquiryId: number;
+    childId: number;
+    childcareSessionId: number;
+  }) {
+    this.inquiryId = data.inquiryId;
+    this.childId = data.childId;
+    this.childcareSessionId = data.childcareSessionId;
   }
 }
