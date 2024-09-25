@@ -49,4 +49,8 @@ export class AddressDTO {
         this.suburb = data.suburb;
         this.postcode = data.postcode;
     }
+
+    public toString(): string {
+        return `${this.streetAddress}${this.apartment ? ', ' + this.apartment : ''}, ${this.suburb}, ${this.state} ${this.postcode}`;
+    }
 }

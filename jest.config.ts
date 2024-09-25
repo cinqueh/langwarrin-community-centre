@@ -33,6 +33,12 @@ const config: Config = {
   // allow Jest to handle these file extensions
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
 
+  moduleNameMapper: {
+    '\\.module\\.css$': 'identity-obj-proxy',   // Mock CSS modules
+    '\\.(css|scss|sass)$': 'identity-obj-proxy', // Handle other styles
+    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js', // Mock images and static assets
+  },
+
   // transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
 
