@@ -126,4 +126,23 @@ export class ChildcareInquirySessionDTO {
   }
 }
 
-// Recommting again for deployment purpose
+export class ComplaintInquiryDTO extends InquiryDTO {
+  programName: string;
+  grievanceReason: string;
+  suggestedSolution: string;
+
+  constructor(data: {
+    date: Date,
+    person: PersonDTO,
+    programName: string,
+    grievanceReason: string,
+    suggestedSolution: string,
+    inquiryId?: number,
+    notes?: string,
+  }) {
+    super(data);
+    this.programName = data.programName;
+    this.grievanceReason = data.grievanceReason;
+    this.suggestedSolution = data.suggestedSolution;
+  }
+}
