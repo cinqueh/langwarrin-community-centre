@@ -4,6 +4,7 @@ import {
   ProgramCourseInquiryDTO,
   ChildcareInquiryDTO,
   ChildcareInquirySessionDTO,
+  ComplaintInquiryDTO
 } from "../dto/inquiry";
 import Mapper from "./mapper";
 import { Person, PersonMapper } from "./person-mapper";
@@ -40,6 +41,16 @@ export type ProgramCourseInquiry = {
   programname: string;
   howheardaboutprogram: string;
   inquiry: Inquiry;
+};
+
+export type ComplaintInquiry = {
+  inquiryid: number;
+  programname: string;
+  personfirstname?: string;  // From PersonDTO
+  personsurname?: string;     // From PersonDTO
+  grevancereason: string;
+  suggestedsolution: string;
+  inquiry: Inquiry;   // The Inquiry structure includes common fields like time, person, and notes.
 };
 
 // ChildcareInquiry Entity
@@ -155,6 +166,22 @@ export class ChildcareInquirySessionMapper implements Mapper<ChildcareInquirySes
       inquiryId: session.inquiryid,
       childId: session.childid,
       childcareSessionId: session.childcaresessionid,
+    });
+  }
+}
+
+export class ComplaintInquiryMapper implements Mapper<ComplaintInquiry, ComplaintInquiryDTO> {
+  private personMapper = new PersonMapper();
+
+  public mapTo(complaintInquiry: ComplaintInquiry): ComplaintInquiryDTO {
+    return new ComplaintInquiryDTO({
+      date: new Date(complaintInquiry?.inquiry?.time),
+      person: this.personMapper.mapTo(complaintInquiry.inquiry.person),
+      programName: complaintInquiry.programname,
+      grievanceReason: complaintInquiry.grevancereason,
+      suggestedSolution: complaintInquiry.suggestedsolution,
+      inquiryId: complaintInquiry.inquiryid,
+      notes: complaintInquiry.inquiry?.notes,
     });
   }
 }
