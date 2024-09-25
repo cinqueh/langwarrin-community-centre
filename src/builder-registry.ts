@@ -1,10 +1,9 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import {
-  RoomBookingCardLeft,
-  RoomBookingCardRight,
-} from "./components/room-booking/room-booking-card";
-
+import ContactUs from "./components/contact-us/contact-us-card";
+import Counter from "./components/Counter/Counter";
+import { FacebookEmbed } from "./components/facebook-card/facebook-card";
+import Footer from "./components/layout/footer";
 import {
   FormDownloadCard,
   DarkGreenProgramCard,
@@ -12,23 +11,14 @@ import {
   LightGreenProgramCard,
   divider,
 } from "./components/programs/programs-card";
-
-import homeimage from "./components/home-image/home-image";
-import WhiteFeatureCard from "./components/feature-card/feature-card";
-import {
-  WhiteNewsCard,
-  GreenNewsCard,
-} from "./components/news-section/news-scetion";
-import ContactUs from "./components/contact-us/contact-us-card";
-import MainBanner from "./components/main-banner/main-banner";
+import { GovernmentCard } from "./components/government-card/government-card";
 import {
   GreenTitleCard,
   TitleCard,
   TitleCardWithBackButton,
 } from "./components/title-card/title-card";
-import { FacebookEmbed } from "./components/facebook-card/facebook-card";
 import Header from "./components/layout/header";
-import Footer from "./components/layout/footer";
+import homeimage from "./components/home-image/home-image";
 import {
   LightGreenInformationCardTitle,
   DarkGreenInformationCardTitle,
@@ -38,17 +28,25 @@ import {
   WhiteInformationCard,
   InformationCardWithButton,
 } from "./components/information-card/information-card";
-
+import MainBanner from "./components/main-banner/main-banner";
 import {
   ProgramImageCard,
   ImageCard,
 } from "./components/image-card/image-card";
-
-import { GovernmentCard } from "./components/government-card/government-card";
+import {
+  RoomBookingCardLeft,
+  RoomBookingCardRight,
+} from "./components/room-booking/room-booking-card";
+import WhiteFeatureCard from "./components/feature-card/feature-card";
+import {
+  WhiteNewsCard,
+  GreenNewsCard,
+} from "./components/news-section/news-scetion";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 // Header parameters
+
 export const headerInputs = [
   {
     name: "logoUrl",
@@ -88,8 +86,8 @@ export const headerInputs = [
     helperText: "Enter the text for the membership button.",
   },
 ];
-
 // Footer parameters
+
 export const footerInputs = [
   {
     name: "contactTitle",
@@ -160,11 +158,10 @@ export const footerInputs = [
   {
     name: "copyrightText",
     type: "string",
-    defaultValue: "© 2024 Company Name. All rights reserved.",
+    defaultValue: "\u00A9 2024 Company Name. All rights reserved.",
     helperText: "Enter the copyright text.",
   },
 ];
-
 // Programs card parameters
 const newsCardParameters = [
   {
@@ -185,7 +182,6 @@ const newsCardParameters = [
   },
   { name: "description", type: "string", defaultValue: "Description" },
 ];
-
 const programImageCardParameters = [
   {
     name: "imageUrl",
@@ -199,7 +195,6 @@ const programImageCardParameters = [
       "This is the alternative text for the image, used for accessibility and SEO",
   },
 ];
-
 const programCardParameters = [
   {
     name: "imageUrl",
@@ -218,7 +213,6 @@ const programCardParameters = [
     defaultValue: "Title",
   },
 ];
-
 const formDownloadCardParameters = [
   {
     name: "title",
@@ -236,7 +230,6 @@ const formDownloadCardParameters = [
     defaultValue: "Button Text",
   },
 ];
-
 const informationCardParameters = [
   {
     name: "title",
@@ -262,7 +255,6 @@ const informationCardParameters = [
     helperText: "Set the height of the card, e.g., '300px' or '100%'",
   },
 ];
-
 const informationCardTitleParameters = [
   {
     name: "title",
@@ -270,7 +262,6 @@ const informationCardTitleParameters = [
     defaultValue: "Title",
   },
 ];
-
 const titleCardParameters = [
   {
     name: "title",
@@ -278,7 +269,6 @@ const titleCardParameters = [
     defaultValue: "Title",
   },
 ];
-
 // Room booking card parameters
 const roomBookingParameters = [
   {
@@ -318,7 +308,6 @@ const roomBookingParameters = [
     defaultValue: "0",
   },
 ];
-
 // Homepage card parameters
 // BackgroundSection Parameters
 const backgroundSectionParameters = [
@@ -335,7 +324,6 @@ const backgroundSectionParameters = [
     helperText: "Enter the alternative text for the image.",
   },
 ];
-
 // ContactUs Parameters
 const contactUsParameters = [
   {
@@ -406,7 +394,6 @@ const contactUsParameters = [
     helperText: "Alt text for the image.",
   },
 ];
-
 // MainBanner Parameters
 const mainBannerParameters = [
   {
@@ -441,7 +428,6 @@ const mainBannerParameters = [
     helperText: "Edit the note below the button.",
   },
 ];
-
 const titleWithBackButtonParameters = [
   {
     name: "title",
@@ -456,78 +442,81 @@ const titleWithBackButtonParameters = [
     helperText: "Enter the URL for the back button link.",
   },
 ];
-
 // Register components
+
 Builder.registerComponent(TitleCardWithBackButton, {
   name: "Title Card With Back Button",
   inputs: titleWithBackButtonParameters,
 });
-
 const partnershipSectionParameters = [
   {
-    name: 'title',
-    type: 'string',
-    defaultValue: 'Our Partnership',
-    helperText: 'Title of the partnership section',
+    name: "title",
+    type: "string",
+    defaultValue: "Our Partnership",
+    helperText: "Title of the partnership section",
   },
   {
-    name: 'description',
-    type: 'string',
-    defaultValue: 'We are proud to partner with...',
-    helperText: 'Description of the partnership',
+    name: "description",
+    type: "string",
+    defaultValue: "We are proud to partner with...",
+    helperText: "Description of the partnership",
   },
   {
-    name: 'imageUrl',
-    type: 'file',
-    allowedFileTypes: ['jpeg', 'jpg', 'png', 'svg'],
-    helperText: 'Upload the logo/image for the partnership',
+    name: "imageUrl",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
+    helperText: "Upload the logo/image for the partnership",
   },
   {
-    name: 'altText',
-    type: 'string',
-    defaultValue: 'Partner Logo',
-    helperText: 'Alternative text for the image',
+    name: "altText",
+    type: "string",
+    defaultValue: "Partner Logo",
+    helperText: "Alternative text for the image",
   },
 ];
-
 // Header
 // Register Header component with the section model
+
 Builder.registerComponent(Header, {
   name: "Header",
   inputs: headerInputs,
 });
-
 // Register Footer component with the section model
+
 Builder.registerComponent(Footer, {
   name: "Footer",
   inputs: footerInputs,
 });
-
 // homepage components
-
 // Register MainBanner component
+
 Builder.registerComponent(MainBanner, {
   name: "MainBanner",
   inputs: mainBannerParameters,
 });
 // Register BackgroundSection component
+
 Builder.registerComponent(homeimage, {
   name: "BackgroundSection",
   inputs: backgroundSectionParameters,
 });
 // Register ContactUs component
+
 Builder.registerComponent(ContactUs, {
   name: "ContactUs",
   inputs: contactUsParameters,
 });
+
 Builder.registerComponent(WhiteFeatureCard, {
   name: "White Feature Card",
   inputs: programCardParameters,
 });
+
 Builder.registerComponent(GreenTitleCard, {
   name: "Green Title Card",
   inputs: titleCardParameters,
 });
+
 Builder.registerComponent(GreenNewsCard, {
   name: "Green News Card",
   inputs: newsCardParameters,
@@ -546,11 +535,29 @@ Builder.registerComponent(DarkGreenInformationCardTitle, {
   name: "Dark Green Information Card Title",
   inputs: informationCardTitleParameters,
 });
-
 // Programs components
+
+const informationCardWithButtonParameters = [
+  {
+    name: "title",
+    type: "string",
+    defaultValue: "Title",
+  },
+  {
+    name: "description",
+    type: "richText",
+    defaultValue: "Description",
+  },
+  {
+    name: "buttonText",
+    type: "string",
+    defaultValue: "Book Online Now",
+  },
+];
+
 Builder.registerComponent(InformationCardWithButton, {
   name: "Information Card With Button",
-  inputs: informationCardParameters,
+  inputs: informationCardWithButtonParameters,
 });
 
 Builder.registerComponent(DarkGreenInformationCard, {
@@ -626,107 +633,107 @@ Builder.registerComponent(RoomBookingCardLeft, {
   name: "Room Booking Card Left",
   inputs: roomBookingParameters,
 });
+
 Builder.registerComponent(RoomBookingCardRight, {
   name: "Room Booking Card Right",
   inputs: roomBookingParameters,
 });
-
 // Register the component in Builder.io
+
 Builder.registerComponent(GovernmentCard, {
-  name: 'GovernmentCard',
+  name: "GovernmentCard",
   inputs: [
     {
-      name: 'title',
-      type: 'string',
-      defaultValue: 'Government Partnership',
-      helperText: 'Enter the title for the card',
+      name: "title",
+      type: "string",
+      defaultValue: "Government Partnership",
+      helperText: "Enter the title for the card",
     },
     {
-      name: 'subheading',
-      type: 'string',
-      defaultValue: 'Supporting Initiatives',
-      helperText: 'Enter the subheading',
+      name: "subheading",
+      type: "string",
+      defaultValue: "Supporting Initiatives",
+      helperText: "Enter the subheading",
     },
     {
-      name: 'image1',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the first image',
+      name: "image1",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the first image",
     },
     {
-      name: 'altText1',
-      type: 'string',
-      defaultValue: 'Image 1 Alt Text',
-      helperText: 'Enter alt text for the first image',
+      name: "altText1",
+      type: "string",
+      defaultValue: "Image 1 Alt Text",
+      helperText: "Enter alt text for the first image",
     },
     {
-      name: 'image2',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the second image',
+      name: "image2",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the second image",
     },
     {
-      name: 'altText2',
-      type: 'string',
-      defaultValue: 'Image 2 Alt Text',
-      helperText: 'Enter alt text for the second image',
+      name: "altText2",
+      type: "string",
+      defaultValue: "Image 2 Alt Text",
+      helperText: "Enter alt text for the second image",
     },
     {
-      name: 'image3',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the third image',
+      name: "image3",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the third image",
     },
     {
-      name: 'altText3',
-      type: 'string',
-      defaultValue: 'Image 3 Alt Text',
-      helperText: 'Enter alt text for the third image',
+      name: "altText3",
+      type: "string",
+      defaultValue: "Image 3 Alt Text",
+      helperText: "Enter alt text for the third image",
     },
     {
-      name: 'image4',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the fourth image',
+      name: "image4",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the fourth image",
     },
     {
-      name: 'altText4',
-      type: 'string',
-      defaultValue: 'Image 4 Alt Text',
-      helperText: 'Enter alt text for the fourth image',
+      name: "altText4",
+      type: "string",
+      defaultValue: "Image 4 Alt Text",
+      helperText: "Enter alt text for the fourth image",
     },
     {
-      name: 'image5',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the fifth image',
+      name: "image5",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the fifth image",
     },
     {
-      name: 'altText5',
-      type: 'string',
-      defaultValue: 'Image 5 Alt Text',
-      helperText: 'Enter alt text for the fifth image',
+      name: "altText5",
+      type: "string",
+      defaultValue: "Image 5 Alt Text",
+      helperText: "Enter alt text for the fifth image",
     },
     {
-      name: 'image6',
-      type: 'file',
-      allowedFileTypes: ['jpeg', 'jpg', 'png'],
-      helperText: 'Upload the sixth image',
+      name: "image6",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png"],
+      helperText: "Upload the sixth image",
     },
     {
-      name: 'altText6',
-      type: 'string',
-      defaultValue: 'Image 6 Alt Text',
-      helperText: 'Enter alt text for the sixth image',
+      name: "altText6",
+      type: "string",
+      defaultValue: "Image 6 Alt Text",
+      helperText: "Enter alt text for the sixth image",
     },
     {
-      name: 'list',
-      type: 'richText',
-      helperText: 'Enter the list of initiatives',
+      name: "list",
+      type: "richText",
+      helperText: "Enter the list of initiatives",
     },
   ],
 });
-
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -735,7 +742,6 @@ Builder.register("insertMenu", {
     { name: "Room Booking Card Right" },
   ],
 });
-
 // information cards
 Builder.register("insertMenu", {
   name: "Information Cards",
@@ -749,7 +755,6 @@ Builder.register("insertMenu", {
     { name: "Information Card With Button" },
   ],
 });
-
 // program cards
 Builder.register("insertMenu", {
   name: "Program Cards",
@@ -759,11 +764,20 @@ Builder.register("insertMenu", {
     { name: "Light Green Program Card" },
   ],
 });
-
 Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
     { name: "Program Image Card (with padding)" },
     { name: "Image Card (without padding)" },
+  ],
+});
+
+Builder.registerComponent(Counter, {
+  name: "Counter",
+  inputs: [
+    {
+      name: "initialCount",
+      type: "number",
+    },
   ],
 });

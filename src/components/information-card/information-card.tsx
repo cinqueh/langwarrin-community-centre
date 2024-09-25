@@ -31,23 +31,27 @@ interface InformationCardProps {
   height?: string;
 }
 const WhiteInformationCard = (props: InformationCardProps) => {
-    const {
-      title,
-      description,
-      titleAlignment = "left",
-      height = "auto",
-    } = props;
-  
-    return (
-      <div className={styles.whiteInformationContainer}>
-        {/* Conditionally render <h4> only if the title is not empty */}
-        {title && <h4 className={styles.title} style={{ textAlign: titleAlignment }}>{title}</h4>}
-        <div className={styles.description} style={{ height }}>
-          <p dangerouslySetInnerHTML={{ __html: description }}></p>
-        </div>
+  const {
+    title,
+    description,
+    titleAlignment = "left",
+    height = "auto",
+  } = props;
+
+  return (
+    <div className={styles.whiteInformationContainer}>
+      {/* Conditionally render <h4> only if the title is not empty */}
+      {title && (
+        <h4 className={styles.title} style={{ textAlign: titleAlignment }}>
+          {title}
+        </h4>
+      )}
+      <div className={styles.description} style={{ height }}>
+        <p dangerouslySetInnerHTML={{ __html: description }}></p>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 const LightGreenInformationCard = (props: InformationCardProps) => {
   const {
@@ -111,16 +115,25 @@ const DarkGreenInformationCard = (props: InformationCardProps) => {
   );
 };
 
-const InformationCardWithButton = (props: InformationCardProps) => {
+interface InformationCardWithButtonProps {
+  title: string;
+  description?: string;
+  buttonText: string;
+}
+
+const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
   return (
     <div className={styles.lightGreenInformationContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.textContent}>
-          <h4>{props.title}</h4>
-          <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
+          {props.title && <h4>{props.title}</h4>}
+          {/* Conditionally render the description only if it exists */}
+          {props.description && (
+            <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
+          )}
         </div>
         <div className={styles.buttonContainer}>
-          <button className="button-white">Book Online Now</button>
+          <button className="button-white">{props.buttonText}</button>
         </div>
       </div>
     </div>

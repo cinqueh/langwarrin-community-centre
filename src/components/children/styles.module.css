@@ -1,0 +1,413 @@
+/* Title card styles */
+.titleCardContainer {
+  background-color: #eeede4;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 50px;
+  margin: 0;
+  color: #004223;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .titleCardContainer {
+    padding: 20px 10px; 
+  }
+
+  .title {
+    font-size: 36px; 
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .titleCardContainer {
+    padding: 15px 5px; 
+  }
+
+  .title {
+    font-size: 28px; 
+  }
+}
+
+/* Button styles */
+.buttonContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.buttonLight {
+  background-color: #eeede4;
+  color: #004223; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buttonLight:hover {
+  background-color: #d7d9d6; 
+}
+
+
+/* Community childcare styles */
+.communityChildcareContainer {
+  display: flex;
+  flex-direction: row; 
+  gap: 20px; 
+  padding: 20px 40px;
+  background-color: #eeede4;
+}
+
+.communityChildcareImageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+
+.communityChildcareImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.communityChildcareContent {
+  flex: 2;
+  background-color: #638B66;
+  color: #eeede4;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.communityChildcareHeader {
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.communityChildcareSubtitle {
+  font-size: 20px;
+  margin: 10px 0;
+  text-decoration: underline;
+}
+
+.communityChildcareDescription {
+  font-size: 16px;
+  line-height: 1.5; 
+  margin: 10px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .communityChildcareContainer {
+    flex-direction: column; 
+    padding: 20px;;
+  }
+
+  .communityChildcareImageContainer {
+    margin-bottom: 20px;
+  }
+
+  .communityChildcareImage {
+    width: 100%; 
+    height: auto; 
+  }
+}
+/* Children Group Card section */
+.childrenGroupCardContainer {
+  display: flex; 
+  gap: 20px; 
+  background-color: #eeede4; 
+  padding: 20px 40px; 
+  align-items: stretch;
+}
+
+.childcareInfoBox {
+  flex: 1;
+  background-color: #004223;
+  color: #eeede4;
+  padding: 20px;
+}
+
+.childcareInfoHeader {
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.childcareInfoDescription {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px; 
+}
+
+.programsContainer {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  justify-content: space-between; 
+}
+
+.programCard {
+  background-color: #38603A; 
+  color: #eeede4;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  height: 100%; 
+}
+
+.programText {
+  flex: 2;
+}
+
+.programHeader {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 10px; 
+}
+
+.programDescription {
+  font-size: 14px;
+  margin: 0;
+}
+
+.programButtonContainer {
+  flex: 1; 
+  display: flex;
+  justify-content: flex-end; 
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .childrenGroupCardContainer {
+    flex-direction: column; 
+    padding: 20px; 
+  }
+
+  .programsContainer {
+    flex-direction: column; 
+  }
+
+  .programCard {
+    flex-direction: column; 
+    align-items: flex-start; 
+    height: auto; 
+  }
+
+  .programButtonContainer {
+    justify-content: flex-start; 
+    margin-top: 10px; 
+  }
+}
+
+/* Activities Card Styles */
+.activitiesContainer {
+  display: flex; 
+  gap: 20px;
+  background-color: #eeede4; 
+  padding: 20px 40px;
+}
+
+.activityCard {
+  min-height: 550px;
+  flex: 1; 
+  background-color: #3f5d41; 
+  color: #eeede4;
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+.activityTitle {
+  font-size: 34px;
+  font-weight: bold;
+  margin: 0 0 20px 0; 
+  text-align: center;
+}
+
+.activityDescription {
+  font-size: 18px;
+  line-height: 1.5;
+  flex: 1; 
+  margin-bottom: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .activitiesContainer {
+    flex-direction: column; 
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .activityTitle {
+    font-size: 28px; 
+  }
+
+  .activityDescription {
+    font-size: 16px; 
+  }
+}
+
+/* Youth Group Card Styles */
+.youthGroupContainer {
+  display: flex; 
+  background-color: #eeede4; 
+  padding: 20px 40px;
+  gap: 20px; 
+}
+
+.youthGroupImageContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.youthGroupImage {
+  width: 100%; 
+  height: auto;
+  max-height: 100%;
+}
+
+.youthGroupInfoContainer {
+  flex: 1; 
+  background-color: #004223; 
+  color: #eeede4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+.youthGroupInfoTitle {
+  font-size: 34px;
+  font-weight: bold;
+  margin: 0 10px; 
+}
+
+.youthGroupInfoDescription {
+  font-size: 18px;
+  line-height: 1.5;
+  flex: 1; 
+  margin: 30px 10px; 
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .youthGroupContainer {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .youthGroupInfoTitle {
+    font-size: 28px; 
+
+  }
+  .youthGroupInfoDescription {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .youthGroupContainer {
+    padding: 20px; 
+  }
+
+  .youthGroupInfoTitle {
+    font-size: 24px; 
+  }
+
+  .youthGroupInfoDescription {
+    font-size: 14px; 
+  }
+}
+
+
+/* Information for parents card styles */
+.infoCardsContainer {
+  display: flex; 
+  gap: 20px; 
+  background-color: #eeede4;
+  padding: 20px 40px;
+}
+
+.infoCard {
+  flex: 1; 
+  background-color: #3f5d41; 
+  color: #eeede4;
+  padding: 20px;
+  text-align: center; 
+  text-decoration: none; 
+  transition: background-color 0.3s ease; 
+  min-height: 300px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.infoCard:hover {
+  background-color: #2e4632; 
+}
+
+.infoTitle {
+  font-size: 37px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .infoCardsContainer {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .infoCard {
+    min-height: auto;
+    padding: 15px; 
+    width: 100%;
+  }
+
+  .infoTitle {
+    font-size: 30px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .infoCardsContainer {
+    padding: 20px; 
+  }
+
+  .infoCard {
+    min-height: auto;
+    padding: 10px; 
+    width: 100%;
+  }
+
+  .infoTitle {
+    font-size: 24px; 
+  }
+}
