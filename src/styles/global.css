@@ -6,7 +6,6 @@
   padding: 20px 40px;
 }
 
-
 h1 {
   font-size: 120px;
   font-weight: bolder;
@@ -33,7 +32,7 @@ h4 {
 }
 
 p {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
   margin: 15px 0;
@@ -70,24 +69,13 @@ p {
 }
 
 .button-white:hover {
-  background-color: #004223;
+  background-color: #c3c3c3;
   color: #eeede4;
 }
 
 .titleContainer {
   text-align: center;
   color: #004223;
-}
-
-/* Container for information (without padding) */
-.lightGreenInformationContainer {
-  background-color: #638b66;
-  padding: 1px 40px;
-}
-
-.darkGreenInformationContainer {
-  background-color: #004223;
-  padding: 1px 40px;
 }
 
 /* dark green */
@@ -153,19 +141,3 @@ p {
   margin: 20px 0;
 }
 
-/* style for information card with button */
-.contentWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.textContent {
-  flex: 4;
-  text-align: left;
-}
-
-.buttonContainer {
-  flex: 1;
-  text-align: right;
-}

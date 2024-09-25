@@ -1,0 +1,43 @@
+.governmentCardContainer {
+    background-color: #e3e9d6;
+    padding: 20px 60px;
+    margin: 0 -40px;
+  }
+  
+  .title {
+    text-align: center;
+    color: #38603a;
+  }
+  
+  .subheading {
+    font-size: 24px;
+    text-align: center;
+    color: #38603a;
+  }
+  
+  .contentContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .imageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    flex: 2;
+  }
+  
+  .gridImage {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+  }
+  
+  .listParagraph {
+    flex: 1;
+    padding: 10px;
+    color: #38603a;
+    line-height: 0;
+  }

@@ -1,0 +1,32 @@
+/* styles for ProgramImageCard */
+.programImageCardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; 
+    margin: 20px 0;
+    padding: 0; 
+  }
+  
+  .programImageCardContainer img {
+    width: 50%; 
+    height: auto; 
+    max-height: 100%; 
+    object-fit: contain; 
+  }
+
+.imageCardContainer {
+  display: block;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; 
+  width: 100%;
+  height: 100%; 
+}
+
+.imageCardContainer img {
+  width: 100%;  
+  height: 100%; 
+  object-fit: cover; 
+  display: block;
+}
