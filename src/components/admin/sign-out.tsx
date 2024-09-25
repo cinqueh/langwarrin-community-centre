@@ -1,4 +1,6 @@
 import { signOut } from "../../../auth"
+import styles from './shared.module.css';
+
 export default function SignOut() {
   return (
     <form
@@ -7,7 +9,7 @@ export default function SignOut() {
         await signOut()
       }}
     >
-      <button type="submit">Sign Out</button>
+      <button className={styles.signOut} type="submit">Sign Out</button>
     </form>
   )
 }
