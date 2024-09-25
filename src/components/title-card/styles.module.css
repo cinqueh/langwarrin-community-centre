@@ -1,32 +1,58 @@
 .greenTitleContainer {
   text-align: center;
-  background-color: #38603A;
+  background-color: #38603a;
 }
 
 .titleCardContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #004223;
-  position: relative;
   padding: 10px;
+  width: 100%;
+  color: #004223;
+}
+
+.titleCardWithButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  gap: 10px; 
+  color: #004223;
+}
+
+.leftColumn {
+  flex-shrink: 0; /* Prevent the left column from shrinking */
+  display: flex;
+  align-items: center;
+}
+
+.rightColumn {
+  flex-grow: 1; /* Allow the right column to take up remaining space */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title horizontally */
+  text-align: center; /* Center the title text */
 }
 
 .backButton {
-  position: absolute;
-  left: 0;
-  padding-left: 10px;
+  display: flex;
+  align-items: center;
   background-color: transparent;
   border: none;
   color: #004223;
   font-size: 20px;
   font-weight: bold;
-  display: flex;
-  align-items: center;
   cursor: pointer;
 }
 
 .backIcon {
   margin-right: 5px;
-  font-size: 18px; 
+  font-size: 18px;
+}
+
+.title {
+  font-weight: bold;
+  color: #004223;
 }

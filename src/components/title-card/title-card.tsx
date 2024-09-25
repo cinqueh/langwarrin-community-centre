@@ -31,17 +31,21 @@ interface TitleCardWithBackButtonProps {
 }
 
 const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
-    const { title, backLink = "/" } = props;
-    return (
-      <div className={styles.titleCardContainer}>
+  const { title, backLink = "/" } = props;
+  return (
+    <div className={styles.titleCardWithButtonContainer}>
+      <div className={styles.leftColumn}>
         <Link href={backLink}>
           <button className={styles.backButton}>
             <span className={styles.backIcon}>&lt;</span> Back
           </button>
         </Link>
-        <h2>{title}</h2>
       </div>
-    );
-  };
+      <div className={styles.rightColumn}>
+        <h2 className={styles.title}>{title}</h2>
+      </div>
+    </div>
+  );
+};
   
 export { GreenTitleCard, TitleCardWithBackButton, TitleCard };
