@@ -56,7 +56,7 @@ This project aims to develop a full-stack website for Langwarrin community centr
    npm run dev
    ```
 
-## [Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24903681/Functional+Requirements) )
+## [Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24903681/Functional+Requirements)
 - **User Experience:**
   - Migrate all content from the old website.
   - Implement a slideshow or list of upcoming events.
