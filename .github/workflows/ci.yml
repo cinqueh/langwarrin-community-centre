@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Next.js project
         run: npm run build
-    
+
   test:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -35,26 +35,26 @@ jobs:
         node-version: [20.16.0]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm run test -- --coverage
+      - name: Run tests
+        run: npm run test -- --coverage
 
-    - name: Upload test results
-      if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: test-results.xml
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results.xml
 
   lint:
     name: Lint Code
@@ -74,3 +74,24 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+  commitlint:
+    name: Lint Commit Messages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # Fetch only the last commit
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Commitlint
+        run: npm install @commitlint/{config-conventional,cli}
+
+      - name: Run Commitlint on the last commit
+        run: git log -1 --pretty=%B | npx commitlint

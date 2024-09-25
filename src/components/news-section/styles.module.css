@@ -1,0 +1,66 @@
+/* Outer container with green background */
+.newsCardOuterContainer {
+  background-color: #38603a; 
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.newsCardImage {
+  width: 100%;
+  height: auto;
+}
+
+/* White box container */
+.whiteNewsCardContainer {
+  background-color: #efeee5;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+/* White box Title styling */
+.whiteNewsCardTitle {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #2b2b2b; 
+  font-weight: bold;
+}
+
+/* White box Description styling */
+.whiteNewsCardDescription {
+  font-size: 14px;
+  color: #2b2b2b;
+  margin-bottom: 15px;
+}
+
+/* Green box container */
+.greenNewsCardContainer {
+    background-color: 38603a;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 4px 4px 0px rgb(255, 255, 255); 
+  }
+  
+  /* Green box Title styling */
+  .greenNewsCardTitle {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #EFEEE5; 
+    font-weight: bold;
+  }
+  
+  /* Green box Description styling */
+  .greenNewsCardDescription {
+    font-size: 14px;
+    color: #EFEEE5;
+    margin-bottom: 15px;
+  }
+  
