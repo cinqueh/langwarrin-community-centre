@@ -12,9 +12,9 @@ export default class GeneralInquiryRepository extends BaseRepository {
             _date: inquiry?.date?.toISOString(),
             _email: inquiry?.person?.email,
             _firstname: inquiry?.person?.firstName,
+            _surname: inquiry?.person?.surname,
             _phonenumber: inquiry?.person?.phoneNumber,
             _message: inquiry?.message,
-            _surname: inquiry?.person?.surname,
         };
 
         return await client

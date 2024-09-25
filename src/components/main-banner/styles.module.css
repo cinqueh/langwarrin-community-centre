@@ -1,0 +1,62 @@
+.mainBanner {
+  text-align: center;
+  color: #eeede4;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerContent {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* create the green background box */
+.bannerTitleWrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.bannerBackground {
+  background-color: #004223;
+  width: 100%;
+}
+
+.bannerTitle {
+  color: #004223;
+  -webkit-text-stroke: 2px #efeee5;
+  font-family: "Anton", sans-serif;
+  letter-spacing: -10px;
+  position: relative;
+  z-index: 1; 
+}
+
+.bannerTitle::before {
+  content: ""; 
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%; 
+  background-color: #004223; 
+  z-index: -1; 
+  width: 100%; 
+}
+
+.bannerTitle2 {
+  margin-top: -20px;
+}
+
+.bannerSubtitle {
+  font-style: italic;
+  margin-top: 0px;
+}
+
+.bannerNote {
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 9px;
+  padding-bottom: 40px;
+}
