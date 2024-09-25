@@ -537,9 +537,27 @@ Builder.registerComponent(DarkGreenInformationCardTitle, {
 });
 // Programs components
 
+const informationCardWithButtonParameters = [
+  {
+    name: "title",
+    type: "string",
+    defaultValue: "Title",
+  },
+  {
+    name: "description",
+    type: "richText",
+    defaultValue: "Description",
+  },
+  {
+    name: "buttonText",
+    type: "string",
+    defaultValue: "Book Online Now",
+  },
+];
+
 Builder.registerComponent(InformationCardWithButton, {
   name: "Information Card With Button",
-  inputs: informationCardParameters,
+  inputs: informationCardWithButtonParameters,
 });
 
 Builder.registerComponent(DarkGreenInformationCard, {
