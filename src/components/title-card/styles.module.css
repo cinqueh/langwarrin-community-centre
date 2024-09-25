@@ -1,0 +1,32 @@
+.greenTitleContainer {
+  text-align: center;
+  background-color: #38603A;
+}
+
+.titleCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #004223;
+  position: relative;
+  padding: 10px;
+}
+
+.backButton {
+  position: absolute;
+  left: 0;
+  padding-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: #004223;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.backIcon {
+  margin-right: 5px;
+  font-size: 18px; 
+}
