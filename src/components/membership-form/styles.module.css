@@ -1,0 +1,73 @@
+.membershipForm {
+    background-color: #38603A;
+    padding: 30px;
+    max-width: 1115px;
+  }
+  
+  .title {
+    font-size: 50px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    font-family: 'prompt';
+  }
+  
+  .subtitle {
+    margin-bottom: 5px;
+    font-size: 19px;
+    margin-top: -5px;
+    font-family: 'prompt';
+  }
+  
+  .subtitle2 {
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-family: 'prompt';
+  }
+
+  .inputGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup input,
+  .selectInput {
+    width: 32%;
+    padding: 7px;
+    border: none;
+    color: rgb(163, 163, 163);
+  }
+  
+  .mobileInputGroup {
+    display: flex;
+    align-items: center;
+    width: 48%;
+  }
+  
+  .mobilePrefix {
+    padding: 10px;
+    background-color: #c6c6c6;
+    font-family: 'prompt';
+  }
+  
+  .mobileInputGroup input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    width: calc(100% - 60px);
+  }
+  
+  .checkboxGroup {
+    margin-bottom: 15px;
+    color: white;
+  }
+  
+  button.button-white {
+    background-color: white;
+    padding: 12px;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
