@@ -1,7 +1,6 @@
 .container {
   display: flex;
-  background-color: #4b6243; /* green background */
-  border-radius: 8px;
+  background-color: #38603A; 
   padding: 20px;
   color: #ffffff;
   align-items: center;
@@ -9,10 +8,9 @@
 
 .containerRight {
   display: flex;
-  background-color: #edede4; /* green background */
-  border-radius: 8px;
+  background-color: #EEEDE4; 
   padding: 20px;
-  color: #004223;
+  color: #004223; 
   align-items: center;
 }
 
@@ -24,34 +22,52 @@
 .image {
   width: 100%;
   height: auto;
-  border-radius: 8px;
 }
 
 .header {
-  font-size: 30px; 
+  font-size: 26px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.capacity {
+  font-size: 20px;
+  color: #9f9f9f; 
+  margin-left: 10px;
+  font-weight: bolder;
 }
 
 .content {
   flex: 1;
-  padding-left: 20px;
+}
+
+.description {
+  margin: 10px 0;
+  color: #9f9f9f; 
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .buttonLight {
-  background-color: #edede4;
-  color: #4b6243;
+  background-color: #EEEDE4;
+  color: #004223;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   font-size: 16px;
+  font-weight: 900;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .buttonDark {
   background-color: #004223;
-  color: #edede4;
+  color: #EEEDE4;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
+  font-weight: 800;
   cursor: pointer;
+  margin-top: 20px;
 }
