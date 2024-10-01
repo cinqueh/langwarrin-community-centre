@@ -141,7 +141,7 @@ const ChildcareContactForm: React.FC<ChildcareContactFormProps> = ({
           />
         </div>
 
-        <h5>Child's Information</h5>
+        <h5>Child&#39;s Information</h5>
         <div className={styles.inputGroup}>
           <input
             type="text"
@@ -200,4 +200,4 @@ const ChildcareContactForm: React.FC<ChildcareContactFormProps> = ({
   );
 };
 
-export {ChildcareContactForm};
+export { ChildcareContactForm };
