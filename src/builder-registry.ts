@@ -43,6 +43,7 @@ import {
   GreenNewsCard,
 } from "./components/news-section/news-scetion";
 import { MembershipForm } from "./components/membership-form/membership-form";
+import { ChildcareContactForm } from "./components/childcare-form/childcare-form";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -830,6 +831,93 @@ Builder.registerComponent(MembershipForm, {
   inputs: membershipFormInputs,
 });
 
+const childcareFormInputs = [
+  {
+    name: "title",
+    type: "string",
+    defaultValue: "Childcare Form",
+    helperText: "Enter the title for the childcare form.",
+  },
+  {
+    name: "subtitle",
+    type: "string",
+    defaultValue: "Enquire now!",
+    helperText: "Enter the subtitle for the form.",
+  },
+  {
+    name: "firstNamePlaceholder",
+    type: "string",
+    defaultValue: "First Name",
+    helperText: "Enter the placeholder text for the first name input.",
+  },
+  {
+    name: "lastNamePlaceholder",
+    type: "string",
+    defaultValue: "Last Name",
+    helperText: "Enter the placeholder text for the last name input.",
+  },
+  {
+    name: "emailPlaceholder",
+    type: "string",
+    defaultValue: "Email",
+    helperText: "Enter the placeholder text for the email input.",
+  },
+  {
+    name: "mobilePlaceholder",
+    type: "string",
+    defaultValue: "Mobile",
+    helperText: "Enter the placeholder text for the mobile input.",
+  },
+  {
+    name: "homePhonePlaceholder",
+    type: "string",
+    defaultValue: "Home Phone",
+    helperText: "Enter the placeholder text for the home phone input.",
+  },
+  {
+    name: "occupationPlaceholder",
+    type: "string",
+    defaultValue: "Occupation",
+    helperText: "Enter the placeholder text for the occupation input.",
+  },
+  {
+    name: "childFirstNamePlaceholder",
+    type: "string",
+    defaultValue: "Child's First Name",
+    helperText: "Enter the placeholder text for the child's first name input.",
+  },
+  {
+    name: "childLastNamePlaceholder",
+    type: "string",
+    defaultValue: "Child's Last Name",
+    helperText: "Enter the placeholder text for the child's last name input.",
+  },
+  {
+    name: "programPlaceholder",
+    type: "string",
+    defaultValue: "Program",
+    helperText: "Enter the placeholder text for the program input.",
+  },
+  {
+    name: "messagePlaceholder",
+    type: "string",
+    defaultValue: "Message",
+    helperText: "Enter the placeholder text for the message input.",
+  },
+  {
+    name: "submitButtonText",
+    type: "string",
+    defaultValue: "Submit",
+    helperText: "Enter the text for the submit button.",
+  },
+];
+
+Builder.registerComponent(ChildcareContactForm, {
+  name: "Childcare Form",
+  inputs: childcareFormInputs,
+});
+
+
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -871,6 +959,7 @@ Builder.register("insertMenu", {
   name: "Custom Forms",
   items: [
     { name: "Membership Form" },
+    { name: "Childcare Form" },
   ],
 });
 

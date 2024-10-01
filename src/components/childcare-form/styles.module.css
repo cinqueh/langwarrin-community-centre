@@ -1,0 +1,62 @@
+.childcareContactForm {
+    background-color: #38603A;
+    padding: 20px;
+    max-width: 1115px;
+  }
+  
+  .title {
+    font-size: 50px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    font-family: 'prompt';
+  }
+  
+  .subtitle {
+    margin-bottom: 30px;
+    font-size: 19px;
+    margin-top: -5px;
+    margin-bottom: 12px;
+    font-family: 'prompt';
+  }
+  
+  .inputGroup {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup input,
+  .selectInput {
+    width: 32%;
+    padding: 7px;
+    border: none;
+    color: rgb(163, 163, 163);
+  }
+  
+  .mobileInputGroup {
+    display: flex;
+    align-items: center;
+    width: 48%;
+  }
+  
+  .mobilePrefix {
+    padding: 10px;
+    background-color: #c6c6c6;
+    font-family: 'prompt';
+  }
+  
+  .mobileInputGroup input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    width: calc(100% - 60px);
+  }
+  
+  .messageTextarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    height: 150px;
+    color: black;
+  }
+  
