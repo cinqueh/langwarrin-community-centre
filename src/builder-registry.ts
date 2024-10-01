@@ -42,6 +42,7 @@ import {
   WhiteNewsCard,
   GreenNewsCard,
 } from "./components/news-section/news-scetion";
+import { MembershipForm } from "./components/membership-form/membership-form";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -734,6 +735,101 @@ Builder.registerComponent(GovernmentCard, {
     },
   ],
 });
+
+
+
+export const membershipFormInputs = [
+  {
+    name: "title",
+    type: "string",
+    defaultValue: "Membership Form",
+    helperText: "Enter the title for the membership form.",
+  },
+  {
+    name: "subtitle",
+    type: "string",
+    defaultValue: "Join us today!",
+    helperText: "Enter the subtitle for the form.",
+  },
+  {
+    name: "subtitle2",
+    type: "string",
+    defaultValue: "We are excited to have you.",
+    helperText: "Enter the secondary subtitle for the form.",
+  },
+  {
+    name: "firstNamePlaceholder",
+    type: "string",
+    defaultValue: "First Name",
+    helperText: "Enter the placeholder text for the first name input.",
+  },
+  {
+    name: "lastNamePlaceholder",
+    type: "string",
+    defaultValue: "Last Name",
+    helperText: "Enter the placeholder text for the last name input.",
+  },
+  {
+    name: "emailPlaceholder",
+    type: "string",
+    defaultValue: "Email",
+    helperText: "Enter the placeholder text for the email input.",
+  },
+  {
+    name: "mobilePlaceholder",
+    type: "string",
+    defaultValue: "Mobile",
+    helperText: "Enter the placeholder text for the mobile input.",
+  },
+  {
+    name: "homePhonePlaceholder",
+    type: "string",
+    defaultValue: "Home Phone",
+    helperText: "Enter the placeholder text for the home phone input.",
+  },
+  {
+    name: "occupationPlaceholder",
+    type: "string",
+    defaultValue: "Occupation",
+    helperText: "Enter the placeholder text for the occupation input.",
+  },
+  {
+    name: "addressPlaceholder",
+    type: "string",
+    defaultValue: "Address",
+    helperText: "Enter the placeholder text for the address input.",
+  },
+  {
+    name: "suburbPlaceholder",
+    type: "string",
+    defaultValue: "Suburb",
+    helperText: "Enter the placeholder text for the suburb input.",
+  },
+  {
+    name: "statePlaceholder",
+    type: "string",
+    defaultValue: "State",
+    helperText: "Enter the placeholder text for the state input.",
+  },
+  {
+    name: "postcodePlaceholder",
+    type: "string",
+    defaultValue: "Postcode",
+    helperText: "Enter the placeholder text for the postcode input.",
+  },
+  {
+    name: "submitButtonText",
+    type: "string",
+    defaultValue: "Submit",
+    helperText: "Enter the text for the submit button.",
+  },
+];
+
+Builder.registerComponent(MembershipForm, {
+  name: "Membership Form",
+  inputs: membershipFormInputs,
+});
+
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -771,13 +867,10 @@ Builder.register("insertMenu", {
     { name: "Image Card (without padding)" },
   ],
 });
-
-Builder.registerComponent(Counter, {
-  name: "Counter",
-  inputs: [
-    {
-      name: "initialCount",
-      type: "number",
-    },
+Builder.register("insertMenu", {
+  name: "Custom Forms",
+  items: [
+    { name: "Membership Form" },
   ],
 });
+
