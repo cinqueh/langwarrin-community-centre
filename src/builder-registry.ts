@@ -1,7 +1,6 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
 import ContactUs from "./components/contact-us/contact-us-card";
-import Counter from "./components/Counter/Counter";
 import { FacebookEmbed } from "./components/facebook-card/facebook-card";
 import Footer from "./components/layout/footer";
 import {
@@ -84,7 +83,7 @@ export const headerInputs = [
   {
     name: "membershipText",
     type: "string",
-    defaultValue: "Become a Member",
+    defaultValue: "Become a Member!",
     helperText: "Enter the text for the membership button.",
   },
 ];

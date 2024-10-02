@@ -22,14 +22,7 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   if (content || isPreviewing) {
     return (
       <>
-        {/* <BuilderComponent model="header"/> */}
-        <Header logoUrl="/images/templogo.png" logoAlt="Langwarrin CC Logo" navItems={[
-          {label: "Programs", link: "/programs"},
-          {label: "Children", link: "/children"},
-          {label: "Room Hire", link: "/room-bookings"},
-          {label: "Forms", link: "/"},
-          {label: "About", link: "/about-us"},
-        ]} membershipText="Become a Member!"></Header>
+        <BuilderComponent model="header"/>
         <div className="pageContainer">
           <BuilderComponent content={content} model={model} />
         </div>
