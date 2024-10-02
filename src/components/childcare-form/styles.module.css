@@ -8,7 +8,6 @@
     font-size: 50px;
     font-weight: 900;
     margin-bottom: 20px;
-    font-family: 'prompt';
   }
   
   .subtitle {
@@ -16,7 +15,6 @@
     font-size: 19px;
     margin-top: -5px;
     margin-bottom: 12px;
-    font-family: 'prompt';
   }
   
   .inputGroup {
@@ -42,7 +40,6 @@
   .mobilePrefix {
     padding: 10px;
     background-color: #c6c6c6;
-    font-family: 'prompt';
   }
   
   .mobileInputGroup input {
