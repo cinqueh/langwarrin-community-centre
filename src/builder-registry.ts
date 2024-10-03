@@ -559,6 +559,11 @@ const informationCardWithButtonParameters = [
     type: "string",
     defaultValue: "Book Online Now",
   },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  },
 ];
 
 Builder.registerComponent(InformationCardWithButton, {
