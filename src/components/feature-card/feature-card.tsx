@@ -12,11 +12,16 @@ interface ProgramCardProps {
 }
 
 const WhiteFeatureCard = (props: ProgramCardProps) => {
+  const handleButtonClick = () => {
+    window.location.href = props.linkUrl;
+  };
   return (
     <div className={styles.featureCardContainer}>
-        <h4>{props.title}</h4>
+      <h4>{props.title}</h4>
       <img src={props.imageUrl} alt={props.altText} />
-      <button className="button-green">Learn More</button>
+      <button className="button-green" onClick={handleButtonClick}>
+        Learn More
+      </button>
     </div>
   );
 };
