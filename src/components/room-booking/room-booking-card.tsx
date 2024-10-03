@@ -1,21 +1,25 @@
-"use client"; // Since you might need client-side interactivity
+"use client";
 
 import React from "react";
-import styles from "./styles.module.css"; // Importing the CSS Module
+import styles from "./styles.module.css";
 
 interface RoomBookingCardProps {
+  imageUrl: string;
+  altText: string;
+  roomName: string;
+  capacity: number;
+  description: string;
+  communityGroupHourlyRate: string;
+  permanentHiresHourlyRate: string;
+  casualHiresHourlyRate: string;
+  buttonText: string;
+  linkUrl: string;
+}
 
-    imageUrl: string;
-    altText: string;
-
-    roomName: string;
-    capacity: number;
-    communityGroupHourlyRate: number;
-    permanentHiresHourlyRate: number;
-    casualHiresHourlyRate: number;
-  }
-
-const RoomBookingCardLeft = (props: RoomBookingCardProps) => {
+const RoomBookingCardLeft: React.FC<RoomBookingCardProps> = (props) => {
+  const handleButtonClick = () => {
+    window.location.href = props.linkUrl;
+  };
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
@@ -26,39 +30,58 @@ const RoomBookingCardLeft = (props: RoomBookingCardProps) => {
         />
       </div>
       <div className={styles.content}>
-        <h2 className={styles.header}>{props.roomName}</h2>
-        <p>Capacity: {props.capacity}</p>
+        <h2 className={styles.header}>
+          {props.roomName}{" "}
+          <span className={styles.capacity}>🪑 Capacity: {props.capacity}</span>
+        </h2>
+        <p className={styles.description}>{props.description}</p>
         <p>
-          <strong>Community Groups: </strong> ${props.communityGroupHourlyRate}/h
+          <strong>Community Groups: </strong> {props.communityGroupHourlyRate}{" "}
+          per hour
         </p>
         <p>
-          <strong>Permanent Hirers (non-community groups): </strong> ${props.permanentHiresHourlyRate}/h
+          <strong>Permanent Hirers (non-community groups): </strong>{" "}
+          {props.permanentHiresHourlyRate} per hour
         </p>
         <p>
-          <strong>Casual Hirers: </strong> ${props.casualHiresHourlyRate}/h
+          <strong>Casual Hirers: </strong> {props.casualHiresHourlyRate} per
+          hour
         </p>
-        <button className={styles.buttonLight}>Book now</button>
+        <button className="button-white" onClick={handleButtonClick}>
+          {props.buttonText}
+        </button>
       </div>
     </div>
   );
 };
 
-const RoomBookingCardRight = (props: RoomBookingCardProps) => {
+const RoomBookingCardRight: React.FC<RoomBookingCardProps> = (props) => {
+  const handleButtonClick = () => {
+    window.location.href = props.linkUrl;
+  };
   return (
     <div className={styles.containerRight}>
       <div className={styles.content}>
-        <h2 className={styles.header}>{props.roomName}</h2>
-        <p>Capacity: {props.capacity}</p>
+        <h2 className={styles.header}>
+          {props.roomName}{" "}
+          <span className={styles.capacity}>🪑 Capacity: {props.capacity}</span>
+        </h2>
+        <p className={styles.description}>{props.description}</p>
         <p>
-          <strong>Community Groups: </strong> ${props.communityGroupHourlyRate}/h
+          <strong>Community Groups: </strong> {props.communityGroupHourlyRate}{" "}
+          per hour
         </p>
         <p>
-          <strong>Permanent Hirers (non-community groups): </strong> ${props.permanentHiresHourlyRate}/h
+          <strong>Permanent Hirers (non-community groups): </strong>{" "}
+          {props.permanentHiresHourlyRate} per hour
         </p>
         <p>
-          <strong>Casual Hirers: </strong> ${props.casualHiresHourlyRate}/h
+          <strong>Casual Hirers: </strong> {props.casualHiresHourlyRate} per
+          hour
         </p>
-        <button className={styles.buttonDark}>Book now</button>
+        <button className="button-green" onClick={handleButtonClick}>
+          {props.buttonText}
+        </button>
       </div>
       <div className={styles.imageContainer}>
         <img

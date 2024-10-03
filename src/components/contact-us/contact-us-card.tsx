@@ -53,7 +53,7 @@ const ContactUs: React.FC<ContactUsProps> = ({
   };
 
   return (
-    <div className={styles.contactForm}>
+    <div className={styles.contactForm} id="contactForm">
       <h4>{title}</h4>
       <p className={styles.subtitle}>{subtitle}</p>
       <form onSubmit={handleSubmit}>

@@ -119,9 +119,20 @@ interface InformationCardWithButtonProps {
   title: string;
   description?: string;
   buttonText: string;
+  linkUrl: string;
 }
 
 const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
+  const isExternalLink = (url: string) => {
+    return url.startsWith("http") || url.startsWith("//"); 
+  };
+  const handleButtonClick = () => {
+    if (isExternalLink(props.linkUrl)) {
+      window.open(props.linkUrl, "_blank"); // Opens in a new tab for external links
+    } else {
+      window.location.href = props.linkUrl; // Internal links open in the same tab
+    }
+  };
   return (
     <div className={styles.lightGreenInformationContainer}>
       <div className={styles.contentWrapper}>
@@ -133,7 +144,9 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
           )}
         </div>
         <div className={styles.buttonContainer}>
-          <button className="button-white">{props.buttonText}</button>
+          <button className="button-white" onClick={handleButtonClick}>
+            {props.buttonText}
+          </button>
         </div>
       </div>
     </div>
