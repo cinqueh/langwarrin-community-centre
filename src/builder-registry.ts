@@ -115,6 +115,12 @@ export const footerInputs = [
     helperText: "Enter the text for the contact button.",
   },
   {
+    name: "contactButtonLink",
+    type: "string",
+    defaultValue: "/#contactForm",
+    helperText: "Enter the URL for the contact button link.",
+  },
+  {
     name: "logoText",
     type: "string",
     defaultValue: "Company Logo",
@@ -131,6 +137,12 @@ export const footerInputs = [
     type: "string",
     defaultValue: "Become a Member",
     helperText: "Enter the text for the membership button.",
+  },
+  {
+    name: "memberButtonLink",
+    type: "string",
+    defaultValue: "/membership",
+    helperText: "Enter the URL for the membership button link.",
   },
   {
     name: "addressTitle",
@@ -181,7 +193,16 @@ const newsCardParameters = [
     type: "string",
     defaultValue: "Title",
   },
-  { name: "description", type: "string", defaultValue: "Description" },
+  {
+    name: "description",
+    type: "string",
+    defaultValue: "Description",
+  },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  },
 ];
 const programImageCardParameters = [
   {
@@ -214,6 +235,31 @@ const programCardParameters = [
     defaultValue: "Title",
   },
 ];
+
+const featureCardParameters = [
+  {
+    name: "imageUrl",
+    type: "file",
+    allowedFileTypes: ["jpeg", "jpg", "png", "svg"], // allowed file types
+  },
+  {
+    name: "altText",
+    type: "string",
+    description:
+      "This is the alternative text for the image, used for accessibility and SEO",
+  },
+  {
+    name: "title",
+    type: "string",
+    defaultValue: "Title",
+  },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  },
+];
+
 const formDownloadCardParameters = [
   {
     name: "title",
@@ -230,7 +276,13 @@ const formDownloadCardParameters = [
     type: "string",
     defaultValue: "Button Text",
   },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  },
 ];
+
 const informationCardParameters = [
   {
     name: "title",
@@ -312,6 +364,11 @@ const roomBookingParameters = [
     name: "buttonText",
     type: "string",
     defaultValue: "Request the room",
+  },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
   },
 ];
 // Homepage card parameters
@@ -427,6 +484,12 @@ const mainBannerParameters = [
     helperText: "Edit the button text.",
   },
   {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "/membership",
+    helperText: "Enter the URL for the button link.",
+  },
+  {
     name: "note",
     type: "string",
     defaultValue:
@@ -515,7 +578,7 @@ Builder.registerComponent(ContactUs, {
 
 Builder.registerComponent(WhiteFeatureCard, {
   name: "White Feature Card",
-  inputs: programCardParameters,
+  inputs: featureCardParameters,
 });
 
 Builder.registerComponent(GreenTitleCard, {
