@@ -308,6 +308,11 @@ const roomBookingParameters = [
     type: "number",
     defaultValue: "0",
   },
+  {
+    name: "buttonText",
+    type: "string",
+    defaultValue: "Request the room",
+  },
 ];
 // Homepage card parameters
 // BackgroundSection Parameters
@@ -736,8 +741,6 @@ Builder.registerComponent(GovernmentCard, {
   ],
 });
 
-
-
 export const membershipFormInputs = [
   {
     name: "title",
@@ -916,7 +919,6 @@ Builder.registerComponent(ChildcareContactForm, {
   inputs: childcareFormInputs,
 });
 
-
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -956,9 +958,5 @@ Builder.register("insertMenu", {
 });
 Builder.register("insertMenu", {
   name: "Custom Forms",
-  items: [
-    { name: "Membership Form" },
-    { name: "Childcare Form" },
-  ],
+  items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
 });
-
