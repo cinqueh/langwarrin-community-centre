@@ -63,23 +63,28 @@
   margin-bottom: 20px;
 }
 
-/* For the icons to be white */
+/* For Date and Time Input */
 .bookingFormContainer input[type="date"],
 .bookingFormContainer input[type="time"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  color: #efeee5;
+  color: #fff; 
+  background-color: transparent; 
+  border: none;
+  border-bottom: 2px solid #fff; 
+}
+
+.bookingFormContainer input[type="date"]::placeholder,
+.bookingFormContainer input[type="time"]::placeholder {
+  color: #fff; /* White color for placeholder */
+}
+
+.bookingFormContainer input[type="date"]:-webkit-autofill,
+.bookingFormContainer input[type="time"]:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #38603a inset !important;
+  -webkit-text-fill-color: #fff !important; 
 }
 
 .bookingFormContainer input[type="date"]::-webkit-calendar-picker-indicator,
 .bookingFormContainer input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-}
-
-/* Same for Firefox */
-.bookingFormContainer input[type="date"]::-moz-calendar-picker-indicator,
-.bookingFormContainer input[type="time"]::-moz-calendar-picker-indicator {
   filter: invert(1);
 }
 
@@ -101,7 +106,7 @@
   left: 50%;
 }
 
-/* Dynamic form styles */
+/* Additional info form styles */
 .additionalInfoFormContainer {
   background-color: #38603a;
   padding: 20px 40px;
@@ -148,17 +153,20 @@
 }
 
 /* Styling for autofilled input fields */
-.additionalInfoFormContainer select:-webkit-autofill:focus,
-.additionalInfoFormContainer input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 30px #38603a inset;
-  -webkit-text-fill-color: #f5f5f5;
-  border-bottom: 2px solid #f5f5f5;
+.additionalInfoFormContainer select:-webkit-autofill,
+.additionalInfoFormContainer input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #38603a inset; /* Override autofill background color */
+  -webkit-text-fill-color: #f5f5f5; /* Text color inside autofilled fields */
+  border-bottom: 2px solid #f5f5f5; /* Keeps the bottom border when autofilled */
+  background-clip: content-box; /* Fixes background clipping issue */
 }
+
 .additionalInfoFormContainer select:-webkit-autofill:focus,
 .additionalInfoFormContainer input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px #38603a inset;
   -webkit-text-fill-color: #f5f5f5;
   border-bottom: 2px solid #f5f5f5;
+  background-clip: content-box;
 }
 
 /* Personal Details Styling */

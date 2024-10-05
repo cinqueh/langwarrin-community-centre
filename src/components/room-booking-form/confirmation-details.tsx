@@ -44,7 +44,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
   ${personalDetails.state}`;
 
   const handleEditClick = (section: string) => {
-    window.location.href = `request-a-room/${section}-form`;
+    window.location.href = `/request-a-room/${section}-form`;
   };
 
   const onSubmit = () => {

@@ -22,7 +22,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               index + 1 === currentStepIndex ? styles.activeStep : ""
             }`}
           >
+            <a href={step.link} className={styles.stepLink}>
             <div className={styles.stepCircle}>{index + 1}</div>
+            </a>
             <span className={styles.stepLabel}>{step.label}</span>
           </li>
         ))}
