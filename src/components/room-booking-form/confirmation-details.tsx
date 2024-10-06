@@ -52,7 +52,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     // add functionality to submit form data
     console.log("Form Submitted");
     localStorage.clear(); // clear form data from local storage
-    window.location.href = "request-a-room/success";
+    window.location.href = "/request-a-room/success";
   };
 
   const handleSubmit = () => {
