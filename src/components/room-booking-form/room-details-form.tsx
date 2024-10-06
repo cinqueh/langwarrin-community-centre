@@ -1,5 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { useSearchParams } from "next/navigation";
 
 interface Room {
   roomName: string;
@@ -28,11 +29,11 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     total: 0,
   });
   const [rooms, setRooms] = useState<Room[]>([]);
+  const searchParams = useSearchParams();
   const [total, setTotal] = useState(0);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [showError, setShowError] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const [initialLoad, setInitialLoad] = useState(true); 
 
   // Load data from local storage when the page loads
   useEffect(() => {
@@ -40,23 +41,44 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
       setFormData(parsedData);
+      setSelectedRoom(
+        rooms.find((r) => r.roomName === parsedData.room) || null
+      );
       setTotal(parsedData.total);
     }
   }, []);
 
-  // Fetch room data from API
   useEffect(() => {
+    // Fetch rooms from API
     const fetchRooms = async () => {
       try {
         const response = await fetch("/api/rooms");
         const data = await response.json();
         setRooms(data);
+
+        // Set room from URL query parameter if present or from local storage
+        const roomFromUrl = searchParams.get("room");
+        const selectedRoomName = roomFromUrl || formData.room;
+
+        if (selectedRoomName) {
+          const room = data.find(
+            (r: { roomName: string }) => r.roomName === selectedRoomName
+          );
+          if (room) {
+            setSelectedRoom(room);
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              room: selectedRoomName,
+            }));
+          }
+        }
       } catch (error) {
         console.error("Error fetching rooms:", error);
       }
     };
+
     fetchRooms();
-  }, []);
+  }, [searchParams]);
 
   const handleInputChange = (e: {
     target: { name: string; value: string };
@@ -70,27 +92,22 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     if (e.target.name === "room") {
       const room = rooms.find((r) => r.roomName === e.target.value);
       setSelectedRoom(room || null);
-      setInitialLoad(false);
     }
   };
 
   const calculateTotal = () => {
-    console.log("Calculating total price...");
-    if (!selectedRoom && formData.room) {
-      const room = rooms.find((r) => r.roomName === formData.room);
-      if (!room) return total; 
-      setSelectedRoom(room); 
-    }
+    if (!selectedRoom) return total;
+
     const { hireType, startTime, endTime } = formData;
 
     // Get the hourly rate based on hire type
     let hourlyRate = 0;
     if (hireType === "Community Groups") {
-      hourlyRate = selectedRoom?.communityGroupHourlyRate || 0;
+      hourlyRate = selectedRoom.communityGroupHourlyRate;
     } else if (hireType === "Permanent Hirers") {
-      hourlyRate = selectedRoom?.permanentHiresHourlyRate || 0;
+      hourlyRate = selectedRoom.permanentHiresHourlyRate;
     } else if (hireType === "Casual Hirers") {
-      hourlyRate = selectedRoom?.casualHiresHourlyRate || 0;
+      hourlyRate = selectedRoom.casualHiresHourlyRate;
     }
 
     // Calculate time difference in hours
@@ -103,19 +120,29 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     return hoursBooked * hourlyRate;
   };
 
-  // Recalculate the total price whenever any of the relevant fields change
+  // when a field is changed, check if the end time is later than the start time
+  // and calculate the total price
   useEffect(() => {
-    // if theres no change, just loading the inital data, return
-    if (initialLoad) return;
+    if (!selectedRoom) {
+      if (formData.room) {
+        const room = rooms.find((r) => r.roomName === formData.room);
+        setSelectedRoom(room || null);
+      } else {
+        return;
+      }
+    }
+
     // Check if end time is later than start time
     const start = new Date(`1970-01-01T${formData.startTime}:00`);
     const end = new Date(`1970-01-01T${formData.endTime}:00`);
+
     if (end <= start) {
       setShowError(true);
     } else {
       setShowError(false);
+
+      // Calculate the total price only when all fields are filled
       const totalPrice = calculateTotal();
-      console.log("Total price:", totalPrice);
       setTotal(totalPrice);
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -128,7 +155,6 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     formData.startTime,
     formData.endTime,
     selectedRoom,
-    initialLoad,
   ]);
 
   const isFormComplete =
