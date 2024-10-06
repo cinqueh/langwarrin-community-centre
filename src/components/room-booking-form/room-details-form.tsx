@@ -1,18 +1,23 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "./styles.module.css";
+
+interface Room {
+  roomName: string;
+  capacity: number;
+  communityGroupHourlyRate: number;
+  permanentHiresHourlyRate: number;
+  casualHiresHourlyRate: number;
+}
 
 interface RoomDetailsFormProps {
   roomLabel: string;
   hireTypeLabel: string;
+  hireTypeInfo: string;
   dateLabel: string;
   timeLabel: string;
   linkUrl: string;
-  hireTypeInfo: string;
 }
 
-// Room Booking Form Component
 const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
   const [formData, setFormData] = useState({
     room: "",
@@ -20,36 +25,124 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     date: "",
     startTime: "",
     endTime: "",
-    total: 100,
+    total: 0,
   });
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [total, setTotal] = useState(0);
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [showError, setShowError] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true); 
 
+  // Load data from local storage when the page loads
   useEffect(() => {
     const savedFormData = localStorage.getItem("roomBookingData");
     if (savedFormData) {
-      setFormData(JSON.parse(savedFormData));
+      const parsedData = JSON.parse(savedFormData);
+      setFormData(parsedData);
+      setTotal(parsedData.total);
     }
   }, []);
 
-  // Update form data based on input changes
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  // Fetch room data from API
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch("/api/rooms");
+        const data = await response.json();
+        setRooms(data);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+    fetchRooms();
+  }, []);
+
+  const handleInputChange = (e: {
+    target: { name: string; value: string };
+  }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };
-  const [showInfo, setShowInfo] = useState(false);
 
-  // Handle Next button click - Save form data to local storage
+    // Set selected room details for calculations
+    if (e.target.name === "room") {
+      const room = rooms.find((r) => r.roomName === e.target.value);
+      setSelectedRoom(room || null);
+      setInitialLoad(false);
+    }
+  };
+
+  const calculateTotal = () => {
+    console.log("Calculating total price...");
+    if (!selectedRoom && formData.room) {
+      const room = rooms.find((r) => r.roomName === formData.room);
+      if (!room) return total; 
+      setSelectedRoom(room); 
+    }
+    const { hireType, startTime, endTime } = formData;
+
+    // Get the hourly rate based on hire type
+    let hourlyRate = 0;
+    if (hireType === "Community Groups") {
+      hourlyRate = selectedRoom?.communityGroupHourlyRate || 0;
+    } else if (hireType === "Permanent Hirers") {
+      hourlyRate = selectedRoom?.permanentHiresHourlyRate || 0;
+    } else if (hireType === "Casual Hirers") {
+      hourlyRate = selectedRoom?.casualHiresHourlyRate || 0;
+    }
+
+    // Calculate time difference in hours
+    const start = new Date(`1970-01-01T${startTime}:00`);
+    const end = new Date(`1970-01-01T${endTime}:00`);
+    const hoursBooked = Math.ceil(
+      (end.getTime() - start.getTime()) / (1000 * 60 * 60)
+    ); // Round up to nearest hour
+
+    return hoursBooked * hourlyRate;
+  };
+
+  // Recalculate the total price whenever any of the relevant fields change
+  useEffect(() => {
+    // if theres no change, just loading the inital data, return
+    if (initialLoad) return;
+    // Check if end time is later than start time
+    const start = new Date(`1970-01-01T${formData.startTime}:00`);
+    const end = new Date(`1970-01-01T${formData.endTime}:00`);
+    if (end <= start) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+      const totalPrice = calculateTotal();
+      console.log("Total price:", totalPrice);
+      setTotal(totalPrice);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        total: totalPrice,
+      }));
+    }
+  }, [
+    formData.room,
+    formData.hireType,
+    formData.startTime,
+    formData.endTime,
+    selectedRoom,
+    initialLoad,
+  ]);
+
+  const isFormComplete =
+    formData.room &&
+    formData.hireType &&
+    formData.date &&
+    formData.startTime &&
+    formData.endTime &&
+    !showError;
+
+  // handle next button click
   const handleNextClick = () => {
-    if (
-      formData.room &&
-      formData.hireType &&
-      formData.date &&
-      formData.startTime &&
-      formData.endTime
-    ) {
+    if (isFormComplete) {
       localStorage.setItem("roomBookingData", JSON.stringify(formData));
-      //   alert("Booking saved to browser storage.");
       window.location.href = props.linkUrl;
     } else {
       alert("Please fill out all required fields.");
@@ -63,7 +156,6 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
         <label>{props.roomLabel}</label>
         <label>
           {props.hireTypeLabel}
-          {/* Information Icon */}
           <span
             className={styles.infoIcon}
             title="Show hire types"
@@ -74,14 +166,12 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
         </label>
       </div>
 
-      {/* Display information when icon is clicked */}
       {showInfo && (
         <div
           className={styles.hireTypeInfo}
           dangerouslySetInnerHTML={{ __html: props.hireTypeInfo }}
         />
       )}
-
       <div className={styles.inputGroup}>
         <select
           name="room"
@@ -90,14 +180,11 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
           required
         >
           <option value="">--</option>
-          <option value="Hall">Hall</option>
-          <option value="Craig Room">Craig Room</option>
-          <option value="Hempel Room">Hempel Room</option>
-          <option value="Hampton Room">Hampton Room</option>
-          <option value="Back Space Office">Back Space Office</option>
-          <option value="Children’s Room & Playground">
-            Children’s Room & Playground
-          </option>
+          {rooms.map((room, index) => (
+            <option key={index} value={room.roomName}>
+              {room.roomName}
+            </option>
+          ))}
         </select>
 
         <select
@@ -145,14 +232,24 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
         </div>
       </div>
 
-      {/* Total and Next Button */}
-      <div className={styles.totalDisplay}>Total: ${formData.total}</div>
+      {/* Error Message */}
+      {showError && (
+        <p className={styles.errorMessage}>
+          Make sure the end time is later than the start time.
+        </p>
+      )}
+
+      {/* Display Total (Only show if form is complete and no errors) */}
+      {isFormComplete && (
+        <div className={styles.totalDisplay}>Total: ${total}</div>
+      )}
+
       <button
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
         onClick={handleNextClick}
       >
-        Next
+        Save
       </button>
     </div>
   );

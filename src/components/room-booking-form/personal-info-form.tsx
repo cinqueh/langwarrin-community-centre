@@ -178,7 +178,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
         style={{ display: "block", margin: "0 auto" }}
         onClick={handleSubmit}
       >
-        Next
+        Save
       </button>
     </div>
   );

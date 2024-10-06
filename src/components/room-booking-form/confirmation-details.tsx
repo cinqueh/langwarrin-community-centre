@@ -25,13 +25,14 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
       "personalDetailsFormData"
     );
     const savedAdditionalInfo = localStorage.getItem("AdditionalInfoFormData");
-    const savedTotalAmount = localStorage.getItem("totalAmount");
 
-    if (savedRoomDetails) setRoomDetails(JSON.parse(savedRoomDetails));
+    if (savedRoomDetails) {
+      setRoomDetails(JSON.parse(savedRoomDetails));
+      setTotalAmount(JSON.parse(savedRoomDetails).total);
+    }
     if (savedPersonalDetails)
       setPersonalDetails(JSON.parse(savedPersonalDetails));
     if (savedAdditionalInfo) setAdditionalInfo(JSON.parse(savedAdditionalInfo));
-    if (savedTotalAmount) setTotalAmount(parseFloat(savedTotalAmount));
   }, []);
 
   const fullName = `${personalDetails.firstName} ${personalDetails.familyName}`;
@@ -51,7 +52,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     // add functionality to submit form data
     console.log("Form Submitted");
     localStorage.clear(); // clear form data from local storage
-    window.location.href = "request-a-room/success"; 
+    window.location.href = "request-a-room/success";
   };
 
   const handleSubmit = () => {

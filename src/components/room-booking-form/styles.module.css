@@ -106,6 +106,12 @@
   left: 50%;
 }
 
+.errorMessage {
+  color: #ff0000;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
 /* Additional info form styles */
 .additionalInfoFormContainer {
   background-color: #38603a;

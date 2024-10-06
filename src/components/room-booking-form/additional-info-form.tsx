@@ -87,7 +87,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({
         style={{ display: "block", margin: "0 auto" }}
         onClick={handleNextClick}
       >
-        Next
+        Save
       </button>
     </div>
   );
