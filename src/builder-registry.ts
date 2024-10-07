@@ -43,6 +43,11 @@ import {
 } from "./components/news-section/news-scetion";
 import { MembershipForm } from "./components/membership-form/membership-form";
 import { ChildcareContactForm } from "./components/childcare-form/childcare-form";
+import { ProgressBar } from "./components/progress-bar/progress-bar";
+import { RoomDetailsFormForm } from "./components/room-booking-form/room-details-form";
+import { AdditionalInfoForm } from "./components/room-booking-form/additional-info-form";
+import { PersonalDetailsForm } from "./components/room-booking-form/personal-info-form";
+import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -368,7 +373,7 @@ const roomBookingParameters = [
   {
     name: "linkUrl",
     type: "string",
-    defaultValue: "#",
+    defaultValue: "/request-a-room/room-details-form",
   },
 ];
 // Homepage card parameters
@@ -987,6 +992,227 @@ Builder.registerComponent(ChildcareContactForm, {
   inputs: childcareFormInputs,
 });
 
+Builder.registerComponent(ProgressBar, {
+  name: "ProgressBar",
+  inputs: [
+    {
+      name: "steps",
+      type: "list",
+      defaultValue: [{ label: "Step Label", link: "/room-details" }],
+      subFields: [
+        {
+          name: "label",
+          type: "string",
+          defaultValue: "Step Label",
+          helperText: "The label for the step.",
+        },
+        {
+          name: "link",
+          type: "url",
+          helperText: "The URL the step should link to.",
+        },
+      ],
+    },
+    {
+      name: "currentStepIndex",
+      type: "number",
+      defaultValue: 1,
+      helperText: "The current step in the progress bar.",
+    },
+  ],
+});
+
+Builder.registerComponent(RoomDetailsFormForm, {
+  name: "RoomDetailsForm",
+  inputs: [
+    {
+      name: "roomLabel",
+      type: "string",
+      defaultValue: "Which room are you booking for? *",
+      helperText: "Label for the room select field.",
+    },
+    {
+      name: "hireTypeLabel",
+      type: "string",
+      defaultValue: "Please select your hire type *",
+      helperText: "Label for the hire type select field.",
+    },
+    {
+      name: "dateLabel",
+      type: "string",
+      defaultValue: "Date *",
+      helperText: "Label for the date input field.",
+    },
+    {
+      name: "timeLabel",
+      type: "string",
+      defaultValue: "Time *",
+      helperText: "Label for the time input field.",
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/room-booking-form",
+      helperText: "Enter the URL for the button link.",
+    },
+    {
+      name: "hireTypeInfo",
+      type: "richText",
+      defaultValue: `
+        <p><strong>Casual Hirers</strong>: A group/person that makes an irregular or one-off booking.</p>
+        <p><strong>Permanent Hirers</strong>: A group/person that makes 8 or more bookings per year.</p>
+        <p><strong>Community Groups</strong>: Not for Profit Groups.</p>
+      `,
+    },
+  ],
+});
+
+Builder.registerComponent(AdditionalInfoForm, {
+  name: "Additional Info Form",
+  inputs: [
+    {
+      name: "fields",
+      type: "list",
+      defaultValue: [
+        { question: "What is your name?", inputType: "text", required: true },
+        { question: "What is your age?", inputType: "text", required: true },
+      ],
+      subFields: [
+        {
+          name: "question",
+          type: "string",
+          helperText: "The question to display.",
+        },
+        {
+          name: "inputType",
+          type: "enum",
+          enum: ["text", "select"],
+          helperText: "The input type for the answer.",
+        },
+        {
+          name: "options",
+          type: "list",
+          subFields: [
+            {
+              name: "option",
+              type: "string",
+              helperText: "Enter the options for select input.",
+            },
+          ],
+          showIf: (options: any) => options.get("inputType") === "select",
+        },
+        {
+          name: "required",
+          type: "boolean",
+          helperText: "Is this field required?",
+        },
+      ],
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the button link.",
+    },
+  ],
+});
+
+Builder.registerComponent(PersonalDetailsForm, {
+  name: "PersonalDetailsForm",
+  inputs: [
+    {
+      name: "contactInfoTitle",
+      type: "string",
+      defaultValue: "Contact Info",
+      helperText: "The title of the contact information section.",
+    },
+    {
+      name: "addressInfoTitle",
+      type: "string",
+      defaultValue: "Address",
+      helperText: "The title of the address information section.",
+    },
+    {
+      name: "firstNamePlaceholder",
+      type: "string",
+      defaultValue: "First Name",
+      helperText: "Placeholder text for the first name field.",
+    },
+    {
+      name: "familyNamePlaceholder",
+      type: "string",
+      defaultValue: "Family Name",
+      helperText: "Placeholder text for the family name field.",
+    },
+    {
+      name: "emailPlaceholder",
+      type: "string",
+      defaultValue: "Email",
+      helperText: "Placeholder text for the email field.",
+    },
+    {
+      name: "mobilePlaceholder",
+      type: "string",
+      defaultValue: "Mobile",
+      helperText: "Placeholder text for the mobile field.",
+    },
+    {
+      name: "unitNoPlaceholder",
+      type: "string",
+      defaultValue: "Unit No. (Optional)",
+      helperText: "Placeholder text for the unit number field.",
+    },
+    {
+      name: "streetNamePlaceholder",
+      type: "string",
+      defaultValue: "Street Name",
+      helperText: "Placeholder text for the street name field.",
+    },
+    {
+      name: "cityPlaceholder",
+      type: "string",
+      defaultValue: "City",
+      helperText: "Placeholder text for the city field.",
+    },
+    {
+      name: "postalCodePlaceholder",
+      type: "string",
+      defaultValue: "ZIP / Postal Code",
+      helperText: "Placeholder text for the postal code field.",
+    },
+    {
+      name: "statePlaceholder",
+      type: "string",
+      defaultValue: "State",
+      helperText: "Placeholder text for the state field.",
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the button link.",
+    },
+  ],
+});
+
+Builder.registerComponent(ConfirmationForm, {
+  name: "ConfirmationForm",
+  inputs: [
+    {
+      name: "termsText",
+      type: "richText",
+      defaultValue: "Yes, I agree to the Terms and Conditions",
+      helperText: "Text for the Terms and Conditions agreement.",
+    },
+    {
+      name: "bondText",
+      type: "richText",
+      defaultValue: "Yes, I agree to the Bond Agreement",
+      helperText: "Text for the Bond Agreement.",
+    },
+  ],
+});
+
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -1024,7 +1250,19 @@ Builder.register("insertMenu", {
     { name: "Image Card (without padding)" },
   ],
 });
+
 Builder.register("insertMenu", {
   name: "Custom Forms",
   items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
+});
+
+Builder.register("insertMenu", {
+  name: "Room Booking Forms",
+  items: [
+    { name: "ProgressBar" },
+    { name: "RoomDetailsForm" },
+    { name: "Additional Info Form" },
+    { name: "PersonalDetailsForm" },
+    { name: "ConfirmationForm" },
+  ],
 });
