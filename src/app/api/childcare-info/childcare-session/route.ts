@@ -10,6 +10,29 @@ function isChildcareSessionDTO(body: any): body is ChildcareSessionDTO {
     );
 }
 
+export async function GET(request: Request) {
+    try {
+        const service = new ChildcareSessionService();
+        const data = await service.getAllSessions(); // Using the getAllSessions() method from the service
+
+        return new Response(
+            JSON.stringify(data),
+            {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );
+    } catch (error) {
+        return new Response(
+            JSON.stringify({ error: 'Failed to fetch childcare sessions' }),
+            {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            }
+        );
+    }
+}
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
