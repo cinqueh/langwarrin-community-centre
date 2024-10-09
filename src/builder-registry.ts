@@ -239,6 +239,11 @@ const programCardParameters = [
     type: "string",
     defaultValue: "Title",
   },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  }
 ];
 
 const featureCardParameters = [
@@ -326,6 +331,12 @@ const titleCardParameters = [
     type: "string",
     defaultValue: "Title",
   },
+  {
+    name: "titleAlignment",
+    type: "enum",
+    enum: ["left", "center"],
+    defaultValue: "left",
+  }
 ];
 // Room booking card parameters
 const roomBookingParameters = [
@@ -502,26 +513,26 @@ const mainBannerParameters = [
     helperText: "Edit the note below the button.",
   },
 ];
-const titleWithBackButtonParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Page Title",
-    helperText: "Edit the title for the card.",
-  },
-  {
-    name: "backLink",
-    type: "string",
-    defaultValue: "/",
-    helperText: "Enter the URL for the back button link.",
-  },
-];
-// Register components
 
+// Register components
 Builder.registerComponent(TitleCardWithBackButton, {
   name: "Title Card With Back Button",
-  inputs: titleWithBackButtonParameters,
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
 });
+
 const partnershipSectionParameters = [
   {
     name: "title",
@@ -695,11 +706,6 @@ Builder.registerComponent(FormDownloadCard, {
 
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
-  inputs: titleCardParameters,
-});
-
-Builder.registerComponent(TitleCardWithBackButton, {
-  name: "Title Card With Back Button",
   inputs: titleCardParameters,
 });
 
@@ -1264,5 +1270,14 @@ Builder.register("insertMenu", {
     { name: "Additional Info Form" },
     { name: "PersonalDetailsForm" },
     { name: "ConfirmationForm" },
+  ],
+});
+
+Builder.register("insertMenu", {
+  name: "Title Cards",
+  items: [
+    { name: "Green Title Card" },
+    { name: "Title Card" },
+    { name: "Title Card With Back Button" },
   ],
 });
