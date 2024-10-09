@@ -48,6 +48,7 @@ import { RoomDetailsFormForm } from "./components/room-booking-form/room-details
 import { AdditionalInfoForm } from "./components/room-booking-form/additional-info-form";
 import { PersonalDetailsForm } from "./components/room-booking-form/personal-info-form";
 import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
+import { ProgramEnrollmentForm } from "./components/program-form/program-form";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -243,7 +244,7 @@ const programCardParameters = [
     name: "linkUrl",
     type: "string",
     defaultValue: "#",
-  }
+  },
 ];
 
 const featureCardParameters = [
@@ -336,7 +337,7 @@ const titleCardParameters = [
     type: "enum",
     enum: ["left", "center"],
     defaultValue: "left",
-  }
+  },
 ];
 // Room booking card parameters
 const roomBookingParameters = [
@@ -1216,6 +1217,107 @@ Builder.registerComponent(ConfirmationForm, {
       defaultValue: "Yes, I agree to the Bond Agreement",
       helperText: "Text for the Bond Agreement.",
     },
+  ],
+});
+
+Builder.registerComponent(ProgramEnrollmentForm, {
+  name: "Program Enrollment Form",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Sign Up to A Program Now",
+      helperText: "Edit the main title of the form.",
+    },
+    {
+      name: "subtitle",
+      type: "string",
+      defaultValue: "Want to join a program? Fill out this form now.",
+      helperText: "Edit the subtitle of the form.",
+    },
+    {
+      name: "programInfoTitle",
+      type: "string",
+      defaultValue: "Program Information",
+      helperText: "Edit the title for the Program Information section.",
+    },
+    {
+      name: "programOptions",
+      type: "list",
+      subFields: [
+        {
+          name: "option",
+          type: "string",
+          defaultValue: "Program 1",
+        },
+      ],
+      helperText: "List of program options to display in the dropdown",
+    },
+    {
+      name: "contactInfoTitle",
+      type: "string",
+      defaultValue: "Contact Information",
+      helperText: "Edit the title for the Contact Information section.",
+    },
+    {
+      name: "addressInfoTitle",
+      type: "string",
+      defaultValue: "Address Information",
+      helperText: "Edit the title for the Address Information section.",
+    },
+    {
+      name: "termsConditionsTitle",
+      type: "string",
+      defaultValue: "Terms and Conditions of Enrolment",
+      helperText: "Edit the title for the Terms and Conditions section.",
+    },
+    {
+      name: "termsConditionsText",
+      type: "richText",
+      defaultValue: "I agree to the terms and conditions",
+      helperText: "Edit the text for the Terms and Conditions section.",
+    },
+    {
+      name: "accessCorrectionTitle",
+      type: "string",
+      defaultValue: "Access, Correction and Complaints",
+      helperText:
+        "Edit the title for the Access, Correction and Complaints section.",
+    },
+    {
+      name: "accessCorrectionText",
+      type: "richText",
+      defaultValue: "I agree to the terms and conditions",
+      helperText:
+        "Edit the text for the Access, Correction and Complaints section.",
+    },
+    {
+      name: "termsCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I declare that the information I have provided to the best of my knowledge is true and correct.",
+      helperText: "Edit the label for the Terms and Conditions checkbox.",
+    },
+    {
+      name: "promotionCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I agree to appear in photos and promotion material for the Centre and its services.",
+      helperText: "Edit the label for the promotion consent checkbox.",
+    },
+    {
+      name: "ageCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I declare that I am 18 OR have guardian consent if under 18.",
+      helperText: "Edit the label for the age declaration checkbox.",
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the button link.",
+    }
   ],
 });
 
