@@ -61,7 +61,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
     }
 
     const allFieldsFilled = Object.entries(formData)
-      .filter(([key]) => key !== "unitNo") // Exclude unitNo from the check
+      .filter(([key]) => key !== "unitNo" && key !== "homePhone") // Exclude unitNo and homephone from the check
       .every(([_, value]) => value);
 
     if (allFieldsFilled) {
