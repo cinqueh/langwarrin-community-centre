@@ -3,6 +3,11 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MainBanner from '../../components/main-banner/main-banner'; // Adjust the import path based on your folder structure
 
+
+jest.mock('next/font/google', () => ({
+  Anton: () => ({ className: 'ignored-anton-font' }),
+}));
+
 describe('MainBanner Component', () => {
   const defaultProps = {
     title: 'Welcome to Our Community Centre',

@@ -5,7 +5,12 @@ import { BuilderContent, builder } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import "../builder-registry";
 import "../styles/global.css";
-import Header from "./layout/header";
+import { Prompt } from 'next/font/google';
+
+const prompt = Prompt({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+});
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>;
 
@@ -23,7 +28,7 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
     return (
       <>
         <BuilderComponent model="header"/>
-        <div className="pageContainer">
+        <div className={`pageContainer ${prompt.className}`}>
           <BuilderComponent content={content} model={model} />
         </div>
         <BuilderComponent model="footer"/>
