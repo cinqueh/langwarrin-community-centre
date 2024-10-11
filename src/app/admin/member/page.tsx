@@ -8,7 +8,7 @@ import { authenticate } from "@/components/admin/auth";
 
 
 export default async function Dashboard() {
-    return authenticate(
+    return authorize(
       async () => {
         const service = new MemberService();
         const data = await service.getAll();
