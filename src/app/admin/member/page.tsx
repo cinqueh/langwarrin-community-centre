@@ -4,7 +4,7 @@ import MemberService from "../../../backend/service/member-service";
 import { TableWrapper } from "../../../components/admin/background";
 import AdminHeader from "@/components/admin/admin-header";
 import { MemberDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
-import { authenticate } from "@/components/admin/auth";
+import { authorize } from "@/components/admin/auth";
 
 
 export default async function Dashboard() {
