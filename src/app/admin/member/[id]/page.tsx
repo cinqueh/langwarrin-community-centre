@@ -8,7 +8,7 @@ import { DisplayIndividualComponent } from "@/components/admin/display-individua
 
 interface MemberPageProps {
     params: { id: string };
-  }
+  } 
 
 export default async function Member({ params }: MemberPageProps) {
     return authorize(
