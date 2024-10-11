@@ -1,7 +1,6 @@
-import { HasPerson } from "./general";
 import { PersonDTO } from "./person";
 
-export class MemberDTO implements HasPerson {
+export class MemberDTO {
     memberId: number;
     title: string;
     submitDate: Date;
