@@ -79,7 +79,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       <h2 className={styles.subtitle}>{props.subtitle}</h2>
 
       {/* Program Information Section */}
-      <h4>{props.programInfoTitle}</h4>
+      <h4 className={styles.sectionTitle}>{props.programInfoTitle}</h4>
       <select name="programName" onChange={handleInputChange}>
         <option value="">Select a Program</option>
         {props.programOptions &&
@@ -100,7 +100,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       />
 
       {/* Contact Information Section */}
-      <h4>{props.contactInfoTitle}</h4>
+      <h4 className={styles.sectionTitle}>{props.contactInfoTitle}</h4>
       <div className={styles.nameInputGroup}>
         <select name="title" onChange={handleInputChange}>
           <option value="">Title</option>
@@ -178,7 +178,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       </div>
 
       {/* Emergency Contact Section */}
-      <h4>Emergency Contact Information</h4>
+      <h4 className={styles.sectionTitle}>Emergency Contact Information</h4>
       <div className={styles.inputGroup}>
         <input
           type="text"
@@ -208,7 +208,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       </div>
 
       {/* Address Section */}
-      <h4>{props.addressInfoTitle}</h4>
+      <h4 className={styles.sectionTitle}>{props.addressInfoTitle}</h4>
       <input
         type="text"
         name="unitNo"
@@ -250,11 +250,11 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       </select>
 
       {/* Terms and Conditions */}
-      <h4>{props.termsConditionsTitle}</h4>
+      <h4 className={styles.sectionTitle}>{props.termsConditionsTitle}</h4>
       <span dangerouslySetInnerHTML={{ __html: props.termsConditionsText }} />
 
       {/* Access and Correction */}
-      <h4>{props.accessCorrectionTitle}</h4>
+      <h4 className={styles.sectionTitle}>{props.accessCorrectionTitle}</h4>
       <span dangerouslySetInnerHTML={{ __html: props.accessCorrectionText }} />
 
       {/* Checkboxes */}
