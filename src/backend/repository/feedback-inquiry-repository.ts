@@ -23,8 +23,6 @@ export default class FeedbackInquiryRepository extends BaseRepository {
             _feedback: inquiry.feedback
         };
 
-        console.log(addInquiryData);
-
         return await client
             .rpc('add_feedback_inquiry', addInquiryData);
     }
