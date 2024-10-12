@@ -39,7 +39,7 @@ const NavigationLinks: React.FC = () => {
       <div onClick={() => handleNavigation('/admin/childcare')} className={`${styles.navItem} ${isActive('/admin/childcare') ? styles.active : ''}`}>
         Childcare Enquiry
       </div>
-      <div onClick={() => handleNavigation('/admin/general-inquiry')} className={`${styles.navItem} ${isActive('/admin/general-inquiry') ? styles.active : ''}`}>
+      <div onClick={() => handleNavigation('/admin/general-enquiry')} className={`${styles.navItem} ${isActive('/admin/general-inquiry') ? styles.active : ''}`}>
         General Enquiry
       </div>
       <div onClick={() => handleNavigation('/admin/feedback')} className={`${styles.navItem} ${isActive('/admin/feedback') ? styles.active : ''}`}>
