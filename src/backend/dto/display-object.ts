@@ -41,6 +41,12 @@ export type GeneralInquiryDisplayObject = InquiryDisplayObject & {
     message: string;
 }
 
+export type FeedbackInquiryDisplayObject = InquiryDisplayObject & {
+    address: string;
+    programName: string;
+    feedback: string;
+}
+
 export type ComplaintInquiryDisplayObject = InquiryDisplayObject & {
     programName: string;
     grievanceReason: string;

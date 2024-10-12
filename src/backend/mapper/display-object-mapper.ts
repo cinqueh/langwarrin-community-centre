@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -141,6 +141,65 @@ export class GeneralInquiryDisplayObjectMapper extends DisplayDataMapper<General
             {
                 Header: 'Notes',
                 accessor: 'notes',
+            }
+        ];
+    }
+}
+
+export class FeedbackInquiryDisplayObjectMapper extends DisplayDataMapper<FeedbackInquiryDTO, 
+    FeedbackInquiryDisplayObject> {
+    protected override mapDisplayObject(complaint: FeedbackInquiryDTO): FeedbackInquiryDisplayObject {
+        return {
+            id: complaint.inquiryId as number,
+            header: this.formatName(complaint?.person),
+            name: this.formatName(complaint?.person),
+            email: this.formatField(complaint?.person?.email),
+            date: this.formatDate(complaint?.date),
+            phoneNumber: this.formatField(complaint?.person?.phoneNumber),
+            notes: this.formatField(complaint?.notes),
+            address: this.formatAddress(complaint?.person?.address),
+            programName: this.formatField(complaint?.programName),
+            feedback: this.formatField(complaint?.feedback),
+        }
+    }
+
+    protected override getColumns(): ColumnAdapter<FeedbackInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Address',
+                accessor: 'address'
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Enquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Mobile Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+            },
+            {
+                Header: 'Program Name',
+                accessor: 'programName'
+            },
+            {
+                Header: 'Feedback',
+                accessor: 'feedback'
             }
         ];
     }
