@@ -219,3 +219,228 @@ describe('MemberDisplayObjectMapper', () => {
     });
   });
 });
+
+// __tests__/ComplaintInquiryObjectMapper.test.tsx
+import { ComplaintInquiryObjectMapper } from '../../../backend/mapper/display-object-mapper';
+import { ComplaintInquiryDTO } from '../../../backend/dto/inquiry';
+
+describe('ComplaintInquiryObjectMapper', () => {
+  let mapper: ComplaintInquiryObjectMapper;
+
+  beforeEach(() => {
+    mapper = new ComplaintInquiryObjectMapper();
+  });
+
+  it('should map ComplaintInquiryDTO to ComplaintInquiryDisplayObject correctly', () => {
+    // Creating AddressDTO instance
+    const address = new AddressDTO({
+      state: 'NY',
+      streetAddress: '123 Street',
+      apartment: '1A',
+      suburb: 'Brooklyn',
+      postcode: '11201',
+    });
+
+    // Creating PersonDTO instance
+    const person = new PersonDTO({
+      personId: 1,
+      firstName: 'John',
+      surname: 'Doe',
+      email: 'john.doe@example.com',
+      address: address,
+      phoneNumber: '123-456-7890',
+    });
+
+    // Creating ComplaintInquiryDTO instance
+    const complaint = new ComplaintInquiryDTO({
+      inquiryId: 100,
+      person: person,
+      date: new Date('2024-10-12'),
+      notes: 'Issue with program',
+      programName: 'Program A',
+      grievanceReason: 'Instructor conduct',
+      suggestedSolution: 'Replace instructor',
+    });
+
+    const result = mapper['mapDisplayObject'](complaint);
+
+    expect(result).toEqual(expect.objectContaining({
+      id: 100,
+      header: 'John Doe',
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phoneNumber: '123-456-7890',
+      notes: 'Issue with program',
+      programName: 'Program A',
+      grievanceReason: 'Instructor conduct',
+      suggestedSolution: 'Replace instructor',
+    }));
+  });
+
+  it('should return the correct columns for ComplaintInquiryDisplayObject', () => {
+    const columns = mapper['getColumns']();
+
+    expect(columns).toEqual([
+      { Header: 'ID', accessor: 'id' },
+      { Header: 'Name', accessor: 'name' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Enquiry Date', accessor: 'date' },
+      { Header: 'Mobile Number', accessor: 'phoneNumber' },
+      { Header: 'Notes', accessor: 'notes' },
+      { Header: 'Program Name', accessor: 'programName' },
+      { Header: 'Grievance Reason', accessor: 'grievanceReason' },
+      { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+    ]);
+  });
+
+  it('should map a single ComplaintInquiryDTO to DisplayData correctly', () => {
+    const address = new AddressDTO({
+      state: 'NY',
+      streetAddress: '123 Street',
+      apartment: '1A',
+      suburb: 'Brooklyn',
+      postcode: '11201',
+    });
+
+    const person = new PersonDTO({
+      personId: 1,
+      firstName: 'John',
+      surname: 'Doe',
+      email: 'john.doe@example.com',
+      address: address,
+      phoneNumber: '123-456-7890',
+    });
+
+    const complaint = new ComplaintInquiryDTO({
+      inquiryId: 100,
+      person: person,
+      date: new Date('2024-10-12'),
+      notes: 'Issue with program',
+      programName: 'Program A',
+      grievanceReason: 'Instructor conduct',
+      suggestedSolution: 'Replace instructor',
+    });
+
+    const displayData = mapper.mapTo(complaint);
+
+    expect(displayData).toEqual({
+        object: expect.objectContaining({
+            id: 100,
+            header: 'John Doe',
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            phoneNumber: '123-456-7890',
+            notes: 'Issue with program',
+            programName: 'Program A',
+            grievanceReason: 'Instructor conduct',
+            suggestedSolution: 'Replace instructor',
+          }),
+      columns: [
+        { Header: 'ID', accessor: 'id' },
+        { Header: 'Name', accessor: 'name' },
+        { Header: 'Email', accessor: 'email' },
+        { Header: 'Enquiry Date', accessor: 'date' },
+        { Header: 'Mobile Number', accessor: 'phoneNumber' },
+        { Header: 'Notes', accessor: 'notes' },
+        { Header: 'Program Name', accessor: 'programName' },
+        { Header: 'Grievance Reason', accessor: 'grievanceReason' },
+        { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+      ],
+    });
+  });
+
+  it('should map multiple ComplaintInquiryDTOs to DisplayDataMany correctly', () => {
+    const address1 = new AddressDTO({
+      state: 'NY',
+      streetAddress: '123 Street',
+      apartment: '1A',
+      suburb: 'Brooklyn',
+      postcode: '11201',
+    });
+
+    const address2 = new AddressDTO({
+      state: 'CA',
+      streetAddress: '456 Avenue',
+      suburb: 'San Francisco',
+      postcode: '94103',
+    });
+
+    const person1 = new PersonDTO({
+      personId: 1,
+      firstName: 'John',
+      surname: 'Doe',
+      email: 'john.doe@example.com',
+      address: address1,
+      phoneNumber: '123-456-7890',
+    });
+
+    const person2 = new PersonDTO({
+      personId: 2,
+      firstName: 'Jane',
+      surname: 'Smith',
+      email: 'jane.smith@example.com',
+      address: address2,
+      phoneNumber: '321-654-0987',
+    });
+
+    const complaint1 = new ComplaintInquiryDTO({
+      inquiryId: 100,
+      person: person1,
+      date: new Date('2024-10-12'),
+      notes: 'Issue with program',
+      programName: 'Program A',
+      grievanceReason: 'Instructor conduct',
+      suggestedSolution: 'Replace instructor',
+    });
+
+    const complaint2 = new ComplaintInquiryDTO({
+      inquiryId: 101,
+      person: person2,
+      date: new Date('2024-10-13'),
+      notes: 'Issue with service',
+      programName: 'Program B',
+      grievanceReason: 'Late delivery',
+      suggestedSolution: 'Refund',
+    });
+
+    const displayDataMany = mapper.mapToMany([complaint1, complaint2]);
+
+    expect(displayDataMany).toEqual({
+        objects: [
+            expect.objectContaining({
+              id: 100,
+              header: 'John Doe',
+              name: 'John Doe',
+              email: 'john.doe@example.com',
+              phoneNumber: '123-456-7890',
+              notes: 'Issue with program',
+              programName: 'Program A',
+              grievanceReason: 'Instructor conduct',
+              suggestedSolution: 'Replace instructor',
+            }),
+            expect.objectContaining({
+              id: 101,
+              header: 'Jane Smith',
+              name: 'Jane Smith',
+              email: 'jane.smith@example.com',
+              phoneNumber: '321-654-0987',
+              notes: 'Issue with service',
+              programName: 'Program B',
+              grievanceReason: 'Late delivery',
+              suggestedSolution: 'Refund',
+            }),
+        ],
+      columns: [
+        { Header: 'ID', accessor: 'id' },
+        { Header: 'Name', accessor: 'name' },
+        { Header: 'Email', accessor: 'email' },
+        { Header: 'Enquiry Date', accessor: 'date' },
+        { Header: 'Mobile Number', accessor: 'phoneNumber' },
+        { Header: 'Notes', accessor: 'notes' },
+        { Header: 'Program Name', accessor: 'programName' },
+        { Header: 'Grievance Reason', accessor: 'grievanceReason' },
+        { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+      ],
+    });
+  });
+});
