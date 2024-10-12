@@ -191,6 +191,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       <div className={styles.inputGroup}>
         <select
           name="enquiryType"
+          aria-label="Enquiry Type"
           value={formData.enquiryType}
           onChange={handleChange}
         >
@@ -295,6 +296,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           <div className={styles.fullLineInput}>
             <label htmlFor="feedbackMessage">Feedback</label>
             <textarea
+              id="feedbackMessage"
               name="feedbackMessage"
               value={formData.feedbackMessage}
               onChange={handleChange}
@@ -322,6 +324,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               may have been unfairly treated
             </label>
             <textarea
+              id="complaintsReason"
               name="complaintsReason"
               value={formData.complaintsReason}
               onChange={handleChange}
@@ -332,6 +335,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               Your suggestions for a solution
             </label>
             <textarea
+              id="complaintsSolution"
               name="complaintsSolution"
               value={formData.complaintsSolution}
               onChange={handleChange}
