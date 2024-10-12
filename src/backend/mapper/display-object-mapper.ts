@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, MemberDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO } from "../dto/inquiry";
+    DisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -92,6 +92,55 @@ export class MemberDisplayObjectMapper extends DisplayDataMapper<MemberDTO, Memb
             {
               Header: 'Approved/Paid',
               accessor: 'approved',
+            }
+        ];
+    }
+}
+
+export class GeneralInquiryDisplayObjectMapper extends DisplayDataMapper<GeneralInquiryDTO, 
+    GeneralInquiryDisplayObject> {
+    protected override mapDisplayObject(complaint: GeneralInquiryDTO): GeneralInquiryDisplayObject {
+        return {
+            id: complaint.inquiryId as number,
+            header: this.formatName(complaint?.person),
+            name: this.formatName(complaint?.person),
+            email: this.formatField(complaint?.person?.email),
+            date: this.formatDate(complaint?.date),
+            phoneNumber: this.formatField(complaint?.person?.phoneNumber),
+            message: this.formatField(complaint?.message),
+            notes: this.formatField(complaint?.notes)
+        }
+    }
+
+    protected override getColumns(): ColumnAdapter<GeneralInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Enquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Mobile Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Message',
+                accessor: 'message'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
             }
         ];
     }

@@ -444,3 +444,157 @@ describe('ComplaintInquiryObjectMapper', () => {
     });
   });
 });
+
+
+import { GeneralInquiryDisplayObjectMapper } from '../../../backend/mapper/display-object-mapper';
+import { GeneralInquiryDTO } from '../../../backend/dto/inquiry';
+
+describe('GeneralInquiryDisplayObjectMapper', () => {
+  let mapper: GeneralInquiryDisplayObjectMapper;
+
+  beforeEach(() => {
+    mapper = new GeneralInquiryDisplayObjectMapper();
+  });
+
+  it('should map GeneralInquiryDTO to GeneralInquiryDisplayObject correctly, excluding date', () => {
+    // Creating AddressDTO instance
+    const address = new AddressDTO({
+      state: 'NY',
+      streetAddress: '123 Street',
+      apartment: '1A',
+      suburb: 'Brooklyn',
+      postcode: '11201',
+    });
+
+    // Creating PersonDTO instance
+    const person = new PersonDTO({
+      personId: 1,
+      firstName: 'John',
+      surname: 'Doe',
+      email: 'john.doe@example.com',
+      address: address,
+      phoneNumber: '123-456-7890',
+    });
+
+    // Creating GeneralInquiryDTO instance
+    const inquiry = new GeneralInquiryDTO({
+      inquiryId: 100,
+      person: person,
+      date: new Date('2024-10-12'),
+      message: 'Need information about the program',
+      notes: 'Customer called for more details',
+    });
+
+    const result = mapper['mapDisplayObject'](inquiry);
+
+    // Using expect.objectContaining to ignore the date field
+    expect(result).toEqual(expect.objectContaining({
+      id: 100,
+      header: 'John Doe',
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phoneNumber: '123-456-7890',
+      message: 'Need information about the program',
+      notes: 'Customer called for more details',
+    }));
+  });
+
+  it('should return the correct columns for GeneralInquiryDisplayObject', () => {
+    const columns = mapper['getColumns']();
+
+    expect(columns).toEqual([
+      { Header: 'ID', accessor: 'id' },
+      { Header: 'Name', accessor: 'name' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Enquiry Date', accessor: 'date' },
+      { Header: 'Mobile Number', accessor: 'phoneNumber' },
+      { Header: 'Message', accessor: 'message' },
+      { Header: 'Notes', accessor: 'notes' },
+    ]);
+  });
+
+  it('should map multiple GeneralInquiryDTOs to DisplayDataMany correctly, excluding date', () => {
+    const address1 = new AddressDTO({
+      state: 'NY',
+      streetAddress: '123 Street',
+      apartment: '1A',
+      suburb: 'Brooklyn',
+      postcode: '11201',
+    });
+
+    const address2 = new AddressDTO({
+      state: 'CA',
+      streetAddress: '456 Avenue',
+      suburb: 'San Francisco',
+      postcode: '94103',
+    });
+
+    const person1 = new PersonDTO({
+      personId: 1,
+      firstName: 'John',
+      surname: 'Doe',
+      email: 'john.doe@example.com',
+      address: address1,
+      phoneNumber: '123-456-7890',
+    });
+
+    const person2 = new PersonDTO({
+      personId: 2,
+      firstName: 'Jane',
+      surname: 'Smith',
+      email: 'jane.smith@example.com',
+      address: address2,
+      phoneNumber: '321-654-0987',
+    });
+
+    const inquiry1 = new GeneralInquiryDTO({
+      inquiryId: 100,
+      person: person1,
+      date: new Date('2024-10-12'),
+      message: 'Need information about the program',
+      notes: 'Customer called for more details',
+    });
+
+    const inquiry2 = new GeneralInquiryDTO({
+      inquiryId: 101,
+      person: person2,
+      date: new Date('2024-10-13'),
+      message: 'Need information about room bookings',
+      notes: 'Inquired about room booking costs',
+    });
+
+    const displayDataMany = mapper.mapToMany([inquiry1, inquiry2]);
+
+    // Using expect.objectContaining to ignore the date field
+    expect(displayDataMany.objects).toEqual([
+      expect.objectContaining({
+        id: 100,
+        header: 'John Doe',
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        phoneNumber: '123-456-7890',
+        message: 'Need information about the program',
+        notes: 'Customer called for more details',
+      }),
+      expect.objectContaining({
+        id: 101,
+        header: 'Jane Smith',
+        name: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        phoneNumber: '321-654-0987',
+        message: 'Need information about room bookings',
+        notes: 'Inquired about room booking costs',
+      }),
+    ]);
+
+    expect(displayDataMany.columns).toEqual([
+      { Header: 'ID', accessor: 'id' },
+      { Header: 'Name', accessor: 'name' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'Enquiry Date', accessor: 'date' },
+      { Header: 'Mobile Number', accessor: 'phoneNumber' },
+      { Header: 'Message', accessor: 'message' },
+      { Header: 'Notes', accessor: 'notes' },
+    ]);
+  });
+});

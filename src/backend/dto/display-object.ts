@@ -37,6 +37,10 @@ export type InquiryDisplayObject = DisplayObject & {
     notes?: string;
 }
 
+export type GeneralInquiryDisplayObject = InquiryDisplayObject & {
+    message: string;
+}
+
 export type ComplaintInquiryDisplayObject = InquiryDisplayObject & {
     programName: string;
     grievanceReason: string;
