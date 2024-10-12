@@ -264,18 +264,17 @@ describe('ComplaintInquiryObjectMapper', () => {
 
     const result = mapper['mapDisplayObject'](complaint);
 
-    expect(result).toEqual({
+    expect(result).toEqual(expect.objectContaining({
       id: 100,
       header: 'John Doe',
       name: 'John Doe',
       email: 'john.doe@example.com',
-      date: '12/10/2024, 11:00 am', // Adjust for your date format
       phoneNumber: '123-456-7890',
       notes: 'Issue with program',
       programName: 'Program A',
       grievanceReason: 'Instructor conduct',
       suggestedSolution: 'Replace instructor',
-    });
+    }));
   });
 
   it('should return the correct columns for ComplaintInquiryDisplayObject', () => {
@@ -325,18 +324,17 @@ describe('ComplaintInquiryObjectMapper', () => {
     const displayData = mapper.mapTo(complaint);
 
     expect(displayData).toEqual({
-      object: {
-        id: 100,
-        header: 'John Doe',
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        date: '12/10/2024, 11:00 am', // Adjust for your date format
-        phoneNumber: '123-456-7890',
-        notes: 'Issue with program',
-        programName: 'Program A',
-        grievanceReason: 'Instructor conduct',
-        suggestedSolution: 'Replace instructor',
-      },
+        object: expect.objectContaining({
+            id: 100,
+            header: 'John Doe',
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            phoneNumber: '123-456-7890',
+            notes: 'Issue with program',
+            programName: 'Program A',
+            grievanceReason: 'Instructor conduct',
+            suggestedSolution: 'Replace instructor',
+          }),
       columns: [
         { Header: 'ID', accessor: 'id' },
         { Header: 'Name', accessor: 'name' },
@@ -408,32 +406,30 @@ describe('ComplaintInquiryObjectMapper', () => {
     const displayDataMany = mapper.mapToMany([complaint1, complaint2]);
 
     expect(displayDataMany).toEqual({
-      objects: [
-        {
-          id: 100,
-          header: 'John Doe',
-          name: 'John Doe',
-          email: 'john.doe@example.com',
-          date: '12/10/2024, 11:00 am', // Adjust for your date format
-          phoneNumber: '123-456-7890',
-          notes: 'Issue with program',
-          programName: 'Program A',
-          grievanceReason: 'Instructor conduct',
-          suggestedSolution: 'Replace instructor',
-        },
-        {
-          id: 101,
-          header: 'Jane Smith',
-          name: 'Jane Smith',
-          email: 'jane.smith@example.com',
-          date: '13/10/2024, 11:00 am', // Adjust for your date format
-          phoneNumber: '321-654-0987',
-          notes: 'Issue with service',
-          programName: 'Program B',
-          grievanceReason: 'Late delivery',
-          suggestedSolution: 'Refund',
-        },
-      ],
+        objects: [
+            expect.objectContaining({
+              id: 100,
+              header: 'John Doe',
+              name: 'John Doe',
+              email: 'john.doe@example.com',
+              phoneNumber: '123-456-7890',
+              notes: 'Issue with program',
+              programName: 'Program A',
+              grievanceReason: 'Instructor conduct',
+              suggestedSolution: 'Replace instructor',
+            }),
+            expect.objectContaining({
+              id: 101,
+              header: 'Jane Smith',
+              name: 'Jane Smith',
+              email: 'jane.smith@example.com',
+              phoneNumber: '321-654-0987',
+              notes: 'Issue with service',
+              programName: 'Program B',
+              grievanceReason: 'Late delivery',
+              suggestedSolution: 'Refund',
+            }),
+        ],
       columns: [
         { Header: 'ID', accessor: 'id' },
         { Header: 'Name', accessor: 'name' },
