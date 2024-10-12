@@ -92,6 +92,14 @@
   font-size: 18px;
 }
 
+.formContainer label {
+  color: #EFEEE5; 
+  opacity: 0.8; 
+  font-weight: 100;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
 .formContainer select:-webkit-autofill,
 .formContainer input:-webkit-autofill, 
 .formContainer textarea:-webkit-autofill {
