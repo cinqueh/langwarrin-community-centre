@@ -13,6 +13,8 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
+        console.log("Received");
+
         // Validate the body
         if (!isGeneralInquiryDTO(body)) {
             return new Response(
