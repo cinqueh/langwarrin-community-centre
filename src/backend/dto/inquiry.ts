@@ -3,15 +3,15 @@ import { ChildcareSessionDTO } from "./childcare/childcaresession"; // Import fr
 import { ChildDTO } from "./childcare/child"; // Import child DTO for Childcare Inquiry
 import { ChildcareProgramDTO } from "./childcare/childcareprogram"; // Import childcare program DTO for Childcare Inquiry
 
-class InquiryDTO {
+export class InquiryDTO {
   inquiryId?: number;
   date?: Date;
-  person: PersonDTO;
+  person?: PersonDTO;
   notes?: string;
 
   constructor(data: {
-    date: Date,
-    person: PersonDTO,
+    date?: Date,
+    person?: PersonDTO,
     inquiryId?: number,
     notes?: string,
   }) {

@@ -141,6 +141,7 @@ export class GeneralInquiryDisplayObjectMapper extends DisplayDataMapper<General
             {
                 Header: 'Notes',
                 accessor: 'notes',
+                editable: true
             }
         ];
     }

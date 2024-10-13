@@ -1,9 +1,9 @@
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { DatabaseError, DataValidationError } from "../util/errors";
-import BaseRepository from "../repository/base-repository";
+import FormRepository, { BaseRepository } from "../repository/base-repository";
 import Mapper from "../mapper/mapper";
 
-export default abstract class DatabaseService<Repository extends BaseRepository, MapFrom, MapTo> {
+export abstract class DatabaseService<Repository extends BaseRepository> {
     protected handleResponse<T, Q>(
         response: PostgrestSingleResponse<T>,
         onSuccess: (data: T) => Q            
@@ -27,10 +27,19 @@ export default abstract class DatabaseService<Repository extends BaseRepository,
     }
 
     protected repository: Repository;
+
+    protected constructor(repository: Repository) {
+        this.repository = repository;
+    }
+}
+
+export default abstract class FormService<Repository extends FormRepository, MapFrom, MapTo>
+    extends DatabaseService<Repository> {
+
     protected mapper: Mapper<MapFrom, MapTo>;
 
     protected constructor(repository: Repository, mapper: Mapper<MapFrom, MapTo>) {
-        this.repository = repository;
+        super(repository);
         this.mapper = mapper;
     }
 
