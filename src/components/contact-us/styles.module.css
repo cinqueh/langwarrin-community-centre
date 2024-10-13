@@ -124,5 +124,6 @@
 }
 
 .formContainer select option:hover {
-  background-color: #EEEDE4;
+  background-color: #D6D6C2; 
+  color: #1A1A1A;
 }
