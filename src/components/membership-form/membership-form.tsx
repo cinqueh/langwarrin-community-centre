@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+import { PersonDTO } from "@/backend/dto/person";
+import { AddressDTO } from "@/backend/dto/person";
+import { MemberDTO } from "@/backend/dto/member";
 
 type MembershipFormProps = {
   title: string;
@@ -49,18 +52,68 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
     postcode: "",
   });
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission
+
+    const addressDTO = new AddressDTO({
+      state: formData.state,
+      streetAddress: formData.address,
+      apartment: "",
+      suburb: formData.suburb,
+      postcode: formData.postcode,
+    });
+
+    const personDTO = new PersonDTO({
+      personId: 0,
+      firstName: formData.firstName,
+      surname: formData.lastName,
+      email: formData.email,
+      homeNumber: formData.homePhone,
+      phoneNumber: formData.mobile,
+      occupation: formData.occupation,
+      address: addressDTO,
+    });
+
+    const memberDTO = new MemberDTO({
+      memberId: 0,
+      title: formData.title,
+      submitDate: new Date(),
+      person: personDTO,
+    });
+
+    // Send form data to backend API
+    try {
+      const response = await fetch("/api/member", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(memberDTO),
+      });
+
+      if (response.ok) {
+        setAlertMessage('Form submitted successfully!');
+        setAlertType('success');
+      } else {
+        setAlertMessage('An error occurred while submitting the form. Please try again.');
+        setAlertType('error');
+      }
+    } catch (error) {
+      // console.error("Error submitting form:", error);
+      setAlertMessage('An error occurred while submitting the form. Please try again.');
+      setAlertType('error');
+    }
   };
 
   return (
@@ -191,16 +244,26 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
         <div className={styles.checkboxGroup}>
           <label>
             <input type="checkbox" required />
-            Yes, I agree to the collection and use of my personal information for communication and event invitations.
+            Yes, I agree to the collection and use of my personal information
+            for communication and event invitations.
           </label>
         </div>
 
         <button type="submit" className="button-white">
           {submitButtonText}
         </button>
+        {alertMessage && (
+          <p
+            className={
+              alertType === "success" ? "alertSuccess" : "alertError"
+            }
+          >
+            {alertMessage}
+          </p>
+        )}
       </form>
     </div>
   );
 };
 
-export {MembershipForm};
+export { MembershipForm };
