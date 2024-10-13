@@ -191,16 +191,17 @@ export class FeedbackInquiryDisplayObjectMapper extends DisplayDataMapper<Feedba
                 accessor: 'phoneNumber',
             },
             {
-                Header: 'Notes',
-                accessor: 'notes',
-            },
-            {
                 Header: 'Program Name',
                 accessor: 'programName'
             },
             {
                 Header: 'Feedback',
                 accessor: 'feedback'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+                editable: true,
             }
         ];
     }
@@ -246,10 +247,6 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
                 accessor: 'phoneNumber',
             },
             {
-                Header: 'Notes',
-                accessor: 'notes',
-            },
-            {
                 Header: 'Program Name',
                 accessor: 'programName'
             },
@@ -260,6 +257,11 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
             {
                 Header: 'Suggested Solution',
                 accessor: 'suggestedSolution'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+                editable: true,
             }
         ];
     }
