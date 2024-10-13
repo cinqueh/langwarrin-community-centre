@@ -63,32 +63,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validate required fields (general fields for all types)
-    if (
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.email ||
-      !formData.mobile
-    ) {
-      alert("Please fill in all required general information.");
-      return;
-    }
-
-    // Validate the address if enquiryType is feedback or complaints
-    if (
-      (formData.enquiryType === "feedback" ||
-        formData.enquiryType === "complaints") &&
-      (!formData.address.street ||
-        !formData.address.suburb ||
-        !formData.address.state ||
-        !formData.address.postcode)
-    ) {
-      console.log(formData.address);
-      alert("Please fill in the address information.");
-      return;
-    }
-
     // Initialize the form data to submit with the common fields
     let dataToSubmit: any = {
       firstName: formData.firstName,
@@ -100,20 +74,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
     // Handle general enquiry
     if (formData.enquiryType === "general") {
-      if (!formData.message) {
-        alert("Please enter your message for General Enquiry.");
-        return;
-      }
       dataToSubmit.message = formData.message; // For general enquiry
     }
 
     // Handle feedback
     if (formData.enquiryType === "feedback") {
-      if (!formData.feedbackProgramName || !formData.feedbackMessage) {
-        alert("Please provide the program name and feedback.");
-        return;
-      }
-
       // Add address, programName, and feedbackMessage
       dataToSubmit.address = formData.address;
       dataToSubmit.programName = formData.feedbackProgramName;
@@ -122,15 +87,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
     // Handle complaints
     if (formData.enquiryType === "complaints") {
-      if (
-        !formData.complaintsPersonName ||
-        !formData.complaintsReason ||
-        !formData.complaintsSolution
-      ) {
-        alert("Please provide all required information for Complaints.");
-        return;
-      }
-
       // Add address, programName, grievanceReason, and suggestedSolution
       dataToSubmit.address = formData.address;
       dataToSubmit.programName = formData.complaintsPersonName;
@@ -156,6 +112,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           placeholder="First Name"
           value={formData.firstName}
           onChange={handleChange}
+          required
         />
         <input
           type="text"
@@ -163,6 +120,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           placeholder="Family Name"
           value={formData.lastName}
           onChange={handleChange}
+          required
         />
       </div>
 
@@ -174,6 +132,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           placeholder="Enter your email"
           value={formData.email}
           onChange={handleChange}
+          required
         />
         <div className={styles.mobileInputWrapper}>
           <span className={styles.mobilePrefix}>+61 |</span>
@@ -183,6 +142,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             placeholder="Mobile"
             value={formData.mobile}
             onChange={handleChange}
+            required
           />
         </div>
       </div>
@@ -220,6 +180,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             name="message"
             value={formData.message}
             onChange={handleChange}
+            required
           />
         </div>
       )}
@@ -245,6 +206,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Street Address"
               value={formData.address.street}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.addressInputGroup}>
@@ -254,11 +216,13 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Suburb"
               value={formData.address.suburb}
               onChange={handleChange}
+              required
             />
             <select
               name="state"
               value={formData.address.state}
               onChange={handleChange}
+              required
             >
               <option value="VIC">VIC</option>
               <option value="NSW">NSW</option>
@@ -291,6 +255,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Name of program"
               value={formData.feedbackProgramName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fullLineInput}>
@@ -300,6 +265,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               name="feedbackMessage"
               value={formData.feedbackMessage}
               onChange={handleChange}
+              required
             />
           </div>
         </>
@@ -316,6 +282,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Name of person/s complaint is in regards to"
               value={formData.complaintsPersonName}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fullLineInput}>
@@ -328,6 +295,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               name="complaintsReason"
               value={formData.complaintsReason}
               onChange={handleChange}
+              required
             />
           </div>
           <div className={styles.fullLineInput}>
@@ -339,6 +307,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               name="complaintsSolution"
               value={formData.complaintsSolution}
               onChange={handleChange}
+              required
             />
           </div>
         </>
