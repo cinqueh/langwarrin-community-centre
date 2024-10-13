@@ -4,7 +4,7 @@ import { IndividualWrapper, TableWrapper } from "../../../../components/admin/ba
 import AdminHeader from "@/components/admin/admin-header";
 import { MemberDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
-import { DisplayIndividualComponent } from "@/components/admin/display-individual";
+import { DisplayIndividualInquiryComponent } from "@/components/admin/display-individual";
 
 interface MemberPageProps {
     params: { id: string };
@@ -27,7 +27,7 @@ export default async function Member({ params }: MemberPageProps) {
           return (
             <AdminHeader>
               <IndividualWrapper title={formattedData.object.header}>
-                <DisplayIndividualComponent data={formattedData.object} columns={formattedData.columns}/>
+                <DisplayIndividualInquiryComponent data={formattedData.object} columns={formattedData.columns}/>
               </IndividualWrapper>
             </AdminHeader>
           );

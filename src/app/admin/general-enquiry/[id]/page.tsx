@@ -1,6 +1,6 @@
 import { IndividualWrapper } from "../../../../components/admin/background";
 import AdminHeader from "@/components/admin/admin-header";
-import { ComplaintInquiryObjectMapper, GeneralInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
+import { GeneralInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
 import { DisplayIndividualInquiryComponent } from "@/components/admin/display-individual";
 import GeneralInquiryService from "@/backend/service/general-inquiry-service";
