@@ -1,6 +1,5 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import ContactUs from "./components/contact-us/contact-us-card";
 import { FacebookEmbed } from "./components/facebook-card/facebook-card";
 import Footer from "./components/layout/footer";
 import {
@@ -49,6 +48,7 @@ import { AdditionalInfoForm } from "./components/room-booking-form/additional-in
 import { PersonalDetailsForm } from "./components/room-booking-form/personal-info-form";
 import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
 import { ProgramEnrollmentForm } from "./components/program-form/program-form";
+import { ContactForm } from "./components/contact-us/contact-us-card";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -404,76 +404,7 @@ const backgroundSectionParameters = [
     helperText: "Enter the alternative text for the image.",
   },
 ];
-// ContactUs Parameters
-const contactUsParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Contact Us",
-    helperText: "Enter the title for the form.",
-  },
-  {
-    name: "subtitle",
-    type: "string",
-    defaultValue:
-      "Got any suggestions or questions? Fill this form to reach out.",
-    helperText: "Enter the subtitle text for the form.",
-  },
-  {
-    name: "firstNamePlaceholder",
-    type: "string",
-    defaultValue: "First Name",
-    helperText: "Placeholder text for the First Name input.",
-  },
-  {
-    name: "familyNamePlaceholder",
-    type: "string",
-    defaultValue: "Family Name",
-    helperText: "Placeholder text for the Family Name input.",
-  },
-  {
-    name: "emailPlaceholder",
-    type: "string",
-    defaultValue: "Enter your email",
-    helperText: "Placeholder text for the Email input.",
-  },
-  {
-    name: "mobilePlaceholder",
-    type: "string",
-    defaultValue: "Mobile",
-    helperText: "Placeholder text for the Mobile input.",
-  },
-  {
-    name: "subjectPlaceholder",
-    type: "string",
-    defaultValue: "What is it about?",
-    helperText: "Placeholder text for the subject select input.",
-  },
-  {
-    name: "messagePlaceholder",
-    type: "string",
-    defaultValue: "Enter your message",
-    helperText: "Placeholder text for the Message textarea.",
-  },
-  {
-    name: "sendButtonText",
-    type: "string",
-    defaultValue: "SEND",
-    helperText: "Text for the Send button.",
-  },
-  {
-    name: "imageSrc",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
-    helperText: "Upload the image for the right-side section.",
-  },
-  {
-    name: "imageAlt",
-    type: "string",
-    defaultValue: "Side Image",
-    helperText: "Alt text for the image.",
-  },
-];
+
 // MainBanner Parameters
 const mainBannerParameters = [
   {
@@ -585,12 +516,6 @@ Builder.registerComponent(MainBanner, {
 Builder.registerComponent(homeimage, {
   name: "BackgroundSection",
   inputs: backgroundSectionParameters,
-});
-// Register ContactUs component
-
-Builder.registerComponent(ContactUs, {
-  name: "ContactUs",
-  inputs: contactUsParameters,
 });
 
 Builder.registerComponent(WhiteFeatureCard, {
@@ -1318,6 +1243,37 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       defaultValue: "/",
       helperText: "Enter the URL for the button link.",
     }
+  ],
+});
+
+Builder.registerComponent(ContactForm, {
+  name: 'ContactForm',
+  inputs: [
+    {
+      name: 'title',
+      type: 'text',
+      defaultValue: 'Contact Us',
+    },
+    {
+      name: 'subtitle',
+      type: 'text',
+      defaultValue: 'Got any suggestions or questions? Fill this form to reach out.',
+    },
+    {
+      name: 'addressTitle',
+      type: 'text',
+      defaultValue: 'Address',
+    },
+    {
+      name: 'feedbackTitle',
+      type: 'text',
+      defaultValue: 'Feedback & Compliments',
+    },
+    {
+      name: 'complaintsTitle',
+      type: 'text',
+      defaultValue: 'Complaints',
+    },
   ],
 });
 
