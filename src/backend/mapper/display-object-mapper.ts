@@ -317,7 +317,7 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
                 accessor: 'programName',
             },
             {
-                Header: 'How Heard About Program',
+                Header: 'How did you hear about the program?',
                 accessor: 'howHeardAboutProgram',
             },
             {
