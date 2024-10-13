@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { PersonDTO } from "@/backend/dto/person";
-import { AddressDTO } from "@/backend/dto/person";
+import { PersonDTO, AddressDTO } from "../../backend/dto/person";
 import {
   GeneralInquiryDTO,
   FeedbackInquiryDTO,
   ComplaintInquiryDTO,
-} from "@/backend/dto/inquiry";
+} from "../../backend/dto/inquiry";
 
 interface ContactFormProps {
   title?: string;

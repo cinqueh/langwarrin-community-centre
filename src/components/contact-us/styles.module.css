@@ -117,12 +117,12 @@
 }
 
 .formContainer select option {
-  background-color: #004223; 
-  color: #efeee5; 
+  background-color: #EEEDE4; 
+  color: #2B2B2B; 
   padding: 10px;
   font-size: 20px;
 }
 
 .formContainer select option:hover {
-  background-color: #00331a;
+  background-color: #EEEDE4;
 }
