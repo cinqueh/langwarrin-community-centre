@@ -1,7 +1,6 @@
 /**
  * @jest-environment node
  */
-import IEmailServiceAdapter from '../../../../backend/service/email/email-adapter';
 import NodeMailerService from '../../../../backend/service/email/node-mailer-service';
 import nodemailer from 'nodemailer';
 import Docker from 'dockerode';
