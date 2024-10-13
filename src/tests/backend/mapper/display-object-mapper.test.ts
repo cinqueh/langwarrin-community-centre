@@ -286,10 +286,10 @@ describe('ComplaintInquiryObjectMapper', () => {
       { Header: 'Email', accessor: 'email' },
       { Header: 'Enquiry Date', accessor: 'date' },
       { Header: 'Mobile Number', accessor: 'phoneNumber' },
-      { Header: 'Notes', accessor: 'notes' },
       { Header: 'Program Name', accessor: 'programName' },
       { Header: 'Grievance Reason', accessor: 'grievanceReason' },
       { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+      { Header: 'Notes', accessor: 'notes', editable: true, },
     ]);
   });
 
@@ -341,10 +341,10 @@ describe('ComplaintInquiryObjectMapper', () => {
         { Header: 'Email', accessor: 'email' },
         { Header: 'Enquiry Date', accessor: 'date' },
         { Header: 'Mobile Number', accessor: 'phoneNumber' },
-        { Header: 'Notes', accessor: 'notes' },
         { Header: 'Program Name', accessor: 'programName' },
         { Header: 'Grievance Reason', accessor: 'grievanceReason' },
         { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+        { Header: 'Notes', accessor: 'notes', editable: true, },
       ],
     });
   });
@@ -436,10 +436,10 @@ describe('ComplaintInquiryObjectMapper', () => {
         { Header: 'Email', accessor: 'email' },
         { Header: 'Enquiry Date', accessor: 'date' },
         { Header: 'Mobile Number', accessor: 'phoneNumber' },
-        { Header: 'Notes', accessor: 'notes' },
         { Header: 'Program Name', accessor: 'programName' },
         { Header: 'Grievance Reason', accessor: 'grievanceReason' },
         { Header: 'Suggested Solution', accessor: 'suggestedSolution' },
+        { Header: 'Notes', accessor: 'notes', editable: true, },
       ],
     });
   });
@@ -509,7 +509,7 @@ describe('GeneralInquiryDisplayObjectMapper', () => {
       { Header: 'Enquiry Date', accessor: 'date' },
       { Header: 'Mobile Number', accessor: 'phoneNumber' },
       { Header: 'Message', accessor: 'message' },
-      { Header: 'Notes', accessor: 'notes' },
+      { Header: 'Notes', accessor: 'notes', editable: true, },
     ]);
   });
 
@@ -594,7 +594,7 @@ describe('GeneralInquiryDisplayObjectMapper', () => {
       { Header: 'Enquiry Date', accessor: 'date' },
       { Header: 'Mobile Number', accessor: 'phoneNumber' },
       { Header: 'Message', accessor: 'message' },
-      { Header: 'Notes', accessor: 'notes' },
+      { Header: 'Notes', accessor: 'notes', editable: true, },
     ]);
   });
 });
@@ -666,9 +666,9 @@ describe('FeedbackInquiryDisplayObjectMapper', () => {
       { Header: 'Email', accessor: 'email' },
       { Header: 'Enquiry Date', accessor: 'date' },
       { Header: 'Mobile Number', accessor: 'phoneNumber' },
-      { Header: 'Notes', accessor: 'notes' },
       { Header: 'Program Name', accessor: 'programName' },
       { Header: 'Feedback', accessor: 'feedback' },
+      { Header: 'Notes', accessor: 'notes', editable: true, },
     ]);
   });
 
@@ -759,9 +759,9 @@ describe('FeedbackInquiryDisplayObjectMapper', () => {
       { Header: 'Email', accessor: 'email' },
       { Header: 'Enquiry Date', accessor: 'date' },
       { Header: 'Mobile Number', accessor: 'phoneNumber' },
-      { Header: 'Notes', accessor: 'notes' },
       { Header: 'Program Name', accessor: 'programName' },
       { Header: 'Feedback', accessor: 'feedback' },
+      { Header: 'Notes', accessor: 'notes', editable: true, },
     ]);
   });
 });

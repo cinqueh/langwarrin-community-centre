@@ -1,9 +1,8 @@
 "use client";
 import { useState } from 'react';
-import { ColumnAdapter } from "@/backend/dto/display-object";
+import { ColumnAdapter } from "../../backend/dto/display-object";
 import styles from "./individual.module.css";
-import { InquiryDTO } from '@/backend/dto/inquiry';
-import { PersonDTO } from '@/backend/dto/person';
+import { InquiryDTO } from '../../backend/dto/inquiry';
 import { useRouter } from 'next/navigation';
 
 interface TableComponentProps<T extends object> {
