@@ -1,5 +1,6 @@
-import { ColumnAdapter, DisplayData, DisplayDataMany, 
-    DisplayObject, MemberDisplayObject } from "../dto/display-object";
+import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -11,6 +12,16 @@ abstract class DisplayDataMapper<S, T extends DisplayObject> implements Mapper<S
     }
     protected formatAddress(address: AddressDTO | undefined): string {
         return address?.toString() ?? '';
+    }
+    protected formatDate(date: Date | undefined): string {
+        return date?.toLocaleString('en-AU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+          }) ?? ''
     }
     protected formatField(field: any): string {
         return field ?? '';
@@ -81,6 +92,173 @@ export class MemberDisplayObjectMapper extends DisplayDataMapper<MemberDTO, Memb
             {
               Header: 'Approved/Paid',
               accessor: 'approved',
+            }
+        ];
+    }
+}
+
+export class GeneralInquiryDisplayObjectMapper extends DisplayDataMapper<GeneralInquiryDTO, 
+    GeneralInquiryDisplayObject> {
+    protected override mapDisplayObject(complaint: GeneralInquiryDTO): GeneralInquiryDisplayObject {
+        return {
+            id: complaint.inquiryId as number,
+            header: this.formatName(complaint?.person),
+            name: this.formatName(complaint?.person),
+            email: this.formatField(complaint?.person?.email),
+            date: this.formatDate(complaint?.date),
+            phoneNumber: this.formatField(complaint?.person?.phoneNumber),
+            message: this.formatField(complaint?.message),
+            notes: this.formatField(complaint?.notes)
+        }
+    }
+
+    protected override getColumns(): ColumnAdapter<GeneralInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Enquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Mobile Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Message',
+                accessor: 'message'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+            }
+        ];
+    }
+}
+
+export class FeedbackInquiryDisplayObjectMapper extends DisplayDataMapper<FeedbackInquiryDTO, 
+    FeedbackInquiryDisplayObject> {
+    protected override mapDisplayObject(complaint: FeedbackInquiryDTO): FeedbackInquiryDisplayObject {
+        return {
+            id: complaint.inquiryId as number,
+            header: this.formatName(complaint?.person),
+            name: this.formatName(complaint?.person),
+            email: this.formatField(complaint?.person?.email),
+            date: this.formatDate(complaint?.date),
+            phoneNumber: this.formatField(complaint?.person?.phoneNumber),
+            notes: this.formatField(complaint?.notes),
+            address: this.formatAddress(complaint?.person?.address),
+            programName: this.formatField(complaint?.programName),
+            feedback: this.formatField(complaint?.feedback),
+        }
+    }
+
+    protected override getColumns(): ColumnAdapter<FeedbackInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Address',
+                accessor: 'address'
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Enquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Mobile Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+            },
+            {
+                Header: 'Program Name',
+                accessor: 'programName'
+            },
+            {
+                Header: 'Feedback',
+                accessor: 'feedback'
+            }
+        ];
+    }
+}
+
+export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInquiryDTO, 
+    ComplaintInquiryDisplayObject> {
+    protected override mapDisplayObject(complaint: ComplaintInquiryDTO): ComplaintInquiryDisplayObject {
+        return {
+            id: complaint.inquiryId as number,
+            header: this.formatName(complaint?.person),
+            name: this.formatName(complaint?.person),
+            email: this.formatField(complaint?.person?.email),
+            date: this.formatDate(complaint?.date),
+            phoneNumber: this.formatField(complaint?.person?.phoneNumber),
+            notes: this.formatField(complaint?.notes),
+            programName: this.formatField(complaint?.programName),
+            grievanceReason: this.formatField(complaint?.grievanceReason),
+            suggestedSolution: this.formatField(complaint?.suggestedSolution)
+        }
+    }
+
+    protected override getColumns(): ColumnAdapter<ComplaintInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Enquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Mobile Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+            },
+            {
+                Header: 'Program Name',
+                accessor: 'programName'
+            },
+            {
+                Header: 'Grievance Reason',
+                accessor: 'grievanceReason'
+            },
+            {
+                Header: 'Suggested Solution',
+                accessor: 'suggestedSolution'
             }
         ];
     }

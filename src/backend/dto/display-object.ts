@@ -30,3 +30,25 @@ export type MemberDisplayObject = DisplayObject & {
     occupation: string;
     approved: string;
 }
+
+export type InquiryDisplayObject = DisplayObject & {
+    date: string;
+    phoneNumber: string;
+    notes?: string;
+}
+
+export type GeneralInquiryDisplayObject = InquiryDisplayObject & {
+    message: string;
+}
+
+export type FeedbackInquiryDisplayObject = InquiryDisplayObject & {
+    address: string;
+    programName: string;
+    feedback: string;
+}
+
+export type ComplaintInquiryDisplayObject = InquiryDisplayObject & {
+    programName: string;
+    grievanceReason: string;
+    suggestedSolution: string;
+}
