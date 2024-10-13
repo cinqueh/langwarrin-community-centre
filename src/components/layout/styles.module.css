@@ -104,13 +104,13 @@
 .footer {
   background-color: #004223;
   color: #f5f5f5;
-  padding: 20px 40px;
+  padding: 0 40px 5px 40px;
 }
 
 .footerContainer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch; 
   flex-wrap: wrap;
   max-width: 1300px;
   margin: 0 auto;
@@ -119,10 +119,17 @@
 .contactSection,
 .logoSection,
 .addressSection {
+  flex-grow: 1; 
   margin: 10px;
   min-width: 250px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between; 
+}
+
+.logoSection {
+  align-items: center; 
+  padding-top: 20px;
 }
 
 .contactSection {
@@ -136,42 +143,41 @@
 /* Titles Styling */
 .contactTitle,
 .addressTitle {
-  font-size: 22px;
-  font-weight: 900;
+  font-size: 25px;
+  font-weight: 600;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 .logoText {
-  font-size: 55px;
+  font-size: 68.16px;
   font-weight: bolder;
-  margin-bottom: 5px;
   color: #ffffff;
+  margin-bottom: -10px;
 }
 
 .subText {
-  font-size: 35px;
+  font-size: 35.39px;
   font-weight: 400;
   color: #e2e2e2;
-  margin-top: -30px;
   margin-bottom: 0px;
   text-align: center;
 }
 
 /* Text Styling */
 .text {
-  font-size: 17px;
+  font-size: 18px;
   margin: 0px 0;
 }
 
 .copyright {
-  margin-top: 35px;
-  font-size: 10px;
-  color: #a5a5a5;
+  margin-top: 30px;
+  font-size: 16px;
+  color: #9B9B9B;
   text-align: center;
+  font-weight: 100;
 }
 
-/* Responsive Footer Styles */
 @media (max-width: 768px) {
   .footerContainer {
     flex-direction: column;
@@ -182,14 +188,6 @@
   .contactSection,
   .addressSection {
     align-items: center;
-  }
-
-  .nav {
-    flex-direction: column;
-  }
-
-  .navItem {
-    margin: 10px 0;
   }
 }
 
