@@ -4,6 +4,7 @@ import { ColumnAdapter } from "@/backend/dto/display-object";
 import styles from "./individual.module.css";
 import { InquiryDTO } from '@/backend/dto/inquiry';
 import { PersonDTO } from '@/backend/dto/person';
+import { useRouter } from 'next/navigation';
 
 interface TableComponentProps<T extends object> {
     data: { [key: string]: any };
@@ -38,6 +39,7 @@ const handleSave = async<T extends Object>(path: string, method: string, data: T
 
 export const DisplayIndividualInquiryComponent = <T extends object>({ data, columns }: TableComponentProps<T>) => {
     const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const router = useRouter();
 
     const saveNotes = async (editableData: { [key: string]: any }) => {
         setSaveStatus('idle');
@@ -51,6 +53,7 @@ export const DisplayIndividualInquiryComponent = <T extends object>({ data, colu
             const result = await handleSave('/api/admin/notes', 'PUT', data);
             if (result) {
                 setSaveStatus('success');
+                router.refresh();
             } else {
                 setSaveStatus('error');
             }
