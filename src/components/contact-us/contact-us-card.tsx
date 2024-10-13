@@ -239,6 +239,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
               placeholder="Postcode"
               value={formData.address.postcode}
               onChange={handleChange}
+              required
             />
           </div>
         </>
