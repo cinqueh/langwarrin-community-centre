@@ -18,13 +18,14 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [agreedToBond, setAgreedToBond] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     const savedRoomDetails = localStorage.getItem("roomBookingData");
     const savedPersonalDetails = localStorage.getItem(
       "personalDetailsFormData"
     );
-    const savedAdditionalInfo = localStorage.getItem("AdditionalInfoFormData");
+    const savedAdditionalInfo = localStorage.getItem("additionalInfoFormData");
 
     if (savedRoomDetails) {
       setRoomDetails(JSON.parse(savedRoomDetails));
@@ -51,7 +52,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
   const onSubmit = () => {
     // add functionality to submit form data
     console.log("Form Submitted");
-    localStorage.clear(); // clear form data from local storage
+    // localStorage.clear(); // clear form data from local storage
     window.location.href = "/request-a-room/success";
   };
 
@@ -59,7 +60,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     if (agreedToTerms && agreedToBond) {
       onSubmit();
     } else {
-      alert("Please agree to the terms and bond agreement.");
+      setAlertMessage("Please agree to the terms and bond agreement");
     }
   };
 
@@ -146,10 +147,31 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
             Edit
           </button>
         </div>
-        {Object.keys(additionalInfo).map((key) => (
+
+        {/* Hard-coded questions with corresponding keys */}
+        {[
+          { label: "Purpose of the hire", key: "hirePurpose" },
+          {
+            label: "Are you booking for an organisation?",
+            key: "forOrganisation",
+          },
+          { label: "Organisation Address", key: "organisationAddress" },
+          { label: "Number Attending", key: "estimatedAttendance" },
+          { label: "Special Requirements", key: "specialRequirements" },
+          {
+            label: "Will liquor be consumed at this function?",
+            key: "willLiquorBeConsumed",
+          },
+          {
+            label: "How did you hear about the space?",
+            key: "howHearAboutSpace",
+          },
+        ].map(({ label, key }) => (
           <p key={key}>
-            <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>{key}</span>:{" "}
-            <span style={{ color: "#EEEDE4" }}>{additionalInfo[key]}</span>
+            <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>
+              {label}
+            </span>
+            : <span style={{ color: "#EEEDE4" }}>{additionalInfo[key]}</span>
           </p>
         ))}
       </div>
@@ -178,6 +200,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
           <span dangerouslySetInnerHTML={{ __html: bondText }} />
         </label>
       </div>
+      {alertMessage && <p className="alertError">{alertMessage}</p>}
 
       <button
         className="button-white"
