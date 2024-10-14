@@ -802,6 +802,12 @@ export const membershipFormInputs = [
     helperText: "Enter the placeholder text for the occupation input.",
   },
   {
+    name: "apartmentPlaceholder",
+    type: "string",
+    defaultValue: "Apartment, Unit No., Suite, etc (Optional)",
+    helperText: "Enter the placeholder text for the apartment input.",
+  },
+  {
     name: "addressPlaceholder",
     type: "string",
     defaultValue: "Address",
@@ -830,6 +836,12 @@ export const membershipFormInputs = [
     type: "string",
     defaultValue: "Submit",
     helperText: "Enter the text for the submit button.",
+  },
+  {
+    name: "checkboxLabel",
+    type: "richText",
+    defaultValue:
+      "Yes, I agree to collection, use, and processing of my personal information which includes using this information for communication, event invitations, and regular membership updates. ",
   },
 ];
 
@@ -1242,37 +1254,38 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       type: "string",
       defaultValue: "/",
       helperText: "Enter the URL for the button link.",
-    }
+    },
   ],
 });
 
 Builder.registerComponent(ContactForm, {
-  name: 'ContactForm',
+  name: "ContactForm",
   inputs: [
     {
-      name: 'title',
-      type: 'text',
-      defaultValue: 'Contact Us',
+      name: "title",
+      type: "text",
+      defaultValue: "Contact Us",
     },
     {
-      name: 'subtitle',
-      type: 'text',
-      defaultValue: 'Got any suggestions or questions? Fill this form to reach out.',
+      name: "subtitle",
+      type: "text",
+      defaultValue:
+        "Got any suggestions or questions? Fill this form to reach out.",
     },
     {
-      name: 'addressTitle',
-      type: 'text',
-      defaultValue: 'Address',
+      name: "addressTitle",
+      type: "text",
+      defaultValue: "Address",
     },
     {
-      name: 'feedbackTitle',
-      type: 'text',
-      defaultValue: 'Feedback & Compliments',
+      name: "feedbackTitle",
+      type: "text",
+      defaultValue: "Feedback & Compliments",
     },
     {
-      name: 'complaintsTitle',
-      type: 'text',
-      defaultValue: 'Complaints',
+      name: "complaintsTitle",
+      type: "text",
+      defaultValue: "Complaints",
     },
   ],
 });

@@ -2,6 +2,12 @@
 
 import React from "react";
 import styles from "./styles.module.css";
+import { Anton } from 'next/font/google';
+
+const anton = Anton({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 interface FooterProps {
   contactTitle: string;
@@ -44,7 +50,7 @@ const Footer = (props: FooterProps) => {
         </div>
 
         <div className={styles.logoSection}>
-          <h1 className={styles.logoText}>{props.logoText}</h1>
+          <h1 className={`${styles.logoText} ${anton.className}`}>{props.logoText}</h1>
           <h2 className={styles.subText}>{props.subText}</h2>
           <button
             className="button-white"
