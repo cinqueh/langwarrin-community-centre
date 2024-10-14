@@ -22,7 +22,7 @@ export default async function Dashboard() {
                     data={formattedData.objects} 
                     columns={formattedData.columns} 
                     descriptor={'Program Enrollments'}
-                    linkedUrl={'program-enrollment'}/>
+                    linkedUrl={'program-enrolments'}/>
               </TableWrapper>
           </AdminHeader>
         );

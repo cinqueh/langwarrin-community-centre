@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import styles from "./styles.module.css"; // Import the CSS module
+import styles from "./styles.module.css";
+import { PersonDTO, AddressDTO } from "../../backend/dto/person";
+import {
+  GeneralInquiryDTO,
+  FeedbackInquiryDTO,
+  ComplaintInquiryDTO,
+} from "../../backend/dto/inquiry";
 
 interface ContactFormProps {
   title?: string;
@@ -38,6 +44,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
     complaintsSolution: "",
   });
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -59,44 +68,92 @@ const ContactForm: React.FC<ContactFormProps> = ({
         [name]: value,
       });
     }
+    setAlertMessage("")
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitForm = async (url: string, dataToSubmit: any) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      if (response.ok) {
+        setAlertMessage("Form submitted successfully!");
+        setAlertType("success");
+      } else {
+        setAlertMessage(
+          "An error occurred while submitting the form. Please try again."
+        );
+        setAlertType("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setAlertMessage(
+        "An error occurred while submitting the form. Please try again."
+      );
+      setAlertType("error");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Initialize the form data to submit with the common fields
-    let dataToSubmit: any = {
+
+    const person = new PersonDTO({
+      personId: 0,
       firstName: formData.firstName,
-      lastName: formData.lastName,
+      surname: formData.lastName,
       email: formData.email,
-      mobile: formData.mobile,
-      homePhone: formData.homePhone,
-    };
+      homeNumber: formData.homePhone,
+      phoneNumber: formData.mobile,
+      address: formData.address
+        ? new AddressDTO({
+            state: formData.address.state,
+            streetAddress: formData.address.street,
+            apartment: formData.address.apartment,
+            suburb: formData.address.suburb,
+            postcode: formData.address.postcode,
+          })
+        : undefined,
+    });
+
+    let dataToSubmit;
 
     // Handle general enquiry
     if (formData.enquiryType === "general") {
-      dataToSubmit.message = formData.message; // For general enquiry
+      dataToSubmit = new GeneralInquiryDTO({
+        date: new Date(),
+        person,
+        message: formData.message,
+      });
+      await submitForm("/api/enquiry/general", dataToSubmit);
     }
 
-    // Handle feedback
+    // Handle feedback enquiry
     if (formData.enquiryType === "feedback") {
-      // Add address, programName, and feedbackMessage
-      dataToSubmit.address = formData.address;
-      dataToSubmit.programName = formData.feedbackProgramName;
-      dataToSubmit.feedback = formData.feedbackMessage;
+      dataToSubmit = new FeedbackInquiryDTO({
+        date: new Date(),
+        person,
+        programName: formData.feedbackProgramName,
+        feedback: formData.feedbackMessage,
+      });
+      await submitForm("/api/enquiry/feedback", dataToSubmit);
     }
 
-    // Handle complaints
+    // Handle complaints enquiry
     if (formData.enquiryType === "complaints") {
-      // Add address, programName, grievanceReason, and suggestedSolution
-      dataToSubmit.address = formData.address;
-      dataToSubmit.programName = formData.complaintsPersonName;
-      dataToSubmit.grievanceReason = formData.complaintsReason;
-      dataToSubmit.suggestedSolution = formData.complaintsSolution;
+      dataToSubmit = new ComplaintInquiryDTO({
+        date: new Date(),
+        person,
+        programName: formData.complaintsPersonName,
+        grievanceReason: formData.complaintsReason,
+        suggestedSolution: formData.complaintsSolution,
+      });
+      await submitForm("/api/enquiry/complaint", dataToSubmit);
     }
-
-    // Submit form data
-    console.log("Form submitted", dataToSubmit);
-    alert("Form submitted successfully!");
   };
 
   return (
@@ -313,7 +370,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
           </div>
         </>
       )}
-
+      {alertMessage && (
+        <p className={alertType === "success" ? "alertSuccess" : "alertError"}>
+          {alertMessage}
+        </p>
+      )}
       <button
         type="submit"
         className="button-white"

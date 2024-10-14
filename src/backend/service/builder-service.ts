@@ -13,10 +13,12 @@ interface BuilderComponent {
   
 interface BuilderBlock {
     component?: BuilderComponent;
+    children?: BuilderBlock[];
 }
   
-interface BuilderPage {
+export interface BuilderPage {
     data?: {
+        url?: string;
         blocks?: BuilderBlock[];
     };
 }
@@ -24,22 +26,31 @@ interface BuilderPage {
 
 export default class BuilderService {
 
-    private getContentUrl(contentType: string): string {
-        const now = new Date().toISOString();
-        return `${BUILDER_CONTENT_API_URL}/${contentType}?apiKey=${process.env.NEXT_PUBLIC_BUILDER_API_KEY}&time=${now}`
-    }
-
     public async getAllPages(): Promise<BuilderPage[]> {
-        
-        const url = this.getContentUrl("page");
-
-        console.log(url);
-
-        const res = await fetch(url);
-        const data = await res.json();
-
-        return data.results;
+        let allPages: BuilderPage[] = [];
+        let hasMore = true;
+        let offset = 0;
+        const limit = 100; // Set a limit to how many pages are fetched per request
+    
+        while (hasMore) {
+            const url = `${BUILDER_CONTENT_API_URL}/page?apiKey=${process.env.NEXT_PUBLIC_BUILDER_API_KEY}&limit=${limit}&offset=${offset}`;
+            const res = await fetch(url);
+            const data = await res.json();
+    
+            allPages = allPages.concat(data.results);
+    
+            // If the results length is less than the limit, no more pages to fetch
+            if (data.results.length < limit) {
+                hasMore = false;
+            }
+    
+            // Increment the offset for the next batch of pages
+            offset += limit;
+        }
+    
+        return allPages;
     }
+    
 
     public async getAllComponents(componentName: string): Promise<BuilderBlock[]> {
         const componentInstances: BuilderBlock[] = [];
@@ -56,6 +67,39 @@ export default class BuilderService {
         });
       
         return componentInstances;
+    }
+
+    public getFirstComponent(page: BuilderPage, componentName: string): BuilderComponent | undefined {
+        const searchBlocks = (blocks: BuilderBlock[]): BuilderBlock | undefined => {
+            for (const block of blocks) {
+                console.log(block?.component?.name);
+    
+                // If the block matches the component name, return it
+                if (block?.component?.name === componentName) {
+                    return block;
+                }
+    
+                // If the block has children, recursively search the children
+                if (block?.children && block.children.length > 0) {
+                    const foundBlock = searchBlocks(block.children);
+                    if (foundBlock) {
+                        return foundBlock; // Return the matching block found in children
+                    }
+                }
+            }
+            return undefined; // If no matching block is found
+        };
+    
+        // Start the search from the top-level blocks
+        if (page?.data?.blocks) {
+            return searchBlocks(page.data.blocks)?.component;
+        }
+        
+        return undefined; // If no blocks exist
+    }
+
+    public getOptionsFromComponent<T extends BuilderOptions>(component: BuilderComponent): T {
+        return component?.options as T;
     }
 
     public async getAllOptionsMapped<T>(componentName: string, mapper: Mapper<BuilderOptions, T>) {
