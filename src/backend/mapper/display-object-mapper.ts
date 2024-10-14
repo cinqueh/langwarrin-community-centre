@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, RoomBookingDisplayObject} from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, RoomBookingEnquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -259,6 +259,114 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
             {
                 Header: 'Suggested Solution',
                 accessor: 'suggestedSolution'
+            }
+        ];
+    }
+}
+
+export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookingEnquiryDTO, RoomBookingDisplayObject> {
+    protected override mapDisplayObject(roomBooking: RoomBookingEnquiryDTO): RoomBookingDisplayObject {
+        return {
+            id: roomBooking.inquiryId as number, 
+            header: this.formatName(roomBooking?.person),
+            name: this.formatName(roomBooking?.person),
+            email: this.formatField(roomBooking?.person?.email),
+            bookingDate: this.formatDate(new Date(roomBooking?.bookingDate)),
+            bookingStartTime: this.formatField(roomBooking?.bookingStartTime),
+            bookingEndTime: this.formatField(roomBooking?.bookingEndTime),
+            roomName: this.formatField(roomBooking?.roomName),
+            hireType: this.formatField(roomBooking?.hireType),
+            purposeOfHire: this.formatField(roomBooking?.purposeOfHire),
+            isOrganisationBooking: roomBooking.isOrganisationBooking ? 'Yes' : 'No',
+            organisationName: this.formatField(roomBooking?.organisationName),
+            organisationAddress: this.formatField(roomBooking?.organisationAddress),
+            otherCompaniesInvolved: roomBooking.otherCompaniesInvolved ? 'Yes' : 'No',
+            companyDetails: this.formatField(roomBooking?.companyDetails),
+            numberAttending: roomBooking.numberAttending.toString(),
+            howDidYouHear: this.formatField(roomBooking?.howDidYouHear),
+            specialRequirements: this.formatField(roomBooking?.specialRequirements),
+            willLiquorBeConsumed: roomBooking.willLiquorBeConsumed ? 'Yes' : 'No',
+            notes: this.formatField(roomBooking?.notes)
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<RoomBookingDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Booking Date',
+                accessor: 'bookingDate',
+            },
+            {
+                Header: 'Booking Start Time',
+                accessor: 'bookingStartTime',
+            },
+            {
+                Header: 'Booking End Time',
+                accessor: 'bookingEndTime',
+            },
+            {
+                Header: 'Room Name',
+                accessor: 'roomName',
+            },
+            {
+                Header: 'Hire Type',
+                accessor: 'hireType',
+            },
+            {
+                Header: 'Purpose of Hire',
+                accessor: 'purposeOfHire',
+            },
+            {
+                Header: 'Is this booking for organisation?',
+                accessor: 'isOrganisationBooking',
+            },
+            {
+                Header: 'Organisation Name',
+                accessor: 'organisationName',
+            },
+            {
+                Header: 'Organisation Address',
+                accessor: 'organisationAddress',
+            },
+            {
+                Header: 'Other Companies Involved',
+                accessor: 'otherCompaniesInvolved',
+            },
+            {
+                Header: 'Company Details',
+                accessor: 'companyDetails',
+            },
+            {
+                Header: 'Estimated Attendance',
+                accessor: 'numberAttending',
+            },
+            {
+                Header: 'How Did You Hear about this venue?',
+                accessor: 'howDidYouHear',
+            },
+            {
+                Header: 'Special Requirements',
+                accessor: 'specialRequirements',
+            },
+            {
+                Header: 'Will liquor be consumed?',
+                accessor: 'willLiquorBeConsumed',
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
             }
         ];
     }
