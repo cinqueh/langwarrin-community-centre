@@ -53,9 +53,9 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     window.location.href = `/request-a-room/${section}-form`;
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     const personalInfo = {
       personId: 1,
       firstName: personalDetails.firstName,
@@ -125,7 +125,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (agreedToTerms && agreedToBond) {
       onSubmit(e);
