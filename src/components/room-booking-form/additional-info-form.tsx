@@ -84,7 +84,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
             <input
               type="text"
               name="organisationName"
-              value={formData.organisationAddress}
+              value={formData.organisationName}
               onChange={handleInputChange}
             />
           </div>
