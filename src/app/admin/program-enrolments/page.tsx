@@ -3,7 +3,7 @@ import { TableWrapper } from "../../../components/admin/background";
 import AdminHeader from "@/components/admin/admin-header";
 import { ProgramCourseInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
-import ProgramCourseInquiryService from "@/backend/service/program-course-inquiry-service"; 
+import ProgramCourseInquiryService from "@/backend/service/program-course-inquiry-service";
 
 export default async function Dashboard() {
     return authorize(
