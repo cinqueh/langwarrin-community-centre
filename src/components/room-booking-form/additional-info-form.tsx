@@ -11,6 +11,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
   const [formData, setFormData] = useState({
     hirePurpose: "",
     forOrganisation: "",
+    organisationName: "",
     organisationAddress: "",
     estimatedAttendance: "",
     specialRequirements: "",
@@ -40,7 +41,10 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
   };
 
   return (
-    <form className={styles.additionalInfoFormContainer} onSubmit={handleSubmit}>
+    <form
+      className={styles.additionalInfoFormContainer}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.additionalInfoInputGroup}>
         <label>
           Purpose of the hire
@@ -61,7 +65,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
           <span className={styles.additionalInfoRequired}> *</span>
         </label>
         <select
-          name="forOrganisation" 
+          name="forOrganisation"
           value={formData.forOrganisation}
           onChange={handleInputChange}
           required
@@ -74,15 +78,26 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
 
       {/* Conditionally display organisation address if "Yes" is selected */}
       {formData.forOrganisation === "Yes" && (
-        <div className={styles.additionalInfoInputGroup}>
-          <label>If yes, what is your organisation address?</label>
-          <input
-            type="text"
-            name="organisationAddress" 
-            value={formData.organisationAddress}
-            onChange={handleInputChange}
-          />
-        </div>
+        <>
+          <div className={styles.additionalInfoInputGroup}>
+            <label>What is your organisation name?</label>
+            <input
+              type="text"
+              name="organisationName"
+              value={formData.organisationAddress}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={styles.additionalInfoInputGroup}>
+            <label>If yes, what is your organisation address?</label>
+            <input
+              type="text"
+              name="organisationAddress"
+              value={formData.organisationAddress}
+              onChange={handleInputChange}
+            />
+          </div>
+        </>
       )}
 
       <div className={styles.additionalInfoInputGroup}>
@@ -92,7 +107,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
         </label>
         <input
           type="number"
-          name="estimatedAttendance" 
+          name="estimatedAttendance"
           value={formData.estimatedAttendance}
           onChange={handleInputChange}
           required
@@ -103,7 +118,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
         <label>Special Requirements</label>
         <input
           type="text"
-          name="specialRequirements" 
+          name="specialRequirements"
           value={formData.specialRequirements}
           onChange={handleInputChange}
         />
@@ -115,7 +130,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
           <span className={styles.additionalInfoRequired}> *</span>
         </label>
         <select
-          name="willLiquorBeConsumed" 
+          name="willLiquorBeConsumed"
           value={formData.willLiquorBeConsumed}
           onChange={handleInputChange}
           required
@@ -134,7 +149,7 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
         </label>
         <input
           type="text"
-          name="howHearAboutSpace" 
+          name="howHearAboutSpace"
           value={formData.howHearAboutSpace}
           onChange={handleInputChange}
           required
