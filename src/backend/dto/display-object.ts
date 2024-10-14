@@ -52,3 +52,11 @@ export type ComplaintInquiryDisplayObject = InquiryDisplayObject & {
     grievanceReason: string;
     suggestedSolution: string;
 }
+
+// New Program Course Inquiry Display Object
+export type ProgramCourseInquiryDisplayObject = InquiryDisplayObject & {
+    emergencyContactName: string; // Combined emergencyFirstName and emergencySurName
+    emergencyNumber: string;
+    programName: string;
+    howHeardAboutProgram: string;
+}

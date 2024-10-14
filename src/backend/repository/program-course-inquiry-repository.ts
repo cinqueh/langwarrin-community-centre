@@ -43,7 +43,7 @@ export default class ProgramCourseInquiryRepository extends BaseRepository {
                 )
               `
       )
-      .eq("programcourseinquiryid", id);
+      .eq("inquiryid", id);
   }
 
   public async getAll() {
