@@ -24,8 +24,6 @@ export default async function Dashboard() {
             <h2 className={styles.header}>Welcome {session?.user?.name ?? 'Leona'}</h2>
             <p className={styles.loggedInText}>You are logged in as {session?.user?.email ?? '[Account]'}</p>
           </div>
-          {/* Sign out button */}
-          <SignOut />
         </div>
 
         <div className={styles.grid}>
