@@ -1,7 +1,7 @@
 import { RoomBookingEnquiryDTO } from "../../../../backend/dto/inquiry";
 import RoomBookingInquiryService from "@/backend/service/room-booking-inquiry-service";
 
-// Type guard to check if the request body is a valid RoomBookingEnquiryDTO
+// Type guard to check if the request body is a valid RoomBookingEnquiryDTO 
 function isRoomBookingEnquiryDTO(body: any): body is RoomBookingEnquiryDTO {
     return (
         typeof body === 'object' &&
