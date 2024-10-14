@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, ProgramCourseInquiryDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -259,6 +259,70 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
             {
                 Header: 'Suggested Solution',
                 accessor: 'suggestedSolution'
+            }
+        ];
+    }
+}
+
+// ProgramCourseInquiryDisplayObjectMapper for mapping ProgramCourseInquiryDTO to ProgramCourseInquiryDisplayObject
+export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<ProgramCourseInquiryDTO, ProgramCourseInquiryDisplayObject> {
+    protected override mapDisplayObject(inquiry: ProgramCourseInquiryDTO): ProgramCourseInquiryDisplayObject {
+        return {
+            id: inquiry.inquiryId ?? 0,
+            header: this.formatName(inquiry?.person),
+            name: this.formatField(inquiry?.person.firstName) + " " + this.formatField(inquiry?.person.surname),
+            email: this.formatField(inquiry?.person?.email), // From base InquiryDisplayObject
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // From base InquiryDisplayObject
+            date: this.formatDate(inquiry?.date), // From base InquiryDisplayObject
+            emergencyContactName: this.formatField(inquiry?.emergencyFirstName) + " " + this.formatField(inquiry?.emergencySurName),
+            emergencyNumber: this.formatField(inquiry?.emergencyNumber),
+            programName: this.formatField(inquiry?.programName),
+            howHeardAboutProgram: this.formatField(inquiry?.howHeardAboutProgram),
+            notes: this.formatField(inquiry?.notes),
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<ProgramCourseInquiryDisplayObject>[] {
+        return [
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Name',
+                accessor: 'name',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Phone Number',
+                accessor: 'phoneNumber',
+            },
+            {
+                Header: 'Inquiry Date',
+                accessor: 'date',
+            },
+            {
+                Header: 'Emergency Contact Name',
+                accessor: 'emergencyContactName',
+            },
+            {
+                Header: 'Emergency Contact Number',
+                accessor: 'emergencyNumber',
+            },
+            {
+                Header: 'Program Name',
+                accessor: 'programName',
+            },
+            {
+                Header: 'How did you hear about the program?',
+                accessor: 'howHeardAboutProgram',
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
             }
         ];
     }
