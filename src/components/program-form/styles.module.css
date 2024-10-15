@@ -124,3 +124,15 @@
 .formContainer input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+.formContainer select option {
+  background-color: #EEEDE4; 
+  color: #2B2B2B; 
+  padding: 10px;
+  font-size: 20px;
+}
+
+.formContainer select option:hover {
+  background-color: #D6D6C2; 
+  color: #1A1A1A;
+}

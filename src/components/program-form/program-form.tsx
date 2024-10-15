@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import ProgramInformation from "@/backend/dto/program";
-import { PersonDTO } from "@/backend/dto/person";
+import { AddressDTO, PersonDTO } from "@/backend/dto/person";
+import { ProgramCourseInquiryDTO } from "@/backend/dto/inquiry";
 
 interface ProgramEnrollmentFormProps {
   title: string;
   subtitle: string;
   programInfoTitle: string;
-  programOptions?: { option: string }[];
   contactInfoTitle: string;
   addressInfoTitle: string;
   termsConditionsTitle: string;
@@ -17,7 +17,6 @@ interface ProgramEnrollmentFormProps {
   termsCheckboxLabel: string;
   promotionCheckboxLabel: string;
   ageCheckboxLabel: string;
-  linkUrl: string;
 }
 
 const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
@@ -48,6 +47,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
   const [programs, setPrograms] = useState<ProgramInformation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
 
   // Fetch programs from the API and filter bookable programs
   useEffect(() => {
@@ -82,15 +82,73 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!agreedToTerms || !agreedToBond || !agreedToAge) {
+    if (agreedToTerms && agreedToBond && agreedToAge) {
+      onSubmit(e);
+    } else {
       setAlertMessage("Please agree to all the terms and conditions.");
-      return
     }
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const personInfo = {
+      personId: 0,
+      firstName: formData.firstName,
+      surname: formData.lastName,
+      email: formData.email,
+      phoneNumber: formData.mobile,
+      homeNumber: formData.homePhone,
+      occupation: "",
+      address: new AddressDTO({
+        state: formData.state,
+        streetAddress: formData.streetName,
+        apartment: formData.unitNo,
+        suburb: formData.city,
+        postcode: formData.postalCode,
+      }),
+    };
+
+    const programCourseInquiryDTO = new ProgramCourseInquiryDTO({
+      date: new Date(),
+      person: new PersonDTO(personInfo),
+      programName: formData.programName,
+      emergencyFirstName: formData.emergencyFirstName,
+      emergencySurName: formData.emergencyLastName,
+      emergencyNumber: formData.emergencyMobile,
+      howHeardAboutProgram: formData.courseSource,
+    });
+
     setIsLoading(true);
 
-    console.log("Form submitted");
-    window.location.href = props.linkUrl;
+    // Send form data to backend API
+    try {
+      const response = await fetch("/api/enquiry/programcourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(programCourseInquiryDTO),
+      });
+
+      if (response.ok) {
+        setAlertMessage("Form submitted successfully!");
+        setAlertType("success");
+      } else {
+        setAlertMessage(
+          "An error occurred while submitting the form. Please try again."
+        );
+        setAlertType("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setAlertMessage(
+        "An error occurred while submitting the form. Please try again."
+      );
+      setAlertType("error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -319,7 +377,12 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
           <span dangerouslySetInnerHTML={{ __html: props.ageCheckboxLabel }} />
         </label>
       </div>
-      {alertMessage && <p className="alertError">{alertMessage}</p>}
+
+      {alertMessage && (
+        <p className={alertType === "success" ? "alertSuccess" : "alertError"}>
+          {alertMessage}
+        </p>
+      )}
 
       <button
         type="submit"
