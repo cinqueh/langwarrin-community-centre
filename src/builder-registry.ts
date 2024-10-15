@@ -1198,18 +1198,6 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       helperText: "Edit the title for the Program Information section.",
     },
     {
-      name: "programOptions",
-      type: "list",
-      subFields: [
-        {
-          name: "option",
-          type: "string",
-          defaultValue: "Program 1",
-        },
-      ],
-      helperText: "List of program options to display in the dropdown",
-    },
-    {
       name: "contactInfoTitle",
       type: "string",
       defaultValue: "Contact Information",
@@ -1267,12 +1255,6 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       defaultValue:
         "I declare that I am 18 OR have guardian consent if under 18.",
       helperText: "Edit the label for the age declaration checkbox.",
-    },
-    {
-      name: "linkUrl",
-      type: "string",
-      defaultValue: "/",
-      helperText: "Enter the URL for the button link.",
     },
   ],
 });
@@ -1350,7 +1332,10 @@ Builder.register("insertMenu", {
 
 Builder.register("insertMenu", {
   name: "Custom Forms",
-  items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
+  items: [
+    { name: "Membership Form" }, 
+    { name: "Childcare Form" }, 
+    { name: "Program Enrollment Form" },],
 });
 
 Builder.register("insertMenu", {
