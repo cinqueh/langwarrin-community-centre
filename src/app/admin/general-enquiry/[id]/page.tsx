@@ -1,9 +1,8 @@
 import { IndividualWrapper } from "../../../../components/admin/background";
 import AdminHeader from "@/components/admin/admin-header";
-import { ComplaintInquiryObjectMapper, GeneralInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
+import { GeneralInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
-import { DisplayIndividualComponent } from "@/components/admin/display-individual";
-import ComplaintInquiryService from "@/backend/service/complaint-inquiry-service";
+import { DisplayIndividualInquiryComponent } from "@/components/admin/display-individual";
 import GeneralInquiryService from "@/backend/service/general-inquiry-service";
 
 interface ComplaintPageProps {
@@ -27,7 +26,7 @@ export default async function Complaint({ params }: ComplaintPageProps) {
           return (
             <AdminHeader>
               <IndividualWrapper title={formattedData.object.header}>
-                <DisplayIndividualComponent data={formattedData.object} columns={formattedData.columns}/>
+                <DisplayIndividualInquiryComponent data={formattedData.object} columns={formattedData.columns}/>
               </IndividualWrapper>
             </AdminHeader>
           );

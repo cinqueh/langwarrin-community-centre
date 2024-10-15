@@ -13,7 +13,7 @@ export default class GeneralInquiryService extends DatabaseService<GeneralInquir
 
         inquiry.date = new Date();
 
-        this.validateData(inquiry, (data) => Boolean(data.person.phoneNumber));
+        this.validateData(inquiry, (data) => Boolean(data.person?.phoneNumber));
 
         const response = await this.repository.addGeneralInquiry(inquiry);
 

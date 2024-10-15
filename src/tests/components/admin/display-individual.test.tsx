@@ -1,8 +1,12 @@
 // __tests__/DisplayIndividualComponent.test.tsx
 import { render, screen } from '@testing-library/react';
-import { DisplayIndividualComponent } from '../../../components/admin/display-individual';
+import { DisplayIndividualInquiryComponent } from '../../../components/admin/display-individual';
 import '@testing-library/jest-dom';
 import { ColumnAdapter } from '@/backend/dto/display-object';
+
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn(),
+  }));
 
 interface MockData {
   name: string;
@@ -33,7 +37,7 @@ const data = {
 
 describe('DisplayIndividualComponent', () => {
   it('renders correctly and filters out the id column', () => {
-    render(<DisplayIndividualComponent<MockData> data={data} columns={columns} />);
+    render(<DisplayIndividualInquiryComponent<MockDataAll> data={data} columns={columns} />);
     
     // Check that the ID field is not rendered
     expect(screen.queryByText('ID')).not.toBeInTheDocument();

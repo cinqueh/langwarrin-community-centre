@@ -2,7 +2,9 @@ import { Column } from "react-table";
 import { MemberDTO } from "./member";
 import { Member } from "../mapper/member-mapper";
 
-export type ColumnAdapter<T extends object> = Column<T>
+export type ColumnAdapter<T extends object> = Column<T> & {
+    editable?: boolean;
+}
 
 // for displaying a single entity
 export type DisplayData<T extends DisplayObject> = {
