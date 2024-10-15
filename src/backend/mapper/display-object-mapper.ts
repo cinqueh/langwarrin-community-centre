@@ -273,7 +273,7 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
         return {
             id: inquiry.inquiryId ?? 0,
             header: this.formatName(inquiry?.person),
-            name: this.formatField(inquiry?.person.firstName) + " " + this.formatField(inquiry?.person.surname),
+            name: this.formatField(inquiry?.person?.firstName) + " " + this.formatField(inquiry?.person?.surname),
             email: this.formatField(inquiry?.person?.email), // From base InquiryDisplayObject
             phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // From base InquiryDisplayObject
             date: this.formatDate(inquiry?.date), // From base InquiryDisplayObject
@@ -326,6 +326,7 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
             {
                 Header: 'Notes',
                 accessor: 'notes',
+                editable: true,
             }
         ];
     }
