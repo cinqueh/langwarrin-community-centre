@@ -15,7 +15,7 @@ export default class RoomBookingInquiryService extends DatabaseService<RoomBooki
         inquiry.date = new Date();
 
         // Validate the incoming inquiry (you can adjust the validation as needed)
-        this.validateData(inquiry, (data) => Boolean(data.person.phoneNumber) && Boolean(data.roomName));
+        this.validateData(inquiry, (data) => Boolean(data.person?.phoneNumber) && Boolean(data.roomName));
 
         // Call the repository to add the inquiry
         const response = await this.repository.addRoomBookingInquiry(inquiry);
