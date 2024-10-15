@@ -1,5 +1,7 @@
 import ProgramService from "@/backend/service/program-service";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
     try {
         const service = new ProgramService();
