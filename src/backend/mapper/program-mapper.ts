@@ -36,6 +36,11 @@ export default class ProgramMapper implements Mapper<BuilderPage, ProgramInforma
             imageCard = this.builderService.getFirstComponent(page, "Program Image Card (with padding)");
         }
 
+        // verify the page url exists
+        if (!page.data?.url) {
+            return undefined;
+        }
+
         let title;
         let category = "";
         let image = "";
@@ -62,7 +67,7 @@ export default class ProgramMapper implements Mapper<BuilderPage, ProgramInforma
             imageUrl: image,
             category: category,
             bookable: bookable,
+            url: page.data?.url
         });
-
     }
 }

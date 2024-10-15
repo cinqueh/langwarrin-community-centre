@@ -13,6 +13,7 @@ type ProgramInformation = {
   imageUrl: string;
   category: string;
   bookable: boolean;
+  url: string;
 };
 
 type ProgramGridProps = {
@@ -34,7 +35,6 @@ const ProgramGrid: React.FC<ProgramGridProps> = ({ title, category }) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setPrograms(data);
         setLoading(false);
       })
@@ -63,7 +63,7 @@ const ProgramGrid: React.FC<ProgramGridProps> = ({ title, category }) => {
                 title={program.name}
                 imageUrl={program.imageUrl}
                 altText={program.name}
-                linkUrl={`/programs/${program.name}`}
+                linkUrl={program.url}
               />
             ) : (
               <LightGreenProgramCard
@@ -71,7 +71,7 @@ const ProgramGrid: React.FC<ProgramGridProps> = ({ title, category }) => {
                 title={program.name}
                 imageUrl={program.imageUrl}
                 altText={program.name}
-                linkUrl={`/programs/${program.name}`}
+                linkUrl={program.url}
               />
             )
           )
