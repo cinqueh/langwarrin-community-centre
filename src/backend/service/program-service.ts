@@ -16,6 +16,8 @@ export default class ProgramService {
                                 }
                             );
 
+    console.log(programPages.map(p => p.data?.url))
+
     // map each page to the program information
     return programPages
                 .map(page => mapper.mapTo(page))

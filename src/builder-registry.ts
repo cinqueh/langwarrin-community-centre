@@ -12,6 +12,7 @@ import {
 import { GovernmentCard } from "./components/government-card/government-card";
 import {
   GreenTitleCard,
+  ProgramTitleCard,
   TitleCard,
   TitleCardWithBackButton,
 } from "./components/title-card/title-card";
@@ -49,6 +50,7 @@ import { PersonalDetailsForm } from "./components/room-booking-form/personal-inf
 import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
 import { ProgramEnrollmentForm } from "./components/program-form/program-form";
 import { ContactForm } from "./components/contact-us/contact-us-card";
+import ProgramGrid from "./components/programs/programs-panel";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -465,6 +467,35 @@ Builder.registerComponent(TitleCardWithBackButton, {
   ],
 });
 
+Builder.registerComponent(ProgramTitleCard, {
+  name: "Program Title Card",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+            'Exercise, Health & Wellbeing',
+            'Craft, Hobby & Fun',
+            'Community',
+            'Children & Youth'], // Dropdown values
+      defaultValue: 'Further Education / Literacy', // Default value
+      friendlyName: 'Program Category',
+    },
+  ],
+});
+
 const partnershipSectionParameters = [
   {
     name: "title",
@@ -491,6 +522,32 @@ const partnershipSectionParameters = [
     helperText: "Alternative text for the image",
   },
 ];
+
+Builder.registerComponent(ProgramGrid, {
+  name: "Dynamic Program Card Grid",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+        'Exercise, Health & Wellbeing',
+        'Craft, Hobby & Fun',
+        'Community',
+        'Children & Youth'],
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
+});
+
+
+
 // Header
 // Register Header component with the section model
 
@@ -1280,6 +1337,7 @@ Builder.register("insertMenu", {
     { name: "Dark Green Program Card" },
     { name: "Medium Green Program Card" },
     { name: "Light Green Program Card" },
+    { name: "Dynamic Program Card Grid" },
   ],
 });
 Builder.register("insertMenu", {
@@ -1312,5 +1370,6 @@ Builder.register("insertMenu", {
     { name: "Green Title Card" },
     { name: "Title Card" },
     { name: "Title Card With Back Button" },
+    { name: "Program Title Card" }
   ],
 });

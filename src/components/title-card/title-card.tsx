@@ -30,6 +30,11 @@ interface TitleCardWithBackButtonProps {
   backLink: string; 
 }
 
+interface ProgramTitleProps {
+  title: string;
+  backLink: string; 
+}
+
 const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
   return (
     <div className={styles.titleCardWithButtonContainer}>
@@ -47,4 +52,6 @@ const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
   );
 };
 
-export { GreenTitleCard, TitleCardWithBackButton, TitleCard };
+const ProgramTitleCard = TitleCardWithBackButton
+
+export { GreenTitleCard, TitleCardWithBackButton, TitleCard, ProgramTitleCard };
