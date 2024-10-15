@@ -47,4 +47,6 @@ const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
   );
 };
 
-export { GreenTitleCard, TitleCardWithBackButton, TitleCard };
+const ProgramTitleCard = TitleCardWithBackButton
+
+export { GreenTitleCard, TitleCardWithBackButton, TitleCard, ProgramTitleCard };

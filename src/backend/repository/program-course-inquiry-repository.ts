@@ -44,7 +44,7 @@ export default class ProgramCourseInquiryRepository extends FormRepository {
                 )
               `
       )
-      .eq("programcourseinquiryid", id);
+      .eq("inquiryid", id);
   }
 
   public async getAll() {

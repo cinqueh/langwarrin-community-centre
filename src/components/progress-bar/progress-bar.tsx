@@ -20,7 +20,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       "personalDetailsFormData"
     );
     const additionalInfoFormData = localStorage.getItem(
-      "AdditionalInfoFormData"
+      "additionalInfoFormData"
     );
 
     if (roomBookingData && personalDetailsFormData && additionalInfoFormData) {

@@ -146,3 +146,67 @@ export class ComplaintInquiryDTO extends InquiryDTO {
     this.suggestedSolution = data.suggestedSolution;
   }
 }
+
+// Room Booking Enquiry
+export class RoomBookingEnquiryDTO extends InquiryDTO {
+  roomName: string;
+  hireType: string;
+  bookingDate: string;
+  bookingStartTime: string;  // New field for booking start time
+  bookingEndTime: string;    // New field for booking end time
+  purposeOfHire: string;
+  isOrganisationBooking: boolean;
+  organisationName?: string;
+  organisationAddress?: string;
+  otherCompaniesInvolved?: boolean;
+  companyDetails?: string;
+  numberAttending: number;
+  howDidYouHear: string;
+  specialRequirements?: string;
+  willLiquorBeConsumed: boolean; 
+
+  constructor(data: {
+    roomName: string;
+    hireType: string;
+    bookingDate: string;
+    bookingStartTime: string;  // New field
+    bookingEndTime: string;    // New field
+    purposeOfHire: string;
+    isOrganisationBooking: boolean;
+    organisationName?: string;
+    organisationAddress?: string;
+    otherCompaniesInvolved?: boolean;
+    companyDetails?: string;
+    numberAttending: number;
+    howDidYouHear: string;
+    specialRequirements?: string;
+    willLiquorBeConsumed: boolean;
+    person: PersonDTO;
+    inquiryId?: number;
+    inquiryDate: Date;
+    notes?: string;
+  }) {
+    super({
+      date: data.inquiryDate,
+      person: data.person,
+      inquiryId: data.inquiryId,
+      notes: data.notes,
+    });
+
+    this.roomName = data.roomName;
+    this.hireType = data.hireType;
+    this.bookingDate = data.bookingDate;
+    this.bookingStartTime = data.bookingStartTime;  // Assigning new field
+    this.bookingEndTime = data.bookingEndTime;      // Assigning new field
+    this.purposeOfHire = data.purposeOfHire;
+    this.isOrganisationBooking = data.isOrganisationBooking;
+    this.organisationName = data.organisationName;
+    this.organisationAddress = data.organisationAddress;
+    this.otherCompaniesInvolved = data.otherCompaniesInvolved;
+    this.companyDetails = data.companyDetails;
+    this.numberAttending = data.numberAttending;
+    this.howDidYouHear = data.howDidYouHear;
+    this.specialRequirements = data.specialRequirements;
+    this.willLiquorBeConsumed = data.willLiquorBeConsumed;
+  }
+}
