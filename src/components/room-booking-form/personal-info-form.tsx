@@ -49,28 +49,15 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
     });
   };
 
-  const handleSubmit = () => {
-    if (
-      formData.firstName &&
-      formData.familyName &&
-      formData.email &&
-      formData.mobile &&
-      formData.streetName &&
-      formData.city &&
-      formData.postalCode &&
-      formData.state
-    ) {
-      localStorage.setItem("personalDetailsFormData", JSON.stringify(formData));
-      //   alert("Personal details saved to browser storage.");
-      window.location.href = props.linkUrl;
-    } else {
-      console.log(formData.state);
-      alert("Please fill out all required fields.");
-    }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    localStorage.setItem("personalDetailsFormData", JSON.stringify(formData));
+    window.location.href = props.linkUrl;
   };
 
   return (
-    <div className={styles.personalInfoFormContainer}>
+    <form className={styles.personalInfoFormContainer} onSubmit={handleSubmit}>
       {/* Contact Info Section */}
       <h4>{props.contactInfoTitle}</h4>
       <div className={styles.inputGroup}>
@@ -99,6 +86,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
           placeholder={props.emailPlaceholder}
           value={formData.email}
           onChange={handleInputChange}
+          required
         />
         <div className={styles.mobileInputWrapper}>
           <span className={styles.mobilePrefix}>+61 |</span>
@@ -161,6 +149,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
           name="state"
           value={formData.state}
           onChange={handleInputChange}
+          required
         >
           <option value="">--</option>
           <option value="VIC">VIC</option>
@@ -174,13 +163,13 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
       </div>
 
       <button
+        type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
-        onClick={handleSubmit}
       >
         Save
       </button>
-    </div>
+    </form>
   );
 };
 

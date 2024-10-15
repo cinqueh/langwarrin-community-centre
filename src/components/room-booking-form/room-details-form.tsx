@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useSearchParams } from "next/navigation";
 
@@ -32,7 +32,8 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
   const searchParams = useSearchParams();
   const [total, setTotal] = useState(0);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-  const [showError, setShowError] = useState(false);
+  const [showDateError, setShowDateError] = useState("");
+  const [showTimeError, setShowTimeError] = useState("");
   const [showInfo, setShowInfo] = useState(false);
 
   // Load data from local storage when the page loads
@@ -132,15 +133,28 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
       }
     }
 
+    // Check if selected date is before today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const selectedDate = new Date(formData.date);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      setShowDateError("Selected date cannot be in the past");
+      return;
+    } else {
+      setShowDateError("");
+    }
+
     // Check if end time is later than start time
     const start = new Date(`1970-01-01T${formData.startTime}:00`);
     const end = new Date(`1970-01-01T${formData.endTime}:00`);
 
     if (end <= start) {
-      setShowError(true);
+      setShowTimeError("End time must be later than start time");
     } else {
-      setShowError(false);
-
+      setShowTimeError("");
       // Calculate the total price only when all fields are filled
       const totalPrice = calculateTotal();
       setTotal(totalPrice);
@@ -154,6 +168,7 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     formData.hireType,
     formData.startTime,
     formData.endTime,
+    formData.date, // Make sure the date is included in the dependencies
     selectedRoom,
   ]);
 
@@ -163,20 +178,19 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     formData.date &&
     formData.startTime &&
     formData.endTime &&
-    !showError;
+    showDateError === "" &&
+    showTimeError === "";
 
   // handle next button click
-  const handleNextClick = () => {
-    if (isFormComplete) {
-      localStorage.setItem("roomBookingData", JSON.stringify(formData));
-      window.location.href = props.linkUrl;
-    } else {
-      alert("Please fill out all required fields.");
-    }
+  const handleNextClick = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormComplete) return;
+    localStorage.setItem("roomBookingData", JSON.stringify(formData));
+    window.location.href = props.linkUrl;
   };
 
   return (
-    <div className={styles.bookingFormContainer}>
+    <form className={styles.bookingFormContainer} onSubmit={handleNextClick}>
       {/* Room and Hire Type Row */}
       <div className={styles.inputGroup}>
         <label>{props.roomLabel}</label>
@@ -259,11 +273,8 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
       </div>
 
       {/* Error Message */}
-      {showError && (
-        <p className={styles.errorMessage}>
-          Make sure the end time is later than the start time.
-        </p>
-      )}
+      {showDateError && <p className="alertError">{showDateError}</p>}
+      {showTimeError && <p className="alertError">{showTimeError}</p>}
 
       {/* Display Total (Only show if form is complete and no errors) */}
       {isFormComplete && (
@@ -271,13 +282,14 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
       )}
 
       <button
+        type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
-        onClick={handleNextClick}
+        disabled={!isFormComplete}
       >
         Save
       </button>
-    </div>
+    </form>
   );
 };
 

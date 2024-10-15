@@ -1015,44 +1015,6 @@ Builder.registerComponent(AdditionalInfoForm, {
   name: "Additional Info Form",
   inputs: [
     {
-      name: "fields",
-      type: "list",
-      defaultValue: [
-        { question: "What is your name?", inputType: "text", required: true },
-        { question: "What is your age?", inputType: "text", required: true },
-      ],
-      subFields: [
-        {
-          name: "question",
-          type: "string",
-          helperText: "The question to display.",
-        },
-        {
-          name: "inputType",
-          type: "enum",
-          enum: ["text", "select"],
-          helperText: "The input type for the answer.",
-        },
-        {
-          name: "options",
-          type: "list",
-          subFields: [
-            {
-              name: "option",
-              type: "string",
-              helperText: "Enter the options for select input.",
-            },
-          ],
-          showIf: (options: any) => options.get("inputType") === "select",
-        },
-        {
-          name: "required",
-          type: "boolean",
-          helperText: "Is this field required?",
-        },
-      ],
-    },
-    {
       name: "linkUrl",
       type: "string",
       defaultValue: "/",

@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { PersonDTO, AddressDTO } from "@/backend/dto/person";
+import { RoomBookingEnquiryDTO } from "@/backend/dto/inquiry";
 
 interface ConfirmationFormProps {
   termsText: string;
@@ -18,13 +20,16 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [agreedToBond, setAgreedToBond] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
 
+  // load data
   useEffect(() => {
     const savedRoomDetails = localStorage.getItem("roomBookingData");
     const savedPersonalDetails = localStorage.getItem(
       "personalDetailsFormData"
     );
-    const savedAdditionalInfo = localStorage.getItem("AdditionalInfoFormData");
+    const savedAdditionalInfo = localStorage.getItem("additionalInfoFormData");
 
     if (savedRoomDetails) {
       setRoomDetails(JSON.parse(savedRoomDetails));
@@ -48,23 +53,89 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
     window.location.href = `/request-a-room/${section}-form`;
   };
 
-  const onSubmit = () => {
-    // add functionality to submit form data
-    console.log("Form Submitted");
-    localStorage.clear(); // clear form data from local storage
-    window.location.href = "/request-a-room/success";
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const personalInfo = {
+      personId: 1,
+      firstName: personalDetails.firstName,
+      surname: personalDetails.familyName,
+      email: personalDetails.email,
+      phoneNumber: personalDetails.mobile,
+      homeNumber: "",
+      occupation: "",
+      address: new AddressDTO({
+        state: personalDetails.state,
+        streetAddress: personalDetails.streetName,
+        apartment: personalDetails.unitNo,
+        suburb: personalDetails.city,
+        postcode: personalDetails.postalCode,
+      }),
+    };
+
+    const roomBookingData = {
+      roomName: roomDetails.room,
+      hireType: roomDetails.hireType,
+      bookingDate: roomDetails.date,
+      bookingStartTime: roomDetails.startTime,
+      bookingEndTime: roomDetails.endTime,
+      purposeOfHire: additionalInfo.hirePurpose,
+      isOrganisationBooking: additionalInfo.forOrganisation === "Yes" ? true : false,
+      organisationName: additionalInfo.organisationName ? additionalInfo.organisationName : "",
+      organisationAddress: additionalInfo.organisationAddress ? additionalInfo.organisationAddress : "",
+      otherCompaniesInvolved: false,
+      companyDetails: "",
+      numberAttending: Number(additionalInfo.estimatedAttendance),
+      howDidYouHear: additionalInfo.howHearAboutSpace,
+      specialRequirements: additionalInfo.specialRequirements,
+      willLiquorBeConsumed: additionalInfo.willLiquorBeConsumed === "Yes" ? true : false,
+      inquiryDate: new Date(),
+      person: new PersonDTO(personalInfo), 
+    };
+
+    // Instantiate the RoomBookingEnquiryDTO with the data
+    const roomBookingEnquiry = new RoomBookingEnquiryDTO(roomBookingData);
+
+    setIsLoading(true); 
+
+    try {
+      const response = await fetch("/api/enquiry/room-hire", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(roomBookingEnquiry), 
+      });
+  
+      if (response.ok) {
+        console.log("Room booking submitted successfully!");
+        localStorage.clear(); // Clear local storage on success
+        window.location.href = "/request-a-room/success"; // Redirect on success
+      } else {
+        const errorData = await response.json();
+        console.log(roomBookingData);
+        console.error("Failed to submit room booking:", errorData);
+        setAlertMessage("Failed to submit room booking. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting room booking:", error);
+      setAlertMessage("An error occurred while submitting the booking.");
+    } finally {
+      setIsLoading(false); // Always stop the loading state, whether success or failure
+    }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (agreedToTerms && agreedToBond) {
-      onSubmit();
+      onSubmit(e);
     } else {
-      alert("Please agree to the terms and bond agreement.");
+      setAlertMessage("Please agree to the terms and bond agreement");
     }
   };
 
   return (
-    <div className={styles.confirmationFormContainer}>
+    <form className={styles.confirmationFormContainer} onSubmit={handleSubmit}>
       {/* Room Details Section */}
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
@@ -72,20 +143,17 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
           <button
             className={styles.editButton}
             onClick={() => handleEditClick("room-details")}
+            type="button" // Prevent the button from submitting the form
           >
             Edit
           </button>
         </div>
         <p>
-          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-            Room Name
-          </span>
+          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>Room Name</span>
           : <span style={{ color: "#EEEDE4" }}>{roomDetails.room}</span>
         </p>
         <p>
-          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-            Booking Type
-          </span>
+          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>Booking Type</span>
           : <span style={{ color: "#EEEDE4" }}>{roomDetails.hireType}</span>
         </p>
         <p>
@@ -94,9 +162,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
         </p>
         <p>
           <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>Time</span>:{" "}
-          <span style={{ color: "#EEEDE4" }}>
-            {roomDetails.startTime} to {roomDetails.endTime}
-          </span>
+          <span style={{ color: "#EEEDE4" }}>{roomDetails.startTime} to {roomDetails.endTime}</span>
         </p>
       </div>
 
@@ -109,14 +175,13 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
           <button
             className={styles.editButton}
             onClick={() => handleEditClick("personal-details")}
+            type="button"
           >
             Edit
           </button>
         </div>
         <p>
-          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>
-            Full Name
-          </span>
+          <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>Full Name</span>
           : <span style={{ color: "#EEEDE4" }}>{fullName}</span>
         </p>
         <p>
@@ -142,14 +207,26 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
           <button
             className={styles.editButton}
             onClick={() => handleEditClick("additional-info")}
+            type="button"
           >
             Edit
           </button>
         </div>
-        {Object.keys(additionalInfo).map((key) => (
+
+        {/* Hard-coded questions with corresponding keys */}
+        {[
+          { label: "Purpose of the hire", key: "hirePurpose" },
+          { label: "Are you booking for an organisation?", key: "forOrganisation" },
+          { label: "Organisation Name", key: "organisationName" },
+          { label: "Organisation Address", key: "organisationAddress" },
+          { label: "Number Attending", key: "estimatedAttendance" },
+          { label: "Special Requirements", key: "specialRequirements" },
+          { label: "Will liquor be consumed at this function?", key: "willLiquorBeConsumed" },
+          { label: "How did you hear about the space?", key: "howHearAboutSpace" },
+        ].map(({ label, key }) => (
           <p key={key}>
-            <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>{key}</span>:{" "}
-            <span style={{ color: "#EEEDE4" }}>{additionalInfo[key]}</span>
+            <span style={{ color: "#FFFFFF", fontWeight: "bold" }}>{label}</span>
+            : <span style={{ color: "#EEEDE4" }}>{additionalInfo[key]}</span>
           </p>
         ))}
       </div>
@@ -179,15 +256,18 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
         </label>
       </div>
 
+      {alertMessage && <p className="alertError">{alertMessage}</p>}
+
       <button
+        type="submit"
         className="button-white"
         style={{ display: "block", margin: "20px auto" }}
-        onClick={handleSubmit}
+        disabled={isLoading} 
       >
-        Confirm
+        {isLoading ? "Submitting..." : "Confirm"}
       </button>
-    </div>
+    </form>
   );
-};
+}
 
 export { ConfirmationForm };
