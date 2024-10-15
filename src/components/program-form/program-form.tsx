@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import ProgramInformation from "@/backend/dto/program";
+import { PersonDTO } from "@/backend/dto/person";
 
 interface ProgramEnrollmentFormProps {
   title: string;
@@ -43,6 +45,31 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [agreedToBond, setAgreedToBond] = useState(false);
   const [agreedToAge, setAgreedToAge] = useState(false);
+  const [programs, setPrograms] = useState<ProgramInformation[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  // Fetch programs from the API and filter bookable programs
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const response = await fetch("/api/program"); // Adjust the endpoint if needed
+        const data = await response.json();
+
+        // Filter the bookable programs
+        const bookablePrograms = data.filter(
+          (program: ProgramInformation) => program.bookable
+        );
+
+        // Update state with the bookable programs
+        setPrograms(bookablePrograms);
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+      }
+    };
+
+    fetchPrograms();
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -53,43 +80,39 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!agreedToTerms || !agreedToBond || !agreedToAge) {
-      alert(
-        "Please agree to the terms and conditions. Please confirm your age and agree to the bond agreement."
-      );
+      setAlertMessage("Please agree to all the terms and conditions.");
+      return
     }
+    setIsLoading(true);
 
-    const allFieldsFilled = Object.entries(formData)
-      .filter(([key]) => key !== "unitNo" && key !== "homePhone") // Exclude unitNo and homephone from the check
-      .every(([_, value]) => value);
-
-    if (allFieldsFilled) {
-      console.log("Form submitted");
-      window.location.href = props.linkUrl;
-    } else {
-      alert("Please fill out all required fields.");
-    }
+    console.log("Form submitted");
+    window.location.href = props.linkUrl;
   };
 
   return (
-    <div className={styles.formContainer}>
+    <form className={styles.formContainer} onSubmit={handleSubmit}>
       {/* Title and Subtitle */}
       <h1 className={styles.title}>{props.title}</h1>
       <h2 className={styles.subtitle}>{props.subtitle}</h2>
 
       {/* Program Information Section */}
       <h4 className={styles.sectionTitle}>{props.programInfoTitle}</h4>
-      <select name="programName" onChange={handleInputChange}>
+      <select
+        name="programName"
+        value={formData.programName}
+        onChange={handleInputChange}
+        required
+      >
         <option value="">Select a Program</option>
-        {props.programOptions &&
-          props.programOptions.map(
-            (optionObj: { option: string }, index: number) => (
-              <option key={index} value={optionObj.option}>
-                {optionObj.option}
-              </option>
-            )
-          )}
+        {programs.map((program, index) => (
+          <option key={index} value={program.name}>
+            {program.name}
+          </option>
+        ))}
       </select>
       <input
         type="text"
@@ -102,7 +125,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
       {/* Contact Information Section */}
       <h4 className={styles.sectionTitle}>{props.contactInfoTitle}</h4>
       <div className={styles.nameInputGroup}>
-        <select name="title" onChange={handleInputChange}>
+        <select name="title" onChange={handleInputChange} required>
           <option value="">Title</option>
           <option value="Miss">Miss</option>
           <option value="Mr">Mr</option>
@@ -158,7 +181,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
           required
         />
         <div>
-          <select name="gender" onChange={handleInputChange}>
+          <select name="gender" onChange={handleInputChange} required>
             <option value="">Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -238,7 +261,7 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
           required
         />
       </div>
-      <select name="state" onChange={handleInputChange}>
+      <select name="state" onChange={handleInputChange} required>
         <option value="">State</option>
         <option value="VIC">VIC</option>
         <option value="NSW">NSW</option>
@@ -296,15 +319,17 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
           <span dangerouslySetInnerHTML={{ __html: props.ageCheckboxLabel }} />
         </label>
       </div>
+      {alertMessage && <p className="alertError">{alertMessage}</p>}
 
       <button
+        type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
-        onClick={handleSubmit}
+        disabled={isLoading}
       >
-        Submit
+        {isLoading ? "Submitting..." : "Submit"}
       </button>
-    </div>
+    </form>
   );
 };
 
