@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.0.0...v1.1.0) (2024-10-22)
+
+
+### Features
+
+* Fixed up styling, APIs linked between forms and backend ([#76](https://github.com/cinqueh/langwarrin-community-centre/issues/76)) ([4b453bf](https://github.com/cinqueh/langwarrin-community-centre/commit/4b453bfcc0583b675ec9ee97ace76618f4253198))
+
 # 1.0.0 (2024-10-22)
 
 
