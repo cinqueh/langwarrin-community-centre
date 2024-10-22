@@ -1,7 +1,8 @@
 import { MemberDTO } from "../dto/member";
+import FormRepository from "./base-repository";
 import BaseRepository from "./base-repository";
 
-export default class MemberRepository extends BaseRepository {
+export default class MemberRepository extends FormRepository {
 
     public async addMember(member: MemberDTO) {
 
