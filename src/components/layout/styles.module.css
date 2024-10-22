@@ -178,6 +178,7 @@
   font-weight: 100;
 }
 
+/* Responsive Footer Styles */
 @media (max-width: 768px) {
   .footerContainer {
     flex-direction: column;
