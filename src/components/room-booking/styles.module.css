@@ -1,22 +1,29 @@
 .container {
   display: flex;
   background-color: #38603A; 
-  padding: 20px;
   color: #ffffff;
   align-items: center;
+  margin: 0 -40px;
+  padding: 50px 40px;
 }
 
 .containerRight {
   display: flex;
   background-color: #EEEDE4; 
-  padding: 20px;
   color: #004223; 
   align-items: center;
+  margin: 0 -40px;
+  padding: 50px 40px;
 }
 
-.imageContainer {
+.imageContainerLeft {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 40px;
+}
+
+.imageContainerRight {
+  flex: 1;
+  margin-left: 20px;
 }
 
 .image {
@@ -24,17 +31,26 @@
   height: auto;
 }
 
+
 .header {
-  font-size: 26px;
-  margin-bottom: 10px;
-  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .capacity {
   font-size: 20px;
-  color: #9f9f9f; 
-  margin-left: 10px;
-  font-weight: bolder;
+  white-space: nowrap; 
+  margin-left: 10px; 
+}
+
+@media (max-width: 600px) { 
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .content {
@@ -46,28 +62,4 @@
   color: #9f9f9f; 
   font-weight: 500;
   font-size: 18px;
-}
-
-.buttonLight {
-  background-color: #EEEDE4;
-  color: #004223;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 20px;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.buttonDark {
-  background-color: #004223;
-  color: #EEEDE4;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 20px;
 }

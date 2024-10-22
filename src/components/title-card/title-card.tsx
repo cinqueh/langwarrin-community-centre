@@ -27,25 +27,26 @@ const TitleCard = (props: TitleCardProps) => {
 
 interface TitleCardWithBackButtonProps {
   title: string;
-  backLink?: string; 
+  backLink: string; 
 }
 
 const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
-  const { title, backLink = "/" } = props;
   return (
     <div className={styles.titleCardWithButtonContainer}>
       <div className={styles.leftColumn}>
-        <Link href={backLink}>
-          <button className={styles.backButton}>
-            <span className={styles.backIcon}>&lt;</span> Back
-          </button>
-        </Link>
+          <a href={props.backLink}>
+            <button className={styles.backButton}>
+              <span className={styles.backIcon}>&lt;</span> Back
+            </button>
+          </a>
       </div>
       <div className={styles.rightColumn}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={styles.title}>{props.title}</h2>
       </div>
     </div>
   );
 };
-  
-export { GreenTitleCard, TitleCardWithBackButton, TitleCard };
+
+const ProgramTitleCard = TitleCardWithBackButton
+
+export { GreenTitleCard, TitleCardWithBackButton, TitleCard, ProgramTitleCard };

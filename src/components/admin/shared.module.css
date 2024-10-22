@@ -23,6 +23,68 @@
     color: #2B2B2B;
 }
 
+.background {
+    background-color: #eeeff3;
+    padding: 30px;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Prompt', sans-serif;
+}
+
+.individualWrapper {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+  
+.individualHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #004223;
+}
+
+.individualHeader h1 {
+    margin-left: 0.5rem;
+    font-size: 1.8rem;
+    padding-bottom: 0px;
+    font-weight: 500;
+    color: #2B2B2B;
+}
+
+.individualContent {
+    padding: 2px 20px 20px 20px;
+}
+
+.backButton {
+    color: #004223;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.backButton:hover {
+    opacity: 0.6;
+}
+  
+.backButton:focus {
+    outline: none;
+}
+
+.arrow {
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+}
+
+
+
 .header {
     background-color: #004223;
     padding: 20px;
@@ -38,42 +100,74 @@
 .navItem {
     color: #F7F7F7;
     text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
     font-family: prompt;
+    padding-bottom: 3px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.navItem:hover {
+    opacity: 0.7;
+}
+
+.active {
+    color: #F7F7F7;
+    font-weight: 900;
+    border-bottom: 1px solid #F7F7F7;
 }
 
 .adminPortal {
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-transform: uppercase;
     color: #F7F7F7;
     text-align: center;
     font-family: Impact, sans-serif;
     line-height: 1.2;
+    cursor: pointer;
 }
 
 .centerName {
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: capitalize;
     color: #F7F7F7;
     text-align: center;
     font-family: prompt;
 }
 
-.active {
-    background-color: #EEEDE4;
-    color: #004223;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: 900;
-}
-
 .signOut {
     background-color: #004223;
-    border: 1px solid #ffffff;
+    border: 1px solid #F7F7F7;
     border-radius: 12px;
-    color: #ffffff;
+    color: #F7F7F7;
     font-family: prompt, sans-serif;
     padding: 8px 12px;
+    margin-bottom: 3px;
+}
+
+.signOut:hover, .signIn:hover {
+    opacity: 0.7;
+}
+
+.signIn {
+    color: #004223;
+    border: 1px solid #004223;
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signIn span {
+    font-size: 20px;
+}
+
+.google {
+    width: 40px;
+    height: 40px;
 }

@@ -2,6 +2,12 @@
 
 import React from "react";
 import styles from "./styles.module.css";
+import { Anton } from 'next/font/google';
+
+const anton = Anton({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 interface MainBannerProps {
   title: string;
@@ -20,7 +26,7 @@ const MainBanner = (props: MainBannerProps) => {
     <section className={styles.mainBanner}>
       <div className={styles.bannerContent}>
         <div className={styles.bannerTitleWrapper}>
-          <h1 className={styles.bannerTitle}>{props.title}</h1>
+          <h1 className={`${styles.bannerTitle} ${anton.className}`}>{props.title}</h1>
           <div className={styles.bannerBackground}>
             <h2 className={styles.bannerTitle2}>{props.subtitle}</h2>
             <p className={styles.bannerSubtitle}>{props.subText}</p>

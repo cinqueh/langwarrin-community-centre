@@ -1,63 +1,129 @@
-.contactForm {
+.formContainer {
   background-color: #004223;
-  padding: 30px;
-  max-width: 650px;
-  color: #EFEEE5;
+  padding: 20px 40px;
+  color: #fff;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .title {
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 37px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .subtitle {
-  margin-bottom: 30px;
+  font-weight: 400;
   font-size: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-weight: 500;
+  font-size: 30px;
+  text-align: left;
 }
 
 .inputGroup {
-    display: flex;
-    flex-direction: column; 
-    margin-bottom: 18px;
-  }
-  
-  .inputGroup input {
-    width: 100%; 
-    padding: 14px;
-    border: none;
-    color: black;
-  }
-  
-  .mobileInputGroup {
-    display: flex;
-    align-items: center;
-    width: 100%; 
-  }
-  
-  .mobilePrefix {
-    padding: 10px;
-    background-color: #c6c6c6;
-  }
-  
-  .mobileInputGroup input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    width: calc(100% - 60px); 
-  }
-
-.subjectSelect {
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 15px;
-  color: black;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.messageTextarea {
+.fullLineInput {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.formContainer input,
+.formContainer select,
+.formContainer textarea {
+  display: block;
   width: 100%;
+  margin-bottom: 10px;
   padding: 10px;
-  margin-bottom: 15px;
-  height: 150px;
-  color: black;
+  font-size: 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #efeee5;
+  color: #efeee5;
+}
+
+.formContainer input:focus,
+.formContainer select:focus,
+.formContainer textarea:focus {
+  outline: none;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.mobileInputWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.mobilePrefix {
+  font-size: 24px;
+  color: #fff;
+  line-height: 1;
+  margin-right: 10px;
+}
+
+.mobileInputWrapper input[type="tel"] {
+  width: calc(100% - 70px);
+  padding-left: 10px;
+}
+
+.addressInputGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.formContainer input::placeholder, 
+.formContainer textarea::placeholder, 
+.formContainer select::placeholder {
+  color: #EFEEE5; 
+  opacity: 0.8; 
+  font-weight: 100;
+  font-size: 18px;
+}
+
+.formContainer label {
+  color: #EFEEE5; 
+  opacity: 0.8; 
+  font-weight: 100;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.formContainer select:-webkit-autofill,
+.formContainer input:-webkit-autofill, 
+.formContainer textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #004223 inset;
+  -webkit-text-fill-color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.formContainer select:-webkit-autofill:focus,
+.formContainer input:-webkit-autofill:focus, 
+.formContainer textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #004223 inset;
+  -webkit-text-fill-color: #f5f5f5;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.formContainer select option {
+  background-color: #EEEDE4; 
+  color: #2B2B2B; 
+  padding: 10px;
+  font-size: 20px;
+}
+
+.formContainer select option:hover {
+  background-color: #D6D6C2; 
+  color: #1A1A1A;
 }

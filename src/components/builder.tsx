@@ -5,7 +5,12 @@ import { BuilderContent, builder } from "@builder.io/sdk";
 import DefaultErrorPage from "next/error";
 import "../builder-registry";
 import "../styles/global.css";
-import Header from "./layout/header";
+import { Prompt } from 'next/font/google';
+
+const prompt = Prompt({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+});
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>;
 
@@ -22,15 +27,8 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   if (content || isPreviewing) {
     return (
       <>
-        {/* <BuilderComponent model="header"/> */}
-        <Header logoUrl="/images/templogo.png" logoAlt="Langwarrin CC Logo" navItems={[
-          {label: "Programs", link: "/programs"},
-          {label: "Children", link: "/children"},
-          {label: "Room Hire", link: "/room-bookings"},
-          {label: "Forms", link: "/"},
-          {label: "About", link: "/about-us"},
-        ]} membershipText="Become a Member!"></Header>
-        <div className="pageContainer">
+        <BuilderComponent model="header"/>
+        <div className={`pageContainer ${prompt.className}`}>
           <BuilderComponent content={content} model={model} />
         </div>
         <BuilderComponent model="footer"/>

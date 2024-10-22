@@ -4,7 +4,7 @@ import { NotImplementedError } from '../util/errors';
 const supabaseUrl = process.env.SUPABASE_URL as string;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY as string;
 
-export default abstract class BaseRepository {
+export abstract class BaseRepository {
     // Private static variable to hold the single instance of SupabaseClient
     private static supabase: SupabaseClient;
 
@@ -15,7 +15,9 @@ export default abstract class BaseRepository {
         }
         return BaseRepository.supabase;
     }
+}
 
+export default abstract class FormRepository extends BaseRepository {
     public async get(id: number): Promise<PostgrestSingleResponse<any[]>> {
         throw new NotImplementedError('Missing get implementation');
     }

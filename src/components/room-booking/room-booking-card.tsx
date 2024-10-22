@@ -18,11 +18,15 @@ interface RoomBookingCardProps {
 
 const RoomBookingCardLeft: React.FC<RoomBookingCardProps> = (props) => {
   const handleButtonClick = () => {
-    window.location.href = props.linkUrl;
+    const roomName = props.roomName;
+    window.location.href = `${props.linkUrl}?room=${encodeURIComponent(
+      roomName
+    )}`;
   };
+
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainerLeft}>
         <img
           src={props.imageUrl}
           alt={props.altText}
@@ -57,7 +61,10 @@ const RoomBookingCardLeft: React.FC<RoomBookingCardProps> = (props) => {
 
 const RoomBookingCardRight: React.FC<RoomBookingCardProps> = (props) => {
   const handleButtonClick = () => {
-    window.location.href = props.linkUrl;
+    const roomName = props.roomName;
+    window.location.href = `${props.linkUrl}?room=${encodeURIComponent(
+      roomName
+    )}`;
   };
   return (
     <div className={styles.containerRight}>
@@ -83,7 +90,7 @@ const RoomBookingCardRight: React.FC<RoomBookingCardProps> = (props) => {
           {props.buttonText}
         </button>
       </div>
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainerRight}>
         <img
           src={props.imageUrl}
           alt={props.altText}

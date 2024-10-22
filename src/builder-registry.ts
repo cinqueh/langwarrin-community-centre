@@ -1,6 +1,5 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import ContactUs from "./components/contact-us/contact-us-card";
 import { FacebookEmbed } from "./components/facebook-card/facebook-card";
 import Footer from "./components/layout/footer";
 import {
@@ -13,6 +12,7 @@ import {
 import { GovernmentCard } from "./components/government-card/government-card";
 import {
   GreenTitleCard,
+  ProgramTitleCard,
   TitleCard,
   TitleCardWithBackButton,
 } from "./components/title-card/title-card";
@@ -43,6 +43,14 @@ import {
 } from "./components/news-section/news-scetion";
 import { MembershipForm } from "./components/membership-form/membership-form";
 import { ChildcareContactForm } from "./components/childcare-form/childcare-form";
+import { ProgressBar } from "./components/progress-bar/progress-bar";
+import { RoomDetailsFormForm } from "./components/room-booking-form/room-details-form";
+import { AdditionalInfoForm } from "./components/room-booking-form/additional-info-form";
+import { PersonalDetailsForm } from "./components/room-booking-form/personal-info-form";
+import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
+import { ProgramEnrollmentForm } from "./components/program-form/program-form";
+import { ContactForm } from "./components/contact-us/contact-us-card";
+import ProgramGrid from "./components/programs/programs-panel";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -234,6 +242,11 @@ const programCardParameters = [
     type: "string",
     defaultValue: "Title",
   },
+  {
+    name: "linkUrl",
+    type: "string",
+    defaultValue: "#",
+  },
 ];
 
 const featureCardParameters = [
@@ -321,6 +334,12 @@ const titleCardParameters = [
     type: "string",
     defaultValue: "Title",
   },
+  {
+    name: "titleAlignment",
+    type: "enum",
+    enum: ["left", "center"],
+    defaultValue: "left",
+  },
 ];
 // Room booking card parameters
 const roomBookingParameters = [
@@ -368,7 +387,7 @@ const roomBookingParameters = [
   {
     name: "linkUrl",
     type: "string",
-    defaultValue: "#",
+    defaultValue: "/request-a-room/room-details-form",
   },
 ];
 // Homepage card parameters
@@ -387,76 +406,7 @@ const backgroundSectionParameters = [
     helperText: "Enter the alternative text for the image.",
   },
 ];
-// ContactUs Parameters
-const contactUsParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Contact Us",
-    helperText: "Enter the title for the form.",
-  },
-  {
-    name: "subtitle",
-    type: "string",
-    defaultValue:
-      "Got any suggestions or questions? Fill this form to reach out.",
-    helperText: "Enter the subtitle text for the form.",
-  },
-  {
-    name: "firstNamePlaceholder",
-    type: "string",
-    defaultValue: "First Name",
-    helperText: "Placeholder text for the First Name input.",
-  },
-  {
-    name: "familyNamePlaceholder",
-    type: "string",
-    defaultValue: "Family Name",
-    helperText: "Placeholder text for the Family Name input.",
-  },
-  {
-    name: "emailPlaceholder",
-    type: "string",
-    defaultValue: "Enter your email",
-    helperText: "Placeholder text for the Email input.",
-  },
-  {
-    name: "mobilePlaceholder",
-    type: "string",
-    defaultValue: "Mobile",
-    helperText: "Placeholder text for the Mobile input.",
-  },
-  {
-    name: "subjectPlaceholder",
-    type: "string",
-    defaultValue: "What is it about?",
-    helperText: "Placeholder text for the subject select input.",
-  },
-  {
-    name: "messagePlaceholder",
-    type: "string",
-    defaultValue: "Enter your message",
-    helperText: "Placeholder text for the Message textarea.",
-  },
-  {
-    name: "sendButtonText",
-    type: "string",
-    defaultValue: "SEND",
-    helperText: "Text for the Send button.",
-  },
-  {
-    name: "imageSrc",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
-    helperText: "Upload the image for the right-side section.",
-  },
-  {
-    name: "imageAlt",
-    type: "string",
-    defaultValue: "Side Image",
-    helperText: "Alt text for the image.",
-  },
-];
+
 // MainBanner Parameters
 const mainBannerParameters = [
   {
@@ -497,26 +447,55 @@ const mainBannerParameters = [
     helperText: "Edit the note below the button.",
   },
 ];
-const titleWithBackButtonParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Page Title",
-    helperText: "Edit the title for the card.",
-  },
-  {
-    name: "backLink",
-    type: "string",
-    defaultValue: "/",
-    helperText: "Enter the URL for the back button link.",
-  },
-];
-// Register components
 
+// Register components
 Builder.registerComponent(TitleCardWithBackButton, {
   name: "Title Card With Back Button",
-  inputs: titleWithBackButtonParameters,
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
 });
+
+Builder.registerComponent(ProgramTitleCard, {
+  name: "Program Title Card",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+            'Exercise, Health & Wellbeing',
+            'Craft, Hobby & Fun',
+            'Community',
+            'Children & Youth'], // Dropdown values
+      defaultValue: 'Further Education / Literacy', // Default value
+      friendlyName: 'Program Category',
+    },
+  ],
+});
+
 const partnershipSectionParameters = [
   {
     name: "title",
@@ -543,6 +522,32 @@ const partnershipSectionParameters = [
     helperText: "Alternative text for the image",
   },
 ];
+
+Builder.registerComponent(ProgramGrid, {
+  name: "Dynamic Program Card Grid",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+        'Exercise, Health & Wellbeing',
+        'Craft, Hobby & Fun',
+        'Community',
+        'Children & Youth'],
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
+});
+
+
+
 // Header
 // Register Header component with the section model
 
@@ -568,12 +573,6 @@ Builder.registerComponent(MainBanner, {
 Builder.registerComponent(homeimage, {
   name: "BackgroundSection",
   inputs: backgroundSectionParameters,
-});
-// Register ContactUs component
-
-Builder.registerComponent(ContactUs, {
-  name: "ContactUs",
-  inputs: contactUsParameters,
 });
 
 Builder.registerComponent(WhiteFeatureCard, {
@@ -690,11 +689,6 @@ Builder.registerComponent(FormDownloadCard, {
 
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
-  inputs: titleCardParameters,
-});
-
-Builder.registerComponent(TitleCardWithBackButton, {
-  name: "Title Card With Back Button",
   inputs: titleCardParameters,
 });
 
@@ -865,6 +859,12 @@ export const membershipFormInputs = [
     helperText: "Enter the placeholder text for the occupation input.",
   },
   {
+    name: "apartmentPlaceholder",
+    type: "string",
+    defaultValue: "Apartment, Unit No., Suite, etc (Optional)",
+    helperText: "Enter the placeholder text for the apartment input.",
+  },
+  {
     name: "addressPlaceholder",
     type: "string",
     defaultValue: "Address",
@@ -893,6 +893,12 @@ export const membershipFormInputs = [
     type: "string",
     defaultValue: "Submit",
     helperText: "Enter the text for the submit button.",
+  },
+  {
+    name: "checkboxLabel",
+    type: "richText",
+    defaultValue:
+      "Yes, I agree to collection, use, and processing of my personal information which includes using this information for communication, event invitations, and regular membership updates. ",
   },
 ];
 
@@ -987,6 +993,304 @@ Builder.registerComponent(ChildcareContactForm, {
   inputs: childcareFormInputs,
 });
 
+Builder.registerComponent(ProgressBar, {
+  name: "ProgressBar",
+  inputs: [
+    {
+      name: "steps",
+      type: "list",
+      defaultValue: [{ label: "Step Label", link: "/room-details" }],
+      subFields: [
+        {
+          name: "label",
+          type: "string",
+          defaultValue: "Step Label",
+          helperText: "The label for the step.",
+        },
+        {
+          name: "link",
+          type: "url",
+          helperText: "The URL the step should link to.",
+        },
+      ],
+    },
+    {
+      name: "currentStepIndex",
+      type: "number",
+      defaultValue: 1,
+      helperText: "The current step in the progress bar.",
+    },
+  ],
+});
+
+Builder.registerComponent(RoomDetailsFormForm, {
+  name: "RoomDetailsForm",
+  inputs: [
+    {
+      name: "roomLabel",
+      type: "string",
+      defaultValue: "Which room are you booking for? *",
+      helperText: "Label for the room select field.",
+    },
+    {
+      name: "hireTypeLabel",
+      type: "string",
+      defaultValue: "Please select your hire type *",
+      helperText: "Label for the hire type select field.",
+    },
+    {
+      name: "dateLabel",
+      type: "string",
+      defaultValue: "Date *",
+      helperText: "Label for the date input field.",
+    },
+    {
+      name: "timeLabel",
+      type: "string",
+      defaultValue: "Time *",
+      helperText: "Label for the time input field.",
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/room-booking-form",
+      helperText: "Enter the URL for the button link.",
+    },
+    {
+      name: "hireTypeInfo",
+      type: "richText",
+      defaultValue: `
+        <p><strong>Casual Hirers</strong>: A group/person that makes an irregular or one-off booking.</p>
+        <p><strong>Permanent Hirers</strong>: A group/person that makes 8 or more bookings per year.</p>
+        <p><strong>Community Groups</strong>: Not for Profit Groups.</p>
+      `,
+    },
+  ],
+});
+
+Builder.registerComponent(AdditionalInfoForm, {
+  name: "Additional Info Form",
+  inputs: [
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the button link.",
+    },
+  ],
+});
+
+Builder.registerComponent(PersonalDetailsForm, {
+  name: "PersonalDetailsForm",
+  inputs: [
+    {
+      name: "contactInfoTitle",
+      type: "string",
+      defaultValue: "Contact Info",
+      helperText: "The title of the contact information section.",
+    },
+    {
+      name: "addressInfoTitle",
+      type: "string",
+      defaultValue: "Address",
+      helperText: "The title of the address information section.",
+    },
+    {
+      name: "firstNamePlaceholder",
+      type: "string",
+      defaultValue: "First Name",
+      helperText: "Placeholder text for the first name field.",
+    },
+    {
+      name: "familyNamePlaceholder",
+      type: "string",
+      defaultValue: "Family Name",
+      helperText: "Placeholder text for the family name field.",
+    },
+    {
+      name: "emailPlaceholder",
+      type: "string",
+      defaultValue: "Email",
+      helperText: "Placeholder text for the email field.",
+    },
+    {
+      name: "mobilePlaceholder",
+      type: "string",
+      defaultValue: "Mobile",
+      helperText: "Placeholder text for the mobile field.",
+    },
+    {
+      name: "unitNoPlaceholder",
+      type: "string",
+      defaultValue: "Unit No. (Optional)",
+      helperText: "Placeholder text for the unit number field.",
+    },
+    {
+      name: "streetNamePlaceholder",
+      type: "string",
+      defaultValue: "Street Name",
+      helperText: "Placeholder text for the street name field.",
+    },
+    {
+      name: "cityPlaceholder",
+      type: "string",
+      defaultValue: "City",
+      helperText: "Placeholder text for the city field.",
+    },
+    {
+      name: "postalCodePlaceholder",
+      type: "string",
+      defaultValue: "ZIP / Postal Code",
+      helperText: "Placeholder text for the postal code field.",
+    },
+    {
+      name: "statePlaceholder",
+      type: "string",
+      defaultValue: "State",
+      helperText: "Placeholder text for the state field.",
+    },
+    {
+      name: "linkUrl",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the button link.",
+    },
+  ],
+});
+
+Builder.registerComponent(ConfirmationForm, {
+  name: "ConfirmationForm",
+  inputs: [
+    {
+      name: "termsText",
+      type: "richText",
+      defaultValue: "Yes, I agree to the Terms and Conditions",
+      helperText: "Text for the Terms and Conditions agreement.",
+    },
+    {
+      name: "bondText",
+      type: "richText",
+      defaultValue: "Yes, I agree to the Bond Agreement",
+      helperText: "Text for the Bond Agreement.",
+    },
+  ],
+});
+
+Builder.registerComponent(ProgramEnrollmentForm, {
+  name: "Program Enrollment Form",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Sign Up to A Program Now",
+      helperText: "Edit the main title of the form.",
+    },
+    {
+      name: "subtitle",
+      type: "string",
+      defaultValue: "Want to join a program? Fill out this form now.",
+      helperText: "Edit the subtitle of the form.",
+    },
+    {
+      name: "programInfoTitle",
+      type: "string",
+      defaultValue: "Program Information",
+      helperText: "Edit the title for the Program Information section.",
+    },
+    {
+      name: "contactInfoTitle",
+      type: "string",
+      defaultValue: "Contact Information",
+      helperText: "Edit the title for the Contact Information section.",
+    },
+    {
+      name: "addressInfoTitle",
+      type: "string",
+      defaultValue: "Address Information",
+      helperText: "Edit the title for the Address Information section.",
+    },
+    {
+      name: "termsConditionsTitle",
+      type: "string",
+      defaultValue: "Terms and Conditions of Enrolment",
+      helperText: "Edit the title for the Terms and Conditions section.",
+    },
+    {
+      name: "termsConditionsText",
+      type: "richText",
+      defaultValue: "I agree to the terms and conditions",
+      helperText: "Edit the text for the Terms and Conditions section.",
+    },
+    {
+      name: "accessCorrectionTitle",
+      type: "string",
+      defaultValue: "Access, Correction and Complaints",
+      helperText:
+        "Edit the title for the Access, Correction and Complaints section.",
+    },
+    {
+      name: "accessCorrectionText",
+      type: "richText",
+      defaultValue: "I agree to the terms and conditions",
+      helperText:
+        "Edit the text for the Access, Correction and Complaints section.",
+    },
+    {
+      name: "termsCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I declare that the information I have provided to the best of my knowledge is true and correct.",
+      helperText: "Edit the label for the Terms and Conditions checkbox.",
+    },
+    {
+      name: "promotionCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I agree to appear in photos and promotion material for the Centre and its services.",
+      helperText: "Edit the label for the promotion consent checkbox.",
+    },
+    {
+      name: "ageCheckboxLabel",
+      type: "string",
+      defaultValue:
+        "I declare that I am 18 OR have guardian consent if under 18.",
+      helperText: "Edit the label for the age declaration checkbox.",
+    },
+  ],
+});
+
+Builder.registerComponent(ContactForm, {
+  name: "ContactForm",
+  inputs: [
+    {
+      name: "title",
+      type: "text",
+      defaultValue: "Contact Us",
+    },
+    {
+      name: "subtitle",
+      type: "text",
+      defaultValue:
+        "Got any suggestions or questions? Fill this form to reach out.",
+    },
+    {
+      name: "addressTitle",
+      type: "text",
+      defaultValue: "Address",
+    },
+    {
+      name: "feedbackTitle",
+      type: "text",
+      defaultValue: "Feedback & Compliments",
+    },
+    {
+      name: "complaintsTitle",
+      type: "text",
+      defaultValue: "Complaints",
+    },
+  ],
+});
+
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -1015,6 +1319,7 @@ Builder.register("insertMenu", {
     { name: "Dark Green Program Card" },
     { name: "Medium Green Program Card" },
     { name: "Light Green Program Card" },
+    { name: "Dynamic Program Card Grid" },
   ],
 });
 Builder.register("insertMenu", {
@@ -1024,7 +1329,32 @@ Builder.register("insertMenu", {
     { name: "Image Card (without padding)" },
   ],
 });
+
 Builder.register("insertMenu", {
   name: "Custom Forms",
-  items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
+  items: [
+    { name: "Membership Form" }, 
+    { name: "Childcare Form" }, 
+    { name: "Program Enrollment Form" },],
+});
+
+Builder.register("insertMenu", {
+  name: "Room Booking Forms",
+  items: [
+    { name: "ProgressBar" },
+    { name: "RoomDetailsForm" },
+    { name: "Additional Info Form" },
+    { name: "PersonalDetailsForm" },
+    { name: "ConfirmationForm" },
+  ],
+});
+
+Builder.register("insertMenu", {
+  name: "Title Cards",
+  items: [
+    { name: "Green Title Card" },
+    { name: "Title Card" },
+    { name: "Title Card With Back Button" },
+    { name: "Program Title Card" }
+  ],
 });

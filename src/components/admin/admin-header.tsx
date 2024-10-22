@@ -1,10 +1,25 @@
 import { ReactNode } from "react";
-import { Anton } from 'next/font/google';
 import styles from './shared.module.css';
 import SignOut from "./sign-out";
+import NavigationLinks from "./navigation";
+import { Anton } from "next/font/google";
 
 type AdminHeaderProps = {
     children: ReactNode;
+};
+
+const AdminHeader = ({ children }: AdminHeaderProps) => {
+    return (
+      <>
+        <header className={styles.header}>
+          <nav className={styles.nav}>
+            <NavigationLinks />
+            <SignOut />
+          </nav>
+        </header>
+        {children}
+      </>
+    );
 };
 
 const anton = Anton({
@@ -12,32 +27,22 @@ const anton = Anton({
     subsets: ['latin'],
 });
 
-const AdminHeader: React.FC<AdminHeaderProps> = ({
-    children
-}) => {
+const AdminHeaderSignedOut = ({ children }: AdminHeaderProps) => {
     return (
-        <>
-            <header className={styles.header}>
-                <nav className={styles.nav}>
-                    <a href="#" className={`${styles.navItem} ${styles.active}`}>
-                        Members
-                    </a>
-                    <a href="#" className={styles.navItem}>
-                        Program Enrolments
-                    </a>
-                    <div className={`${styles.adminPortal} ${anton.className}`}>
-                        Admin Portal
-                        <span className={styles.centerName}>Langwarrin Community Centre</span>
-                    </div>
-                    <a href="#" className={styles.navItem}>
-                        Room Bookings
-                    </a>
-                    <SignOut/>
-                </nav>
-            </header>
-            {children}
-        </>
+      <>
+        <header className={styles.header}>
+          <nav className={styles.nav}>
+            <div className={`${styles.adminPortal} ${anton.className}`}>
+                Admin Portal
+                <span className={styles.centerName}>Langwarrin Community Centre</span>
+            </div>
+          </nav>
+        </header>
+        {children}
+      </>
     );
 };
 
+export { AdminHeaderSignedOut };
 export default AdminHeader;
+

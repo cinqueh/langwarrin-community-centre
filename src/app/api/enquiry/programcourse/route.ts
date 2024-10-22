@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     const address = new AddressDTO({
       state: body.person.address.state,
       streetAddress: body.person.address.streetAddress,
-      apartment: body.person.address.apartment || undefined,
+      apartment: body.person.address.apartment || null,
       suburb: body.person.address.suburb,
       postcode: body.person.address.postcode
     });
