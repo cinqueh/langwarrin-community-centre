@@ -3,7 +3,8 @@ import {
   GeneralInquiryDTO,
   ProgramCourseInquiryDTO,
   ChildcareInquiryDTO,
-  ComplaintInquiryDTO
+  ComplaintInquiryDTO,
+  RoomBookingEnquiryDTO
 } from "../dto/inquiry";
 import Mapper from "./mapper";
 import { Person, PersonMapper } from "./person-mapper";
@@ -60,6 +61,28 @@ export type ChildcareInquiry = {
   notes?: string;      // Optional notes
   inquiry: Inquiry;
 };
+
+// Define RoomBookingEnquiry entity type
+export type RoomBookingEnquiry = {
+  inquiryid: number;
+  bookingdate: string;
+  bookingstarttime: string;
+  bookingendtime: string;
+  roomname: string;
+  hiretype: string;
+  purposeofhire: string;
+  isorganisationbooking: boolean;
+  organisationname?: string;
+  organisationaddress?: string;
+  othercompaniesinvolved?: boolean;
+  companydetails?: string;
+  numberattending: number;
+  howdidyouhear: string;
+  specialrequirements?: string;
+  willliquorbeconsumed: boolean;
+  inquiry: Inquiry;
+};
+
 
 export class GeneralInquiryMapper implements Mapper<GeneralInquiry, GeneralInquiryDTO> {
   public mapTo(inquiry: GeneralInquiry): GeneralInquiryDTO {
@@ -149,6 +172,36 @@ export class ComplaintInquiryMapper implements Mapper<ComplaintInquiry, Complain
       suggestedSolution: complaintInquiry.suggestedsolution,
       inquiryId: complaintInquiry.inquiryid,
       notes: complaintInquiry.inquiry?.notes,
+    });
+  }
+}
+
+export class RoomBookingEnquiryMapper implements Mapper<RoomBookingEnquiry, RoomBookingEnquiryDTO> {
+  private personMapper = new PersonMapper();
+
+  public mapTo(enquiry: RoomBookingEnquiry): RoomBookingEnquiryDTO {
+    return new RoomBookingEnquiryDTO({
+      roomName: enquiry.roomname,
+      hireType: enquiry.hiretype,
+      bookingDate: enquiry.bookingdate,
+      bookingStartTime: enquiry.bookingstarttime, // Mapping the new start time field
+      bookingEndTime: enquiry.bookingendtime,     // Mapping the new end time field
+      purposeOfHire: enquiry.purposeofhire,
+      isOrganisationBooking: enquiry.isorganisationbooking,
+      organisationName: enquiry.organisationname,
+      organisationAddress: enquiry.organisationaddress,
+      otherCompaniesInvolved: enquiry.othercompaniesinvolved,
+      companyDetails: enquiry.companydetails,
+      numberAttending: enquiry.numberattending,
+      howDidYouHear: enquiry.howdidyouhear,
+      specialRequirements: enquiry.specialrequirements,
+      willLiquorBeConsumed: enquiry.willliquorbeconsumed,
+      
+      // Map the inquiry details (inherited from InquiryDTO)
+      person: this.personMapper.mapTo(enquiry.inquiry.person),
+      inquiryId: enquiry.inquiry.inquiryid,
+      inquiryDate: new Date(enquiry.inquiry.time), // Inquiry submission date
+      notes: enquiry.inquiry.notes,
     });
   }
 }

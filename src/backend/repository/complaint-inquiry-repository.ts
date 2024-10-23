@@ -1,7 +1,8 @@
 import BaseRepository from "./base-repository";
 import { ComplaintInquiryDTO } from "../dto/inquiry";
+import FormRepository from "./base-repository";
 
-export default class ComplaintInquiryRepository extends BaseRepository {
+export default class ComplaintInquiryRepository extends FormRepository {
 
   public async addComplaintInquiry(inquiry: ComplaintInquiryDTO) {
     const client = this.getSupabaseClient();

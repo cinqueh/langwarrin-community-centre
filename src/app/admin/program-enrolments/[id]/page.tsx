@@ -3,7 +3,7 @@ import { IndividualWrapper } from "../../../../components/admin/background";
 import AdminHeader from "@/components/admin/admin-header";
 import { ProgramCourseInquiryDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
-import { DisplayIndividualComponent } from "@/components/admin/display-individual";
+import { DisplayIndividualInquiryComponent } from "@/components/admin/display-individual";
 
 interface ProgramInquiryPageProps {
     params: { id: string };
@@ -24,7 +24,7 @@ export default async function ProgramInquiry({ params }: ProgramInquiryPageProps
                 return (
                     <AdminHeader>
                         <IndividualWrapper title={formattedData.object.header}>
-                            <DisplayIndividualComponent 
+                            <DisplayIndividualInquiryComponent 
                               data={formattedData.object} 
                               columns={formattedData.columns}
                             />

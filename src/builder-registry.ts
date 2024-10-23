@@ -12,6 +12,7 @@ import {
 import { GovernmentCard } from "./components/government-card/government-card";
 import {
   GreenTitleCard,
+  ProgramTitleCard,
   TitleCard,
   TitleCardWithBackButton,
 } from "./components/title-card/title-card";
@@ -49,6 +50,7 @@ import { PersonalDetailsForm } from "./components/room-booking-form/personal-inf
 import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
 import { ProgramEnrollmentForm } from "./components/program-form/program-form";
 import { ContactForm } from "./components/contact-us/contact-us-card";
+import ProgramGrid from "./components/programs/programs-panel";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -465,6 +467,35 @@ Builder.registerComponent(TitleCardWithBackButton, {
   ],
 });
 
+Builder.registerComponent(ProgramTitleCard, {
+  name: "Program Title Card",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+            'Exercise, Health & Wellbeing',
+            'Craft, Hobby & Fun',
+            'Community',
+            'Children & Youth'], // Dropdown values
+      defaultValue: 'Further Education / Literacy', // Default value
+      friendlyName: 'Program Category',
+    },
+  ],
+});
+
 const partnershipSectionParameters = [
   {
     name: "title",
@@ -491,6 +522,32 @@ const partnershipSectionParameters = [
     helperText: "Alternative text for the image",
   },
 ];
+
+Builder.registerComponent(ProgramGrid, {
+  name: "Dynamic Program Card Grid",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: ['Further Education / Literacy', 
+        'Exercise, Health & Wellbeing',
+        'Craft, Hobby & Fun',
+        'Community',
+        'Children & Youth'],
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
+});
+
+
+
 // Header
 // Register Header component with the section model
 
@@ -802,6 +859,12 @@ export const membershipFormInputs = [
     helperText: "Enter the placeholder text for the occupation input.",
   },
   {
+    name: "apartmentPlaceholder",
+    type: "string",
+    defaultValue: "Apartment, Unit No., Suite, etc (Optional)",
+    helperText: "Enter the placeholder text for the apartment input.",
+  },
+  {
     name: "addressPlaceholder",
     type: "string",
     defaultValue: "Address",
@@ -830,6 +893,12 @@ export const membershipFormInputs = [
     type: "string",
     defaultValue: "Submit",
     helperText: "Enter the text for the submit button.",
+  },
+  {
+    name: "checkboxLabel",
+    type: "richText",
+    defaultValue:
+      "Yes, I agree to collection, use, and processing of my personal information which includes using this information for communication, event invitations, and regular membership updates. ",
   },
 ];
 
@@ -1003,44 +1072,6 @@ Builder.registerComponent(AdditionalInfoForm, {
   name: "Additional Info Form",
   inputs: [
     {
-      name: "fields",
-      type: "list",
-      defaultValue: [
-        { question: "What is your name?", inputType: "text", required: true },
-        { question: "What is your age?", inputType: "text", required: true },
-      ],
-      subFields: [
-        {
-          name: "question",
-          type: "string",
-          helperText: "The question to display.",
-        },
-        {
-          name: "inputType",
-          type: "enum",
-          enum: ["text", "select"],
-          helperText: "The input type for the answer.",
-        },
-        {
-          name: "options",
-          type: "list",
-          subFields: [
-            {
-              name: "option",
-              type: "string",
-              helperText: "Enter the options for select input.",
-            },
-          ],
-          showIf: (options: any) => options.get("inputType") === "select",
-        },
-        {
-          name: "required",
-          type: "boolean",
-          helperText: "Is this field required?",
-        },
-      ],
-    },
-    {
       name: "linkUrl",
       type: "string",
       defaultValue: "/",
@@ -1167,18 +1198,6 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       helperText: "Edit the title for the Program Information section.",
     },
     {
-      name: "programOptions",
-      type: "list",
-      subFields: [
-        {
-          name: "option",
-          type: "string",
-          defaultValue: "Program 1",
-        },
-      ],
-      helperText: "List of program options to display in the dropdown",
-    },
-    {
       name: "contactInfoTitle",
       type: "string",
       defaultValue: "Contact Information",
@@ -1237,42 +1256,37 @@ Builder.registerComponent(ProgramEnrollmentForm, {
         "I declare that I am 18 OR have guardian consent if under 18.",
       helperText: "Edit the label for the age declaration checkbox.",
     },
-    {
-      name: "linkUrl",
-      type: "string",
-      defaultValue: "/",
-      helperText: "Enter the URL for the button link.",
-    }
   ],
 });
 
 Builder.registerComponent(ContactForm, {
-  name: 'ContactForm',
+  name: "ContactForm",
   inputs: [
     {
-      name: 'title',
-      type: 'text',
-      defaultValue: 'Contact Us',
+      name: "title",
+      type: "text",
+      defaultValue: "Contact Us",
     },
     {
-      name: 'subtitle',
-      type: 'text',
-      defaultValue: 'Got any suggestions or questions? Fill this form to reach out.',
+      name: "subtitle",
+      type: "text",
+      defaultValue:
+        "Got any suggestions or questions? Fill this form to reach out.",
     },
     {
-      name: 'addressTitle',
-      type: 'text',
-      defaultValue: 'Address',
+      name: "addressTitle",
+      type: "text",
+      defaultValue: "Address",
     },
     {
-      name: 'feedbackTitle',
-      type: 'text',
-      defaultValue: 'Feedback & Compliments',
+      name: "feedbackTitle",
+      type: "text",
+      defaultValue: "Feedback & Compliments",
     },
     {
-      name: 'complaintsTitle',
-      type: 'text',
-      defaultValue: 'Complaints',
+      name: "complaintsTitle",
+      type: "text",
+      defaultValue: "Complaints",
     },
   ],
 });
@@ -1305,6 +1319,7 @@ Builder.register("insertMenu", {
     { name: "Dark Green Program Card" },
     { name: "Medium Green Program Card" },
     { name: "Light Green Program Card" },
+    { name: "Dynamic Program Card Grid" },
   ],
 });
 Builder.register("insertMenu", {
@@ -1317,7 +1332,10 @@ Builder.register("insertMenu", {
 
 Builder.register("insertMenu", {
   name: "Custom Forms",
-  items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
+  items: [
+    { name: "Membership Form" }, 
+    { name: "Childcare Form" }, 
+    { name: "Program Enrollment Form" },],
 });
 
 Builder.register("insertMenu", {
@@ -1337,5 +1355,6 @@ Builder.register("insertMenu", {
     { name: "Green Title Card" },
     { name: "Title Card" },
     { name: "Title Card With Back Button" },
+    { name: "Program Title Card" }
   ],
 });

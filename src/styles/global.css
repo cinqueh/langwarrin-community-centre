@@ -145,3 +145,18 @@ p {
   margin: 20px 0;
 }
 
+.alertSuccess {
+  color: green;
+  background-color: #e6ffed;
+  padding: 10px;
+  border: 1px solid green;
+  font-weight: bold;
+}
+
+.alertError {
+  color: red;
+  background-color: #ffe6e6;
+  padding: 10px;
+  border: 1px solid red;
+  font-weight: bold;
+}

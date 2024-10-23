@@ -26,7 +26,6 @@
 .background {
     background-color: #eeeff3;
     padding: 30px;
-    border-radius: 8px;
     width: 100%;
     min-height: 100vh;
     font-family: 'Prompt', sans-serif;
@@ -147,6 +146,27 @@
     margin-bottom: 3px;
 }
 
-.signOut:hover {
+.signOut:hover, .signIn:hover {
     opacity: 0.7;
+}
+
+.signIn {
+    color: #004223;
+    border: 1px solid #004223;
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signIn span {
+    font-size: 20px;
+}
+
+.google {
+    width: 40px;
+    height: 40px;
 }

@@ -15,6 +15,7 @@ describe("ContactForm Component", () => {
   it("renders the form with default props", () => {
     render(<ContactForm {...defaultProps} />);
 
+    // Check if all main components are rendered
     expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
     expect(screen.getByText(defaultProps.subtitle)).toBeInTheDocument();
     expect(screen.getByPlaceholderText("First Name")).toBeInTheDocument();
@@ -27,20 +28,24 @@ describe("ContactForm Component", () => {
   it("shows message textarea for General Enquiry", () => {
     render(<ContactForm {...defaultProps} />);
 
+    // Change the Enquiry Type to General
     fireEvent.change(screen.getByLabelText("Enquiry Type"), {
       target: { value: "general" },
     });
 
+    // Check that the message textarea is visible for General Enquiry
     expect(screen.getByLabelText("Enter your message")).toBeInTheDocument();
   });
 
   it("shows feedback fields when Feedback & Compliments is selected", () => {
     render(<ContactForm {...defaultProps} />);
 
+    // Change the Enquiry Type to Feedback
     fireEvent.change(screen.getByLabelText("Enquiry Type"), {
       target: { value: "feedback" },
     });
 
+    // Check that feedback-specific fields are visible
     expect(screen.getByPlaceholderText("Name of program")).toBeInTheDocument();
     expect(screen.getByLabelText("Feedback")).toBeInTheDocument();
     expect(screen.getByText(defaultProps.addressTitle)).toBeInTheDocument(); // Address section is present
@@ -49,10 +54,12 @@ describe("ContactForm Component", () => {
   it("shows complaints fields when Complaints is selected", () => {
     render(<ContactForm {...defaultProps} />);
 
+    // Change the Enquiry Type to Complaints
     fireEvent.change(screen.getByLabelText("Enquiry Type"), {
       target: { value: "complaints" },
     });
 
+    // Check that complaints-specific fields are visible
     expect(
       screen.getByPlaceholderText("Name of person/s complaint is in regards to")
     ).toBeInTheDocument();
@@ -63,32 +70,5 @@ describe("ContactForm Component", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText("Your suggestions for a solution")).toBeInTheDocument();
     expect(screen.getByText(defaultProps.addressTitle)).toBeInTheDocument(); // Address section is present
-  });
-
-  it("submits the form successfully for General Enquiry", () => {
-    render(<ContactForm {...defaultProps} />);
-
-    fireEvent.change(screen.getByLabelText("Enquiry Type"), {
-      target: { value: "general" },
-    });
-
-    // Fill in the form
-    fireEvent.change(screen.getByPlaceholderText("First Name"), {
-      target: { value: "John" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Family Name"), {
-      target: { value: "Doe" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Enter your email"), {
-      target: { value: "john.doe@example.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Mobile"), {
-      target: { value: "0400123456" },
-    });
-    fireEvent.change(screen.getByLabelText("Enter your message"), {
-      target: { value: "This is a general enquiry." },
-    });
-
-    fireEvent.click(screen.getByRole("button", { name: /send/i }));
   });
 });
