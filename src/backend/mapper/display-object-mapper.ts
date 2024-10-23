@@ -332,11 +332,6 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
 export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<ChildcareInquiryDTO, ChildcareInquiryDisplayObject> {
 
     protected override mapDisplayObject(inquiry: ChildcareInquiryDTO): ChildcareInquiryDisplayObject {
-        // console.log(inquiry.child);
-        // console.log(inquiry.date);
-        // console.log(inquiry.person);
-
-        console.log('Child object:', inquiry.child);
 
         return {
             id: inquiry.inquiryId as number,                          // Inquiry ID
