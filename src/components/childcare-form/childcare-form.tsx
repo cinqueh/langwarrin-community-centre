@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { ChildDTO } from "@/backend/dto/childcare/child";
-import { PersonDTO } from "@/backend/dto/person";
-import { ChildcareInquiryDTO } from "@/backend/dto/inquiry";
+import { ChildDTO } from '../../backend/dto/childcare/child';  
+import { PersonDTO } from '../../backend/dto/person';
+import { ChildcareInquiryDTO } from '../../backend/dto/inquiry';
 
 interface ChildcareContactFormProps {
   title: string;

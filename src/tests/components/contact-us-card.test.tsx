@@ -10,7 +10,7 @@ describe("ContactForm Component", () => {
     addressTitle: "Address",
     feedbackTitle: "Feedback & Compliments",
     complaintsTitle: "Complaints",
-  };
+  }; 
 
   it("renders the form with default props", () => {
     render(<ContactForm {...defaultProps} />);
