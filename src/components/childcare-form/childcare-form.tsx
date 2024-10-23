@@ -200,7 +200,7 @@ const ChildcareContactForm = (props: ChildcareContactFormProps) => {
           />
         </div>
 
-        <h5 className={styles.sectionTitle}>Child's Information</h5>
+        <h5 className={styles.sectionTitle}>Child&apos;s Information</h5>
         <div className={styles.nameInputGroup}>
           <input
             type="text"
