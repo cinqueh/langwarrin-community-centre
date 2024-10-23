@@ -25,7 +25,8 @@ export default class ChildcareInquiryRepository extends BaseRepository {
   public override async get(id: number) {
     const client = this.getSupabaseClient();
 
-    return await client
+    // Fetch a single childcare inquiry by id
+    const response = await client
       .from("childcareinquiry")
       .select(`
         *,
@@ -37,12 +38,19 @@ export default class ChildcareInquiryRepository extends BaseRepository {
         )
       `)
       .eq("inquiryid", id);
+
+    // Add a console log to inspect the raw data
+    console.log('Raw childcare inquiries response:', JSON.stringify(response, null, 2));
+
+    // Return the fetched data
+    return response;
   }
 
   public async getAll() {
     const client = this.getSupabaseClient();
 
-    return await client.from("childcareinquiry").select(`
+    // Fetch all childcare inquiries, including related person and child data
+    const response = await client.from("childcareinquiry").select(`
       *,
       person (
           *
@@ -51,5 +59,11 @@ export default class ChildcareInquiryRepository extends BaseRepository {
           *
       )
     `);
+
+    // Add a console log to inspect the raw data
+    console.log('Raw childcare inquiries response:', JSON.stringify(response, null, 2));
+
+    // Return the fetched data
+    return response;
   }
 }

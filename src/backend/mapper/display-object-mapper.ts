@@ -1,6 +1,7 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
     DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, ProgramCourseInquiryDisplayObject, ChildcareInquiryDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO } from "../dto/inquiry";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO} from "../dto/inquiry";
+import { ChildDTO} from "../dto/childcare/child";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -331,6 +332,12 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
 export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<ChildcareInquiryDTO, ChildcareInquiryDisplayObject> {
 
     protected override mapDisplayObject(inquiry: ChildcareInquiryDTO): ChildcareInquiryDisplayObject {
+        // console.log(inquiry.child);
+        // console.log(inquiry.date);
+        // console.log(inquiry.person);
+
+        console.log('Child object:', inquiry.child);
+
         return {
             id: inquiry.inquiryId as number,                          // Inquiry ID
             header: this.formatName(inquiry?.person),                  // Person name (header)
@@ -339,7 +346,7 @@ export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<Child
             phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // Inherited from InquiryDisplayObject
             date: this.formatDate(inquiry?.date),                      // Inquiry date
             notes: this.formatField(inquiry.notes),                    // Optional notes inherited from InquiryDisplayObject
-            childName: this.formatField(inquiry.child?.childFirstName) + " " + this.formatField(inquiry.child?.childSurname), // Child's full name
+            childName: this.formatField(inquiry.child.childFirstName) + " " + this.formatField(inquiry.child.childSurname), // Child's full name
             childAge: inquiry.child?.childAge || 0,                    // Child's age
             day: this.formatField(inquiry.day),                        // Day of the program
             program: this.formatField(inquiry.program),                // Program name
