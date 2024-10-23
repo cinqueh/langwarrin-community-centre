@@ -85,7 +85,7 @@
 
 .checkBoxGroup {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Distribute checkboxes evenly in 5 columns */
+  grid-template-columns: repeat(5, 1fr); 
   gap: 20px;
   margin-bottom: 20px;
   width: 100%;
@@ -146,6 +146,12 @@
   resize: none;
   margin-bottom: 20px;
 } 
+
+.formContainer button:disabled {
+  background-color: #cccccc; 
+  color: #666666; 
+  cursor: not-allowed; 
+}
 
 /* Mobile-Responsive Styles */
 @media (max-width: 768px) {
