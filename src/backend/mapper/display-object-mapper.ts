@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, ProgramCourseInquiryDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO } from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, ProgramCourseInquiryDisplayObject, ChildcareInquiryDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -323,6 +323,70 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
             {
                 Header: 'Notes',
                 accessor: 'notes',
+            }
+        ];
+    }
+}
+
+export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<ChildcareInquiryDTO, ChildcareInquiryDisplayObject> {
+
+    protected override mapDisplayObject(inquiry: ChildcareInquiryDTO): ChildcareInquiryDisplayObject {
+        return {
+            id: inquiry.inquiryId as number,                          // Inquiry ID
+            header: this.formatName(inquiry?.person),                  // Person name (header)
+            name: this.formatName(inquiry?.person),                    // Person full name
+            email: this.formatField(inquiry?.person?.email),           // Person email
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // Inherited from InquiryDisplayObject
+            date: this.formatDate(inquiry?.date),                      // Inquiry date
+            notes: this.formatField(inquiry.notes),                    // Optional notes inherited from InquiryDisplayObject
+            childName: this.formatField(inquiry.child?.childFirstName) + " " + this.formatField(inquiry.child?.childSurname), // Child's full name
+            childAge: inquiry.child?.childAge || 0,                    // Child's age
+            day: this.formatField(inquiry.day),                        // Day of the program
+            program: this.formatField(inquiry.program),                // Program name
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<ChildcareInquiryDisplayObject>[] {
+        return [
+            {
+              Header: 'ID',
+              accessor: 'id',
+            },
+            {
+              Header: 'Name',
+              accessor: 'name',
+            },
+            {
+              Header: 'Email',
+              accessor: 'email',
+            },
+            {
+              Header: 'Phone Number',
+              accessor: 'phoneNumber',
+            },
+            {
+              Header: 'Inquiry Date',
+              accessor: 'date',
+            },
+            {
+              Header: 'Child Name',
+              accessor: 'childName',
+            },
+            {
+              Header: 'Child Age',
+              accessor: 'childAge',
+            },
+            {
+              Header: 'Day',
+              accessor: 'day',
+            },
+            {
+              Header: 'Program Name',
+              accessor: 'program',
+            },
+            {
+              Header: 'Notes',
+              accessor: 'notes',
             }
         ];
     }

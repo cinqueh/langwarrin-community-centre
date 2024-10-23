@@ -60,3 +60,11 @@ export type ProgramCourseInquiryDisplayObject = InquiryDisplayObject & {
     programName: string;
     howHeardAboutProgram: string;
 }
+
+export type ChildcareInquiryDisplayObject = InquiryDisplayObject & {
+    childName: string;       // Full name of the child
+    childAge: number;        // Age of the child
+    day: string;             // Day of the program
+    program: string;         // Name of the program
+};
+ 
