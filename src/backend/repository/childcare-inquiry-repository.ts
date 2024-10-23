@@ -39,9 +39,6 @@ export default class ChildcareInquiryRepository extends BaseRepository {
       `)
       .eq("inquiryid", id);
 
-    // Add a console log to inspect the raw data
-    console.log('Raw childcare inquiries response:', JSON.stringify(response, null, 2));
-
     // Return the fetched data
     return response;
   }
@@ -59,9 +56,6 @@ export default class ChildcareInquiryRepository extends BaseRepository {
           *
       )
     `);
-
-    // Add a console log to inspect the raw data
-    console.log('Raw childcare inquiries response:', JSON.stringify(response, null, 2));
 
     // Return the fetched data
     return response;
