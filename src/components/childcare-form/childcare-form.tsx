@@ -172,7 +172,7 @@ const ChildcareContactForm = (props: ChildcareContactFormProps) => {
             />
           </div>
           <input
-            type="text"
+            type="tel"
             name="homePhone"
             placeholder={props.homePhonePlaceholder}
             value={formData.homePhone}
