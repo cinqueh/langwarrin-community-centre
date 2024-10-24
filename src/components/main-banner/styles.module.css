@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: -10px;
+  padding: 0 20px; /* Added padding to prevent content from touching the edges */
 }
 
 .bannerContent {
@@ -14,7 +15,6 @@
   width: 100%;
 }
 
-/* create the green background box */
 .bannerTitleWrapper {
   display: inline-block;
   position: relative;
@@ -23,47 +23,89 @@
 .bannerBackground {
   background-color: #004223;
   width: 100%;
-  padding: 0 120px;
+  padding: 0 60px; /* Adjusted for smaller screens */
 }
 
 .bannerTitle {
-  font-size: 127.34px;
+  font-size: 100px; /* Reduced font size for better responsiveness */
   color: #004223;
   letter-spacing: 0.2%;
   position: relative;
   z-index: 1;
-  line-height: 1; 
-  text-shadow: 
+  line-height: 1;
+  text-shadow:
     5px 0 0 #efeee5, /* right */
     -2px 0 0 #efeee5, 
     0 2px 0 #efeee5, 
-    0 -2px 0 #efeee5; 
+    0 -2px 0 #efeee5;
 }
 
 .bannerTitle::before {
-  content: ""; 
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 50%; 
-  background-color: #004223; 
-  z-index: -1; 
-  width: 100%; 
+  height: 50%;
+  background-color: #004223;
+  z-index: -1;
+  width: 100%;
 }
 
 .bannerTitle2 {
-  font: 64.63px;
+  font-size: 50px; /* Adjusted font size */
 }
 
 .bannerSubtitle {
   font-style: italic;
   margin-top: 0px;
+  font-size: 18px; /* Reduced font size */
 }
 
 .bannerNote {
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
   font-style: italic;
   margin-top: 9px;
   padding-bottom: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bannerTitle {
+    font-size: 60px; 
+  }
+
+  .bannerTitle2 {
+    font-size: 40px; 
+  }
+
+  .bannerSubtitle {
+    font-size: 16px; 
+  }
+
+  .bannerBackground {
+    padding: 0 40px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .bannerTitle {
+    font-size: 40px; 
+  }
+
+  .bannerTitle2 {
+    font-size: 30px; 
+  }
+
+  .bannerSubtitle {
+    font-size: 14px;
+  }
+
+  .bannerBackground {
+    padding: 0 20px; 
+  }
+
+  .bannerNote {
+    font-size: 12px; 
+  }
 }

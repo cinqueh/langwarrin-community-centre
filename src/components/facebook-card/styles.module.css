@@ -1,0 +1,30 @@
+.facebookEmbedContainer {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .facebookEmbedIframe {
+    border: none;
+    overflow: hidden;
+    width: 100%; 
+    max-width: 800px;
+    height: 850px;
+  }
+  
+  /* Media query for tablet screens */
+  @media (max-width: 768px) {
+    .facebookEmbedIframe {
+      max-width: 600px; 
+      height: 700px;
+    }
+  }
+  
+  /* Media query for mobile screens */
+  @media (max-width: 480px) {
+    .facebookEmbedIframe {
+      max-width: 100%; 
+      height: 500px; 
+    }
+  }
