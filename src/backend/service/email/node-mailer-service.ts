@@ -22,14 +22,16 @@ export default class NodeMailerService implements IEmailServiceAdapter {
         return NodeMailerService.instance;
     }
 
-    public async sendEmail(to: string, subject: string, text: string): Promise<void> {
-        const mailOptions = {
-            from: process.env.GMAIL_USER,
-            to,
-            subject,
-            text,
-        };
-
-        await this.transporter.sendMail(mailOptions);
+    async sendEmail(to: string, subject: string, text: string): Promise<void> {
+        try {
+            await this.transporter.sendMail({
+                from: process.env.GMAIL_USER,
+                to,
+                subject,
+                text,
+            });
+        } catch (error) {
+            console.error(`Error sending email: ${(error as Error).toString()}`);
+        }
     }
 }
