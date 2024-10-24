@@ -8,6 +8,8 @@ export default class NodeMailerService implements IEmailServiceAdapter {
     private transporter: Transporter;
 
     private constructor() {
+
+      console.log("GMAIL_USER:", process.env.GMAIL_USER);  // Should log your Gmail username
       // Initalise the transporter
       this.transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -15,6 +17,8 @@ export default class NodeMailerService implements IEmailServiceAdapter {
           user: process.env.GMAIL_USER,
           pass: process.env.GMAIL_PASSWORD,
         },
+        logger: true,  // Logs to console
+        debug: true,   // Enable debugging
       });
     }
 
