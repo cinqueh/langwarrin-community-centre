@@ -959,12 +959,6 @@ const childcareFormInputs = [
     defaultValue: "Message",
     helperText: "Enter the placeholder text for the message input.",
   },
-  {
-    name: "submitButtonText",
-    type: "string",
-    defaultValue: "Submit",
-    helperText: "Enter the text for the submit button.",
-  },
 ];
 
 Builder.registerComponent(ChildcareContactForm, {
