@@ -7,7 +7,7 @@ interface InformationCardProps {
   titleAlignment?: "left" | "center";
   descriptionAlignment?: "left" | "center";
   colorScheme?: "darkGreen" | "mediumGreen" | "lightGreen" | "white";
-  minHeight?: string; // Use minHeight instead of height
+  minHeight?: string; 
 }
 
 const InformationCard = (props: InformationCardProps) => {
@@ -31,19 +31,20 @@ const InformationCard = (props: InformationCardProps) => {
 
   return (
     <div className={containerClass} style={{ minHeight }}>
-      {title && <h3 style={{ textAlign: titleAlignment }}>{title}</h3>}
-      {description && (
-        <div className={styles.description}>
-          <p
-            style={{ textAlign: descriptionAlignment }}
-            dangerouslySetInnerHTML={{ __html: description }}
-          ></p>
-        </div>
-      )}
+      <div className={styles.textContent}>
+        {title && <h3 style={{ textAlign: titleAlignment }}>{title}</h3>}
+        {description && (
+          <div className={styles.description}>
+            <p
+              style={{ textAlign: descriptionAlignment }}
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
-
 
 interface InformationCardWithButtonProps extends InformationCardProps {
   buttonText: string;
@@ -59,7 +60,7 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
     colorScheme = "mediumGreen",
     buttonText,
     linkUrl,
-    minHeight = "auto", 
+    minHeight = "auto",
   } = props;
 
   const containerClass =
@@ -70,11 +71,6 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
       : colorScheme === "white"
       ? styles.whiteInformationContainer
       : styles.mediumGreenInformationContainer;
-
-  const buttonClass =
-    colorScheme === "darkGreen" || colorScheme === "mediumGreen"
-      ? "button-white"
-      : "button-green"; 
 
   const isExternalLink = (url: string) =>
     url.startsWith("http") || url.startsWith("//");
@@ -91,7 +87,7 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
     <div className={containerClass} style={{ minHeight }}>
       <div className={styles.contentWrapper}>
         <div className={styles.textContent}>
-          {title && <h4 style={{ textAlign: titleAlignment }}>{title}</h4>}
+          {title && <h3 style={{ textAlign: titleAlignment }}>{title}</h3>}
           {description && (
             <div
               className={styles.description}
@@ -102,7 +98,7 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
           )}
         </div>
         <div className={styles.buttonRight}>
-          <button className={buttonClass} onClick={handleButtonClick}>
+          <button className="button-white" onClick={handleButtonClick}>
             {buttonText}
           </button>
         </div>
