@@ -1,48 +1,35 @@
-
 import nodemailer, { Transporter } from 'nodemailer';
 import IEmailServiceAdapter from './email-adapter';
 
-// Singleton email service
 export default class NodeMailerService implements IEmailServiceAdapter {
     private static instance: NodeMailerService;
     private transporter: Transporter;
 
     private constructor() {
-
-      console.log("GMAIL_USER:", process.env.GMAIL_USER);  // Should log your Gmail username
-      // Initalise the transporter
-      this.transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASSWORD,
-        },
-        logger: true,  // Logs to console
-        debug: true,   // Enable debugging
-      });
+        this.transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASSWORD,
+            },
+        });
     }
 
     public static getInstance(): NodeMailerService {
         if (!NodeMailerService.instance) {
-          NodeMailerService.instance = new NodeMailerService();
+            NodeMailerService.instance = new NodeMailerService();
         }
         return NodeMailerService.instance;
     }
 
-    // Send Email
-    public async sendEmail(to: string, subject: string, text: string) {
+    public async sendEmail(to: string, subject: string, text: string): Promise<void> {
         const mailOptions = {
             from: process.env.GMAIL_USER,
-            to: to,
-            subject: subject,
-            text: text,
+            to,
+            subject,
+            text,
         };
 
-        try {
-            const info = await this.transporter.sendMail(mailOptions);
-            console.log(`Email sent: ${info.response}`);
-        } catch (error) {
-            console.error(`Error sending email: ${error}`);
-        }
+        await this.transporter.sendMail(mailOptions);
     }
 }

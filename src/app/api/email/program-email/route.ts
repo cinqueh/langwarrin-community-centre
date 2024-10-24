@@ -1,30 +1,30 @@
+import IEmailServiceAdapter from '@/backend/service/email/email-adapter'; // Import the email adapter interface
 import NodeMailerService from '@/backend/service/email/node-mailer-service'; // Adjust path as necessary
-import IEmailServiceAdapter from '@/backend/service/email/email-adapter'; // Reference the interface
 
 export async function POST(request: Request) {
     try {
         const { userEmail, formData } = await request.json();
 
-        // Reference the interface instead of the class
+        // Use the interface instead of the class directly
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
         const adminEmail = 'langwarrin.community@gmail.com';
 
         // Email content for admin
         const adminEmailContent = `
-            New membership form submitted:
+            New program enrollment submitted:
             ---------------------------------
+            Program Name: ${formData.programName}
+            Course Source: ${formData.courseSource}
             Title: ${formData.title}
             First Name: ${formData.firstName}
             Last Name: ${formData.lastName}
-            Email: ${formData.email}
             Mobile: ${formData.mobile}
             Home Phone: ${formData.homePhone}
-            Occupation: ${formData.occupation}
-            Apartment: ${formData.apartment || 'N/A'}
-            Address: ${formData.address}
-            Suburb: ${formData.suburb}
-            State: ${formData.state}
-            Postcode: ${formData.postcode}
+            Email: ${formData.email}
+            Gender: ${formData.gender}
+            Date of Birth: ${formData.dob}
+            Emergency Contact: ${formData.emergencyFirstName} ${formData.emergencyLastName}, Mobile: ${formData.emergencyMobile}
+            Address: Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}
             ---------------------------------
             Please review the submission details above.
         `;
@@ -33,22 +33,22 @@ export async function POST(request: Request) {
         const clientEmailContent = `
             Dear ${formData.firstName},
 
-            Thank you for submitting your membership form to the Langwarrin Community Centre.
-            
+            Thank you for enrolling in the program "${formData.programName}" at the Langwarrin Community Centre.
+
             Here are the details you submitted:
             ---------------------------------
+            Program Name: ${formData.programName}
+            Course Source: ${formData.courseSource}
             Title: ${formData.title}
             First Name: ${formData.firstName}
             Last Name: ${formData.lastName}
-            Email: ${formData.email}
             Mobile: ${formData.mobile}
             Home Phone: ${formData.homePhone}
-            Occupation: ${formData.occupation}
-            Apartment: ${formData.apartment || 'N/A'}
-            Address: ${formData.address}
-            Suburb: ${formData.suburb}
-            State: ${formData.state}
-            Postcode: ${formData.postcode}
+            Email: ${formData.email}
+            Gender: ${formData.gender}
+            Date of Birth: ${formData.dob}
+            Emergency Contact: ${formData.emergencyFirstName} ${formData.emergencyLastName}, Mobile: ${formData.emergencyMobile}
+            Address: Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}
             ---------------------------------
 
             We will review your submission and get back to you soon.
@@ -60,10 +60,10 @@ export async function POST(request: Request) {
         `;
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, 'New Membership Form Submission', adminEmailContent);
+        await emailService.sendEmail(adminEmail, 'New Program Enrollment Submission', adminEmailContent);
 
         // Send confirmation email to the user
-        await emailService.sendEmail(userEmail, 'Thank you for your membership form submission', clientEmailContent);
+        await emailService.sendEmail(userEmail, 'Thank you for enrolling in our program', clientEmailContent);
 
         return new Response(
             JSON.stringify({ message: 'Emails sent successfully' }),
