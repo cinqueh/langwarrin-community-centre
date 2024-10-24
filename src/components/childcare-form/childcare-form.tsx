@@ -64,62 +64,76 @@ const ChildcareContactForm = (props: ChildcareContactFormProps) => {
     e.preventDefault();
 
     const childDTO = new ChildDTO({
-      childAge: parseInt(formData.childAge),
-      childFirstName: formData.childFirstName,
-      childSurname: formData.childLastName,
+        childAge: parseInt(formData.childAge),
+        childFirstName: formData.childFirstName,
+        childSurname: formData.childLastName,
     });
 
     const personDTO = new PersonDTO({
-      personId: 0,
-      firstName: formData.firstName,
-      surname: formData.lastName,
-      email: formData.email,
-      phoneNumber: formData.mobile,
-      homeNumber: formData.homePhone,
-      occupation: formData.occupation,
+        personId: 0,
+        firstName: formData.firstName,
+        surname: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.mobile,
+        homeNumber: formData.homePhone,
+        occupation: formData.occupation,
     });
 
     const selectedDaysString = formData.selectedDays.join(" ");
 
     const childcareInquiryDTO = new ChildcareInquiryDTO({
-      date: new Date(),
-      person: personDTO,
-      child: childDTO,
-      day: selectedDaysString,
-      program: formData.program,
-      notes: formData.message,
+        date: new Date(),
+        person: personDTO,
+        child: childDTO,
+        day: selectedDaysString,
+        program: formData.program,
+        notes: formData.message,
     });
 
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/enquiry/childcare", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(childcareInquiryDTO),
-      });
+        const response = await fetch("/api/enquiry/childcare", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(childcareInquiryDTO),
+        });
 
-      if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
-      } else {
-        setAlertMessage(
-          "An error occurred while submitting the form. Please try again."
-        );
-        setAlertType("error");
-      }
+        if (response.ok) {
+            // After form submission is successful, send confirmation emails
+            const emailResponse = await fetch("/api/email/childcare-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userEmail: formData.email, // Client's email
+                    formData, // Form data for the email content
+                }),
+            });
+
+            if (emailResponse.ok) {
+                setAlertMessage("Form submitted and emails sent successfully!");
+                setAlertType("success");
+            } else {
+                setAlertMessage("Form submitted, but an error occurred while sending emails.");
+                setAlertType("error");
+            }
+        } else {
+            setAlertMessage("An error occurred while submitting the form. Please try again.");
+            setAlertType("error");
+        }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setAlertMessage(
-        "An error occurred while submitting the form. Please try again."
-      );
-      setAlertType("error");
+        console.error("Error submitting form:", error);
+        setAlertMessage("An error occurred while submitting the form. Please try again.");
+        setAlertType("error");
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
   };
+
 
   return (
     <div className={styles.formContainer}>
