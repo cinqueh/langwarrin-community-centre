@@ -482,7 +482,7 @@ Builder.registerComponent(ProgramTitleCard, {
     {
       name: "backLink",
       type: "string",
-      defaultValue: "/",
+      defaultValue: "/programs",
       helperText: "Enter the URL for the back button link.",
     },
     {

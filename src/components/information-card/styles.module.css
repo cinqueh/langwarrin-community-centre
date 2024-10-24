@@ -24,7 +24,16 @@
   background-color: #EEEDE4;
   padding: 20px;
   box-sizing: border-box;
-  color: #004223;
+  color: #004223; 
+}
+
+.whiteInformationContainer h3,
+.whiteInformationContainer h4 {
+  color: #2B2B2B; 
+}
+
+.whiteInformationContainer p {
+  color: #004223; 
 }
 
 /* Text content and description handling */
