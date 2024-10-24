@@ -108,12 +108,10 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
       });
   
       if (response.ok) {
-        console.log("Room booking submitted successfully!");
         localStorage.clear(); // Clear local storage on success
         window.location.href = "/request-a-room/success"; // Redirect on success
       } else {
         const errorData = await response.json();
-        console.log(roomBookingData);
         console.error("Failed to submit room booking:", errorData);
         setAlertMessage("Failed to submit room booking. Please try again.");
       }
