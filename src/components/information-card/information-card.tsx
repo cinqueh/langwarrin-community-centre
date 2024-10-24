@@ -101,7 +101,7 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
             </div>
           )}
         </div>
-        <div className={`${styles.buttonRight} ${styles.responsiveButton}`}>
+        <div className={styles.buttonRight}>
           <button className={buttonClass} onClick={handleButtonClick}>
             {buttonText}
           </button>

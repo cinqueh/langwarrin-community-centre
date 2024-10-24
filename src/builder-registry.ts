@@ -293,14 +293,16 @@ const formDownloadCardParameters = [
 
 const informationCardParameters = [
   {
+    name: "colorScheme",
+    type: "enum",
+    enum: ["darkGreen", "mediumGreen", "lightGreen", "white"],
+    defaultValue: "mediumGreen",
+    helperText: "Choose the color scheme of the card",
+  },
+  {
     name: "title",
     type: "string",
     defaultValue: "Title",
-  },
-  {
-    name: "description",
-    type: "richText",
-    defaultValue: "Description",
   },
   {
     name: "titleAlignment",
@@ -310,18 +312,16 @@ const informationCardParameters = [
     helperText: "Choose the alignment for the title",
   },
   {
+    name: "description",
+    type: "richText",
+    defaultValue: "Description",
+  },
+  {
     name: "descriptionAlignment",
     type: "enum",
     enum: ["left", "center"],
     defaultValue: "left",
     helperText: "Choose the alignment for the description",
-  },
-  {
-    name: "colorScheme",
-    type: "enum",
-    enum: ["darkGreen", "mediumGreen", "lightGreen", "white"],
-    defaultValue: "mediumGreen",
-    helperText: "Choose the color scheme of the card",
   },
   {
     name: "minHeight", 

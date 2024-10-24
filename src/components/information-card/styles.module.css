@@ -78,14 +78,11 @@
     align-items: center; 
   }
 
-  .textContent {
-    text-align: center;
+  .textContent h4, 
+  .description p {
+    text-align: center !important; 
   }
-
-  .descriptionText {
-    text-align: center; 
-  }
-
+  
   .buttonRight {
     justify-content: center; 
     margin-top: 20px; 
