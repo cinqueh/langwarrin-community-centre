@@ -84,7 +84,7 @@ export async function POST(request: Request) {
         `;
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, 'New Room Booking Submission', adminEmailContent); 
+        await emailService.sendEmail(adminEmail, 'New Room Booking Submission', adminEmailContent);
 
         // Send confirmation email to the user
         await emailService.sendEmail(userEmail, 'Thank you for your room booking', clientEmailContent);
