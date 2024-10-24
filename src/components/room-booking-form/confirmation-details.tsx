@@ -90,10 +90,9 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
       specialRequirements: additionalInfo.specialRequirements,
       willLiquorBeConsumed: additionalInfo.willLiquorBeConsumed === "Yes" ? true : false,
       inquiryDate: new Date(),
-      person: new PersonDTO(personalInfo), 
+      person: new PersonDTO(personalInfo),
     };
 
-    // Instantiate the RoomBookingEnquiryDTO with the data
     const roomBookingEnquiry = new RoomBookingEnquiryDTO(roomBookingData);
 
     setIsLoading(true); 
@@ -104,10 +103,27 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(roomBookingEnquiry), 
+        body: JSON.stringify(roomBookingEnquiry),
       });
-  
+
       if (response.ok) {
+        // Send email after successful booking submission
+        await fetch("/api/email/room-booking-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: personalDetails.email,
+            formData: {
+              roomDetails,
+              personalDetails,
+              additionalInfo,
+              totalAmount
+            }
+          })
+        });
+
         localStorage.clear(); // Clear local storage on success
         window.location.href = "/request-a-room/success"; // Redirect on success
       } else {
@@ -122,6 +138,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
       setIsLoading(false); // Always stop the loading state, whether success or failure
     }
   };
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
