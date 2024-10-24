@@ -1,151 +1,109 @@
-"use client"; // Since you might need client-side interactivity
-
 import React from "react";
 import styles from "./styles.module.css";
 
-interface InformationCardTitleProps {
-  title: string;
-}
-
-// Information Card Title Component
-const LightGreenInformationCardTitle = (props: InformationCardTitleProps) => {
-  return (
-    <div className={styles.lightGreenInformationContainer}>
-      <h3>{props.title}</h3>
-    </div>
-  );
-};
-
-const DarkGreenInformationCardTitle = (props: InformationCardTitleProps) => {
-  return (
-    <div className={styles.darkGreenInformationContainer}>
-      <h3>{props.title}</h3>
-    </div>
-  );
-};
-
 interface InformationCardProps {
-  title: string;
-  description: string;
-  titleAlignment?: "left" | "center";
-  height?: string;
-}
-const WhiteInformationCard = (props: InformationCardProps) => {
-  const {
-    title,
-    description,
-    titleAlignment = "left",
-    height = "auto",
-  } = props;
-
-  return (
-    <div className={styles.whiteInformationContainer}>
-      {/* Conditionally render <h4> only if the title is not empty */}
-      {title && (
-        <h4 className={styles.title} style={{ textAlign: titleAlignment }}>
-          {title}
-        </h4>
-      )}
-      <div className={styles.description} style={{ height }}>
-        <p dangerouslySetInnerHTML={{ __html: description }}></p>
-      </div>
-    </div>
-  );
-};
-
-const LightGreenInformationCard = (props: InformationCardProps) => {
-  const {
-    title,
-    description,
-    titleAlignment = "left",
-    height = "auto",
-  } = props;
-
-  return (
-    <div
-      className={styles.lightGreenInformationContainer}
-      // Set height dynamically from props
-    >
-      {/* Conditionally render <h4> only if the title is not empty */}
-      {title && <h4 style={{ textAlign: titleAlignment }}>{title}</h4>}
-      <div className={styles.description} style={{ height }}>
-        <p dangerouslySetInnerHTML={{ __html: description }}></p>
-      </div>
-    </div>
-  );
-};
-
-const MediumGreenInformationCard = (props: InformationCardProps) => {
-  const {
-    title,
-    description,
-    titleAlignment = "left",
-    height = "auto",
-  } = props;
-
-  return (
-    <div
-      className={styles.mediumGreenInformationContainer}
-      // Set height dynamically from props
-    >
-      {/* Conditionally render <h4> only if the title is not empty */}
-      {title && <h4 style={{ textAlign: titleAlignment }}>{title}</h4>}
-      <div className={styles.description} style={{ height }}>
-        <p dangerouslySetInnerHTML={{ __html: description }}></p>
-      </div>
-    </div>
-  );
-};
-
-const DarkGreenInformationCard = (props: InformationCardProps) => {
-  const {
-    title,
-    description,
-    titleAlignment = "left",
-    height = "auto",
-  } = props;
-
-  return (
-    <div className={styles.darkGreenInformationContainer}>
-      {title && <h4 style={{ textAlign: titleAlignment }}>{title}</h4>}
-      <div className={styles.description} style={{ height }}>
-        <p dangerouslySetInnerHTML={{ __html: description }}></p>
-      </div>
-    </div>
-  );
-};
-
-interface InformationCardWithButtonProps {
-  title: string;
+  title?: string;
   description?: string;
+  titleAlignment?: "left" | "center";
+  descriptionAlignment?: "left" | "center";
+  colorScheme?: "darkGreen" | "mediumGreen" | "lightGreen" | "white";
+  minHeight?: string; // Use minHeight instead of height
+}
+
+const InformationCard = (props: InformationCardProps) => {
+  const {
+    title,
+    description,
+    titleAlignment = "left",
+    descriptionAlignment = "left",
+    colorScheme = "mediumGreen",
+    minHeight = "auto",
+  } = props;
+
+  const containerClass =
+    colorScheme === "darkGreen"
+      ? styles.darkGreenInformationContainer
+      : colorScheme === "lightGreen"
+      ? styles.lightGreenInformationContainer
+      : colorScheme === "white"
+      ? styles.whiteInformationContainer
+      : styles.mediumGreenInformationContainer;
+
+  return (
+    <div className={containerClass} style={{ minHeight }}>
+      {title && <h3 style={{ textAlign: titleAlignment }}>{title}</h3>}
+      {description && (
+        <div className={styles.description}>
+          <p
+            style={{ textAlign: descriptionAlignment }}
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+interface InformationCardWithButtonProps extends InformationCardProps {
   buttonText: string;
   linkUrl: string;
 }
 
 const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
-  const isExternalLink = (url: string) => {
-    return url.startsWith("http") || url.startsWith("//"); 
-  };
+  const {
+    title,
+    description,
+    titleAlignment = "left",
+    descriptionAlignment = "left",
+    colorScheme = "mediumGreen",
+    buttonText,
+    linkUrl,
+    minHeight = "auto", 
+  } = props;
+
+  const containerClass =
+    colorScheme === "darkGreen"
+      ? styles.darkGreenInformationContainer
+      : colorScheme === "lightGreen"
+      ? styles.lightGreenInformationContainer
+      : colorScheme === "white"
+      ? styles.whiteInformationContainer
+      : styles.mediumGreenInformationContainer;
+
+  const buttonClass =
+    colorScheme === "darkGreen" || colorScheme === "mediumGreen"
+      ? "button-white"
+      : "button-green"; 
+
+  const isExternalLink = (url: string) =>
+    url.startsWith("http") || url.startsWith("//");
+
   const handleButtonClick = () => {
-    if (isExternalLink(props.linkUrl)) {
-      window.open(props.linkUrl, "_blank"); // Opens in a new tab for external links
+    if (isExternalLink(linkUrl)) {
+      window.open(linkUrl, "_blank"); // Opens in a new tab for external links
     } else {
-      window.location.href = props.linkUrl; // Internal links open in the same tab
+      window.location.href = linkUrl; // Internal links open in the same tab
     }
   };
+
   return (
-    <div className={styles.lightGreenInformationContainer}>
+    <div className={containerClass} style={{ minHeight }}>
       <div className={styles.contentWrapper}>
         <div className={styles.textContent}>
-          {props.title && <h4>{props.title}</h4>}
-          {/* Conditionally render the description only if it exists */}
-          {props.description && (
-            <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
+          {title && <h4 style={{ textAlign: titleAlignment }}>{title}</h4>}
+          {description && (
+            <div
+              className={styles.description}
+              style={{ textAlign: descriptionAlignment }}
+            >
+              <p dangerouslySetInnerHTML={{ __html: description }}></p>
+            </div>
           )}
         </div>
-        <div className={styles.buttonContainer}>
-          <button className="button-white" onClick={handleButtonClick}>
-            {props.buttonText}
+        <div className={`${styles.buttonRight} ${styles.responsiveButton}`}>
+          <button className={buttonClass} onClick={handleButtonClick}>
+            {buttonText}
           </button>
         </div>
       </div>
@@ -153,12 +111,4 @@ const InformationCardWithButton = (props: InformationCardWithButtonProps) => {
   );
 };
 
-export {
-  LightGreenInformationCardTitle,
-  DarkGreenInformationCardTitle,
-  WhiteInformationCard,
-  LightGreenInformationCard,
-  MediumGreenInformationCard,
-  DarkGreenInformationCard,
-  InformationCardWithButton,
-};
+export { InformationCard, InformationCardWithButton };
