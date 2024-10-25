@@ -33,7 +33,7 @@ export default class BuilderService {
         const limit = 100; // Set a limit to how many pages are fetched per request
     
         while (hasMore) {
-            const url = `${BUILDER_CONTENT_API_URL}/page?apiKey=${process.env.NEXT_PUBLIC_BUILDER_API_KEY}&limit=${limit}&offset=${offset}`;
+            const url = `${BUILDER_CONTENT_API_URL}/page?apiKey=${process.env.NEXT_PUBLIC_BUILDER_API_KEY}&time=${new Date()}&limit=${limit}&offset=${offset}`;
             const res = await fetch(url);
             const data = await res.json();
     
@@ -71,9 +71,7 @@ export default class BuilderService {
 
     public getFirstComponent(page: BuilderPage, componentName: string): BuilderComponent | undefined {
         const searchBlocks = (blocks: BuilderBlock[]): BuilderBlock | undefined => {
-            for (const block of blocks) {
-                console.log(block?.component?.name);
-    
+            for (const block of blocks) {    
                 // If the block matches the component name, return it
                 if (block?.component?.name === componentName) {
                     return block;

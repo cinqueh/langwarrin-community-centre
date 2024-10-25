@@ -26,7 +26,7 @@ const RoomBookingCardLeft: React.FC<RoomBookingCardProps> = (props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainerLeft}>
         <img
           src={props.imageUrl}
           alt={props.altText}
@@ -90,7 +90,7 @@ const RoomBookingCardRight: React.FC<RoomBookingCardProps> = (props) => {
           {props.buttonText}
         </button>
       </div>
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainerRight}>
         <img
           src={props.imageUrl}
           alt={props.altText}

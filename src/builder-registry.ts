@@ -12,18 +12,14 @@ import {
 import { GovernmentCard } from "./components/government-card/government-card";
 import {
   GreenTitleCard,
+  ProgramTitleCard,
   TitleCard,
   TitleCardWithBackButton,
 } from "./components/title-card/title-card";
 import Header from "./components/layout/header";
 import homeimage from "./components/home-image/home-image";
 import {
-  LightGreenInformationCardTitle,
-  DarkGreenInformationCardTitle,
-  DarkGreenInformationCard,
-  MediumGreenInformationCard,
-  LightGreenInformationCard,
-  WhiteInformationCard,
+  InformationCard,
   InformationCardWithButton,
 } from "./components/information-card/information-card";
 import MainBanner from "./components/main-banner/main-banner";
@@ -49,6 +45,7 @@ import { PersonalDetailsForm } from "./components/room-booking-form/personal-inf
 import { ConfirmationForm } from "./components/room-booking-form/confirmation-details";
 import { ProgramEnrollmentForm } from "./components/program-form/program-form";
 import { ContactForm } from "./components/contact-us/contact-us-card";
+import ProgramGrid from "./components/programs/programs-panel";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -296,14 +293,16 @@ const formDownloadCardParameters = [
 
 const informationCardParameters = [
   {
+    name: "colorScheme",
+    type: "enum",
+    enum: ["darkGreen", "mediumGreen", "lightGreen", "white"],
+    defaultValue: "mediumGreen",
+    helperText: "Choose the color scheme of the card",
+  },
+  {
     name: "title",
     type: "string",
     defaultValue: "Title",
-  },
-  {
-    name: "description",
-    type: "richText",
-    defaultValue: "Description",
   },
   {
     name: "titleAlignment",
@@ -313,19 +312,25 @@ const informationCardParameters = [
     helperText: "Choose the alignment for the title",
   },
   {
-    name: "height",
+    name: "description",
+    type: "richText",
+    defaultValue: "Description",
+  },
+  {
+    name: "descriptionAlignment",
+    type: "enum",
+    enum: ["left", "center"],
+    defaultValue: "left",
+    helperText: "Choose the alignment for the description",
+  },
+  {
+    name: "minHeight",
     type: "string",
     defaultValue: "auto",
-    helperText: "Set the height of the card, e.g., '300px' or '100%'",
+    helperText: "Set the min height of the card, e.g., '300px' or '100%'",
   },
 ];
-const informationCardTitleParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Title",
-  },
-];
+
 const titleCardParameters = [
   {
     name: "title",
@@ -463,34 +468,66 @@ Builder.registerComponent(TitleCardWithBackButton, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
-const partnershipSectionParameters = [
-  {
-    name: "title",
-    type: "string",
-    defaultValue: "Our Partnership",
-    helperText: "Title of the partnership section",
-  },
-  {
-    name: "description",
-    type: "string",
-    defaultValue: "We are proud to partner with...",
-    helperText: "Description of the partnership",
-  },
-  {
-    name: "imageUrl",
-    type: "file",
-    allowedFileTypes: ["jpeg", "jpg", "png", "svg"],
-    helperText: "Upload the logo/image for the partnership",
-  },
-  {
-    name: "altText",
-    type: "string",
-    defaultValue: "Partner Logo",
-    helperText: "Alternative text for the image",
-  },
-];
+Builder.registerComponent(ProgramTitleCard, {
+  name: "Program Title Card",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Page Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "backLink",
+      type: "string",
+      defaultValue: "/programs",
+      helperText: "Enter the URL for the back button link.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: [
+        "Further Education / Literacy",
+        "Exercise, Health & Wellbeing",
+        "Craft, Hobby & Fun",
+        "Community",
+        "Children & Youth",
+      ], // Dropdown values
+      defaultValue: "Further Education / Literacy", // Default value
+      friendlyName: "Program Category",
+    },
+  ],
+});
+
+Builder.registerComponent(ProgramGrid, {
+  name: "Dynamic Program Card Grid",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Title",
+      helperText: "Edit the title for the card.",
+    },
+    {
+      name: "category",
+      type: "string",
+      enum: [
+        "Further Education / Literacy",
+        "Exercise, Health & Wellbeing",
+        "Craft, Hobby & Fun",
+        "Community",
+        "Children & Youth",
+      ],
+      defaultValue: "/",
+      helperText: "Enter the URL for the back button link.",
+    },
+  ],
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+});
+
 // Header
 // Register Header component with the section model
 
@@ -542,12 +579,6 @@ Builder.registerComponent(FacebookEmbed, {
   name: "Facebook Embed",
 });
 
-Builder.registerComponent(DarkGreenInformationCardTitle, {
-  name: "Dark Green Information Card Title",
-  inputs: informationCardTitleParameters,
-});
-// Programs components
-
 const informationCardWithButtonParameters = [
   {
     name: "title",
@@ -562,38 +593,52 @@ const informationCardWithButtonParameters = [
   {
     name: "buttonText",
     type: "string",
-    defaultValue: "Book Online Now",
+    defaultValue: "Click Here",
   },
   {
     name: "linkUrl",
     type: "string",
     defaultValue: "#",
   },
+  {
+    name: "titleAlignment",
+    type: "enum",
+    enum: ["left", "center"],
+    defaultValue: "left",
+    helperText: "Choose the alignment for the title",
+  },
+  {
+    name: "descriptionAlignment",
+    type: "enum",
+    enum: ["left", "center"],
+    defaultValue: "left",
+    helperText: "Choose the alignment for the description",
+  },
+  {
+    name: "colorScheme",
+    type: "enum",
+    enum: ["darkGreen", "mediumGreen", "lightGreen"],
+    defaultValue: "mediumGreen",
+    helperText: "Choose the color scheme of the card",
+  },
+  {
+    name: "minHeight",
+    type: "string",
+    defaultValue: "auto",
+    helperText: "Set the min height of the card, e.g., '300px' or '100%'",
+  },
 ];
 
 Builder.registerComponent(InformationCardWithButton, {
   name: "Information Card With Button",
   inputs: informationCardWithButtonParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
-Builder.registerComponent(DarkGreenInformationCard, {
-  name: "Dark Green Information Card",
+Builder.registerComponent(InformationCard, {
+  name: "Information Card",
   inputs: informationCardParameters,
-});
-
-Builder.registerComponent(MediumGreenInformationCard, {
-  name: "Medium Green Information Card",
-  inputs: informationCardParameters,
-});
-
-Builder.registerComponent(LightGreenInformationCard, {
-  name: "Light Green Information Card",
-  inputs: informationCardParameters,
-});
-
-Builder.registerComponent(WhiteInformationCard, {
-  name: "White Information Card",
-  inputs: informationCardParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(divider, {
@@ -603,11 +648,13 @@ Builder.registerComponent(divider, {
 Builder.registerComponent(ProgramImageCard, {
   name: "Program Image Card (with padding)",
   inputs: programImageCardParameters,
+   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(ImageCard, {
   name: "Image Card (without padding)",
   inputs: programImageCardParameters,
+   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(DarkGreenProgramCard, {
@@ -633,21 +680,19 @@ Builder.registerComponent(FormDownloadCard, {
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
   inputs: titleCardParameters,
-});
-
-Builder.registerComponent(LightGreenInformationCardTitle, {
-  name: "Light Green Information Card Title",
-  inputs: informationCardTitleParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(RoomBookingCardLeft, {
   name: "Room Booking Card Left",
   inputs: roomBookingParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(RoomBookingCardRight, {
   name: "Room Booking Card Right",
   inputs: roomBookingParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 // Register the component in Builder.io
 
@@ -923,12 +968,6 @@ const childcareFormInputs = [
     defaultValue: "Message",
     helperText: "Enter the placeholder text for the message input.",
   },
-  {
-    name: "submitButtonText",
-    type: "string",
-    defaultValue: "Submit",
-    helperText: "Enter the text for the submit button.",
-  },
 ];
 
 Builder.registerComponent(ChildcareContactForm, {
@@ -1014,44 +1053,6 @@ Builder.registerComponent(RoomDetailsFormForm, {
 Builder.registerComponent(AdditionalInfoForm, {
   name: "Additional Info Form",
   inputs: [
-    {
-      name: "fields",
-      type: "list",
-      defaultValue: [
-        { question: "What is your name?", inputType: "text", required: true },
-        { question: "What is your age?", inputType: "text", required: true },
-      ],
-      subFields: [
-        {
-          name: "question",
-          type: "string",
-          helperText: "The question to display.",
-        },
-        {
-          name: "inputType",
-          type: "enum",
-          enum: ["text", "select"],
-          helperText: "The input type for the answer.",
-        },
-        {
-          name: "options",
-          type: "list",
-          subFields: [
-            {
-              name: "option",
-              type: "string",
-              helperText: "Enter the options for select input.",
-            },
-          ],
-          showIf: (options: any) => options.get("inputType") === "select",
-        },
-        {
-          name: "required",
-          type: "boolean",
-          helperText: "Is this field required?",
-        },
-      ],
-    },
     {
       name: "linkUrl",
       type: "string",
@@ -1179,18 +1180,6 @@ Builder.registerComponent(ProgramEnrollmentForm, {
       helperText: "Edit the title for the Program Information section.",
     },
     {
-      name: "programOptions",
-      type: "list",
-      subFields: [
-        {
-          name: "option",
-          type: "string",
-          defaultValue: "Program 1",
-        },
-      ],
-      helperText: "List of program options to display in the dropdown",
-    },
-    {
       name: "contactInfoTitle",
       type: "string",
       defaultValue: "Contact Information",
@@ -1249,12 +1238,6 @@ Builder.registerComponent(ProgramEnrollmentForm, {
         "I declare that I am 18 OR have guardian consent if under 18.",
       helperText: "Edit the label for the age declaration checkbox.",
     },
-    {
-      name: "linkUrl",
-      type: "string",
-      defaultValue: "/",
-      helperText: "Enter the URL for the button link.",
-    },
   ],
 });
 
@@ -1290,6 +1273,26 @@ Builder.registerComponent(ContactForm, {
   ],
 });
 
+// information cards
+Builder.register("insertMenu", {
+  name: "Information Cards",
+  items: [
+    { name: "Information Card" },
+    { name: "Information Card With Button" },
+  ],
+});
+
+// program cards
+Builder.register("insertMenu", {
+  name: "Program Cards",
+  items: [
+    { name: "Dynamic Program Card Grid" },
+    { name: "Dark Green Program Card" },
+    { name: "Medium Green Program Card" },
+    { name: "Light Green Program Card" },
+  ],
+});
+
 // room booking cards
 Builder.register("insertMenu", {
   name: "Room Booking Cards",
@@ -1298,28 +1301,7 @@ Builder.register("insertMenu", {
     { name: "Room Booking Card Right" },
   ],
 });
-// information cards
-Builder.register("insertMenu", {
-  name: "Information Cards",
-  items: [
-    { name: "Light Green Information Card Title" },
-    { name: "Dark Green Information Card Title" },
-    { name: "White Information Card" },
-    { name: "Light Green Information Card" },
-    { name: "Medium Green Information Card" },
-    { name: "Dark Green Information Card" },
-    { name: "Information Card With Button" },
-  ],
-});
-// program cards
-Builder.register("insertMenu", {
-  name: "Program Cards",
-  items: [
-    { name: "Dark Green Program Card" },
-    { name: "Medium Green Program Card" },
-    { name: "Light Green Program Card" },
-  ],
-});
+
 Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
@@ -1330,7 +1312,12 @@ Builder.register("insertMenu", {
 
 Builder.register("insertMenu", {
   name: "Custom Forms",
-  items: [{ name: "Membership Form" }, { name: "Childcare Form" }],
+  items: [
+    { name: "Membership Form" },
+    { name: "Childcare Form" },
+    { name: "Program Enrollment Form" },
+    { name: "ContactForm" },
+  ],
 });
 
 Builder.register("insertMenu", {
@@ -1347,8 +1334,21 @@ Builder.register("insertMenu", {
 Builder.register("insertMenu", {
   name: "Title Cards",
   items: [
-    { name: "Green Title Card" },
-    { name: "Title Card" },
     { name: "Title Card With Back Button" },
+    { name: "Title Card" },
+    { name: "Green Title Card" },
+    { name: "Program Title Card" },
+  ],
+});
+
+Builder.register("insertMenu", {
+  name: "Home Page Components",
+  items: [
+    { name: "Green News Card" },
+    { name: "White News Card" },
+    { name: "White Feature Card" }, // program, childcare and room hire on home page
+    { name: "MainBanner" },
+    { name: "BackgroundSection" },
+    { name: "Facebook Embed" },
   ],
 });

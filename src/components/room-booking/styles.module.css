@@ -1,22 +1,29 @@
 .container {
   display: flex;
   background-color: #38603A; 
-  padding: 20px;
   color: #ffffff;
   align-items: center;
+  margin: 0 -40px;
+  padding: 50px 40px;
 }
 
 .containerRight {
   display: flex;
   background-color: #EEEDE4; 
-  padding: 20px;
   color: #004223; 
   align-items: center;
+  margin: 0 -40px;
+  padding: 50px 40px;
 }
 
-.imageContainer {
+.imageContainerLeft {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 40px;
+}
+
+.imageContainerRight {
+  flex: 1;
+  margin-left: 20px;
 }
 
 .image {
@@ -25,16 +32,17 @@
 }
 
 .header {
-  font-size: 26px;
-  margin-bottom: 10px;
-  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .capacity {
   font-size: 20px;
-  color: #9f9f9f; 
-  margin-left: 10px;
-  font-weight: bolder;
+  white-space: nowrap; 
+  margin-left: 10px; 
 }
 
 .content {
@@ -48,26 +56,61 @@
   font-size: 18px;
 }
 
-.buttonLight {
-  background-color: #EEEDE4;
-  color: #004223;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 20px;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-  margin-top: 20px;
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+  .container, .containerRight {
+    flex-direction: column; 
+    padding: 20px; 
+  }
+
+  .imageContainerLeft, .imageContainerRight {
+    order: -1;
+    margin: 0 0 20px 0; 
+  }
+
+  .header {
+    font-size: 24px; 
+  }
+
+  .capacity {
+    font-size: 16px;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+  .description {
+    font-size: 16px; 
+  }
+
+  .content button {
+    display: block;
+    margin: 20px auto 0 auto; 
+  }
 }
 
-.buttonDark {
-  background-color: #004223;
-  color: #EEEDE4;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 20px;
+@media (max-width: 480px) {
+  .container, .containerRight {
+    padding: 10px; 
+  }
+
+  .imageContainerLeft, .imageContainerRight {
+    margin: 0 0 30px 0; 
+  }
+
+  .header {
+    font-size: 20px; 
+  }
+
+  .capacity {
+    font-size: 14px; 
+  }
+
+  .description {
+    font-size: 14px; 
+  }
+
+  .content button {
+    margin: 15px auto 0 auto; 
+  }
 }

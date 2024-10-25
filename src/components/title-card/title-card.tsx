@@ -1,6 +1,5 @@
 "use client"; // Since you might need client-side interactivity
 
-import Link from "next/link";
 import React from "react";
 import styles from "./styles.module.css"; // Importing the CSS Module
 
@@ -47,4 +46,7 @@ const TitleCardWithBackButton = (props: TitleCardWithBackButtonProps) => {
   );
 };
 
-export { GreenTitleCard, TitleCardWithBackButton, TitleCard };
+
+const ProgramTitleCard = TitleCardWithBackButton
+
+export { GreenTitleCard, TitleCardWithBackButton, TitleCard, ProgramTitleCard };

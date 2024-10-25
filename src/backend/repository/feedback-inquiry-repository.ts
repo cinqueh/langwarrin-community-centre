@@ -1,8 +1,9 @@
 import { FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
+import FormRepository from "./base-repository";
 import BaseRepository from "./base-repository";
 
-export default class FeedbackInquiryRepository extends BaseRepository {
+export default class FeedbackInquiryRepository extends FormRepository {
 
     public async addFeedbackInquiry(inquiry: FeedbackInquiryDTO) {
 

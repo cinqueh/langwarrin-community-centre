@@ -70,7 +70,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
+
     if (!agreedToTerms) {
       setAlertMessage("Please agree to the terms and conditions.");
       setAlertType("error");
@@ -114,8 +114,25 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
       });
 
       if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
+        // After successfully submitting the form, trigger the email sending
+        const emailResponse = await fetch("/api/email/membership-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: formData.email, // The client's email
+            formData, // The form data containing all the details
+          }),
+        });
+
+        if (emailResponse.ok) {
+          setAlertMessage("Form submitted and emails sent successfully!");
+          setAlertType("success");
+        } else {
+          setAlertMessage("Form submitted, but an error occurred while sending emails.");
+          setAlertType("error");
+        }
       } else {
         setAlertMessage(
           "An error occurred while submitting the form. Please try again."
@@ -123,7 +140,6 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
         setAlertType("error");
       }
     } catch (error) {
-      // console.error("Error submitting form:", error);
       setAlertMessage(
         "An error occurred while submitting the form. Please try again."
       );

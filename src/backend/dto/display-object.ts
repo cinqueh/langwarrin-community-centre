@@ -2,7 +2,9 @@ import { Column } from "react-table";
 import { MemberDTO } from "./member";
 import { Member } from "../mapper/member-mapper";
 
-export type ColumnAdapter<T extends object> = Column<T>
+export type ColumnAdapter<T extends object> = Column<T> & {
+    editable?: boolean;
+}
 
 // for displaying a single entity
 export type DisplayData<T extends DisplayObject> = {
@@ -72,3 +74,18 @@ export type RoomBookingDisplayObject = DisplayObject & {
     willLiquorBeConsumed: string; // Display as 'Yes' or 'No'
     notes?: string;
 }
+// New Program Course Inquiry Display Object
+export type ProgramCourseInquiryDisplayObject = InquiryDisplayObject & {
+    emergencyContactName: string; // Combined emergencyFirstName and emergencySurName
+    emergencyNumber: string;
+    programName: string;
+    howHeardAboutProgram: string;
+}
+
+export type ChildcareInquiryDisplayObject = InquiryDisplayObject & {
+    childName: string;       // Full name of the child
+    childAge: number;        // Age of the child
+    day: string;             // Day of the program
+    program: string;         // Name of the program
+};
+ 

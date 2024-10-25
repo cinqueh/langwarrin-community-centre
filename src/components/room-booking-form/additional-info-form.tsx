@@ -4,23 +4,23 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 interface AdditionalInfoFormProps {
-  fields: {
-    question: string;
-    inputType: string;
-    options?: { option: string }[];
-    required: boolean;
-  }[];
   linkUrl: string;
 }
 
-const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({
-  fields,
-  linkUrl,
-}) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({ linkUrl }) => {
+  const [formData, setFormData] = useState({
+    hirePurpose: "",
+    forOrganisation: "",
+    organisationName: "",
+    organisationAddress: "",
+    estimatedAttendance: "",
+    specialRequirements: "",
+    willLiquorBeConsumed: "",
+    howHearAboutSpace: "",
+  });
 
   useEffect(() => {
-    const savedFormData = localStorage.getItem("AdditionalInfoFormData");
+    const savedFormData = localStorage.getItem("additionalInfoFormData");
     if (savedFormData) {
       setFormData(JSON.parse(savedFormData));
     }
@@ -30,66 +30,140 @@ const AdditionalInfoForm: React.FC<AdditionalInfoFormProps> = ({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleNextClick = () => {
-    const missingRequiredFields = fields.some(
-      (field) => field.required && !formData[field.question]
-    );
-
-    if (missingRequiredFields) {
-      alert("Please fill out all required fields.");
-    } else {
-      localStorage.setItem("AdditionalInfoFormData", JSON.stringify(formData));
-      window.location.href = linkUrl;
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem("additionalInfoFormData", JSON.stringify(formData));
+    window.location.href = linkUrl;
   };
 
   return (
-    <div className={styles.additionalInfoFormContainer}>
-      {fields.map((field, index) => (
-        <div key={index} className={styles.additionalInfoInputGroup}>
-          <label>
-            {field.question}
-            {field.required && (
-              <span className={styles.additionalInfoRequired}> *</span>
-            )}
-          </label>
-          {field.inputType === "select" ? (
-            <select
-              name={field.question}
-              value={formData[field.question] || ""}
-              onChange={handleInputChange}
-              required={field.required}
-            >
-              <option value="">--</option>
-              {field.options &&
-                field.options.map((optionObj, idx) => (
-                  <option key={idx} value={optionObj.option}>
-                    {optionObj.option}
-                  </option>
-                ))}
-            </select>
-          ) : (
+    <form
+      className={styles.additionalInfoFormContainer}
+      onSubmit={handleSubmit}
+    >
+      <div className={styles.additionalInfoInputGroup}>
+        <label>
+          Purpose of the hire
+          <span className={styles.additionalInfoRequired}> *</span>
+        </label>
+        <input
+          type="text"
+          name="hirePurpose"
+          value={formData.hirePurpose}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label style={{ marginTop: "20px" }}>
+          Are you booking for an organisation?
+          <span className={styles.additionalInfoRequired}> *</span>
+        </label>
+        <select
+          name="forOrganisation"
+          value={formData.forOrganisation}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="">--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      {/* Conditionally display organisation address if "Yes" is selected */}
+      {formData.forOrganisation === "Yes" && (
+        <>
+          <div className={styles.additionalInfoInputGroup}>
+            <label>What is your organisation name?</label>
             <input
               type="text"
-              name={field.question}
-              value={formData[field.question] || ""}
+              name="organisationName"
+              value={formData.organisationName}
               onChange={handleInputChange}
-              required={field.required}
             />
-          )}
-        </div>
-      ))}
+          </div>
+          <div className={styles.additionalInfoInputGroup}>
+            <label>If yes, what is your organisation address?</label>
+            <input
+              type="text"
+              name="organisationAddress"
+              value={formData.organisationAddress}
+              onChange={handleInputChange}
+            />
+          </div>
+        </>
+      )}
+
+      <div className={styles.additionalInfoInputGroup}>
+        <label>
+          Number Attending
+          <span className={styles.additionalInfoRequired}> *</span>
+        </label>
+        <input
+          type="number"
+          name="estimatedAttendance"
+          value={formData.estimatedAttendance}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className={styles.additionalInfoInputGroup}>
+        <label>Special Requirements</label>
+        <input
+          type="text"
+          name="specialRequirements"
+          value={formData.specialRequirements}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label style={{ marginTop: "20px" }}>
+          Will liquor be consumed at this function?
+          <span className={styles.additionalInfoRequired}> *</span>
+        </label>
+        <select
+          name="willLiquorBeConsumed"
+          value={formData.willLiquorBeConsumed}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="">--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Not Sure">Not Sure</option>
+        </select>
+      </div>
+
+      <div className={styles.additionalInfoInputGroup}>
+        <label>
+          How did you hear about the space?
+          <span className={styles.additionalInfoRequired}> *</span>
+        </label>
+        <input
+          type="text"
+          name="howHearAboutSpace"
+          value={formData.howHearAboutSpace}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
       <button
+        type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
-        onClick={handleNextClick}
       >
         Save
       </button>
-    </div>
+    </form>
   );
 };
 

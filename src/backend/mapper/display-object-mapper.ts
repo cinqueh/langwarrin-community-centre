@@ -1,6 +1,7 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, RoomBookingDisplayObject} from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, RoomBookingEnquiryDTO } from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, RoomBookingDisplayObject, ProgramCourseInquiryDisplayObject, ChildcareInquiryDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, RoomBookingEnquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO} from "../dto/inquiry";
+import { ChildDTO} from "../dto/childcare/child";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
 import Mapper from "./mapper";
@@ -13,16 +14,26 @@ abstract class DisplayDataMapper<S, T extends DisplayObject> implements Mapper<S
     protected formatAddress(address: AddressDTO | undefined): string {
         return address?.toString() ?? '';
     }
-    protected formatDate(date: Date | undefined): string {
-        return date?.toLocaleString('en-AU', {
+    protected formatDate(date: Date | string | undefined): string {
+        if (!date) {
+            return '';
+        }
+        let dateObj: Date;
+        if (typeof date === 'string') {
+            dateObj = new Date(date);
+        } else {
+            dateObj = date;
+        }
+        return dateObj.toLocaleString('en-AU', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
-          }) ?? ''
+        });
     }
+    
     protected formatField(field: any): string {
         return field ?? '';
     }
@@ -141,6 +152,7 @@ export class GeneralInquiryDisplayObjectMapper extends DisplayDataMapper<General
             {
                 Header: 'Notes',
                 accessor: 'notes',
+                editable: true
             }
         ];
     }
@@ -190,16 +202,17 @@ export class FeedbackInquiryDisplayObjectMapper extends DisplayDataMapper<Feedba
                 accessor: 'phoneNumber',
             },
             {
-                Header: 'Notes',
-                accessor: 'notes',
-            },
-            {
                 Header: 'Program Name',
                 accessor: 'programName'
             },
             {
                 Header: 'Feedback',
                 accessor: 'feedback'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+                editable: true,
             }
         ];
     }
@@ -245,10 +258,6 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
                 accessor: 'phoneNumber',
             },
             {
-                Header: 'Notes',
-                accessor: 'notes',
-            },
-            {
                 Header: 'Program Name',
                 accessor: 'programName'
             },
@@ -259,11 +268,17 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
             {
                 Header: 'Suggested Solution',
                 accessor: 'suggestedSolution'
+            },
+            {
+                Header: 'Notes',
+                accessor: 'notes',
+                editable: true,
             }
         ];
     }
 }
 
+// RoomBookingDisplayObjectMapper for mapping RoomBookingEnquiryDTO to RoomBookingDisplayObject
 export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookingEnquiryDTO, RoomBookingDisplayObject> {
     protected override mapDisplayObject(roomBooking: RoomBookingEnquiryDTO): RoomBookingDisplayObject {
         return {
@@ -292,82 +307,94 @@ export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookin
 
     protected override getColumns(): ColumnAdapter<RoomBookingDisplayObject>[] {
         return [
-            {
-                Header: 'ID',
-                accessor: 'id',
-            },
-            {
-                Header: 'Name',
-                accessor: 'name',
-            },
-            {
-                Header: 'Email',
-                accessor: 'email',
-            },
-            {
-                Header: 'Booking Date',
-                accessor: 'bookingDate',
-            },
-            {
-                Header: 'Booking Start Time',
-                accessor: 'bookingStartTime',
-            },
-            {
-                Header: 'Booking End Time',
-                accessor: 'bookingEndTime',
-            },
-            {
-                Header: 'Room Name',
-                accessor: 'roomName',
-            },
-            {
-                Header: 'Hire Type',
-                accessor: 'hireType',
-            },
-            {
-                Header: 'Purpose of Hire',
-                accessor: 'purposeOfHire',
-            },
-            {
-                Header: 'Is this booking for organisation?',
-                accessor: 'isOrganisationBooking',
-            },
-            {
-                Header: 'Organisation Name',
-                accessor: 'organisationName',
-            },
-            {
-                Header: 'Organisation Address',
-                accessor: 'organisationAddress',
-            },
-            {
-                Header: 'Other Companies Involved',
-                accessor: 'otherCompaniesInvolved',
-            },
-            {
-                Header: 'Company Details',
-                accessor: 'companyDetails',
-            },
-            {
-                Header: 'Estimated Attendance',
-                accessor: 'numberAttending',
-            },
-            {
-                Header: 'How Did You Hear about this venue?',
-                accessor: 'howDidYouHear',
-            },
-            {
-                Header: 'Special Requirements',
-                accessor: 'specialRequirements',
-            },
-            {
-                Header: 'Will liquor be consumed?',
-                accessor: 'willLiquorBeConsumed',
-            },
-            {
-                Header: 'Notes',
-                accessor: 'notes',
-            }
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Booking Date', accessor: 'bookingDate' },
+            { Header: 'Booking Start Time', accessor: 'bookingStartTime' },
+            { Header: 'Booking End Time', accessor: 'bookingEndTime' },
+            { Header: 'Room Name', accessor: 'roomName' },
+            { Header: 'Hire Type', accessor: 'hireType' },
+            { Header: 'Purpose of Hire', accessor: 'purposeOfHire' },
+            { Header: 'Is this booking for organisation?', accessor: 'isOrganisationBooking' },
+            { Header: 'Organisation Name', accessor: 'organisationName' },
+            { Header: 'Organisation Address', accessor: 'organisationAddress' },
+            { Header: 'Other Companies Involved', accessor: 'otherCompaniesInvolved' },
+            { Header: 'Company Details', accessor: 'companyDetails' },
+            { Header: 'Estimated Attendance', accessor: 'numberAttending' },
+            { Header: 'How Did You Hear?', accessor: 'howDidYouHear' },
+            { Header: 'Special Requirements', accessor: 'specialRequirements' },
+            { Header: 'Will liquor be consumed?', accessor: 'willLiquorBeConsumed' },
+            { Header: 'Notes', accessor: 'notes' }
         ];
     }
 }
+
+// ProgramCourseInquiryDisplayObjectMapper for mapping ProgramCourseInquiryDTO to ProgramCourseInquiryDisplayObject
+export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<ProgramCourseInquiryDTO, ProgramCourseInquiryDisplayObject> {
+    protected override mapDisplayObject(inquiry: ProgramCourseInquiryDTO): ProgramCourseInquiryDisplayObject {
+        return {
+            id: inquiry.inquiryId ?? 0,
+            header: this.formatName(inquiry?.person),
+            name: this.formatField(inquiry?.person?.firstName) + " " + this.formatField(inquiry?.person?.surname),
+            email: this.formatField(inquiry?.person?.email),
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber),
+            date: this.formatDate(inquiry?.date),
+            emergencyContactName: this.formatField(inquiry?.emergencyFirstName) + " " + this.formatField(inquiry?.emergencySurName),
+            emergencyNumber: this.formatField(inquiry?.emergencyNumber),
+            programName: this.formatField(inquiry?.programName),
+            howHeardAboutProgram: this.formatField(inquiry?.howHeardAboutProgram),
+            notes: this.formatField(inquiry?.notes),
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<ProgramCourseInquiryDisplayObject>[] {
+        return [
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Phone Number', accessor: 'phoneNumber' },
+            { Header: 'Inquiry Date', accessor: 'date' },
+            { Header: 'Emergency Contact Name', accessor: 'emergencyContactName' },
+            { Header: 'Emergency Contact Number', accessor: 'emergencyNumber' },
+            { Header: 'Program Name', accessor: 'programName' },
+            { Header: 'How did you hear?', accessor: 'howHeardAboutProgram' },
+            { Header: 'Notes', accessor: 'notes', editable: true, }
+        ];
+    }
+}
+
+// ChildcareInquiryDisplayObjectMapper for mapping ChildcareInquiryDTO to ChildcareInquiryDisplayObject
+export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<ChildcareInquiryDTO, ChildcareInquiryDisplayObject> {
+    protected override mapDisplayObject(inquiry: ChildcareInquiryDTO): ChildcareInquiryDisplayObject {
+        return {
+            id: inquiry.inquiryId as number,
+            header: this.formatName(inquiry?.person),
+            name: this.formatName(inquiry?.person),
+            email: this.formatField(inquiry?.person?.email),
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber),
+            date: this.formatDate(inquiry?.date),
+            notes: this.formatField(inquiry.notes),
+            childName: this.formatField(inquiry.child.childFirstName) + " " + this.formatField(inquiry.child.childSurname),
+            childAge: inquiry.child?.childAge || 0,
+            day: this.formatField(inquiry.day),
+            program: this.formatField(inquiry.program),
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<ChildcareInquiryDisplayObject>[] {
+        return [
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Phone Number', accessor: 'phoneNumber' },
+            { Header: 'Inquiry Date', accessor: 'date' },
+            { Header: 'Child Name', accessor: 'childName' },
+            { Header: 'Child Age', accessor: 'childAge' },
+            { Header: 'Day', accessor: 'day' },
+            { Header: 'Program Name', accessor: 'program' },
+            { Header: 'Notes', accessor: 'notes' }
+        ];
+    }
+}
+
