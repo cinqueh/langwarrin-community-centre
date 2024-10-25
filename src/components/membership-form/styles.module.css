@@ -146,3 +146,38 @@
   background-color: #d6d6c2;
   color: #1a1a1a;
 }
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+  .membershipForm {
+    padding: 20px; 
+  }
+
+  .nameInputGroup,
+  .inputGroup,
+  .suburbInputGroup {
+    grid-template-columns: 1fr; 
+  }
+
+  .membershipForm input,
+  .membershipForm select,
+  .membershipForm textarea {
+    font-size: 18px; 
+  }
+
+  .title {
+    font-size: 28px; 
+  }
+
+  .subtitle, .sectionTitle {
+    font-size: 18px; 
+  }
+
+  .checkBoxGroup label {
+    font-size: 18px;
+  }
+
+  .mobilePrefix {
+    font-size: 18px; 
+  }
+}
