@@ -324,9 +324,9 @@ const informationCardParameters = [
     helperText: "Choose the alignment for the description",
   },
   {
-    name: "minHeight", 
+    name: "minHeight",
     type: "string",
-    defaultValue: "auto", 
+    defaultValue: "auto",
     helperText: "Set the min height of the card, e.g., '300px' or '100%'",
   },
 ];
@@ -468,6 +468,7 @@ Builder.registerComponent(TitleCardWithBackButton, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(ProgramTitleCard, {
@@ -524,6 +525,7 @@ Builder.registerComponent(ProgramGrid, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 // Header
@@ -620,9 +622,9 @@ const informationCardWithButtonParameters = [
     helperText: "Choose the color scheme of the card",
   },
   {
-    name: "minHeight", 
+    name: "minHeight",
     type: "string",
-    defaultValue: "auto", 
+    defaultValue: "auto",
     helperText: "Set the min height of the card, e.g., '300px' or '100%'",
   },
 ];
@@ -630,11 +632,13 @@ const informationCardWithButtonParameters = [
 Builder.registerComponent(InformationCardWithButton, {
   name: "Information Card With Button",
   inputs: informationCardWithButtonParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(InformationCard, {
   name: "Information Card",
   inputs: informationCardParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(divider, {
@@ -644,11 +648,13 @@ Builder.registerComponent(divider, {
 Builder.registerComponent(ProgramImageCard, {
   name: "Program Image Card (with padding)",
   inputs: programImageCardParameters,
+   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(ImageCard, {
   name: "Image Card (without padding)",
   inputs: programImageCardParameters,
+   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(DarkGreenProgramCard, {
@@ -674,16 +680,19 @@ Builder.registerComponent(FormDownloadCard, {
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
   inputs: titleCardParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(RoomBookingCardLeft, {
   name: "Room Booking Card Left",
   inputs: roomBookingParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(RoomBookingCardRight, {
   name: "Room Booking Card Right",
   inputs: roomBookingParameters,
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 // Register the component in Builder.io
 
@@ -1264,14 +1273,6 @@ Builder.registerComponent(ContactForm, {
   ],
 });
 
-// room booking cards
-Builder.register("insertMenu", {
-  name: "Room Booking Cards",
-  items: [
-    { name: "Room Booking Card Left" },
-    { name: "Room Booking Card Right" },
-  ],
-});
 // information cards
 Builder.register("insertMenu", {
   name: "Information Cards",
@@ -1280,16 +1281,27 @@ Builder.register("insertMenu", {
     { name: "Information Card With Button" },
   ],
 });
+
 // program cards
 Builder.register("insertMenu", {
   name: "Program Cards",
   items: [
+    { name: "Dynamic Program Card Grid" },
     { name: "Dark Green Program Card" },
     { name: "Medium Green Program Card" },
     { name: "Light Green Program Card" },
-    { name: "Dynamic Program Card Grid" },
   ],
 });
+
+// room booking cards
+Builder.register("insertMenu", {
+  name: "Room Booking Cards",
+  items: [
+    { name: "Room Booking Card Left" },
+    { name: "Room Booking Card Right" },
+  ],
+});
+
 Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
@@ -1304,6 +1316,7 @@ Builder.register("insertMenu", {
     { name: "Membership Form" },
     { name: "Childcare Form" },
     { name: "Program Enrollment Form" },
+    { name: "ContactForm" },
   ],
 });
 
@@ -1321,9 +1334,21 @@ Builder.register("insertMenu", {
 Builder.register("insertMenu", {
   name: "Title Cards",
   items: [
-    { name: "Green Title Card" },
-    { name: "Title Card" },
     { name: "Title Card With Back Button" },
+    { name: "Title Card" },
+    { name: "Green Title Card" },
     { name: "Program Title Card" },
+  ],
+});
+
+Builder.register("insertMenu", {
+  name: "Home Page Components",
+  items: [
+    { name: "Green News Card" },
+    { name: "White News Card" },
+    { name: "White Feature Card" }, // program, childcare and room hire on home page
+    { name: "MainBanner" },
+    { name: "BackgroundSection" },
+    { name: "Facebook Embed" },
   ],
 });
