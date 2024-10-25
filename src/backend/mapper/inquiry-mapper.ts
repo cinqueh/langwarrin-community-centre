@@ -10,6 +10,8 @@ import Mapper from "./mapper";
 import { Person, PersonMapper } from "./person-mapper";
 import {Child, ChildMapper} from "./childcare-mapper"
 import { ChildDTO } from "../dto/childcare/child";
+import { PersonDTO } from "../dto/person";
+
 
 export type Inquiry = {
   inquiryid: number;
@@ -135,29 +137,38 @@ export class ProgramCourseInquiryMapper implements Mapper<ProgramCourseInquiry, 
   }
 }
 
-// Childcare Inquiry Mapper
-export class ChildcareInquiryMapper implements Mapper<ChildcareInquiry, ChildcareInquiryDTO> {
-  private personMapper = new PersonMapper();
-  private childMapper = new ChildMapper();
+export class ChildcareInquiryMapper implements Mapper<any, ChildcareInquiryDTO> {
+    public mapTo(entity: any): ChildcareInquiryDTO {
+        const personData = entity.person || {};
+        const person = new PersonDTO({
+            personId: personData.personid,
+            firstName: personData.firstname,
+            surname: personData.surname,
+            email: personData.email,
+            phoneNumber: personData.phonenumber,
+        });
 
-  public mapTo(inquiry: ChildcareInquiry): ChildcareInquiryDTO {
-    return new ChildcareInquiryDTO({
-      date: new Date(inquiry?.inquiry?.time),  // Directly access the date field from ChildcareInquiry
-      person: this.personMapper.mapTo(inquiry.person),  // Map person
-      child: this.childMapper.mapTo({
-        childid: inquiry.child.childId!,  // Map child data
-        childage: inquiry.child.childAge,
-        childfirstname: inquiry.child.childFirstName,
-        childsurname: inquiry.child.childSurname,
-      }),
-      day: inquiry.day,         // Directly map the day field
-      program: inquiry.program, // Directly map the program field
-      inquiryId: inquiry.inquiryid,
-      notes: inquiry.notes || undefined,  // Map optional notes field
-    });
-  }
+        const childData = entity.child || {};
+        const child = new ChildDTO({
+            childId: childData.childid,
+            childAge: childData.childage,
+            childFirstName: childData.childfirstname,
+            childSurname: childData.childsurname,
+        });
+
+        const date = new Date(entity.date);
+
+        return new ChildcareInquiryDTO({
+            inquiryId: entity.inquiryid,
+            date: date,
+            person: person,
+            child: child,
+            notes: entity.notes,
+            day: entity.day,
+            program: entity.program,
+        });
+    }
 }
-
 
 
 export class ComplaintInquiryMapper implements Mapper<ComplaintInquiry, ComplaintInquiryDTO> {
