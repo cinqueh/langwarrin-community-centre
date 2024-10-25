@@ -1,7 +1,6 @@
 "use client"; // Since you might need client-side interactivity
 
 import React from "react";
-import styles from "./programs-card.module.css"; // Importing the CSS Module
 
 interface FormDownloadCardProps {
   title: string;

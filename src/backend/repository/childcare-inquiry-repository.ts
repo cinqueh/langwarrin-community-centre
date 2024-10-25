@@ -6,22 +6,17 @@ export default class ChildcareInquiryRepository extends BaseRepository {
     const client = this.getSupabaseClient();
 
     const addInquiryData = {
-      _date: inquiry?.date?.toISOString(),
-      _firstname: inquiry?.person?.firstName,
-      _surname: inquiry?.person?.surname,
-      _email: inquiry?.person?.email,
-      _phonenumber: inquiry?.person?.phoneNumber,
-      _childfirstname: inquiry.child?.childFirstName, // New: Add child’s first name
-      _childsurname: inquiry.child?.childSurname, // New: Add child’s surname
-      _childage: inquiry.child?.childAge, // New: Add child’s age
-      _childcareprogramid: inquiry.childcareProgram?.childcareProgramId || null, // Access childcareProgramId from the childcareProgram object
-      _childcaresessionid: inquiry.childcareSession?.childcareSessionId || null, // Access childcareSessionId from the childcareSession object
-      _notes: inquiry.notes || null,
-      _state: inquiry?.person?.address?.state, // New: Add state from address
-      _streetaddress: inquiry?.person?.address?.streetAddress, // New: Add street address
-      _apartment: inquiry?.person?.address?.apartment || null, // New: Add apartment if present
-      _suburb: inquiry?.person?.address?.suburb, // New: Add suburb
-      _postcode: inquiry?.person?.address?.postcode, // New: Add postcode
+      _date: inquiry?.date?.toISOString(),                // Capture inquiry date
+      _firstname: inquiry?.person?.firstName,             // Person's first name
+      _surname: inquiry?.person?.surname,                 // Person's last name
+      _email: inquiry?.person?.email,                     // Person's email
+      _phonenumber: inquiry?.person?.phoneNumber,         // Person's phone number
+      _childfirstname: inquiry.child?.childFirstName,     // Child's first name
+      _childsurname: inquiry.child?.childSurname,         // Child's last name
+      _childage: inquiry.child?.childAge,                 // Child's age
+      _day: inquiry.day,                                  // Program day
+      _program: inquiry.program,                          // Program name
+      _notes: inquiry.notes || null                       // Optional notes
     };
 
     return await client.rpc("add_childcare_inquiry", addInquiryData);
@@ -30,49 +25,39 @@ export default class ChildcareInquiryRepository extends BaseRepository {
   public override async get(id: number) {
     const client = this.getSupabaseClient();
 
-    return await client
+    // Fetch a single childcare inquiry by id
+    const response = await client
       .from("childcareinquiry")
       .select(`
-                *,
-                inquiry (
-                    *,
-                    person (
-                        *
-                    ),
-                    child (
-                        *
-                    ),
-                    childcareprogram (
-                        *
-                    ),
-                    childcaresession (
-                        *
-                    )
-                )
-              `)
+        *,
+        person (
+            *
+        ),
+        child (
+            *
+        )
+      `)
       .eq("inquiryid", id);
+
+    // Return the fetched data
+    return response;
   }
 
   public async getAll() {
     const client = this.getSupabaseClient();
 
-    return await client.from("childcareinquiry").select(`
-                *,
-                inquiry (
-                    *,
-                    person (
-                        *
-                    ),
-                    child (
-                        *
-                    ),
-                    childcareprogram (
-                        *
-                    ),
-                    childcaresession (
-                        *
-                    )
-                )
-              `);
+    // Fetch all childcare inquiries, including related person and child data
+    const response = await client.from("childcareinquiry").select(`
+      *,
+      person (
+          *
+      ),
+      child (
+          *
+      )
+    `);
+
+    // Return the fetched data
+    return response;
   }
 }

@@ -1,3 +1,4 @@
+/* Base styles for the form */
 .formContainer {
   background-color: #004223;
   padding: 20px 40px;
@@ -126,4 +127,34 @@
 .formContainer select option:hover {
   background-color: #D6D6C2; 
   color: #1A1A1A;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+  .inputGroup {
+    grid-template-columns: 1fr; /* Stack inputs on smaller screens */
+  }
+
+  .addressInputGroup {
+    grid-template-columns: 1fr; /* Stack address fields on smaller screens */
+  }
+
+  .formContainer label,
+  .formContainer input,
+  .formContainer select,
+  .formContainer textarea {
+    font-size: 18px; /* Reduce font size for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer input,
+  .formContainer select,
+  .formContainer textarea {
+    font-size: 16px; /* Further reduce font size for very small screens */
+  }
+
+  .formContainer button {
+    font-size: 16px;
+  }
 }

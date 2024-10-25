@@ -160,3 +160,55 @@ p {
   border: 1px solid red;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 80px;
+  }
+
+  h2 {
+    font-size: 45px; 
+  }
+
+  h3 {
+    font-size: 28px; 
+  }
+
+  h4 {
+    font-size: 22px; 
+  }
+
+  h5, p {
+    font-size: 18px; 
+  }
+
+  .button-green, .button-white {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 60px; 
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 24px; 
+  }
+
+  h4 {
+    font-size: 18px; 
+  }
+
+  h5, p {
+    font-size: 16px; 
+  }
+
+  .button-green, .button-white {
+    font-size: 14px; 
+  }
+}

@@ -93,63 +93,77 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
     e.preventDefault();
 
     const personInfo = {
-      personId: 0,
-      firstName: formData.firstName,
-      surname: formData.lastName,
-      email: formData.email,
-      phoneNumber: formData.mobile,
-      homeNumber: formData.homePhone,
-      occupation: "",
-      address: new AddressDTO({
-        state: formData.state,
-        streetAddress: formData.streetName,
-        apartment: formData.unitNo,
-        suburb: formData.city,
-        postcode: formData.postalCode,
-      }),
+        personId: 0,
+        firstName: formData.firstName,
+        surname: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.mobile,
+        homeNumber: formData.homePhone,
+        occupation: "",
+        address: new AddressDTO({
+            state: formData.state,
+            streetAddress: formData.streetName,
+            apartment: formData.unitNo,
+            suburb: formData.city,
+            postcode: formData.postalCode,
+        }),
     };
 
     const programCourseInquiryDTO = new ProgramCourseInquiryDTO({
-      date: new Date(),
-      person: new PersonDTO(personInfo),
-      programName: formData.programName,
-      emergencyFirstName: formData.emergencyFirstName,
-      emergencySurName: formData.emergencyLastName,
-      emergencyNumber: formData.emergencyMobile,
-      howHeardAboutProgram: formData.courseSource,
+        date: new Date(),
+        person: new PersonDTO(personInfo),
+        programName: formData.programName,
+        emergencyFirstName: formData.emergencyFirstName,
+        emergencySurName: formData.emergencyLastName,
+        emergencyNumber: formData.emergencyMobile,
+        howHeardAboutProgram: formData.courseSource,
     });
 
     setIsLoading(true);
 
-    // Send form data to backend API
+    // Send form data to backend API (save program enrollment)
     try {
-      const response = await fetch("/api/enquiry/programcourse", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(programCourseInquiryDTO),
-      });
+        const response = await fetch("/api/enquiry/programcourse", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(programCourseInquiryDTO),
+        });
 
-      if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
-      } else {
-        setAlertMessage(
-          "An error occurred while submitting the form. Please try again."
-        );
-        setAlertType("error");
-      }
+        if (response.ok) {
+            // After form submission is successful, send confirmation emails
+            const emailResponse = await fetch("/api/email/program-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userEmail: formData.email, // Client's email
+                    formData, // Form data for the email content
+                }),
+            });
+
+            if (emailResponse.ok) {
+                setAlertMessage("Form submitted and emails sent successfully!");
+                setAlertType("success");
+            } else {
+                setAlertMessage("Form submitted, but an error occurred while sending emails.");
+                setAlertType("error");
+            }
+        } else {
+            setAlertMessage("An error occurred while submitting the form. Please try again.");
+            setAlertType("error");
+        }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      setAlertMessage(
-        "An error occurred while submitting the form. Please try again."
-      );
-      setAlertType("error");
+        console.error("Error submitting form:", error);
+        setAlertMessage("An error occurred while submitting the form. Please try again.");
+        setAlertType("error");
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-  };
+};
+
 
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit}>

@@ -1,63 +1,90 @@
-/* Container for information (without padding) */
-.whiteInformationContainer {
-  padding: 20px;
-  box-sizing: border-box;
-}
-
+/* General styles for the container based on color scheme */
 .lightGreenInformationContainer {
   background-color: #638b66;
   padding: 20px;
   box-sizing: border-box;
-  color: #EFEEE5;
-}
-
-.darkGreenInformationContainer {
-  background-color: #004223;
-  padding: 20px;
-  box-sizing: border-box;
-  color: #EFEEE5;
+  color: #efeee5;
 }
 
 .mediumGreenInformationContainer {
   background-color: #38603a;
   padding: 20px;
   box-sizing: border-box;
-  color: #EFEEE5;
+  color: #efeee5;
 }
 
-.description {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
+.darkGreenInformationContainer {
+  background-color: #004223;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #efeee5;
 }
 
-.description p {
-  margin: 0;
-  text-align: left; 
+.whiteInformationContainer {
+  background-color: #EEEDE4;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #004223; 
 }
 
-.whiteInformationContainer .title {
+.whiteInformationContainer h3,
+.whiteInformationContainer h4 {
   color: #2B2B2B; 
 }
 
-.whiteInformationContainer .description p {
-  color: #38603A; 
+.whiteInformationContainer p {
+  color: #004223; 
 }
 
-/* style for information card with button */
+/* Text content and description handling */
+.textContent {
+  text-align: left;
+}
+
+.description {
+  display: block;
+  width: 100%;
+}
+
+.descriptionText.left {
+  text-align: left;
+}
+
+.descriptionText.center {
+  text-align: center;
+}
+
+/* Button styles */
+.buttonRight {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  height: 100%; 
+  text-align: right;
+}
+
+/* Layout for content and button */
 .contentWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
-.textContent {
-  flex: 4;
-  text-align: left;
-}
+/* Media query for medium and small screens */
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column; 
+    align-items: center; 
+  }
 
-.buttonContainer {
-  flex: 1;
-  text-align: right;
+  .textContent h3, 
+  .description p {
+    text-align: center !important; 
+  }
+  
+  .buttonRight {
+    justify-content: center; 
+    margin-top: 20px; 
+  }
 }
