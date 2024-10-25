@@ -1,7 +1,5 @@
 import { AddressDTO, PersonDTO } from "./person";
-import { ChildcareSessionDTO } from "./childcare/childcaresession"; // Import from childcare folder
 import { ChildDTO } from "./childcare/child"; // Import child DTO for Childcare Inquiry
-import { ChildcareProgramDTO } from "./childcare/childcareprogram"; // Import childcare program DTO for Childcare Inquiry
 
 export class InquiryDTO {
   inquiryId?: number;
@@ -87,42 +85,25 @@ export class ProgramCourseInquiryDTO extends InquiryDTO {
   }
 }
 
-// Childcare Inquiry with child, childcare program and session details
+// Childcare Inquiry extends InquiryDTO
 export class ChildcareInquiryDTO extends InquiryDTO {
-  child: ChildDTO; 
-  childcareProgram?: ChildcareProgramDTO; 
-  childcareSession?: ChildcareSessionDTO; 
+  child: ChildDTO;
+  day: string;      // The day of the program they are asking about
+  program: string;  // The program they are asking about
 
   constructor(data: {
     date: Date,
     person: PersonDTO,
     child: ChildDTO,
-    childcareProgram?: ChildcareProgramDTO,
-    childcareSession?: ChildcareSessionDTO,
+    day: string,     // The day of the program
+    program: string, // The program they are asking about
     inquiryId?: number,
-    notes?: string
+    notes?: string,
   }) {
-    super(data);
+    super(data);  // Call the base constructor
     this.child = data.child;
-    this.childcareProgram = data.childcareProgram;
-    this.childcareSession = data.childcareSession;
-  }
-}
-
-// Childcare Inquiry Session with childcare session details
-export class ChildcareInquirySessionDTO {
-  inquiryId: number;
-  childId: number;
-  childcareSessionId: number;
-
-  constructor(data: {
-    inquiryId: number;
-    childId: number;
-    childcareSessionId: number;
-  }) {
-    this.inquiryId = data.inquiryId;
-    this.childId = data.childId;
-    this.childcareSessionId = data.childcareSessionId;
+    this.day = data.day;       // Set day
+    this.program = data.program; // Set program
   }
 }
 

@@ -168,7 +168,7 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
     formData.hireType,
     formData.startTime,
     formData.endTime,
-    formData.date, // Make sure the date is included in the dependencies
+    formData.date, 
     selectedRoom,
   ]);
 
@@ -191,19 +191,50 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
 
   return (
     <form className={styles.bookingFormContainer} onSubmit={handleNextClick}>
-      {/* Room and Hire Type Row */}
-      <div className={styles.inputGroup}>
-        <label>{props.roomLabel}</label>
-        <label>
-          {props.hireTypeLabel}
-          <span
-            className={styles.infoIcon}
-            title="Show hire types"
-            onClick={() => setShowInfo(!showInfo)}
+      {/* Room and Hire Type Group */}
+      <div className={styles.columnGroup}>
+        {/* Room Group */}
+        <div className={styles.formGroup}>
+          <label>{props.roomLabel}</label>
+          <select
+            name="room"
+            value={formData.room}
+            onChange={handleInputChange}
+            required
           >
-            ℹ️
-          </span>
-        </label>
+            <option value="">--</option>
+            {rooms.map((room, index) => (
+              <option key={index} value={room.roomName}>
+                {room.roomName}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Hire Type Group */}
+        <div className={styles.formGroup}>
+          <label>
+            {props.hireTypeLabel}
+            <span
+              className={styles.infoIcon}
+              title="Show hire types"
+              onClick={() => setShowInfo(!showInfo)}
+            >
+              ℹ️
+            </span>
+          </label>
+          <select
+            name="hireType"
+            value={formData.hireType}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">--</option>
+            <option value="Casual Hirers">Casual Hirers</option>
+            <option value="Permanent Hirers">Permanent Hirers</option>
+            <option value="Community Groups">Community Groups</option>
+          </select>
+        </div>
       </div>
 
       {showInfo && (
@@ -212,63 +243,41 @@ const RoomDetailsFormForm = (props: RoomDetailsFormProps) => {
           dangerouslySetInnerHTML={{ __html: props.hireTypeInfo }}
         />
       )}
-      <div className={styles.inputGroup}>
-        <select
-          name="room"
-          value={formData.room}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">--</option>
-          {rooms.map((room, index) => (
-            <option key={index} value={room.roomName}>
-              {room.roomName}
-            </option>
-          ))}
-        </select>
 
-        <select
-          name="hireType"
-          value={formData.hireType}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">--</option>
-          <option value="Casual Hirers">Casual Hirers</option>
-          <option value="Permanent Hirers">Permanent Hirers</option>
-          <option value="Community Groups">Community Groups</option>
-        </select>
-      </div>
-
-      {/* Date and Time Row */}
-      <div className={styles.inputGroup}>
-        <label>{props.dateLabel}</label>
-        <label>{props.timeLabel}</label>
-      </div>
-      <div className={styles.inputGroup}>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleInputChange}
-          required
-        />
-        <div className={styles.timeInputGroup}>
+      {/* Date and Time Group */}
+      <div className={styles.columnGroup}>
+        {/* Date Group */}
+        <div className={styles.formGroup}>
+          <label>{props.dateLabel}</label>
           <input
-            type="time"
-            name="startTime"
-            value={formData.startTime}
+            type="date"
+            name="date"
+            value={formData.date}
             onChange={handleInputChange}
             required
           />
-          <span>to</span>
-          <input
-            type="time"
-            name="endTime"
-            value={formData.endTime}
-            onChange={handleInputChange}
-            required
-          />
+        </div>
+
+        {/* Time Group */}
+        <div className={styles.formGroup}>
+          <label>{props.timeLabel}</label>
+          <div className={styles.timeInputGroup}>
+            <input
+              type="time"
+              name="startTime"
+              value={formData.startTime}
+              onChange={handleInputChange}
+              required
+            />
+            <span>to</span>
+            <input
+              type="time"
+              name="endTime"
+              value={formData.endTime}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
         </div>
       </div>
 
