@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
                 Message: ${formData.message}
 
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
+                This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
                 
                 Best regards,
                 Langwarrin Community Centre
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
 
                 Feedback Message: ${formData.feedbackMessage}
 
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
+                This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
 
                 Best regards,
                 Langwarrin Community Centre
@@ -120,7 +120,7 @@ export async function POST(request: Request) {
                 Complaints Reason: ${formData.complaintsReason}
                 Suggested Solution: ${formData.complaintsSolution}
 
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
+                This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
 
                 Best regards,
                 Langwarrin Community Centre

@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
             We will review your submission and get back to you soon.
 
-            This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
+            This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
 
             Best regards,
             Langwarrin Community Centre
