@@ -47,7 +47,14 @@ const TableComponent = <T extends object>({ data, columns, descriptor, linkedUrl
             </button>
           </div>
         </div>
-        <TableComponentInner data={data} columns={visibleColumns} searchQuery={searchQuery} linkedUrl={linkedUrl} />
+        <div className={styles.tableContent}>
+        <TableComponentInner
+          data={data}
+          columns={visibleColumns}
+          searchQuery={searchQuery}
+          linkedUrl={linkedUrl}
+        />
+      </div>
       </div>
     );
 }
