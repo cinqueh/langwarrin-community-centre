@@ -22,7 +22,7 @@ This project aims to develop a full-stack website for Langwarrin community centr
 - **Design Tool:** Figma
 
 ### Architecture Diagram
-![Screen Shot 2024-09-24 at 8 52 06 PM](https://github.com/user-attachments/assets/7a2e43dc-4d83-4f28-aad5-b508c4071e42)
+![20f980d2-7810-4335-b0d1-b9bed9267b93](https://github.com/user-attachments/assets/269a8628-4dd7-4d51-b17f-2434ef7f9944)
 
 ### Front-End Design
 - [Brand Kit](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4587524/Mock-Ups)
@@ -38,11 +38,11 @@ This project aims to develop a full-stack website for Langwarrin community centr
 
 
 ## [Team Roles](https://comp30022.atlassian.net/wiki/spaces/SD/pages/426021/Team+Managment)
-- **Zhen Liu:** Backend Developer, Product Owner
-- **Cinque Howells:** Backend Lead, Scrum Master
-- **Aarushi Dua:** Lead Designer, Backend Developer
-- **Cindy Shi:** Designer, Frontend Lead
-- **Noel Abraham:** Designer, Frontend Developer, Minute Taker
+- **Zhen Liu:** Product Owner, Backend Engineer
+- **Cinque Howells:** Scrum Master, DevOps Engineer
+- **Aarushi Dua:** UX Designer, Database Admin
+- **Cindy Shi:** UI Designer, Frontend Engineer
+- **Noel Abraham:** UX Designer, Frontend Engineer
 
 ## Getting Started
 1. Ensure you have Node.js and npm installed.
