@@ -1,3 +1,43 @@
+# [1.2.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.2...v1.2.0) (2024-10-25)
+
+
+### Bug Fixes
+
+* [IT-288] API cache + font issue for admin portal ([#75](https://github.com/cinqueh/langwarrin-community-centre/issues/75)) ([e0ed3d8](https://github.com/cinqueh/langwarrin-community-centre/commit/e0ed3d830abcac606f0a1453e5eba96d52ec978a))
+* [IT-345] Updated package-lock and fixed naming of form service ([#78](https://github.com/cinqueh/langwarrin-community-centre/issues/78)) ([7f22fe9](https://github.com/cinqueh/langwarrin-community-centre/commit/7f22fe9cc5bb9a3af0d805eb811cf821d3ec3fcc))
+
+
+### Features
+
+* [IT-150] Added individual view for submitted forms ([#56](https://github.com/cinqueh/langwarrin-community-centre/issues/56)) ([f341214](https://github.com/cinqueh/langwarrin-community-centre/commit/f3412147b274f62e21aeffaedddfcb75fc761725))
+* [IT-150] Changed mapping structure for admin display objects ([#54](https://github.com/cinqueh/langwarrin-community-centre/issues/54)) ([b24a38a](https://github.com/cinqueh/langwarrin-community-centre/commit/b24a38a8a87be86311b71e0a6841b045a4e609bc))
+* [IT-152] Added dynamic table component to visualise form requests ([a8ad51c](https://github.com/cinqueh/langwarrin-community-centre/commit/a8ad51c091292745565cf3f4f0043e31196b7e24))
+* [IT-223] Added header links + redirect to home page ([#38](https://github.com/cinqueh/langwarrin-community-centre/issues/38)) ([6cfa0ef](https://github.com/cinqueh/langwarrin-community-centre/commit/6cfa0ef00e866d7ac497ae60a19649ba56b4caab))
+* [IT-247] Added display for general inquiries ([#59](https://github.com/cinqueh/langwarrin-community-centre/issues/59)) ([63b9c2e](https://github.com/cinqueh/langwarrin-community-centre/commit/63b9c2e7d4910ad55e731a473f73e9818b3d0598))
+* [IT-248] Add view for feedback inquiries ([#60](https://github.com/cinqueh/langwarrin-community-centre/issues/60)) ([d082e61](https://github.com/cinqueh/langwarrin-community-centre/commit/d082e61bd5246c24976639649b5e816f2f5ef43e))
+* [IT-251] Added admin pages to view complaints ([#57](https://github.com/cinqueh/langwarrin-community-centre/issues/57)) ([7a28590](https://github.com/cinqueh/langwarrin-community-centre/commit/7a28590aeba58f4a7c18bc61704db026dd692a4c))
+* [IT-252] Linked up admin header ([#58](https://github.com/cinqueh/langwarrin-community-centre/issues/58)) ([c6ea4ee](https://github.com/cinqueh/langwarrin-community-centre/commit/c6ea4ee2aaf792500d3aa3f735bcf0ff9bb12c24))
+* [IT-253] Styled and polished authentication page ([dc277dc](https://github.com/cinqueh/langwarrin-community-centre/commit/dc277dcee3dec7d3bd781a8464556513937a022c))
+* [IT-280] Added get API for all programs ([#63](https://github.com/cinqueh/langwarrin-community-centre/issues/63)) ([fd9b287](https://github.com/cinqueh/langwarrin-community-centre/commit/fd9b2874f1d65bb5150b085c9b5f127da75b56dc))
+* [IT-282] Added email service ([#65](https://github.com/cinqueh/langwarrin-community-centre/issues/65)) ([c0788dc](https://github.com/cinqueh/langwarrin-community-centre/commit/c0788dc2337d57da75a160faf14d48a8f66d8f34))
+* [IT-283] Notes can be edited for inquiries in admin portal ([#66](https://github.com/cinqueh/langwarrin-community-centre/issues/66)) ([e44ccac](https://github.com/cinqueh/langwarrin-community-centre/commit/e44ccacbc7ad14df820025ce17b4c695421f15a2))
+* [IT-286] Added a dynamic program component ([#73](https://github.com/cinqueh/langwarrin-community-centre/issues/73)) ([c3e3d8e](https://github.com/cinqueh/langwarrin-community-centre/commit/c3e3d8e85f6cca19355f023ad3c50fe7b6033ed5))
+* recommiting for deployment ([e29f609](https://github.com/cinqueh/langwarrin-community-centre/commit/e29f6092f4e2b022e67a7a6419be84225f4080c5))
+
+## [1.1.2](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.1...v1.1.2) (2024-10-25)
+
+
+### Bug Fixes
+
+* [IT-355] Merge conflicts dealing ([#84](https://github.com/cinqueh/langwarrin-community-centre/issues/84)) ([a319555](https://github.com/cinqueh/langwarrin-community-centre/commit/a3195551129b4fd395ad549c3477a6e92f02fc42))
+
+## [1.1.1](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.0...v1.1.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* Incorrect package lock, remerged previous changes ([0f66820](https://github.com/cinqueh/langwarrin-community-centre/commit/0f668208f25a81fdb55cc6607f5fcaf799840949))
+
 # [1.1.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.0.0...v1.1.0) (2024-10-22)
 
 
