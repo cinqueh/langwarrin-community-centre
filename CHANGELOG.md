@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.1...v1.1.2) (2024-10-25)
+
+
+### Bug Fixes
+
+* [IT-355] Merge conflicts dealing ([#84](https://github.com/cinqueh/langwarrin-community-centre/issues/84)) ([a319555](https://github.com/cinqueh/langwarrin-community-centre/commit/a3195551129b4fd395ad549c3477a6e92f02fc42))
+
 ## [1.1.1](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.0...v1.1.1) (2024-10-22)
 
 
