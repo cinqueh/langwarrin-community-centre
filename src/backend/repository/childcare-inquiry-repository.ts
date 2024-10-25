@@ -45,19 +45,23 @@ export default class ChildcareInquiryRepository extends BaseRepository {
 
   public async getAll() {
     const client = this.getSupabaseClient();
-
+  
     // Fetch all childcare inquiries, including related person and child data
     const response = await client.from("childcareinquiry").select(`
       *,
-      person (
-          *
+      inquiry (
+          *,
+          person (
+              *
+          )
       ),
       child (
           *
       )
     `);
-
+  
     // Return the fetched data
     return response;
   }
+  
 }

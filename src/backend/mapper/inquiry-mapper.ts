@@ -138,37 +138,39 @@ export class ProgramCourseInquiryMapper implements Mapper<ProgramCourseInquiry, 
 }
 
 export class ChildcareInquiryMapper implements Mapper<any, ChildcareInquiryDTO> {
-    public mapTo(entity: any): ChildcareInquiryDTO {
-        const personData = entity.person || {};
-        const person = new PersonDTO({
-            personId: personData.personid,
-            firstName: personData.firstname,
-            surname: personData.surname,
-            email: personData.email,
-            phoneNumber: personData.phonenumber,
-        });
+  public mapTo(entity: any): ChildcareInquiryDTO {
+    const inquiryData = entity.inquiry || {};
+    const personData = inquiryData.person || {};
+    const person = new PersonDTO({
+      personId: personData.personid,
+      firstName: personData.firstname,
+      surname: personData.surname,
+      email: personData.email,
+      phoneNumber: personData.phonenumber,
+    });
 
-        const childData = entity.child || {};
-        const child = new ChildDTO({
-            childId: childData.childid,
-            childAge: childData.childage,
-            childFirstName: childData.childfirstname,
-            childSurname: childData.childsurname,
-        });
+    const childData = entity.child || {};
+    const child = new ChildDTO({
+      childId: childData.childid,
+      childAge: childData.childage,
+      childFirstName: childData.childfirstname,
+      childSurname: childData.childsurname,
+    });
 
-        const date = new Date(entity.date);
+    const date = new Date(inquiryData.time);  // Correctly accessing the date
 
-        return new ChildcareInquiryDTO({
-            inquiryId: entity.inquiryid,
-            date: date,
-            person: person,
-            child: child,
-            notes: entity.notes,
-            day: entity.day,
-            program: entity.program,
-        });
-    }
+    return new ChildcareInquiryDTO({
+      inquiryId: entity.inquiryid,
+      date: date,
+      person: person,
+      child: child,
+      notes: inquiryData.notes,  // Access notes from inquiryData
+      day: entity.day,
+      program: entity.program,
+    });
+  }
 }
+
 
 
 export class ComplaintInquiryMapper implements Mapper<ComplaintInquiry, ComplaintInquiryDTO> {
