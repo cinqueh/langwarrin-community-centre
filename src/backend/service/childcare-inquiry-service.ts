@@ -20,7 +20,14 @@ export default class ChildcareInquiryService extends DatabaseService<
   }
 
   public async getAllInquiries() {
-    return await this.repository.getAll();  // Fetch all inquiries
+    const response = await this.repository.getAll();
+    return this.handleResponse(response, (data) => {
+        if (Array.isArray(data)) {
+            return data.map(this.mapper.mapTo);
+        } else {
+            return [];
+        }
+    });
   }
 
   public async getInquiryById(id: number) {

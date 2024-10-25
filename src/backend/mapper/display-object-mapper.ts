@@ -14,16 +14,26 @@ abstract class DisplayDataMapper<S, T extends DisplayObject> implements Mapper<S
     protected formatAddress(address: AddressDTO | undefined): string {
         return address?.toString() ?? '';
     }
-    protected formatDate(date: Date | undefined): string {
-        return date?.toLocaleString('en-AU', {
+    protected formatDate(date: Date | string | undefined): string {
+        if (!date) {
+            return '';
+        }
+        let dateObj: Date;
+        if (typeof date === 'string') {
+            dateObj = new Date(date);
+        } else {
+            dateObj = date;
+        }
+        return dateObj.toLocaleString('en-AU', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
-          }) ?? ''
+        });
     }
+    
     protected formatField(field: any): string {
         return field ?? '';
     }
