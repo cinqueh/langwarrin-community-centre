@@ -5,13 +5,18 @@ This project aims to develop a full-stack website for Langwarrin community centr
 
 ## [Tech Stack](https://comp30022.atlassian.net/wiki/spaces/SD/pages/950306/Tech+Stack)
 
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAF)
+![image](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![image](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)
+![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+
 - **Frontend Framework:** Next.js, React, TypeScript
-- **Backend:** Node.js (with Express.js if applicable)
+- **Backend:** Next.js
 - **Deployment:** Vercel (for frontend and full-stack deployment)
 - **Content Management:** Builder.io (for client to easily update website content)
-- **Database:** Amazon RDS (Relational Database for Membership Forms and Submissions)
-- **File Storage:** AWS S3 Buckets (for PDF and other file storage)
-- **Email Integration:** SendGrid (for sending automated emails and notifications)
+- **Database:** Supabase (Relational Database for Form Submissions)
+- **Email Integration:** MailHog & Gmail (for sending automated emails and notifications)
 - **CI/CD:** GitHub and Vercel (for continuous integration and deployment)
 - **Testing:** Jest (for unit testing)
 - **Design Tool:** Figma
