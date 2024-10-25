@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.0...v1.1.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* Incorrect package lock, remerged previous changes ([0f66820](https://github.com/cinqueh/langwarrin-community-centre/commit/0f668208f25a81fdb55cc6607f5fcaf799840949))
+
 # [1.1.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.0.0...v1.1.0) (2024-10-22)
 
 
