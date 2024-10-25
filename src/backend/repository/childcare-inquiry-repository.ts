@@ -17,11 +17,11 @@ export default class ChildcareInquiryRepository extends BaseRepository {
       _childcareprogramid: inquiry.childcareProgram?.childcareProgramId || null, // Access childcareProgramId from the childcareProgram object
       _childcaresessionid: inquiry.childcareSession?.childcareSessionId || null, // Access childcareSessionId from the childcareSession object
       _notes: inquiry.notes || null,
-      _state: inquiry?.person.address?.state, // New: Add state from address
-      _streetaddress: inquiry?.person.address?.streetAddress, // New: Add street address
-      _apartment: inquiry?.person.address?.apartment || null, // New: Add apartment if present
-      _suburb: inquiry?.person.address?.suburb, // New: Add suburb
-      _postcode: inquiry?.person.address?.postcode, // New: Add postcode
+      _state: inquiry?.person?.address?.state, // New: Add state from address
+      _streetaddress: inquiry?.person?.address?.streetAddress, // New: Add street address
+      _apartment: inquiry?.person?.address?.apartment || null, // New: Add apartment if present
+      _suburb: inquiry?.person?.address?.suburb, // New: Add suburb
+      _postcode: inquiry?.person?.address?.postcode, // New: Add postcode
     };
 
     return await client.rpc("add_childcare_inquiry", addInquiryData);

@@ -1,0 +1,106 @@
+.tableContainer {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 24px;
+  font-family: 'Prompt', sans-serif;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #2B2B2B;
+}
+
+.tableTitle {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: flex-end;
+}
+
+.iconGroup {
+  margin-right: 8px;
+}
+
+.tableActions {
+  display: flex;
+  align-items: center;
+}
+
+.filterButton,
+.downloadButton {
+  background-color: #fff;
+  border: 1px solid #004223;
+  color: #004223;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.filterButton i,
+.downloadButton i {
+  margin-left: 4px;
+}
+
+.searchInput {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.styledTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.styledTable th,
+.styledTable td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.styledTable th {
+  /* background-color: #f7f7f7; */
+  padding-top: 20px;
+  font-weight: bold;
+  color: #2B2B2B;
+  border-top: 1px solid #004223;
+}
+
+.styledTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.styledTable tr { 
+  color: #636363;
+}
+
+/* .styledTable td:last-child {
+  text-align: center;
+} */
+
+.styledTable tbody tr:hover {
+  background-color: #c8e2c9;
+  color: #2B2B2B;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: #c8e2c9;
+  color: #2B2B2B;
+}

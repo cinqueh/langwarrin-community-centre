@@ -1,8 +1,9 @@
 import { FeedbackInquiryDTO, GeneralInquiryDTO } from "../dto/inquiry";
 import { MemberDTO } from "../dto/member";
+import FormRepository from "./base-repository";
 import BaseRepository from "./base-repository";
 
-export default class FeedbackInquiryRepository extends BaseRepository {
+export default class FeedbackInquiryRepository extends FormRepository {
 
     public async addFeedbackInquiry(inquiry: FeedbackInquiryDTO) {
 
@@ -22,8 +23,6 @@ export default class FeedbackInquiryRepository extends BaseRepository {
             _programname: inquiry.programName,
             _feedback: inquiry.feedback
         };
-
-        console.log(addInquiryData);
 
         return await client
             .rpc('add_feedback_inquiry', addInquiryData);

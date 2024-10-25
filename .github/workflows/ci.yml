@@ -46,6 +46,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up Docker
+        run: |
+          docker --version
+          docker ps
+
+      - name: Pull MailHog image
+        run: docker pull mailhog/mailhog:latest
+
       - name: Run tests
         run: npm run test -- --coverage
 

@@ -1,7 +1,8 @@
 import BaseRepository from "./base-repository";
 import { ProgramCourseInquiryDTO } from "../dto/inquiry";
+import FormRepository from "./base-repository";
 
-export default class ProgramCourseInquiryRepository extends BaseRepository {
+export default class ProgramCourseInquiryRepository extends FormRepository {
   public async addProgramCourseInquiry(inquiry: ProgramCourseInquiryDTO) {
     const client = this.getSupabaseClient();
   
@@ -43,7 +44,7 @@ export default class ProgramCourseInquiryRepository extends BaseRepository {
                 )
               `
       )
-      .eq("programcourseinquiryid", id);
+      .eq("inquiryid", id);
   }
 
   public async getAll() {

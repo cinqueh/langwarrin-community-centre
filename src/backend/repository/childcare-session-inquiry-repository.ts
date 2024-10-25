@@ -1,7 +1,8 @@
 import BaseRepository from "./base-repository";
 import { ChildcareInquirySessionDTO } from "../dto/inquiry";
+import FormRepository from "./base-repository";
 
-export default class ChildcareInquirySessionRepository extends BaseRepository {
+export default class ChildcareInquirySessionRepository extends FormRepository {
   public async addChildcareInquirySession(session: ChildcareInquirySessionDTO) {
     const client = this.getSupabaseClient();
 

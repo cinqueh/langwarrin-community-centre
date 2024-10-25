@@ -1,7 +1,7 @@
-import BaseRepository from "./base-repository";
 import { ChildDTO } from "../dto/childcare/child";
+import FormRepository from "./base-repository";
 
-export default class ChildRepository extends BaseRepository {
+export default class ChildRepository extends FormRepository {
   public async addChild(child: ChildDTO) {
     const client = this.getSupabaseClient();
 

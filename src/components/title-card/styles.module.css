@@ -1,6 +1,7 @@
 .greenTitleContainer {
   text-align: center;
   background-color: #38603a;
+  color: #EFEEE5;
 }
 
 .titleCardContainer {
@@ -9,7 +10,7 @@
   align-items: center;
   padding: 10px;
   width: 100%;
-  color: #004223;
+  color: #2B2B2B;
 }
 
 .titleCardWithButtonContainer {
@@ -19,7 +20,7 @@
   padding: 10px;
   width: 100%;
   gap: 10px; 
-  color: #004223;
+  color: #2B2B2B;
 }
 
 .leftColumn {
@@ -54,5 +55,5 @@
 
 .title {
   font-weight: bold;
-  color: #004223;
+  color: #2B2B2B;
 }

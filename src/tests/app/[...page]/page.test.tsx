@@ -17,7 +17,7 @@ jest.mock("@builder.io/sdk", () => ({
 // mock the RenderBuilderContent component
 jest.mock("../../../components/builder", () => ({
   RenderBuilderContent: jest.fn(() => <div>Mocked Content</div>),
-}));
+})); 
 
 // // mock the Header component
 // jest.mock("../../../components/layout/footer", () => ({
