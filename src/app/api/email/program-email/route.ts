@@ -9,61 +9,71 @@ export async function POST(request: Request) {
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
         const adminEmail = 'langwarrin.community@gmail.com';
 
-        // Email content for admin
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://langwarrin-community-centre.vercel.app';
+        const adminDashboardLink = `${baseUrl}/admin/program-enrolments`;
+
+        // Email content for admin (HTML formatted)
         const adminEmailContent = `
-            New program enrollment submitted:
-            ---------------------------------
-            Program Name: ${formData.programName}
-            Course Source: ${formData.courseSource}
-            Title: ${formData.title}
-            First Name: ${formData.firstName}
-            Last Name: ${formData.lastName}
-            Mobile: ${formData.mobile}
-            Home Phone: ${formData.homePhone}
-            Email: ${formData.email}
-            Gender: ${formData.gender}
-            Date of Birth: ${formData.dob}
-            Emergency Contact: ${formData.emergencyFirstName} ${formData.emergencyLastName}, Mobile: ${formData.emergencyMobile}
-            Address: Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}
-            ---------------------------------
-            Please review the submission details above.
+            <p>New program enrollment submitted:</p>
+            <hr/>
+            <p><strong>Program Name:</strong> ${formData.programName}</p>
+            <p><strong>Course Source:</strong> ${formData.courseSource}</p>
+            <p><strong>Title:</strong> ${formData.title}</p>
+            <p><strong>First Name:</strong> ${formData.firstName}</p>
+            <p><strong>Last Name:</strong> ${formData.lastName}</p>
+            <p><strong>Mobile:</strong> ${formData.mobile}</p>
+            <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Gender:</strong> ${formData.gender}</p>
+            <p><strong>Date of Birth:</strong> ${formData.dob}</p>
+            <hr/>
+            <p><strong>Emergency Contact:</strong> ${formData.emergencyFirstName} ${formData.emergencyLastName}, <strong>Mobile</strong>: ${formData.emergencyMobile}</p>
+            <p><strong>Address:</strong> Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}</p>
+            <hr/>
+            <p>Please review the submission details above.</p>
+            <a href="${adminDashboardLink}">View all program enrollments here</a>
         `;
 
-        // Email content for client
+        // Email content for client (HTML formatted)
         const clientEmailContent = `
-            Dear ${formData.firstName},
-
-            Thank you for enrolling in the program "${formData.programName}" at the Langwarrin Community Centre.
-
-            Here are the details you submitted:
-            ---------------------------------
-            Program Name: ${formData.programName}
-            Course Source: ${formData.courseSource}
-            Title: ${formData.title}
-            First Name: ${formData.firstName}
-            Last Name: ${formData.lastName}
-            Mobile: ${formData.mobile}
-            Home Phone: ${formData.homePhone}
-            Email: ${formData.email}
-            Gender: ${formData.gender}
-            Date of Birth: ${formData.dob}
-            Emergency Contact: ${formData.emergencyFirstName} ${formData.emergencyLastName}, Mobile: ${formData.emergencyMobile}
-            Address: Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}
-            ---------------------------------
-
-            We will review your submission and get back to you soon.
-
-            This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
-
-            Best regards,
-            Langwarrin Community Centre
+            <p>Dear ${formData.firstName},</p>
+            <p>Thank you for enrolling in the program "<strong>${formData.programName}</strong>" at the Langwarrin Community Centre.</p>
+            <p>Here are the details you submitted:</p>
+            <hr/>
+            <p><strong>Program Name:</strong> ${formData.programName}</p>
+            <p><strong>Course Source:</strong> ${formData.courseSource}</p>
+            <p><strong>Title:</strong> ${formData.title}</p>
+            <p><strong>First Name:</strong> ${formData.firstName}</p>
+            <p><strong>Last Name:</strong> ${formData.lastName}</p>
+            <p><strong>Mobile:</strong> ${formData.mobile}</p>
+            <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Gender:</strong> ${formData.gender}</p>
+            <p><strong>Date of Birth:</strong> ${formData.dob}</p>
+            <hr/>
+            <p><strong>Emergency Contact:</strong> ${formData.emergencyFirstName} ${formData.emergencyLastName}, <strong>Mobile</strong>: ${formData.emergencyMobile}</p>
+            <p><strong>Address:</strong> Unit ${formData.unitNo || 'N/A'}, ${formData.streetName}, ${formData.city}, ${formData.state}, ${formData.postalCode}</p>
+            <hr/>
+            <p>We will review your submission and get back to you soon.</p>
+            <p>This mailbox is unmonitored. If in doubt, please contact <strong>(03) 9789 7653</strong> or <strong>reception@langwarrincc.org.au</strong>.</p>
+            <p>Best regards,<br/>Langwarrin Community Centre</p>
         `;
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, 'New Program Enrollment Submission', adminEmailContent);
+        await emailService.sendEmail(
+            adminEmail,
+            'New Program Enrollment Submission',
+            undefined, // No plain text content
+            adminEmailContent // HTML content
+        );
 
         // Send confirmation email to the user
-        await emailService.sendEmail(userEmail, 'Thank you for enrolling in our program', clientEmailContent);
+        await emailService.sendEmail(
+            userEmail,
+            'Thank you for enrolling in our program',
+            undefined, // No plain text content
+            clientEmailContent // HTML content
+        );
 
         return new Response(
             JSON.stringify({ message: 'Emails sent successfully' }),

@@ -9,85 +9,89 @@ export async function POST(request: Request) {
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
         const adminEmail = 'langwarrin.community@gmail.com';
 
-        // Extract room details
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://langwarrin-community-centre.vercel.app';
+        const adminDashboardLink = `${baseUrl}/admin/room-hire`;
+
+        // Room details (HTML formatted)
         const roomDetails = `
-            Room Name: ${formData.roomDetails.roomName}
-            Hire Type: ${formData.roomDetails.hireType}
-            Booking Date: ${formData.roomDetails.date}
-            Time: ${formData.roomDetails.startTime} to ${formData.roomDetails.endTime}
-            Total Amount: $${formData.roomDetails.totalAmount}
+            <p><strong>Room Name:</strong> ${formData.roomDetails.roomName}</p>
+            <p><strong>Hire Type:</strong> ${formData.roomDetails.hireType}</p>
+            <p><strong>Booking Date:</strong> ${formData.roomDetails.date}</p>
+            <p><strong>Time:</strong> ${formData.roomDetails.startTime} to ${formData.roomDetails.endTime}</p>
+            <p><strong>Total Amount:</strong> $${formData.roomDetails.totalAmount}</p>
         `;
 
-        // Extract personal details
+        // Personal details (HTML formatted)
         const personalDetails = `
-            Full Name: ${formData.personalDetails.firstName} ${formData.personalDetails.familyName}
-            Email: ${formData.personalDetails.email}
-            Mobile: ${formData.personalDetails.mobile}
-            Address: ${formData.personalDetails.unitNo ? formData.personalDetails.unitNo + ", " : ""} 
-            ${formData.personalDetails.streetName}, 
-            ${formData.personalDetails.city}, 
-            ${formData.personalDetails.postalCode}, 
-            ${formData.personalDetails.state}
+            <p><strong>Full Name:</strong> ${formData.personalDetails.firstName} ${formData.personalDetails.familyName}</p>
+            <p><strong>Email:</strong> ${formData.personalDetails.email}</p>
+            <p><strong>Mobile:</strong> ${formData.personalDetails.mobile}</p>
+            <p><strong>Address:</strong> ${formData.personalDetails.unitNo ? formData.personalDetails.unitNo + ", " : ""}${formData.personalDetails.streetName}, ${formData.personalDetails.city}, ${formData.personalDetails.postalCode}, ${formData.personalDetails.state}</p>
         `;
 
-        // Extract additional information
+        // Additional information (HTML formatted)
         const additionalInfo = `
-            Purpose of Hire: ${formData.additionalInfo.hirePurpose}
-            Organisation: ${formData.additionalInfo.forOrganisation === "Yes" ? formData.additionalInfo.organisationName : "N/A"}
-            Organisation Address: ${formData.additionalInfo.forOrganisation === "Yes" ? formData.additionalInfo.organisationAddress : "N/A"}
-            Number Attending: ${formData.additionalInfo.estimatedAttendance}
-            Special Requirements: ${formData.additionalInfo.specialRequirements || "None"}
-            Will Liquor be Consumed: ${formData.additionalInfo.willLiquorBeConsumed}
-            How Did You Hear About the Space: ${formData.additionalInfo.howHearAboutSpace}
+            <p><strong>Purpose of Hire:</strong> ${formData.additionalInfo.hirePurpose}</p>
+            <p><strong>Organisation:</strong> ${formData.additionalInfo.forOrganisation === "Yes" ? formData.additionalInfo.organisationName : "N/A"}</p>
+            <p><strong>Organisation Address:</strong> ${formData.additionalInfo.forOrganisation === "Yes" ? formData.additionalInfo.organisationAddress : "N/A"}</p>
+            <p><strong>Number Attending:</strong> ${formData.additionalInfo.estimatedAttendance}</p>
+            <p><strong>Special Requirements:</strong> ${formData.additionalInfo.specialRequirements || "None"}</p>
+            <p><strong>Will Liquor be Consumed:</strong> ${formData.additionalInfo.willLiquorBeConsumed}</p>
+            <p><strong>How Did You Hear About the Space:</strong> ${formData.additionalInfo.howHearAboutSpace}</p>
         `;
 
-        // Construct email content
+        // Admin email content
         const adminEmailContent = `
-            New Room Booking Submitted:
-            ---------------------------------
+            <p>New Room Booking Submitted:</p>
+            <hr/>
+            <p><strong>Room Details:</strong></p>
             ${roomDetails}
-
-            Personal Details:
-            ---------------------------------
+            <hr/>
+            <p><strong>Personal Details:</strong></p>
             ${personalDetails}
-
-            Additional Information:
-            ---------------------------------
+            <hr/>
+            <p><strong>Additional Information:</strong></p>
             ${additionalInfo}
-
-            Please review the booking details.
+            <hr/>
+            <p>Please review the booking details above.</p>
+            <a href="${adminDashboardLink}">View all room bookings here</a>
         `;
 
+        // Client email content
         const clientEmailContent = `
-            Dear ${formData.personalDetails.firstName},
-
-            Thank you for your room booking at Langwarrin Community Centre.
-
-            Here are the details you submitted:
-            ---------------------------------
+            <p>Dear ${formData.personalDetails.firstName},</p>
+            <p>Thank you for your room booking at Langwarrin Community Centre.</p>
+            <p>Here are the details you submitted:</p>
+            <hr/>
+            <p><strong>Room Details:</strong></p>
             ${roomDetails}
-
-            Personal Details:
-            ---------------------------------
+            <hr/>
+            <p><strong>Personal Details:</strong></p>
             ${personalDetails}
-
-            Additional Information:
-            ---------------------------------
+            <hr/>
+            <p><strong>Additional Information:</strong></p>
             ${additionalInfo}
-
-            We will review your booking and get back to you shortly.
-
-            This mailbox is unmonitored. If in doubt, please contact (03) 9789 7653 or reception@langwarrincc.org.au.
-
-            Best regards,
-            Langwarrin Community Centre
+            <hr/>
+            <p>We will review your booking and get back to you shortly.</p>
+            <p>This mailbox is unmonitored. If in doubt, please contact <strong>(03) 9789 7653</strong> or <strong>reception@langwarrincc.org.au</strong>.</p>
+            <p>Best regards,<br/>Langwarrin Community Centre</p>
         `;
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, 'New Room Booking Submission', adminEmailContent); 
+        await emailService.sendEmail(
+            adminEmail,
+            'New Room Booking Submission',
+            undefined, // No plain text content
+            adminEmailContent // HTML content
+        );
 
-        // Send confirmation email to the user
-        await emailService.sendEmail(userEmail, 'Thank you for your room booking', clientEmailContent);
+        // Send confirmation email to the client
+        await emailService.sendEmail(
+            userEmail,
+            'Thank you for your room booking',
+            undefined, // No plain text content
+            clientEmailContent // HTML content
+        );
 
         return new Response(
             JSON.stringify({ message: 'Emails sent successfully' }),
