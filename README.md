@@ -21,6 +21,11 @@
 # 🚀 Overview
 This project aims to develop a full-stack website for Langwarrin community centre that enhances user experience, manages course enrollment, and facilitates room bookings, and is easy to use for the admin of the website.
 
+**Our solution comprises three parts**:
+- Website (Used by the website visitors)
+- Admin Portal (Used by the admin to view form submissions)
+- Website Builder (Used by the admin to customise the website)
+
 ![IT Project Final Presentation](https://github.com/user-attachments/assets/8dfa57d0-4318-483d-9fc3-0d334527e234)
 
 ## 💻 [Website Live Demo](https://langwarrin-community-centre.vercel.app/)
