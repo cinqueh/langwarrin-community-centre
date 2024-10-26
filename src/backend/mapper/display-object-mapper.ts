@@ -393,7 +393,7 @@ export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<Child
             { Header: 'Child Age', accessor: 'childAge' },
             { Header: 'Day', accessor: 'day' },
             { Header: 'Program Name', accessor: 'program' },
-            { Header: 'Notes', accessor: 'notes' }
+            { Header: 'Notes', accessor: 'notes', editable: true }
         ];
     }
 }
