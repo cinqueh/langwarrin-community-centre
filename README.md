@@ -5,19 +5,30 @@ This project aims to develop a full-stack website for Langwarrin community centr
 
 ## [Tech Stack](https://comp30022.atlassian.net/wiki/spaces/SD/pages/950306/Tech+Stack)
 
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAF)
+![image](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![image](https://img.shields.io/badge/-Builder.io-4B0082?style=for-the-badge&logoColor=white)
+![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![image](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)
+![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![image](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![image](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)
+
+
+
 - **Frontend Framework:** Next.js, React, TypeScript
-- **Backend:** Node.js (with Express.js if applicable)
+- **Backend:** Next.js
 - **Deployment:** Vercel (for frontend and full-stack deployment)
 - **Content Management:** Builder.io (for client to easily update website content)
-- **Database:** Amazon RDS (Relational Database for Membership Forms and Submissions)
-- **File Storage:** AWS S3 Buckets (for PDF and other file storage)
-- **Email Integration:** SendGrid (for sending automated emails and notifications)
+- **Database:** Supabase (Relational Database for Form Submissions)
+- **Email Integration:** MailHog & Gmail (for sending automated emails and notifications)
 - **CI/CD:** GitHub and Vercel (for continuous integration and deployment)
 - **Testing:** Jest (for unit testing)
 - **Design Tool:** Figma
 
 ### Architecture Diagram
-![Screen Shot 2024-09-24 at 8 52 06 PM](https://github.com/user-attachments/assets/7a2e43dc-4d83-4f28-aad5-b508c4071e42)
+![20f980d2-7810-4335-b0d1-b9bed9267b93](https://github.com/user-attachments/assets/269a8628-4dd7-4d51-b17f-2434ef7f9944)
 
 ### Front-End Design
 - [Brand Kit](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4587524/Mock-Ups)
@@ -33,11 +44,11 @@ This project aims to develop a full-stack website for Langwarrin community centr
 
 
 ## [Team Roles](https://comp30022.atlassian.net/wiki/spaces/SD/pages/426021/Team+Managment)
-- **Zhen Liu:** Backend Developer, Product Owner
-- **Cinque Howells:** Backend Lead, Scrum Master
-- **Aarushi Dua:** Lead Designer, Backend Developer
-- **Cindy Shi:** Designer, Frontend Lead
-- **Noel Abraham:** Designer, Frontend Developer, Minute Taker
+- **Zhen Liu:** Product Owner, Backend Engineer
+- **Cinque Howells:** Scrum Master, DevOps Engineer
+- **Aarushi Dua:** UX Designer, Database Admin
+- **Cindy Shi:** UI Designer, Frontend Engineer
+- **Noel Abraham:** UX Designer, Frontend Engineer
 
 ## Getting Started
 1. Ensure you have Node.js and npm installed.

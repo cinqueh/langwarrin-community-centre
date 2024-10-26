@@ -42,7 +42,7 @@ export default class RoomBookingInquiryRepository extends BaseRepository {
         const client = this.getSupabaseClient();
 
         return await client
-            .from('roombookingenquiry')
+            .from('roombookinginquiry')
             .select(`
                 *,
                 inquiry (
@@ -63,7 +63,7 @@ export default class RoomBookingInquiryRepository extends BaseRepository {
         const client = this.getSupabaseClient();
 
         return await client
-            .from('roombookingenquiry')
+            .from('roombookinginquiry')
             .select(`
                 *,
                 inquiry (
