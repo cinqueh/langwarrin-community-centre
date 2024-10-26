@@ -301,7 +301,7 @@ export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookin
             howDidYouHear: this.formatField(roomBooking?.howDidYouHear),
             specialRequirements: this.formatField(roomBooking?.specialRequirements),
             willLiquorBeConsumed: roomBooking.willLiquorBeConsumed ? 'Yes' : 'No',
-            notes: this.formatField(roomBooking?.notes)
+            notes: this.formatField(roomBooking?.notes),
         };
     }
 
@@ -325,7 +325,7 @@ export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookin
             { Header: 'How Did You Hear?', accessor: 'howDidYouHear' },
             { Header: 'Special Requirements', accessor: 'specialRequirements' },
             { Header: 'Will liquor be consumed?', accessor: 'willLiquorBeConsumed' },
-            { Header: 'Notes', accessor: 'notes' }
+            { Header: 'Notes', accessor: 'notes', editable: true }
         ];
     }
 }
