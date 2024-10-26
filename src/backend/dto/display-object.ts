@@ -55,6 +55,25 @@ export type ComplaintInquiryDisplayObject = InquiryDisplayObject & {
     suggestedSolution: string;
 }
 
+// Extend the base DisplayObject for common fields like id, header, name, email
+export type RoomBookingDisplayObject = DisplayObject & {
+    bookingDate: string;
+    bookingStartTime: string;
+    bookingEndTime: string;
+    roomName: string;
+    hireType: string;
+    purposeOfHire: string;
+    isOrganisationBooking: string; // Display as 'Yes' or 'No'
+    organisationName?: string;
+    organisationAddress?: string;
+    otherCompaniesInvolved?: string; // Display as 'Yes' or 'No'
+    companyDetails?: string;
+    numberAttending: string;
+    howDidYouHear: string;
+    specialRequirements?: string;
+    willLiquorBeConsumed: string; // Display as 'Yes' or 'No'
+    notes?: string;
+}
 // New Program Course Inquiry Display Object
 export type ProgramCourseInquiryDisplayObject = InquiryDisplayObject & {
     emergencyContactName: string; // Combined emergencyFirstName and emergencySurName

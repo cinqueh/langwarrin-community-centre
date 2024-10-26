@@ -16,6 +16,21 @@
   color: #2B2B2B;
 }
 
+.tableContent {
+  overflow-x: auto;
+  scrollbar-height: thin;
+  transform: rotateX(180deg);
+}
+
+.tableContent::-webkit-scrollbar {
+  height: 8px; /* Adjust the height as needed */
+}
+
+.tableContent::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
 .tableTitle {
   font-size: 18px;
   font-weight: bold;
@@ -30,6 +45,7 @@
 .tableActions {
   display: flex;
   align-items: center;
+  
 }
 
 .filterButton,
@@ -64,6 +80,7 @@
   border-collapse: collapse;
   border-radius: 8px;
   overflow: hidden;
+  transform: rotateX(180deg);
 }
 
 .styledTable th,

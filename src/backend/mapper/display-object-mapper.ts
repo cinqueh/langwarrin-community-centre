@@ -1,6 +1,6 @@
 import { ColumnAdapter, ComplaintInquiryDisplayObject, DisplayData, DisplayDataMany, 
-    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, ProgramCourseInquiryDisplayObject, ChildcareInquiryDisplayObject } from "../dto/display-object";
-import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO} from "../dto/inquiry";
+    DisplayObject, FeedbackInquiryDisplayObject, GeneralInquiryDisplayObject, MemberDisplayObject, RoomBookingDisplayObject, ProgramCourseInquiryDisplayObject, ChildcareInquiryDisplayObject } from "../dto/display-object";
+import { ComplaintInquiryDTO, FeedbackInquiryDTO, GeneralInquiryDTO, RoomBookingEnquiryDTO, ProgramCourseInquiryDTO, ChildcareInquiryDTO} from "../dto/inquiry";
 import { ChildDTO} from "../dto/childcare/child";
 import { MemberDTO } from "../dto/member";
 import { AddressDTO, PersonDTO } from "../dto/person";
@@ -278,6 +278,58 @@ export class ComplaintInquiryObjectMapper extends DisplayDataMapper<ComplaintInq
     }
 }
 
+// RoomBookingDisplayObjectMapper for mapping RoomBookingEnquiryDTO to RoomBookingDisplayObject
+export class RoomBookingDisplayObjectMapper extends DisplayDataMapper<RoomBookingEnquiryDTO, RoomBookingDisplayObject> {
+    protected override mapDisplayObject(roomBooking: RoomBookingEnquiryDTO): RoomBookingDisplayObject {
+        return {
+            id: roomBooking.inquiryId as number, 
+            header: this.formatName(roomBooking?.person),
+            name: this.formatName(roomBooking?.person),
+            email: this.formatField(roomBooking?.person?.email),
+            bookingDate: this.formatDate(new Date(roomBooking?.bookingDate)),
+            bookingStartTime: this.formatField(roomBooking?.bookingStartTime),
+            bookingEndTime: this.formatField(roomBooking?.bookingEndTime),
+            roomName: this.formatField(roomBooking?.roomName),
+            hireType: this.formatField(roomBooking?.hireType),
+            purposeOfHire: this.formatField(roomBooking?.purposeOfHire),
+            isOrganisationBooking: roomBooking.isOrganisationBooking ? 'Yes' : 'No',
+            organisationName: this.formatField(roomBooking?.organisationName),
+            organisationAddress: this.formatField(roomBooking?.organisationAddress),
+            otherCompaniesInvolved: roomBooking.otherCompaniesInvolved ? 'Yes' : 'No',
+            companyDetails: this.formatField(roomBooking?.companyDetails),
+            numberAttending: roomBooking.numberAttending.toString(),
+            howDidYouHear: this.formatField(roomBooking?.howDidYouHear),
+            specialRequirements: this.formatField(roomBooking?.specialRequirements),
+            willLiquorBeConsumed: roomBooking.willLiquorBeConsumed ? 'Yes' : 'No',
+            notes: this.formatField(roomBooking?.notes),
+        };
+    }
+
+    protected override getColumns(): ColumnAdapter<RoomBookingDisplayObject>[] {
+        return [
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Booking Date', accessor: 'bookingDate' },
+            { Header: 'Booking Start Time', accessor: 'bookingStartTime' },
+            { Header: 'Booking End Time', accessor: 'bookingEndTime' },
+            { Header: 'Room Name', accessor: 'roomName' },
+            { Header: 'Hire Type', accessor: 'hireType' },
+            { Header: 'Purpose of Hire', accessor: 'purposeOfHire' },
+            { Header: 'Is this booking for organisation?', accessor: 'isOrganisationBooking' },
+            { Header: 'Organisation Name', accessor: 'organisationName' },
+            { Header: 'Organisation Address', accessor: 'organisationAddress' },
+            { Header: 'Other Companies Involved', accessor: 'otherCompaniesInvolved' },
+            { Header: 'Company Details', accessor: 'companyDetails' },
+            { Header: 'Estimated Attendance', accessor: 'numberAttending' },
+            { Header: 'How Did You Hear?', accessor: 'howDidYouHear' },
+            { Header: 'Special Requirements', accessor: 'specialRequirements' },
+            { Header: 'Will liquor be consumed?', accessor: 'willLiquorBeConsumed' },
+            { Header: 'Notes', accessor: 'notes', editable: true }
+        ];
+    }
+}
+
 // ProgramCourseInquiryDisplayObjectMapper for mapping ProgramCourseInquiryDTO to ProgramCourseInquiryDisplayObject
 export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<ProgramCourseInquiryDTO, ProgramCourseInquiryDisplayObject> {
     protected override mapDisplayObject(inquiry: ProgramCourseInquiryDTO): ProgramCourseInquiryDisplayObject {
@@ -285,9 +337,9 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
             id: inquiry.inquiryId ?? 0,
             header: this.formatName(inquiry?.person),
             name: this.formatField(inquiry?.person?.firstName) + " " + this.formatField(inquiry?.person?.surname),
-            email: this.formatField(inquiry?.person?.email), // From base InquiryDisplayObject
-            phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // From base InquiryDisplayObject
-            date: this.formatDate(inquiry?.date), // From base InquiryDisplayObject
+            email: this.formatField(inquiry?.person?.email),
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber),
+            date: this.formatDate(inquiry?.date),
             emergencyContactName: this.formatField(inquiry?.emergencyFirstName) + " " + this.formatField(inquiry?.emergencySurName),
             emergencyNumber: this.formatField(inquiry?.emergencyNumber),
             programName: this.formatField(inquiry?.programName),
@@ -298,112 +350,51 @@ export class ProgramCourseInquiryDisplayObjectMapper extends DisplayDataMapper<P
 
     protected override getColumns(): ColumnAdapter<ProgramCourseInquiryDisplayObject>[] {
         return [
-            {
-                Header: 'ID',
-                accessor: 'id',
-            },
-            {
-                Header: 'Name',
-                accessor: 'name',
-            },
-            {
-                Header: 'Email',
-                accessor: 'email',
-            },
-            {
-                Header: 'Phone Number',
-                accessor: 'phoneNumber',
-            },
-            {
-                Header: 'Inquiry Date',
-                accessor: 'date',
-            },
-            {
-                Header: 'Emergency Contact Name',
-                accessor: 'emergencyContactName',
-            },
-            {
-                Header: 'Emergency Contact Number',
-                accessor: 'emergencyNumber',
-            },
-            {
-                Header: 'Program Name',
-                accessor: 'programName',
-            },
-            {
-                Header: 'How did you hear about the program?',
-                accessor: 'howHeardAboutProgram',
-            },
-            {
-                Header: 'Notes',
-                accessor: 'notes',
-                editable: true,
-            }
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Phone Number', accessor: 'phoneNumber' },
+            { Header: 'Inquiry Date', accessor: 'date' },
+            { Header: 'Emergency Contact Name', accessor: 'emergencyContactName' },
+            { Header: 'Emergency Contact Number', accessor: 'emergencyNumber' },
+            { Header: 'Program Name', accessor: 'programName' },
+            { Header: 'How did you hear?', accessor: 'howHeardAboutProgram' },
+            { Header: 'Notes', accessor: 'notes', editable: true, }
         ];
     }
 }
 
+// ChildcareInquiryDisplayObjectMapper for mapping ChildcareInquiryDTO to ChildcareInquiryDisplayObject
 export class ChildcareInquiryDisplayObjectMapper extends DisplayDataMapper<ChildcareInquiryDTO, ChildcareInquiryDisplayObject> {
-
     protected override mapDisplayObject(inquiry: ChildcareInquiryDTO): ChildcareInquiryDisplayObject {
-
         return {
-            id: inquiry.inquiryId as number,                          // Inquiry ID
-            header: this.formatName(inquiry?.person),                  // Person name (header)
-            name: this.formatName(inquiry?.person),                    // Person full name
-            email: this.formatField(inquiry?.person?.email),           // Person email
-            phoneNumber: this.formatField(inquiry?.person?.phoneNumber), // Inherited from InquiryDisplayObject
-            date: this.formatDate(inquiry?.date),                      // Inquiry date
-            notes: this.formatField(inquiry.notes),                    // Optional notes inherited from InquiryDisplayObject
-            childName: this.formatField(inquiry.child.childFirstName) + " " + this.formatField(inquiry.child.childSurname), // Child's full name
-            childAge: inquiry.child?.childAge || 0,                    // Child's age
-            day: this.formatField(inquiry.day),                        // Day of the program
-            program: this.formatField(inquiry.program),                // Program name
+            id: inquiry.inquiryId as number,
+            header: this.formatName(inquiry?.person),
+            name: this.formatName(inquiry?.person),
+            email: this.formatField(inquiry?.person?.email),
+            phoneNumber: this.formatField(inquiry?.person?.phoneNumber),
+            date: this.formatDate(inquiry?.date),
+            notes: this.formatField(inquiry.notes),
+            childName: this.formatField(inquiry.child.childFirstName) + " " + this.formatField(inquiry.child.childSurname),
+            childAge: inquiry.child?.childAge || 0,
+            day: this.formatField(inquiry.day),
+            program: this.formatField(inquiry.program),
         };
     }
 
     protected override getColumns(): ColumnAdapter<ChildcareInquiryDisplayObject>[] {
         return [
-            {
-              Header: 'ID',
-              accessor: 'id',
-            },
-            {
-              Header: 'Name',
-              accessor: 'name',
-            },
-            {
-              Header: 'Email',
-              accessor: 'email',
-            },
-            {
-              Header: 'Phone Number',
-              accessor: 'phoneNumber',
-            },
-            {
-              Header: 'Inquiry Date',
-              accessor: 'date',
-            },
-            {
-              Header: 'Child Name',
-              accessor: 'childName',
-            },
-            {
-              Header: 'Child Age',
-              accessor: 'childAge',
-            },
-            {
-              Header: 'Day',
-              accessor: 'day',
-            },
-            {
-              Header: 'Program Name',
-              accessor: 'program',
-            },
-            {
-              Header: 'Notes',
-              accessor: 'notes',
-            }
+            { Header: 'ID', accessor: 'id' },
+            { Header: 'Name', accessor: 'name' },
+            { Header: 'Email', accessor: 'email' },
+            { Header: 'Phone Number', accessor: 'phoneNumber' },
+            { Header: 'Inquiry Date', accessor: 'date' },
+            { Header: 'Child Name', accessor: 'childName' },
+            { Header: 'Child Age', accessor: 'childAge' },
+            { Header: 'Day', accessor: 'day' },
+            { Header: 'Program Name', accessor: 'program' },
+            { Header: 'Notes', accessor: 'notes' }
         ];
     }
 }
+
