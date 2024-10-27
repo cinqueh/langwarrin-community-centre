@@ -1,5 +1,6 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../../components/builder";
+import { notFound } from "next/navigation";
 import Header from "../../components/layout/header";
 import Footer from "../../components/layout/footer";
 
@@ -21,11 +22,16 @@ export default async function Page(props: PageProps) {
       userAttributes: {
         // use the page path specified in the URL to fetch the content
         urlPath: "/" + (props?.params?.page?.join("/") || ""),
-        timestamp: Date.now()
-      }
+        timestamp: Date.now(),
+      },
     })
     // Convert the result to a promise
     .toPromise();
+
+  // If content is not found, trigger a 404 page
+  if (!content) {
+    notFound();
+  }
 
   return (
     <>
