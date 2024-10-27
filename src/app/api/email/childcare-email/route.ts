@@ -3,7 +3,7 @@ import NodeMailerService from '@/backend/service/email/node-mailer-service'; // 
 
 export async function POST(request: Request) {
     try {
-        const { userEmail, formData } = await request.json();
+        const { userEmail, formData } = await request.json(); 
 
         // Use the interface instead of the class directly
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
