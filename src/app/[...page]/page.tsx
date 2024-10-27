@@ -1,8 +1,5 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../../components/builder";
-import { notFound } from "next/navigation";
-import Header from "../../components/layout/header";
-import Footer from "../../components/layout/footer";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -28,10 +25,6 @@ export default async function Page(props: PageProps) {
     // Convert the result to a promise
     .toPromise();
 
-  // If content is not found, trigger a 404 page
-  if (!content) {
-    notFound();
-  }
 
   return (
     <>

@@ -2,14 +2,14 @@
 import { ComponentProps } from "react";
 import { BuilderComponent, useIsPreviewing } from "@builder.io/react";
 import { BuilderContent, builder } from "@builder.io/sdk";
-import DefaultErrorPage from "next/error";
 import "../builder-registry";
 import "../styles/global.css";
-import { Prompt } from 'next/font/google';
+import { Prompt } from "next/font/google";
+import { Custom404 } from "./404-page/custom-404";
 
 const prompt = Prompt({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
 });
 
 type BuilderPageProps = ComponentProps<typeof BuilderComponent>;
@@ -27,16 +27,24 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   if (content || isPreviewing) {
     return (
       <>
-        <BuilderComponent model="header"/>
+        <BuilderComponent model="header" />
         <div className={`pageContainer ${prompt.className}`}>
           <BuilderComponent content={content} model={model} />
         </div>
-        <BuilderComponent model="footer"/>
+        <BuilderComponent model="footer" />
       </>
     );
   }
   // If the "content" is falsy and the page is
   // not being previewed in Builder, render the
-  // DefaultErrorPage with a 404.
-  return <DefaultErrorPage statusCode={404} />;
+  // custom 404 page.
+  return (
+    <>
+      <BuilderComponent model="header" />
+      <div className={`pageContainer ${prompt.className}`}>
+      <Custom404 />
+      </div>
+      <BuilderComponent model="footer" />
+    </>
+  );
 }
