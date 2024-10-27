@@ -9,129 +9,124 @@ export async function POST(request: Request) {
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
         const adminEmail = 'langwarrin.community@gmail.com';
 
-        // Add specific content based on the enquiry type
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://langwarrin-community-centre.vercel.app';
+        let adminDashboardLink = '';
+
         let adminEmailContent = '';
         let clientEmailContent = '';
 
         if (formData.enquiryType === 'general') {
+            // Set link for general inquiry
+            adminDashboardLink = `${baseUrl}/admin/general-enquiry`;
+
             // General Inquiry Email Content
             adminEmailContent = `
-                New General Inquiry submitted:
-                ---------------------------------
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-                
-                Message: ${formData.message}
-                ---------------------------------
-                Please review the submission details above.
+                <p>New General Inquiry submitted:</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Message:</strong> ${formData.message}</p>
+                <hr/>
+                <p>Please review the submission details above.</p>
+                <a href="${adminDashboardLink}">View all general inquiries here</a>
             `;
             clientEmailContent = `
-                Dear ${formData.firstName},
-
-                Thank you for submitting your inquiry. 
-                Your message has been received, and we will get back to you shortly.
-
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-
-                Message: ${formData.message}
-
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
-                
-                Best regards,
-                Langwarrin Community Centre
+                <p>Dear ${formData.firstName},</p>
+                <p>Thank you for submitting your inquiry.</p>
+                <p>Your message has been received, and we will get back to you shortly.</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Message:</strong> ${formData.message}</p>
+                <hr/>
+                <p>This mailbox is unmonitored. If in doubt, please contact <strong>(03) 9789 7653</strong> or <strong>reception@langwarrincc.org.au</strong>.</p>
+                <p>Best regards,<br/>Langwarrin Community Centre</p>
             `;
         } else if (formData.enquiryType === 'feedback') {
+            // Set link for feedback
+            adminDashboardLink = `${baseUrl}/admin/feedback`;
+
             // Feedback Inquiry Email Content
             adminEmailContent = `
-                New Feedback & Compliments submitted:
-                ---------------------------------
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-                
-                Address: ${formData.address.apartment}, ${formData.address.street}, 
-                ${formData.address.suburb}, ${formData.address.state}, ${formData.address.postcode}
-                
-                Program Name: ${formData.feedbackProgramName}
-                Feedback Message: ${formData.feedbackMessage}
-                ---------------------------------
-                Please review the submission details above.
+                <p>New Feedback & Compliments submitted:</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Address:</strong> ${formData.address.apartment}, ${formData.address.street}, ${formData.address.suburb}, ${formData.address.state}, ${formData.address.postcode}</p>
+                <p><strong>Program Name:</strong> ${formData.feedbackProgramName}</p>
+                <p><strong>Feedback Message:</strong> ${formData.feedbackMessage}</p>
+                <hr/>
+                <p>Please review the submission details above.</p>
+                <a href="${adminDashboardLink}">View all feedback here</a>
             `;
             clientEmailContent = `
-                Dear ${formData.firstName},
-
-                Thank you for your feedback regarding "${formData.feedbackProgramName}".
-                We appreciate your input and will review it shortly.
-
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-                
-                Address: ${formData.address.apartment}, ${formData.address.street}, 
-                ${formData.address.suburb}, ${formData.address.state}, ${formData.address.postcode}
-
-                Feedback Message: ${formData.feedbackMessage}
-
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
-
-                Best regards,
-                Langwarrin Community Centre
+                <p>Dear ${formData.firstName},</p>
+                <p>Thank you for your feedback regarding "<strong>${formData.feedbackProgramName}</strong>".</p>
+                <p>We appreciate your input and will review it shortly.</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Address:</strong> ${formData.address.apartment}, ${formData.address.street}, ${formData.address.suburb}, ${formData.address.state}, ${formData.address.postcode}</p>
+                <p><strong>Feedback Message:</strong> ${formData.feedbackMessage}</p>
+                <hr/>
+                <p>This mailbox is unmonitored. If in doubt, please contact <strong>(03) 9789 7653</strong> or <strong>reception@langwarrincc.org.au</strong>.</p>
+                <p>Best regards,<br/>Langwarrin Community Centre</p>
             `;
         } else if (formData.enquiryType === 'complaints') {
+            // Set link for complaints
+            adminDashboardLink = `${baseUrl}/admin/complaint`;
+
             // Complaints Email Content
             adminEmailContent = `
-                New Complaint submitted:
-                ---------------------------------
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-                
-                Complaints Person: ${formData.complaintsPersonName}
-                Complaints Reason: ${formData.complaintsReason}
-                Suggested Solution: ${formData.complaintsSolution}
-                ---------------------------------
-                Please review the submission details above.
+                <p>New Complaint submitted:</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Complaints Person:</strong> ${formData.complaintsPersonName}</p>
+                <p><strong>Complaints Reason:</strong> ${formData.complaintsReason}</p>
+                <p><strong>Suggested Solution:</strong> ${formData.complaintsSolution}</p>
+                <hr/>
+                <p>Please review the submission details above.</p>
+                <a href="${adminDashboardLink}">View all complaints here</a>
             `;
             clientEmailContent = `
-                Dear ${formData.firstName},
-
-                Thank you for submitting your complaint regarding "${formData.complaintsPersonName}".
-                We will review your submission and get back to you soon.
-
-                First Name: ${formData.firstName}
-                Last Name: ${formData.lastName}
-                Email: ${formData.email}
-                Mobile: ${formData.mobile}
-                Home Phone: ${formData.homePhone}
-                
-                Complaints Reason: ${formData.complaintsReason}
-                Suggested Solution: ${formData.complaintsSolution}
-
-                This mailbox is unmonitored. If in doubt, please contact: langwarrin.community@gmail.com.
-
-                Best regards,
-                Langwarrin Community Centre
+                <p>Dear ${formData.firstName},</p>
+                <p>Thank you for submitting your complaint regarding "<strong>${formData.complaintsPersonName}</strong>".</p>
+                <p>We will review your submission and get back to you soon.</p>
+                <hr/>
+                <p><strong>First Name:</strong> ${formData.firstName}</p>
+                <p><strong>Last Name:</strong> ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Mobile:</strong> ${formData.mobile}</p>
+                <p><strong>Home Phone:</strong> ${formData.homePhone}</p>
+                <p><strong>Complaints Reason:</strong> ${formData.complaintsReason}</p>
+                <p><strong>Suggested Solution:</strong> ${formData.complaintsSolution}</p>
+                <hr/>
+                <p>This mailbox is unmonitored. If in doubt, please contact <strong>(03) 9789 7653</strong> or <strong>reception@langwarrincc.org.au</strong>.</p>
+                <p>Best regards,<br/>Langwarrin Community Centre</p>
             `;
         }
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, `New ${formData.enquiryType} Inquiry Submission`, adminEmailContent);
+        await emailService.sendEmail(adminEmail, `New ${formData.enquiryType} Inquiry Submission`, undefined, adminEmailContent);
 
         // Send confirmation email to the user
-        await emailService.sendEmail(userEmail, `Thank you for your ${formData.enquiryType} submission`, clientEmailContent);
+        await emailService.sendEmail(userEmail, `Thank you for your ${formData.enquiryType} submission`, undefined, clientEmailContent);
 
         return new Response(
             JSON.stringify({ message: 'Emails sent successfully' }),
