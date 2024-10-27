@@ -2,12 +2,6 @@ import { builder } from "@builder.io/sdk";
 import { render, screen, waitFor } from "@testing-library/react";
 import Page from "../../../app/[...page]/page";
 import "@testing-library/jest-dom";
-import { notFound } from "next/navigation"; // Import notFound function
-
-// Mock the notFound function to prevent it from triggering errors during tests
-jest.mock("next/navigation", () => ({
-  notFound: jest.fn(),
-}));
 
 // create a mock for the builder sdk
 jest.mock("@builder.io/sdk", () => ({
@@ -25,6 +19,16 @@ jest.mock("../../../components/builder", () => ({
   RenderBuilderContent: jest.fn(() => <div>Mocked Content</div>),
 })); 
 
+// // mock the Header component
+// jest.mock("../../../components/layout/footer", () => ({
+//   Footer: jest.fn(() => <div>Footer</div>),
+// }));
+
+// // mock the Footer component
+// jest.mock("../../../components/layout/header", () => ({
+//   Header: jest.fn(() => <div>Header</div>),
+// }));
+
 // run the unit tests
 describe('Builder Page Component', () => {
 
@@ -41,6 +45,7 @@ describe('Builder Page Component', () => {
     });
   
     test('renders successfully when page request is successful', async () => {
+
         render(await Page(mockProps));
     
         // Check if the mocked content is rendered
