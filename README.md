@@ -39,8 +39,10 @@ The Admin Portal allows administrators to manage memberships, program enrollment
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/5539e60b-5276-403f-a891-308b9000c707">
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/c5ad6f66-a7fb-4e11-8b9b-8310570d79d9">
 
-## 🧱 [Website Builder Live Demo (Builder.io Integration)]()
+## 🧱 Website Builder Live Demo (Builder.io Integration)
 Experience the Website Builder, an intuitive interface that enables content updates without requiring technical skills. Admins can customise sections, update events, and modify website content seamlessly.
+
+> 🚨 To customise the website using Builder Integration, you need to run the website locally and log in to [Builder.io](https://www.builder.io/). Please refer to [⬇️ Development Setup](#️-development-setup) to set up the project locally. **Note: The Admin Portal is not customisable.**  
 
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/6950ccfd-22eb-49fe-b562-69eaa2107c2c">
 
@@ -99,6 +101,10 @@ Experience the Website Builder, an intuitive interface that enables content upda
 - [Deployment](https://comp30022.atlassian.net/wiki/spaces/SD/pages/12943362/Deployment)
 - [Security](https://comp30022.atlassian.net/wiki/spaces/SD/pages/5570617/Security)
 
+### Deployment Diagram
+![Deployment Diagram](https://github.com/user-attachments/assets/cb16d3bc-bb8a-4de3-944e-4d30b67910ea)
+
+
 ## ✅ [Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24903681/Functional+Requirements)
 - **User Experience:**
   - [x] Migrate all content from the old website.
@@ -133,18 +139,43 @@ Experience the Website Builder, an intuitive interface that enables content upda
 
 # ⬇️ Development Setup
 
-1. Ensure you have Node.js and npm installed.
-2. Clone the repository:
+> ☁️ This project uses **Next.js**, a full-stack framework, which means the front-end and back-end are seamlessly integrated and do not require separate initialisation. Additionally, we are using **Supabase**, a cloud-hosted, open-source database, so there is no need to run a local SQL database server.
+
+### Prerequisites
+1. Ensure you have **Node.js** and **npm** installed on your machine.  
+   - [Download Node.js](https://nodejs.org/)
+   - [Download npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+### Steps
+
+1. **Clone the Repository:**
    ```bash
    git clone https://github.com/cinqueh/langwarrin-community-centre.git
    cd langwarrin-community-centre
    ```
-3. Install the dependencies:
+
+2. **Install Dependencies:**
    ```bash
    npm install
    ```
-4. Create a `.env.local` file in the repository root and request the necessary values from a team member.
-5. To run the development server, use:
+
+3. **Environment Setup:**
+   - Create a `.env.local` file in the project root.
+   - Request necessary environment values from a team member to fill this file.
+
+4. **Run the Development Server:**
    ```bash
    npm run dev
    ```
+   - This command starts the development server, making the app available **locally**.
+
+5. **Build the Project for Production:**
+   ```bash
+   npm run build
+   ```
+
+6. **Start the Production Server:**
+   ```bash
+   npm run start
+   ```
+   - This will launch the production build.
