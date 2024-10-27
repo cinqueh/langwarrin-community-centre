@@ -36,6 +36,8 @@ Explore the main website, designed for ease of use and accessibility. This site 
 ## 👩‍💼 [Admin Portal Live Demo](https://langwarrin-community-centre.vercel.app/admin)
 The Admin Portal allows administrators to manage memberships, program enrollments, room bookings, and receive notifications. It offers search functionalities to simplify management tasks, and admin can download the records in the database as CSV file.
 
+> 🔑 To log into the Admin Portal, you need to be signed into the admin Google account. Please contact a team member to request access to the linked Google account for authentication.
+
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/5539e60b-5276-403f-a891-308b9000c707">
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/c5ad6f66-a7fb-4e11-8b9b-8310570d79d9">
 
