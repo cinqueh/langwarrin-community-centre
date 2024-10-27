@@ -43,9 +43,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
     complaintsReason: "",
     complaintsSolution: "",
   });
-
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -68,12 +68,59 @@ const ContactForm: React.FC<ContactFormProps> = ({
         [name]: value,
       });
     }
-    setAlertMessage("")
+    setAlertMessage("");
   };
 
-  const submitForm = async (url: string, dataToSubmit: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const person = new PersonDTO({
+      personId: 0,
+      firstName: formData.firstName,
+      surname: formData.lastName,
+      email: formData.email,
+      homeNumber: formData.homePhone,
+      phoneNumber: formData.mobile,
+      address: formData.address
+        ? new AddressDTO({
+            state: formData.address.state,
+            streetAddress: formData.address.street,
+            apartment: formData.address.apartment,
+            suburb: formData.address.suburb,
+            postcode: formData.address.postcode,
+          })
+        : undefined,
+    });
+
+    let dataToSubmit;
+
+    if (formData.enquiryType === "general") {
+      dataToSubmit = new GeneralInquiryDTO({
+        date: new Date(),
+        person,
+        message: formData.message,
+      });
+    } else if (formData.enquiryType === "feedback") {
+      dataToSubmit = new FeedbackInquiryDTO({
+        date: new Date(),
+        person,
+        programName: formData.feedbackProgramName,
+        feedback: formData.feedbackMessage,
+      });
+    } else if (formData.enquiryType === "complaints") {
+      dataToSubmit = new ComplaintInquiryDTO({
+        date: new Date(),
+        person,
+        programName: formData.complaintsPersonName,
+        grievanceReason: formData.complaintsReason,
+        suggestedSolution: formData.complaintsSolution,
+      });
+    }
+
+    setIsLoading(true);
+
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`/api/enquiry/${formData.enquiryType}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,8 +129,27 @@ const ContactForm: React.FC<ContactFormProps> = ({
       });
 
       if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
+        // After form submission is successful, send confirmation emails
+        const emailResponse = await fetch("/api/email/inquiry-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: formData.email, // Client's email
+            formData, // Form data for the email content
+          }),
+        });
+
+        if (emailResponse.ok) {
+          setAlertMessage("Form submitted and emails sent successfully!");
+          setAlertType("success");
+        } else {
+          setAlertMessage(
+            "Form submitted, but an error occurred while sending emails."
+          );
+          setAlertType("error");
+        }
       } else {
         setAlertMessage(
           "An error occurred while submitting the form. Please try again."
@@ -96,96 +162,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
         "An error occurred while submitting the form. Please try again."
       );
       setAlertType("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const person = new PersonDTO({
-        personId: 0,
-        firstName: formData.firstName,
-        surname: formData.lastName,
-        email: formData.email,
-        homeNumber: formData.homePhone,
-        phoneNumber: formData.mobile,
-        address: formData.address
-            ? new AddressDTO({
-                state: formData.address.state,
-                streetAddress: formData.address.street,
-                apartment: formData.address.apartment,
-                suburb: formData.address.suburb,
-                postcode: formData.address.postcode,
-            })
-            : undefined,
-    });
-
-    let dataToSubmit;
-
-    if (formData.enquiryType === "general") {
-        dataToSubmit = new GeneralInquiryDTO({
-            date: new Date(),
-            person,
-            message: formData.message,
-        });
-    } else if (formData.enquiryType === "feedback") {
-        dataToSubmit = new FeedbackInquiryDTO({
-            date: new Date(),
-            person,
-            programName: formData.feedbackProgramName,
-            feedback: formData.feedbackMessage,
-        });
-    } else if (formData.enquiryType === "complaints") {
-        dataToSubmit = new ComplaintInquiryDTO({
-            date: new Date(),
-            person,
-            programName: formData.complaintsPersonName,
-            grievanceReason: formData.complaintsReason,
-            suggestedSolution: formData.complaintsSolution,
-        });
-    }
-
-    try {
-        const response = await fetch(`/api/enquiry/${formData.enquiryType}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataToSubmit),
-        });
-
-        if (response.ok) {
-            // After form submission is successful, send confirmation emails
-            const emailResponse = await fetch("/api/email/inquiry-email", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    userEmail: formData.email, // Client's email
-                    formData, // Form data for the email content
-                }),
-            });
-
-            if (emailResponse.ok) {
-                setAlertMessage("Form submitted and emails sent successfully!");
-                setAlertType("success");
-            } else {
-                setAlertMessage("Form submitted, but an error occurred while sending emails.");
-                setAlertType("error");
-            }
-        } else {
-            setAlertMessage("An error occurred while submitting the form. Please try again.");
-            setAlertType("error");
-        }
-    } catch (error) {
-        console.error("Error submitting form:", error);
-        setAlertMessage("An error occurred while submitting the form. Please try again.");
-        setAlertType("error");
-    }
-};
-
-  
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit}>
       <h1 className={styles.title}>{title}</h1>
@@ -409,8 +390,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
         type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
+        disabled={isLoading}
       >
-        Send
+        {isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
