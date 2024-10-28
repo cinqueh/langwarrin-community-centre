@@ -41,4 +41,8 @@ export default class NodeMailerService implements IEmailServiceAdapter {
             console.error(`Error sending email: ${error}`);
         }
     }
+
+    public async sendBulkEmail(to: string[], subject: string, text: string) {
+      to.forEach(email => this.sendEmail(email, subject, text));
+    }
 }
