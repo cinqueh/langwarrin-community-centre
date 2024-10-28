@@ -83,6 +83,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
 
+      - name: Start Next.js server
+        run: npm run start & # Start the server in the background
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:3000 # Wait for server to start
+
       - name: Run Playwright E2E tests
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
