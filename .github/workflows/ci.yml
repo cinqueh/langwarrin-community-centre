@@ -95,8 +95,8 @@ jobs:
       - name: Check server response
         run: curl -I http://localhost:3000 
 
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000 --timeout 300000 # Wait with a 5-minute timeout
+      # - name: Wait for server to be ready
+      #   run: npx wait-on http://localhost:3000 --timeout 300000 # Wait with a 5-minute timeout
 
       - name: Run Playwright E2E tests
         env:
