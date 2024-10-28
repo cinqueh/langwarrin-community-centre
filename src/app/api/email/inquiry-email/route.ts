@@ -123,10 +123,10 @@ export async function POST(request: Request) {
         }
 
         // Send email to admin
-        await emailService.sendEmail(adminEmail, `New ${formData.enquiryType} Inquiry Submission`, undefined, adminEmailContent);
+        await emailService.sendEmail(adminEmail, `New ${formData.enquiryType} Inquiry Submission`, adminEmailContent);
 
         // Send confirmation email to the user
-        await emailService.sendEmail(userEmail, `Thank you for your ${formData.enquiryType} submission`, undefined, clientEmailContent);
+        await emailService.sendEmail(userEmail, `Thank you for your ${formData.enquiryType} submission`, clientEmailContent);
 
         return new Response(
             JSON.stringify({ message: 'Emails sent successfully' }),
