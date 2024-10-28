@@ -103,11 +103,11 @@
   color: #efeee5;
 }
 
-.membershipForm input::placeholder, 
-.membershipForm textarea::placeholder, 
+.membershipForm input::placeholder,
+.membershipForm textarea::placeholder,
 .membershipForm select::placeholder {
-  color: #EFEEE5; 
-  opacity: 0.8; 
+  color: #efeee5;
+  opacity: 0.8;
   font-weight: 200;
   font-size: 18px;
 }
@@ -145,4 +145,47 @@
 .membershipForm select option:hover {
   background-color: #d6d6c2;
   color: #1a1a1a;
+}
+
+.membershipForm button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+  .membershipForm {
+    padding: 20px;
+  }
+
+  .nameInputGroup,
+  .inputGroup,
+  .suburbInputGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .membershipForm input,
+  .membershipForm select,
+  .membershipForm textarea {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle,
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .checkBoxGroup label {
+    font-size: 18px;
+  }
+
+  .mobilePrefix {
+    font-size: 18px;
+  }
 }

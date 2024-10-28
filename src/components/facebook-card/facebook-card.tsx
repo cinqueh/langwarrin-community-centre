@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles.module.css";
 
 interface FacebookEmbedProps {
   href: string;
@@ -12,7 +13,7 @@ const FacebookEmbed: React.FC<FacebookEmbedProps> = ({
   height = "850",
 }) => {
   return (
-    <div style={{ paddingLeft: "60px" }}>
+    <div style={{ display: "flex", justifyContent: "flex-end", paddingLeft: "60px" }}>
       <iframe
         src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
           href

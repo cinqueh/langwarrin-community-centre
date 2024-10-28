@@ -43,9 +43,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
     complaintsReason: "",
     complaintsSolution: "",
   });
-
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -68,35 +68,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         [name]: value,
       });
     }
-    setAlertMessage("")
-  };
-
-  const submitForm = async (url: string, dataToSubmit: any) => {
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSubmit),
-      });
-
-      if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
-      } else {
-        setAlertMessage(
-          "An error occurred while submitting the form. Please try again."
-        );
-        setAlertType("error");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setAlertMessage(
-        "An error occurred while submitting the form. Please try again."
-      );
-      setAlertType("error");
-    }
+    setAlertMessage("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -122,29 +94,20 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
     let dataToSubmit;
 
-    // Handle general enquiry
     if (formData.enquiryType === "general") {
       dataToSubmit = new GeneralInquiryDTO({
         date: new Date(),
         person,
         message: formData.message,
       });
-      await submitForm("/api/enquiry/general", dataToSubmit);
-    }
-
-    // Handle feedback enquiry
-    if (formData.enquiryType === "feedback") {
+    } else if (formData.enquiryType === "feedback") {
       dataToSubmit = new FeedbackInquiryDTO({
         date: new Date(),
         person,
         programName: formData.feedbackProgramName,
         feedback: formData.feedbackMessage,
       });
-      await submitForm("/api/enquiry/feedback", dataToSubmit);
-    }
-
-    // Handle complaints enquiry
-    if (formData.enquiryType === "complaints") {
+    } else if (formData.enquiryType === "complaints") {
       dataToSubmit = new ComplaintInquiryDTO({
         date: new Date(),
         person,
@@ -152,7 +115,55 @@ const ContactForm: React.FC<ContactFormProps> = ({
         grievanceReason: formData.complaintsReason,
         suggestedSolution: formData.complaintsSolution,
       });
-      await submitForm("/api/enquiry/complaint", dataToSubmit);
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`/api/enquiry/${formData.enquiryType}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      if (response.ok) {
+        // After form submission is successful, send confirmation emails
+        const emailResponse = await fetch("/api/email/inquiry-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: formData.email, // Client's email
+            formData, // Form data for the email content
+          }),
+        });
+
+        if (emailResponse.ok) {
+          setAlertMessage("Form submitted and emails sent successfully!");
+          setAlertType("success");
+        } else {
+          setAlertMessage(
+            "Form submitted, but an error occurred while sending emails."
+          );
+          setAlertType("error");
+        }
+      } else {
+        setAlertMessage(
+          "An error occurred while submitting the form. Please try again."
+        );
+        setAlertType("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setAlertMessage(
+        "An error occurred while submitting the form. Please try again."
+      );
+      setAlertType("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -379,8 +390,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
         type="submit"
         className="button-white"
         style={{ display: "block", margin: "0 auto" }}
+        disabled={isLoading}
       >
-        Send
+        {isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );

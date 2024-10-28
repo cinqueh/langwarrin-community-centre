@@ -5,7 +5,7 @@ import { PersonDTO } from "@/backend/dto/person";
 import { AddressDTO } from "@/backend/dto/person";
 import { MemberDTO } from "@/backend/dto/member";
 
-type MembershipFormProps = {
+interface MembershipFormProps {
   title: string;
   subtitle: string;
   subtitle2: string;
@@ -22,26 +22,9 @@ type MembershipFormProps = {
   postcodePlaceholder: string;
   submitButtonText: string;
   checkboxLabel: string;
-};
+}
 
-const MembershipForm: React.FC<MembershipFormProps> = ({
-  title,
-  subtitle,
-  subtitle2,
-  firstNamePlaceholder,
-  lastNamePlaceholder,
-  emailPlaceholder,
-  mobilePlaceholder,
-  homePhonePlaceholder,
-  occupationPlaceholder,
-  apartmentPlaceholder,
-  addressPlaceholder,
-  suburbPlaceholder,
-  statePlaceholder,
-  postcodePlaceholder,
-  submitButtonText,
-  checkboxLabel,
-}) => {
+const MembershipForm = (props: MembershipFormProps) => {
   const [formData, setFormData] = useState({
     title: "",
     firstName: "",
@@ -60,6 +43,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -70,7 +54,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
+
     if (!agreedToTerms) {
       setAlertMessage("Please agree to the terms and conditions.");
       setAlertType("error");
@@ -103,6 +87,8 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
       person: personDTO,
     });
 
+    setIsLoading(true);
+
     // Send form data to backend API
     try {
       const response = await fetch("/api/member", {
@@ -114,8 +100,27 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
       });
 
       if (response.ok) {
-        setAlertMessage("Form submitted successfully!");
-        setAlertType("success");
+        // After successfully submitting the form, trigger the email sending
+        const emailResponse = await fetch("/api/email/membership-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: formData.email, // The client's email
+            formData, // The form data containing all the details
+          }),
+        });
+
+        if (emailResponse.ok) {
+          setAlertMessage("Form submitted and emails sent successfully!");
+          setAlertType("success");
+        } else {
+          setAlertMessage(
+            "Form submitted, but an error occurred while sending emails."
+          );
+          setAlertType("error");
+        }
       } else {
         setAlertMessage(
           "An error occurred while submitting the form. Please try again."
@@ -123,19 +128,20 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
         setAlertType("error");
       }
     } catch (error) {
-      // console.error("Error submitting form:", error);
       setAlertMessage(
         "An error occurred while submitting the form. Please try again."
       );
       setAlertType("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className={styles.membershipForm}>
-      <h4>{title}</h4>
-      <p className={styles.subtitle}>{subtitle}</p>
-      <p className={styles.sectionTitle}>{subtitle2}</p>
+      <h4>{props.title}</h4>
+      <p className={styles.subtitle}>{props.subtitle}</p>
+      <p className={styles.sectionTitle}>{props.subtitle2}</p>
       <form onSubmit={handleSubmit}>
         <div className={styles.nameInputGroup}>
           <select
@@ -154,7 +160,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="firstName"
-            placeholder={firstNamePlaceholder}
+            placeholder={props.firstNamePlaceholder}
             value={formData.firstName}
             onChange={handleInputChange}
             required
@@ -162,7 +168,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="lastName"
-            placeholder={lastNamePlaceholder}
+            placeholder={props.lastNamePlaceholder}
             value={formData.lastName}
             onChange={handleInputChange}
             required
@@ -175,7 +181,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
             <input
               type="tel"
               name="mobile"
-              placeholder={mobilePlaceholder}
+              placeholder={props.mobilePlaceholder}
               value={formData.mobile}
               onChange={handleInputChange}
               required
@@ -186,7 +192,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
             <input
               type="tel"
               name="homePhone"
-              placeholder={homePhonePlaceholder}
+              placeholder={props.homePhonePlaceholder}
               value={formData.homePhone}
               onChange={handleInputChange}
               required
@@ -198,7 +204,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="email"
             name="email"
-            placeholder={emailPlaceholder}
+            placeholder={props.emailPlaceholder}
             value={formData.email}
             onChange={handleInputChange}
             required
@@ -206,7 +212,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="occupation"
-            placeholder={occupationPlaceholder}
+            placeholder={props.occupationPlaceholder}
             value={formData.occupation}
             onChange={handleInputChange}
             required
@@ -217,7 +223,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="apartment"
-            placeholder={apartmentPlaceholder}
+            placeholder={props.apartmentPlaceholder}
             value={formData.apartment}
             onChange={handleInputChange}
           />
@@ -226,7 +232,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="address"
-            placeholder={addressPlaceholder}
+            placeholder={props.addressPlaceholder}
             value={formData.address}
             onChange={handleInputChange}
             required
@@ -237,7 +243,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="suburb"
-            placeholder={suburbPlaceholder}
+            placeholder={props.suburbPlaceholder}
             value={formData.suburb}
             onChange={handleInputChange}
             required
@@ -261,7 +267,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           <input
             type="text"
             name="postcode"
-            placeholder={postcodePlaceholder}
+            placeholder={props.postcodePlaceholder}
             value={formData.postcode}
             onChange={handleInputChange}
             required
@@ -277,7 +283,7 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
               onChange={(e) => setAgreedToTerms(e.target.checked)}
               className={styles.checkboxInput}
             />
-            <span dangerouslySetInnerHTML={{ __html: checkboxLabel }} />
+            <span dangerouslySetInnerHTML={{ __html: props.checkboxLabel }} />
           </label>
         </div>
 
@@ -292,8 +298,9 @@ const MembershipForm: React.FC<MembershipFormProps> = ({
           type="submit"
           className="button-white"
           style={{ display: "block", margin: "0 auto" }}
+          disabled={isLoading}
         >
-          {submitButtonText}
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

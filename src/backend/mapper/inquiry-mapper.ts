@@ -3,16 +3,15 @@ import {
   GeneralInquiryDTO,
   ProgramCourseInquiryDTO,
   ChildcareInquiryDTO,
-  ChildcareInquirySessionDTO,
   ComplaintInquiryDTO,
   RoomBookingEnquiryDTO
 } from "../dto/inquiry";
 import Mapper from "./mapper";
 import { Person, PersonMapper } from "./person-mapper";
-import {Child, ChildMapper, ChildcareProgram, ChildcareProgramMapper, ChildcareSession, ChildcareSessionMapper} from "./childcare-mapper"
+import {Child, ChildMapper} from "./childcare-mapper"
 import { ChildDTO } from "../dto/childcare/child";
-import { ChildcareProgramDTO } from "../dto/childcare/childcareprogram";
-import { ChildcareSessionDTO } from "../dto/childcare/childcaresession";
+import { PersonDTO } from "../dto/person";
+
 
 export type Inquiry = {
   inquiryid: number;
@@ -57,18 +56,12 @@ export type ComplaintInquiry = {
 // ChildcareInquiry Entity
 export type ChildcareInquiry = {
   inquiryid: number;
-  child: ChildDTO;
-  childcareprogram?: ChildcareProgramDTO;
-  childcaresession?: ChildcareSessionDTO;
-  person: Person;
-  notes?: string;
-};
-
-// ChildcareInquirySession Entity
-export type ChildcareInquirySession = {
-  inquiryid: number;
-  childid: number;
-  childcaresessionid: number;
+  child: ChildDTO;     // Child entity
+  person: Person;      // Person entity
+  day: string;         // The day of the program they are asking about
+  program: string;     // The program they are asking about
+  notes?: string;      // Optional notes
+  inquiry: Inquiry;
 };
 
 // Define RoomBookingEnquiry entity type
@@ -144,54 +137,41 @@ export class ProgramCourseInquiryMapper implements Mapper<ProgramCourseInquiry, 
   }
 }
 
-// Childcare Inquiry Mapper
-export class ChildcareInquiryMapper implements Mapper<ChildcareInquiry, ChildcareInquiryDTO> {
-  private personMapper = new PersonMapper();
-  private childMapper = new ChildMapper();
-  private programMapper = new ChildcareProgramMapper();
-  private sessionMapper = new ChildcareSessionMapper();
+export class ChildcareInquiryMapper implements Mapper<any, ChildcareInquiryDTO> {
+  public mapTo(entity: any): ChildcareInquiryDTO {
+    const inquiryData = entity.inquiry || {};
+    const personData = inquiryData.person || {};
+    const person = new PersonDTO({
+      personId: personData.personid,
+      firstName: personData.firstname,
+      surname: personData.surname,
+      email: personData.email,
+      phoneNumber: personData.phonenumber,
+    });
 
-  public mapTo(inquiry: ChildcareInquiry): ChildcareInquiryDTO {
+    const childData = entity.child || {};
+    const child = new ChildDTO({
+      childId: childData.childid,
+      childAge: childData.childage,
+      childFirstName: childData.childfirstname,
+      childSurname: childData.childsurname,
+    });
+
+    const date = new Date(inquiryData.time);  // Correctly accessing the date
+
     return new ChildcareInquiryDTO({
-      date: new Date(),
-      person: this.personMapper.mapTo(inquiry.person),
-      // Mapping from Child (entity) to ChildDTO
-      child: this.childMapper.mapTo({
-        childid: inquiry.child.childId!,
-        childage: inquiry.child.childAge,
-        childfirstname: inquiry.child.childFirstName,
-        childsurname: inquiry.child.childSurname,
-      }),
-      // Mapping from ChildcareProgram (entity) to ChildcareProgramDTO
-      childcareProgram: inquiry.childcareprogram ? this.programMapper.mapTo({
-        childcareprogramid: inquiry.childcareprogram.childcareProgramId!,
-        childcaresessionid: inquiry.childcareprogram.childcareSessionId,
-        programname: inquiry.childcareprogram.programName
-      }) : undefined,
-      // Mapping from ChildcareSession (entity) to ChildcareSessionDTO
-      childcareSession: inquiry.childcaresession ? this.sessionMapper.mapTo({
-        childcaresessionid: inquiry.childcaresession.childcareSessionId!,
-        day: inquiry.childcaresession.day,
-        starttime: inquiry.childcaresession.startTime,
-        endtime: inquiry.childcaresession.endTime
-      }) : undefined,
-      inquiryId: inquiry.inquiryid,
-      notes: inquiry.notes,
+      inquiryId: entity.inquiryid,
+      date: date,
+      person: person,
+      child: child,
+      notes: inquiryData.notes,  // Access notes from inquiryData
+      day: entity.day,
+      program: entity.program,
     });
   }
 }
 
 
-// Childcare Inquiry Session Mapper
-export class ChildcareInquirySessionMapper implements Mapper<ChildcareInquirySession, ChildcareInquirySessionDTO> {
-  public mapTo(session: ChildcareInquirySession): ChildcareInquirySessionDTO {
-    return new ChildcareInquirySessionDTO({
-      inquiryId: session.inquiryid,
-      childId: session.childid,
-      childcareSessionId: session.childcaresessionid,
-    });
-  }
-}
 
 export class ComplaintInquiryMapper implements Mapper<ComplaintInquiry, ComplaintInquiryDTO> {
   private personMapper = new PersonMapper();

@@ -1,96 +1,74 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import {
-  LightGreenInformationCardTitle,
-  DarkGreenInformationCardTitle,
-  WhiteInformationCard,
-  LightGreenInformationCard,
-  MediumGreenInformationCard,
-  DarkGreenInformationCard,
+  InformationCard,
   InformationCardWithButton,
-} from '../../components/information-card/information-card'; // Adjust the path as necessary
+} from "../../components/information-card/information-card";
 
-describe('InformationCard Components', () => {
-  it('renders LightGreenInformationCardTitle with correct title', () => {
-    render(<LightGreenInformationCardTitle title="Light Green Title" />);
-    expect(screen.getByText('Light Green Title')).toBeInTheDocument();
-  });
-
-  it('renders DarkGreenInformationCardTitle with correct title', () => {
-    render(<DarkGreenInformationCardTitle title="Dark Green Title" />);
-    expect(screen.getByText('Dark Green Title')).toBeInTheDocument();
-  });
-
-  it('renders WhiteInformationCard with correct props', () => {
+describe("InformationCard Components", () => {
+  it("renders InformationCard with correct title and description", () => {
     render(
-      <WhiteInformationCard
-        title="White Info Card"
-        description="This is a white information card."
+      <InformationCard
+        title="Test Title"
+        description="This is a test description."
         titleAlignment="center"
-        height="100px"
+        descriptionAlignment="left"
+        colorScheme="lightGreen"
+        minHeight="200px"
       />
     );
-    expect(screen.getByText('White Info Card')).toBeInTheDocument();
-    expect(screen.getByText('This is a white information card.')).toBeInTheDocument();
-  });
 
-  it('renders LightGreenInformationCard with correct props', () => {
-    render(
-      <LightGreenInformationCard
-        title="Light Green Info Card"
-        description="This is a light green information card."
-        titleAlignment="center"
-        height="150px"
-      />
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("This is a test description.")).toBeInTheDocument();
+    expect(screen.getByText("Test Title")).toHaveStyle("text-align: center");
+    expect(screen.getByText("This is a test description.")).toHaveStyle(
+      "text-align: left"
     );
-    expect(screen.getByText('Light Green Info Card')).toBeInTheDocument();
-    expect(screen.getByText('This is a light green information card.')).toBeInTheDocument();
   });
 
-  it('renders MediumGreenInformationCard with correct props', () => {
-    render(
-      <MediumGreenInformationCard
-        title="Medium Green Info Card"
-        description="This is a medium green information card."
-        titleAlignment="left"
-        height="120px"
-      />
-    );
-    expect(screen.getByText('Medium Green Info Card')).toBeInTheDocument();
-    expect(screen.getByText('This is a medium green information card.')).toBeInTheDocument();
-  });
-
-  it('renders DarkGreenInformationCard with correct props', () => {
-    render(
-      <DarkGreenInformationCard
-        title="Dark Green Info Card"
-        description="This is a dark green information card."
-        height="140px"
-      />
-    );
-    expect(screen.getByText('Dark Green Info Card')).toBeInTheDocument();
-    expect(screen.getByText('This is a dark green information card.')).toBeInTheDocument();
-  });
-
-  it('renders InformationCardWithButton correctly and handles button click', () => {
+  it("renders InformationCardWithButton and handles button click", () => {
     const handleClick = jest.fn();
     render(
       <InformationCardWithButton
-        title="Info Card With Button"
-        description="This is an information card with a button."
+        title="Card With Button"
+        description="Description for the card with a button."
         buttonText="Click Me"
         linkUrl="#"
+        titleAlignment="left"
+        descriptionAlignment="left"
       />
     );
 
-    const buttonElement = screen.getByRole('button', { name: /click me/i });
+    const buttonElement = screen.getByRole("button", { name: /click me/i });
     expect(buttonElement).toBeInTheDocument();
+    expect(screen.getByText("Card With Button")).toBeInTheDocument();
+    expect(
+      screen.getByText("Description for the card with a button.")
+    ).toBeInTheDocument();
 
     // Simulate button click
     fireEvent.click(buttonElement);
 
-    // Asserting that the button click was triggered
-    expect(buttonElement).toBeInTheDocument(); // The handler won't navigate, so check the button presence instead
+    // Assert button presence (since actual redirection is not happening in the test environment)
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  it("renders InformationCard with different color schemes", () => {
+    const { rerender } = render(
+      <InformationCard title="Dark Green Card" colorScheme="darkGreen" />
+    );
+    const darkGreenCard = screen.getByText("Dark Green Card");
+    expect(darkGreenCard).toBeInTheDocument();
+
+    rerender(
+      <InformationCard title="Light Green Card" colorScheme="lightGreen" />
+    );
+    const lightGreenCard = screen.getByText("Light Green Card");
+    expect(lightGreenCard).toBeInTheDocument();
+
+    rerender(<InformationCard title="White Card" colorScheme="white" />);
+    const whiteCard = screen.getByText("White Card");
+    expect(whiteCard).toBeInTheDocument();
   });
 });
