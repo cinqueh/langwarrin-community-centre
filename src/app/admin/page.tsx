@@ -30,6 +30,13 @@ export default async function Dashboard() {
         <div className={styles.grid}>
           {/* Row 1: Membership, Program Enrolments, Room Hire, Childcare Enquiry */}
           <div className={styles.card}>
+            <h3>Email</h3>
+            <Link href="/admin/email">
+              <button className={styles.button}>View</button>
+            </Link>
+          </div>
+
+          <div className={styles.card}>
             <h3>Membership</h3>
             <Link href="/admin/member">
               <button className={styles.button}>View</button>

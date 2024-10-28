@@ -65,7 +65,7 @@ describe('NodeMailerService', () => {
             from: process.env.GMAIL_USER,
             to: 'test@example.com',
             subject: 'Test Subject',
-            text: 'Test body',
+            html: 'Test body',
         });
     });
 

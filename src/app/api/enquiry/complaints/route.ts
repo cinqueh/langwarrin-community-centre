@@ -14,6 +14,7 @@ function isComplaintInquiryDTO(body: any): body is ComplaintInquiryDTO {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    console.log(body);
 
     // Validate the body
     if (!isComplaintInquiryDTO(body)) {

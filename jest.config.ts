@@ -39,6 +39,12 @@ const config: Config = {
     '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js', // Mock images and static assets
   },
 
+  testPathIgnorePatterns: [
+    '/node_modules/',          // Default ignored folder
+    '/e2e/',             // Example: ignore e2e-tests folder
+    '/dist/',                  // Example: ignore dist folder for build files
+  ],
+
   // transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
 
