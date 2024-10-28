@@ -14,6 +14,7 @@ export async function authorize(onSuccess: () => Promise<JSX.Element>): Promise<
 }
 
 export async function authorizeRoute(onSuccess: () => Promise<Response>): Promise<Response> {
+
     const session = await auth();
     
     // if not authenticated, redirect to the login page

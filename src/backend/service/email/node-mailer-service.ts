@@ -22,7 +22,7 @@ export default class NodeMailerService implements IEmailServiceAdapter {
         return NodeMailerService.instance;
     }
 
-    async sendEmail(to: string, subject: string, text?: string, html?: string): Promise<void> {
+    async sendEmail(to: string, subject: string, content: string): Promise<void> {
         try {
             const mailOptions: nodemailer.SendMailOptions = {
                 from: process.env.GMAIL_USER,
@@ -30,18 +30,14 @@ export default class NodeMailerService implements IEmailServiceAdapter {
                 subject,
             };
     
-            if (html) {
-                mailOptions.html = html;
-            }
-    
-            if (text) {
-                mailOptions.text = text;
-            }
+            mailOptions.html = content;
     
             await this.transporter.sendMail(mailOptions);
         } catch (error) {
             console.error(`Error sending email: ${(error as Error).toString()}`);
         }
     }
-    
+    public async sendBulkEmail(to: string[], subject: string, text: string) {
+      to.forEach(email => this.sendEmail(email, subject, text));
+    }
 }

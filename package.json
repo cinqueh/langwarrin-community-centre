@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@blocknote/mantine": "^0.17.1",
+    "@blocknote/react": "^0.17.1",
     "@builder.io/dev-tools": "^1.0.20",
     "@builder.io/react": "^5.0.1",
     "@builder.io/sdk": "^3.0.1",

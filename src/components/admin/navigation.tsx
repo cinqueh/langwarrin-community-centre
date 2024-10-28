@@ -27,6 +27,9 @@ const NavigationLinks: React.FC = () => {
               Admin Portal
               <span className={styles.centerName}>Langwarrin Community Centre</span>
         </div>
+        <div onClick={() => handleNavigation('/admin/email')} className={`${styles.navItem} ${isActive('/admin/email') ? styles.active : ''}`}>
+        Email
+      </div>
       <div onClick={() => handleNavigation('/admin/member')} className={`${styles.navItem} ${isActive('/admin/member') ? styles.active : ''}`}>
         Membership
       </div>

@@ -81,7 +81,6 @@ export async function POST(request: Request) {
         await emailService.sendEmail(
             adminEmail,
             'New Room Booking Submission',
-            undefined, // No plain text content
             adminEmailContent // HTML content
         );
 
@@ -89,7 +88,6 @@ export async function POST(request: Request) {
         await emailService.sendEmail(
             userEmail,
             'Thank you for your room booking',
-            undefined, // No plain text content
             clientEmailContent // HTML content
         );
 

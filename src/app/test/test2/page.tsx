@@ -1,7 +1,9 @@
-import ProgramGrid from "@/components/programs/programs-panel";
+import BrevoService from "@/backend/service/email/brevo-service";
+import IEmailServiceAdapter from "@/backend/service/email/email-adapter";
 
 export default async function Complaint() {
     return (
-        <ProgramGrid title={"Abc"} category={'Further Education / Literacy'}/>
+        <>
+        </>
     )
 }
