@@ -8,7 +8,8 @@ export default defineConfig({
     headless: true,
   },
   webServer: {
-    command: 'npm run dev', // Start your Next.js app for testing
-    port: 3000,
+    command: 'npm run start', // Start your Next.js app for testing
+    url: 'http://localhost:3000',
+    reuseExistingServer: true,
   },
 });
