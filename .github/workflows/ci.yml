@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-
+  
   build:
     name: Build Project
     runs-on: ubuntu-latest
@@ -63,6 +63,28 @@ jobs:
         with:
           name: test-results
           path: test-results.xml
+
+  playwright-e2e:
+    name: Run Playwright E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright E2E tests
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: npx playwright test # Replace with the actual script for your Playwright tests
 
   lint:
     name: Lint Code
