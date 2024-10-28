@@ -80,6 +80,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
       - name: Run Playwright E2E tests
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
