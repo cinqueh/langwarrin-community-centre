@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.2.0...v1.3.0) (2024-10-27)
+
+
+### Features
+
+* Merge development branch into main with updates on Room Hire Table View, Childcare Table, and Email Automation ([#92](https://github.com/cinqueh/langwarrin-community-centre/issues/92)) ([60e3b7e](https://github.com/cinqueh/langwarrin-community-centre/commit/60e3b7e5f9363ab375e327318aeeb2a4fbbf093c))
+
 # [1.2.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.1.2...v1.2.0) (2024-10-25)
 
 
