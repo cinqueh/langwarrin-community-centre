@@ -63,7 +63,6 @@ export async function POST(request: Request) {
         await emailService.sendEmail(
             adminEmail,
             'New Membership Form Submission',
-            undefined, // No plain text content
             adminEmailContent // HTML content
         );
 
@@ -71,7 +70,6 @@ export async function POST(request: Request) {
         await emailService.sendEmail(
             userEmail,
             'Thank you for your membership form submission',
-            undefined, // No plain text content
             clientEmailContent // HTML content
         );
 
