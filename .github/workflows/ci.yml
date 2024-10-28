@@ -90,6 +90,10 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.NEXT_PUBLIC_BUILDER_API_KEY }}
+          AUTH_GOOGLE_SECRET: ${{ secrets.SUPABASE_URL }}
+          AUTH_GOOGLE_ID: ${{ secrets.AUTH_SECRET }}
         run: npx playwright test # Replace with the actual script for your Playwright tests
 
   lint:
