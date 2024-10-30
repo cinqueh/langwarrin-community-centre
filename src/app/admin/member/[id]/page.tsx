@@ -5,6 +5,7 @@ import AdminHeader from "@/components/admin/admin-header";
 import { MemberDisplayObjectMapper } from "@/backend/mapper/display-object-mapper";
 import { authorize } from "@/components/admin/auth";
 import { DisplayIndividualInquiryComponent } from "@/components/admin/display-individual";
+import DeleteButton from '../../../../components/admin/delete-button';
 
 interface MemberPageProps {
     params: { id: string };
@@ -28,6 +29,7 @@ export default async function Member({ params }: MemberPageProps) {
             <AdminHeader>
               <IndividualWrapper title={formattedData.object.header}>
                 <DisplayIndividualInquiryComponent data={formattedData.object} columns={formattedData.columns}/>
+                <DeleteButton id={id} />
               </IndividualWrapper>
             </AdminHeader>
           );

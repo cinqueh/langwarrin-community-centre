@@ -18,4 +18,9 @@ export default class MemberService extends DatabaseService<MemberRepository, Mem
 
         return this.handleResponse(response, (data) => data);
     }
+
+    public async deleteMember(id: number) {
+        const response = await this.repository.deleteMember(id);
+        return this.handleResponse(response, (data) => data);
+    }
 }
