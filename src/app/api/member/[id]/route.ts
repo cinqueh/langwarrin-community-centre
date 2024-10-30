@@ -1,6 +1,6 @@
 // app/api/member/[id]/route.ts
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'; 
 import MemberService from '@/backend/service/member-service';
 
 
