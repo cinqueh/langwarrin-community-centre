@@ -1,6 +1,7 @@
 import { POST } from "../../../../../app/api/enquiry/general/route";
 import { GeneralInquiryDTO } from "../../../../../backend/dto/inquiry";
 import GeneralInquiryService from "../../../../../backend/service/general-inquiry-service";
+import rateLimitHandler from "../../../../../components/api/rate-limit";
 import 'whatwg-fetch';
 
 // Mock the GeneralInquiryService
@@ -14,6 +15,9 @@ const mockNewGeneralInquiry = jest.fn();
 const mockNextRequest = (body: any) => ({
   json: jest.fn().mockResolvedValue(body),
 });
+
+// Mock rateLimitHandler to directly invoke the callback
+jest.mock("../../../../../components/api/rate-limit", () => jest.fn((request, callback) => callback()));
 
 const validGeneralInquiryDTO: GeneralInquiryDTO = {
     message: "This is a general inquiry message.",
