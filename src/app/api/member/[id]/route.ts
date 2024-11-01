@@ -1,37 +1,24 @@
-// app/api/member/[id]/route.ts
-
-import { NextRequest, NextResponse } from 'next/server'; 
+import { NextRequest, NextResponse } from 'next/server';
 import MemberService from '@/backend/service/member-service';
-import { getToken } from 'next-auth/jwt';
+import { authorizeRoute } from '@/components/admin/auth'; 
 
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
-): Promise<NextResponse> {
-  // Retrieve the token from the request
-  const token = await getToken({ req: request, secret: process.env.AUTH_SECRET });
-
-  // If there's no token, return unauthorized response
-  if (!token) {
-    return new NextResponse(
-      JSON.stringify({ error: 'Unauthorized.' }),
-      {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-  }
-
+): Promise<Response> {
   try {
-    const id = Number(params.id);
+    return await authorizeRoute(async () => {
 
-    const service = new MemberService();
-    await service.deleteMember(id);
+      const id = Number(params.id);
 
-    return NextResponse.json(
-      { message: 'Member deleted successfully' },
-      { status: 200 }
-    );
+      const service = new MemberService();
+      await service.deleteMember(id);
+
+      return NextResponse.json(
+        { message: 'Member deleted successfully' },
+        { status: 200 }
+      );
+    });
   } catch (error: any) {
     console.error('Error in DELETE API route:', error);
     return NextResponse.json(
