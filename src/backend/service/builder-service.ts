@@ -69,6 +69,16 @@ export default class BuilderService {
         return componentInstances;
     }
 
+    public getFirstComponentOfTypes(page: BuilderPage, componentNames: string[]): BuilderComponent | undefined {
+        for (const componentName of componentNames) {
+            const component = this.getFirstComponent(page, componentName);
+            if (component) {
+                return component;
+            }
+        }
+        return undefined;
+    }
+
     public getFirstComponent(page: BuilderPage, componentName: string): BuilderComponent | undefined {
         const searchBlocks = (blocks: BuilderBlock[]): BuilderBlock | undefined => {
             for (const block of blocks) {    
