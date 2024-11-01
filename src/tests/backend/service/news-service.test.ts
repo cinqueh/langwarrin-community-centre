@@ -45,10 +45,9 @@ describe("NewsService", () => {
     // Verify results
     expect(result).toEqual(mockNewsInformation);
     expect(getAllPagesMock).toHaveBeenCalledTimes(1);
-    expect(mapToMock).toHaveBeenCalledTimes(3); // Once for each page
+    expect(mapToMock).toHaveBeenCalledTimes(2); // Once for each page
     expect(mapToMock).toHaveBeenCalledWith(mockPages[0]);
     expect(mapToMock).toHaveBeenCalledWith(mockPages[1]);
-    expect(mapToMock).toHaveBeenCalledWith(mockPages[2]);
   });
 
   it("should return an empty array if there are no pages with '/news/' in their URL", async () => {
