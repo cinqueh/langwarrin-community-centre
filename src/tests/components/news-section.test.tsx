@@ -8,7 +8,6 @@ describe('NewsCard Components', () => {
     imageUrl: 'https://example.com/image1.jpg',
     altText: 'Example Image 1',
     title: 'White News Card Title',
-    description: 'This is a description for the White News Card.',
     linkUrl: 'https://example.com/white-news-card',
   };
 
@@ -16,7 +15,6 @@ describe('NewsCard Components', () => {
     imageUrl: 'https://example.com/image2.jpg',
     altText: 'Example Image 2',
     title: 'Green News Card Title',
-    description: 'This is a description for the Green News Card.',
     linkUrl: 'https://example.com/green-news-card',
   };
 
@@ -27,7 +25,6 @@ describe('NewsCard Components', () => {
     expect(screen.getByAltText(whiteCardProps.altText)).toBeInTheDocument();
     expect(screen.getByAltText(whiteCardProps.altText)).toHaveAttribute('src', whiteCardProps.imageUrl);
     expect(screen.getByText(whiteCardProps.title)).toBeInTheDocument();
-    expect(screen.getByText(whiteCardProps.description)).toBeInTheDocument();
 
     // Check button is rendered correctly
     const button = screen.getByText('Learn More');
@@ -41,7 +38,6 @@ describe('NewsCard Components', () => {
     expect(screen.getByAltText(greenCardProps.altText)).toBeInTheDocument();
     expect(screen.getByAltText(greenCardProps.altText)).toHaveAttribute('src', greenCardProps.imageUrl);
     expect(screen.getByText(greenCardProps.title)).toBeInTheDocument();
-    expect(screen.getByText(greenCardProps.description)).toBeInTheDocument();
 
     // Check button is rendered correctly
     const button = screen.getByText('Learn More');
