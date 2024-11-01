@@ -1,3 +1,4 @@
+import rateLimitHandler from "@/components/api/rate-limit";
 import { RoomBookingEnquiryDTO } from "../../../../backend/dto/inquiry";
 import RoomBookingInquiryService from "@/backend/service/room-booking-inquiry-service";
 
@@ -35,29 +36,31 @@ function isRoomBookingEnquiryDTO(body: any): body is RoomBookingEnquiryDTO {
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json();
+        return await rateLimitHandler(request, async() => {
+            const body = await request.json();
 
-        // Validate the body
-        if (!isRoomBookingEnquiryDTO(body)) {
+            // Validate the body
+            if (!isRoomBookingEnquiryDTO(body)) {
+                return new Response(
+                    JSON.stringify({ error: 'Invalid input.' }),
+                    {
+                        status: 400,
+                        headers: { 'Content-Type': 'application/json' }
+                    }
+                );
+            }
+    
+            const service = new RoomBookingInquiryService();
+            const data = await service.newRoomBookingInquiry(body);
+    
             return new Response(
-                JSON.stringify({ error: 'Invalid input.' }),
+                JSON.stringify(data),
                 {
-                    status: 400,
+                    status: 200,
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
-        }
-
-        const service = new RoomBookingInquiryService();
-        const data = await service.newRoomBookingInquiry(body);
-
-        return new Response(
-            JSON.stringify(data),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+        });
     } catch (error) {
         console.log(error);
         return new Response(

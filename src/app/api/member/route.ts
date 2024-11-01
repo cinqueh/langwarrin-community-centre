@@ -1,3 +1,4 @@
+import rateLimitHandler from "../../../components/api/rate-limit";
 import { MemberDTO } from "../../../backend/dto/member";
 import MemberService from "../../../backend/service/member-service";
 
@@ -12,29 +13,32 @@ function isMemberDTO(body: any): body is MemberDTO {
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json();
+        return await rateLimitHandler(request, async() => {
+            const body = await request.json();
 
-        // Validate the body
-        if (!isMemberDTO(body)) {
+            // Validate the body
+            if (!isMemberDTO(body)) {
+                return new Response(
+                    JSON.stringify({ error: 'Invalid input.' }),
+                    {
+                        status: 400,
+                        headers: { 'Content-Type': 'application/json' }
+                    }
+                );
+            }
+    
+            const service = new MemberService();
+            const data = await service.addMember(body);
+    
             return new Response(
-                JSON.stringify({ error: 'Invalid input.' }),
+                JSON.stringify(data),
                 {
-                    status: 400,
+                    status: 200,
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
         }
-
-        const service = new MemberService();
-        const data = await service.addMember(body);
-
-        return new Response(
-            JSON.stringify(data),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+    )
     } catch (error) {
         console.log(error);
         return new Response(
