@@ -11,29 +11,31 @@ function isGeneralInquiryDTO(body: any): body is GeneralInquiryDTO {
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json();
+        return rateLimitHandler(request, async() => {
+            const body = await request.json();
 
-        // Validate the body
-        if (!isGeneralInquiryDTO(body)) {
+            // Validate the body
+            if (!isGeneralInquiryDTO(body)) {
+                return new Response(
+                    JSON.stringify({ error: 'Invalid input.' }),
+                    {
+                        status: 400,
+                        headers: { 'Content-Type': 'application/json' }
+                    }
+                );
+            }
+    
+            const service = new GeneralInquiryService();
+            const data = await service.newGeneralInquiry(body);
+    
             return new Response(
-                JSON.stringify({ error: 'Invalid input.' }),
+                JSON.stringify(data),
                 {
-                    status: 400,
+                    status: 200,
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
-        }
-
-        const service = new GeneralInquiryService();
-        const data = await service.newGeneralInquiry(body);
-
-        return new Response(
-            JSON.stringify(data),
-            {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+        });
     } catch (error) {
         console.log(error);
         return new Response(
