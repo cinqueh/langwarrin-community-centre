@@ -19,5 +19,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: '/admin/sign-in',
   },
   trustHost: true,
-  secret: process.env.AUTH_SECRET,
 })
