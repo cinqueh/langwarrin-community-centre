@@ -1,7 +1,7 @@
 import ProgramCourseInquiryService from "../../../../backend/service/program-course-inquiry-service";
 import { ProgramCourseInquiryDTO } from "../../../../backend/dto/inquiry";
 import { PersonDTO, AddressDTO } from "../../../../backend/dto/person";
-import { rateLimitHandler } from "@/components/api/rate-limit";
+import rateLimitHandler from "@/components/api/rate-limit";
 
 function isProgramCourseInquiryDTO(body: any): boolean {
   return (

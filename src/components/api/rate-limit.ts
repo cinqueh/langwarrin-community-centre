@@ -7,7 +7,7 @@ const rateLimiter = new RateLimiterMemory({
   duration: Number(process.env.API_RATE_LIMIT_DURATION) || 60, // Default to 60 seconds
 });
 
-export async function rateLimitHandler(
+export default async function rateLimitHandler(
   request: Request,
   onSuccess: () => Promise<Response> | Response
 ): Promise<Response> {

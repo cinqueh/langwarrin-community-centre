@@ -1,5 +1,6 @@
 import ComplaintInquiryService from "../../../../backend/service/complaint-inquiry-service";
 import { ComplaintInquiryDTO } from "../../../../backend/dto/inquiry";
+import rateLimitHandler from "@/components/api/rate-limit";
 
 function isComplaintInquiryDTO(body: any): body is ComplaintInquiryDTO {
   return (
@@ -13,30 +14,31 @@ function isComplaintInquiryDTO(body: any): body is ComplaintInquiryDTO {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    console.log(body);
+    return rateLimitHandler(request, async() => {
+        const body = await request.json();
 
-    // Validate the body
-    if (!isComplaintInquiryDTO(body)) {
-      return new Response(
-        JSON.stringify({ error: 'Invalid input.' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
+        // Validate the body
+        if (!isComplaintInquiryDTO(body)) {
+          return new Response(
+            JSON.stringify({ error: 'Invalid input.' }),
+            {
+              status: 400,
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
         }
-      );
-    }
-
-    const service = new ComplaintInquiryService();
-    const data = await service.newComplaintInquiry(body);
-
-    return new Response(
-      JSON.stringify(data),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    
+        const service = new ComplaintInquiryService();
+        const data = await service.newComplaintInquiry(body);
+    
+        return new Response(
+          JSON.stringify(data),
+          {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+    });
   } catch (error) {
     console.log(error);
     return new Response(

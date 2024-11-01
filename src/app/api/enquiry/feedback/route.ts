@@ -1,4 +1,4 @@
-import { rateLimitHandler } from "@/components/api/rate-limit";
+import rateLimitHandler from "@/components/api/rate-limit";
 import { FeedbackInquiryDTO } from "../../../../backend/dto/inquiry";
 import FeedbackInquiryService from "@/backend/service/feedback-inquiry-service";
 

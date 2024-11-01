@@ -1,4 +1,4 @@
-import { rateLimitHandler } from "@/components/api/rate-limit";
+import rateLimitHandler from "@/components/api/rate-limit";
 import { MemberDTO } from "../../../backend/dto/member";
 import MemberService from "../../../backend/service/member-service";
 

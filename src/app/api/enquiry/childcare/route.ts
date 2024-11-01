@@ -3,7 +3,7 @@ import ChildService from "../../../../backend/service/child-service"; // Import 
 import { ChildcareInquiryDTO } from "../../../../backend/dto/inquiry";
 import { ChildDTO } from "../../../../backend/dto/childcare/child";
 import { PersonDTO } from "../../../../backend/dto/person";
-import { rateLimitHandler } from "@/components/api/rate-limit";
+import rateLimitHandler from "@/components/api/rate-limit";
 
 function isChildcareInquiryDTO(body: any): boolean {
   return (

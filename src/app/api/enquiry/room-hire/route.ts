@@ -1,4 +1,4 @@
-import { rateLimitHandler } from "@/components/api/rate-limit";
+import rateLimitHandler from "@/components/api/rate-limit";
 import { RoomBookingEnquiryDTO } from "../../../../backend/dto/inquiry";
 import RoomBookingInquiryService from "@/backend/service/room-booking-inquiry-service";
 
