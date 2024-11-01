@@ -25,7 +25,7 @@ function isProgramCourseInquiryDTO(body: any): boolean {
 
 export async function POST(request: Request) {
   try {
-    return rateLimitHandler(request, async() => {
+    return await rateLimitHandler(request, async() => {
       const body = await request.json();
 
       // Validate the body thoroughly

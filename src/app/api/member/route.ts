@@ -1,4 +1,4 @@
-import rateLimitHandler from "@/components/api/rate-limit";
+import rateLimitHandler from "../../../components/api/rate-limit";
 import { MemberDTO } from "../../../backend/dto/member";
 import MemberService from "../../../backend/service/member-service";
 
@@ -13,7 +13,7 @@ function isMemberDTO(body: any): body is MemberDTO {
 
 export async function POST(request: Request) {
     try {
-        return rateLimitHandler(request, async() => {
+        return await rateLimitHandler(request, async() => {
             const body = await request.json();
 
             // Validate the body

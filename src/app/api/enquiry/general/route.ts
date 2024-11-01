@@ -1,6 +1,6 @@
 import GeneralInquiryService from "../../../../backend/service/general-inquiry-service";
 import { GeneralInquiryDTO } from "../../../../backend/dto/inquiry";
-import rateLimitHandler from "@/components/api/rate-limit";
+import rateLimitHandler from "../../../../components/api/rate-limit";
 
 function isGeneralInquiryDTO(body: any): body is GeneralInquiryDTO {
     return (
@@ -12,7 +12,7 @@ function isGeneralInquiryDTO(body: any): body is GeneralInquiryDTO {
 
 export async function POST(request: Request) {
     try {
-        return rateLimitHandler(request, async() => {
+        return await rateLimitHandler(request, async() => {
             const body = await request.json();
 
             // Validate the body

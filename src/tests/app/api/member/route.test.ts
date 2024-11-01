@@ -1,6 +1,7 @@
 import { POST } from "../../../../app/api/member/route";
 import { MemberDTO } from "../../../../backend/dto/member";
 import MemberService from "../../../../backend/service/member-service";
+import rateLimitHandler from "../../../../components/api/rate-limit";
 import 'whatwg-fetch';
 
 // Mock the MemberService
@@ -14,6 +15,8 @@ const mockAddMember = jest.fn();
 const mockNextRequest = (body: any) => ({
   json: jest.fn().mockResolvedValue(body),
 });
+
+jest.mock("../../../../components/api/rate-limit", () => jest.fn((request, callback) => callback()));
 
 const validMemberDTO: MemberDTO = {
   memberId: 1,
