@@ -13,8 +13,11 @@ export default async function Dashboard() {
 
         // get a list of all member emails
         const service = new MemberService();
-        const members = (await service.getAll()).map(member => member.person?.email)
-                                                .filter(email => email !== undefined)
+        const members = Array.from(
+          new Set((await service.getAll())
+            .map(member => member.person?.email)
+            .filter(email => email !== undefined))
+        );
 
         return (
           <AdminHeader>
