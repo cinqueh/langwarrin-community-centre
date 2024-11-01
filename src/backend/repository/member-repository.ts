@@ -61,4 +61,9 @@ export default class MemberRepository extends FormRepository {
                 )
               `);
     }
+
+    public async deleteMember(id: number) {
+      const client = this.getSupabaseClient();
+      return await client.rpc('delete_full_member', { member_id: id });
+  }
 }
