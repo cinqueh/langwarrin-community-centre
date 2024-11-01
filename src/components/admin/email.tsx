@@ -7,7 +7,11 @@ import "@blocknote/mantine/style.css";
 import { useState } from "react";
 import styles from "./email-form.module.css"; // Import styles
 
-export default function EmailForm() {
+interface EmailFormProps {
+  memberEmails: string[];
+}
+
+export default function EmailForm({ memberEmails = [] }: EmailFormProps) {
   const [emails, setEmails] = useState<string[]>([]); // For storing multiple email addresses
   const [emailInput, setEmailInput] = useState(""); // For the current email input field
   const [subject, setSubject] = useState(""); // For storing email subject
@@ -23,9 +27,18 @@ export default function EmailForm() {
     }
   };
 
+  const handleInsertAllEmails = () => {
+    const newEmails = memberEmails.filter((email) => email && !emails.includes(email)); // Filter undefined and duplicates
+    setEmails([...emails, ...newEmails]);
+  };
+
   // Remove an email from the list
   const handleRemoveEmail = (emailToRemove: string) => {
     setEmails(emails.filter((email) => email !== emailToRemove));
+  };
+
+  const handleRemoveAllEmails = () => {
+    setEmails([]);
   };
 
   // Extract HTML content from the BlockNote editor
@@ -91,7 +104,17 @@ export default function EmailForm() {
     <div className={styles.content}>
       {/* Email input for multiple addresses */}
       <div className={styles.emailInputContainer}>
-        <label className={styles.label}>Emails</label>
+        <div className={styles.emailFlex}>
+          <label className={styles.label}>Emails</label>
+          <div>
+            <button onClick={handleInsertAllEmails} className={styles.insertAllButton}>
+              Add Members
+            </button>
+            <button onClick={handleRemoveAllEmails} className={styles.clearButton}>
+              Clear
+            </button>
+          </div>
+        </div>
         <div className={styles.emailList}>
           {emails.map((email, index) => (
             <div key={index} className={styles.emailChip}>
