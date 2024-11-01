@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.4.0...v1.5.0) (2024-11-01)
+
+
+### Features
+
+* 1.5.0 ([1b59c6b](https://github.com/cinqueh/langwarrin-community-centre/commit/1b59c6b31404d4e22c147b66f616668042720c80))
+
 # [1.4.0](https://github.com/cinqueh/langwarrin-community-centre/compare/v1.3.0...v1.4.0) (2024-10-28)
 
 
