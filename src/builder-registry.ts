@@ -525,7 +525,6 @@ Builder.registerComponent(ProgramGrid, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 // Header
@@ -643,16 +642,17 @@ Builder.registerComponent(InformationCard, {
 
 Builder.registerComponent(divider, {
   name: "Divider",
+  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(ProgramImageCard, {
-  name: "Program Image Card (with padding)",
+  name: "Image card (with space on the side)",
   inputs: programImageCardParameters,
    image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
 Builder.registerComponent(ImageCard, {
-  name: "Image Card (without padding)",
+  name: "Image card (without space on the side)",
   inputs: programImageCardParameters,
    image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
@@ -1279,17 +1279,7 @@ Builder.register("insertMenu", {
   items: [
     { name: "Information Card" },
     { name: "Information Card With Button" },
-  ],
-});
-
-// program cards
-Builder.register("insertMenu", {
-  name: "Program Cards",
-  items: [
-    { name: "Dynamic Program Card Grid" },
-    { name: "Dark Green Program Card" },
-    { name: "Medium Green Program Card" },
-    { name: "Light Green Program Card" },
+    { name: "Divider" },
   ],
 });
 
@@ -1303,12 +1293,36 @@ Builder.register("insertMenu", {
 });
 
 Builder.register("insertMenu", {
-  name: "Image Cards",
+  name: "Title Cards",
   items: [
-    { name: "Program Image Card (with padding)" },
-    { name: "Image Card (without padding)" },
+    { name: "Title Card With Back Button" },
+    { name: "Title Card" },
+    { name: "Green Title Card" },
+    { name: "Program Title Card" },
   ],
 });
+
+
+Builder.register("insertMenu", {
+  name: "Image Cards",
+  items: [
+    { name: "Image card (with space on the side)" },
+    { name: "Image card (without space on the side)" },
+  ],
+});
+
+
+// program cards
+Builder.register("insertMenu", {
+  name: "Program Cards",
+  items: [
+    { name: "Dynamic Program Card Grid" },
+    { name: "Dark Green Program Card" },
+    { name: "Medium Green Program Card" },
+    { name: "Light Green Program Card" },
+  ],
+});
+
 
 Builder.register("insertMenu", {
   name: "Custom Forms",
@@ -1331,15 +1345,6 @@ Builder.register("insertMenu", {
   ],
 });
 
-Builder.register("insertMenu", {
-  name: "Title Cards",
-  items: [
-    { name: "Title Card With Back Button" },
-    { name: "Title Card" },
-    { name: "Green Title Card" },
-    { name: "Program Title Card" },
-  ],
-});
 
 Builder.register("insertMenu", {
   name: "Home Page Components",
