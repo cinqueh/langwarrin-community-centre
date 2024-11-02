@@ -28,9 +28,9 @@ export default class NewsMapper implements Mapper<BuilderPage, NewsInformation |
                 "Program Title Card"
             ]);
         const imageCard = this.builderService.getFirstComponentOfTypes(page, 
-            ["Program Image Card (with padding)", 
-                "Image Card without padding", 
-                "Program Image Card",
+            ["Image card with space", 
+                "Image card without space", 
+                "Image Card",
             ]);
 
         // verify the page is valid

@@ -657,14 +657,14 @@ Builder.registerComponent(divider, {
 });
 
 Builder.registerComponent(ProgramImageCard, {
-  name: "Image card (with space)",
+  name: "Image card with space",
   inputs: programImageCardParameters,
   image:
     "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ImageCard, {
-  name: "Image card (without space)",
+  name: "Image card without space",
   inputs: programImageCardParameters,
   image:
     "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
@@ -1321,8 +1321,8 @@ Builder.register("insertMenu", {
 Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
-    { name: "Image card (with space)" },
-    { name: "Image card (without space)" },
+    { name: "Image card with space" },
+    { name: "Image card without space" },
   ],
 });
 

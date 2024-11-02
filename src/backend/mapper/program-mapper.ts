@@ -31,9 +31,9 @@ export default class ProgramMapper implements Mapper<BuilderPage, ProgramInforma
         const programTitleCard = this.builderService.getFirstComponent(page, "Program Title Card");
 
         // search for Program Image Card, fallback to Program Image Card with padding
-        let imageCard = this.builderService.getFirstComponent(page, "Program Image Card");
+        let imageCard = this.builderService.getFirstComponent(page, "Image card with space");
         if (!imageCard) {
-            imageCard = this.builderService.getFirstComponent(page, "Program Image Card (with padding)");
+            imageCard = this.builderService.getFirstComponent(page, "Image Card with space");
         }
 
         // verify the page url exists
