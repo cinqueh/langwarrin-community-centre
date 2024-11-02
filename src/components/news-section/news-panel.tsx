@@ -53,18 +53,18 @@ const NewsGrid: React.FC<NewsPanelProps> = ({ title }) => {
             const isGreenCard = index % 3 === 1;
             return isGreenCard ? (
               <GreenNewsCard
-                key={item.name}
+                key={`${item.name}-${index}`}
                 title={item.name}
                 imageUrl={item.imageUrl}
-                altText={item.altText}
+                altText={item.name}
                 linkUrl={item.url}
               />
             ) : (
               <WhiteNewsCard
-                key={item.name}
+                key={`${item.name}-${index}`}
                 title={item.name}
                 imageUrl={item.imageUrl}
-                altText={item.altText}
+                altText={item.name}
                 linkUrl={item.url}
               />
             );
