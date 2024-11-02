@@ -652,18 +652,19 @@ Builder.registerComponent(InformationCard, {
 
 Builder.registerComponent(divider, {
   name: "Divider",
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ProgramImageCard, {
-  name: "Image card (with space on the side)",
+  name: "Image card (with space)",
   inputs: programImageCardParameters,
   image:
     "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ImageCard, {
-  name: "Image card (without space on the side)",
+  name: "Image card (without space)",
   inputs: programImageCardParameters,
   image:
     "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
@@ -1317,15 +1318,13 @@ Builder.register("insertMenu", {
   ],
 });
 
-
 Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
-    { name: "Image card (with space on the side)" },
-    { name: "Image card (without space on the side)" },
+    { name: "Image card (with space)" },
+    { name: "Image card (without space)" },
   ],
 });
-
 
 // program cards
 Builder.register("insertMenu", {
@@ -1337,7 +1336,6 @@ Builder.register("insertMenu", {
     { name: "Light Green Program Card" },
   ],
 });
-
 
 Builder.register("insertMenu", {
   name: "Custom Forms",
@@ -1360,7 +1358,6 @@ Builder.register("insertMenu", {
   ],
 });
 
-
 Builder.register("insertMenu", {
   name: "Home Page Components",
   items: [
@@ -1371,5 +1368,6 @@ Builder.register("insertMenu", {
     { name: "Facebook Embed" },
     { name: "Green News Card" },
     { name: "White News Card" },
+    { name: "Dynamic News Card Grid" },
   ],
 });
