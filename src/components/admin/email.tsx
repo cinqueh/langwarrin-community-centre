@@ -152,7 +152,7 @@ export default function EmailForm({ memberEmails = [] }: EmailFormProps) {
       <div className={styles.editorContainer}>
         <label className={styles.label}>Email Content</label>
         <div className={styles.editorBox}>
-            <BlockNoteView editor={editor} />
+            <BlockNoteView editor={editor} theme="light"/>
         </div>
       </div>
 
