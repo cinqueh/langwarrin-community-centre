@@ -14,6 +14,8 @@ export default class MemberService extends DatabaseService<MemberRepository, Mem
 
         member.submitDate = new Date();
 
+        member = this.validateData(member, (member) => true);
+
         const response = await this.repository.addMember(member);
 
         return this.handleResponse(response, (data) => data);
