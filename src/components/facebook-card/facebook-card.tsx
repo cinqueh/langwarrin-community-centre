@@ -13,13 +13,14 @@ const FacebookEmbed: React.FC<FacebookEmbedProps> = ({
   height = "850",
 }) => {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-end", paddingLeft: "60px" }}>
+    <div className={styles.facebookEmbedContainer}>
       <iframe
         src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
           href
         )}&tabs=timeline&width=${width}&height=${height}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId`}
         width={width}
         height={height}
+        className={styles.facebookEmbedIframe}
         style={{ border: "none", overflow: "hidden" }}
         allowFullScreen={true}
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
