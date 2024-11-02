@@ -6,7 +6,6 @@ interface NewsCardProps {
   imageUrl: string;
   altText: string;
   title: string;
-  description: string;
   linkUrl: string;
 }
 
@@ -23,7 +22,6 @@ const WhiteNewsCard = (props: NewsCardProps) => {
           className={styles.newsCardImage}
         />
         <h4 className={styles.whiteNewsCardTitle}>{props.title}</h4>
-        <p className={styles.whiteNewsCardDescription}>{props.description}</p>
       </div>
       <button className="button-white" onClick={handleButtonClick}>
         Learn More
@@ -45,7 +43,6 @@ const GreenNewsCard = (props: NewsCardProps) => {
           className={styles.newsCardImage}
         />
         <h4 className={styles.greenNewsCardTitle}>{props.title}</h4>
-        <p className={styles.greenNewsCardDescription}>{props.description}</p>
       </div>
       <button className="button-white" onClick={handleButtonClick}>
         Learn More
