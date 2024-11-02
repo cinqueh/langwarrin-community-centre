@@ -68,11 +68,12 @@
   right: 0;
   background-color: #004223;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   justify-content: center;
   align-items: center;
   gap: 30px;
   z-index: 10;
+  
 }
 
 /* Responsive Styles */
