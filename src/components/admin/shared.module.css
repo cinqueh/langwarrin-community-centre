@@ -5,6 +5,7 @@
     padding: 30px;
     border-radius: 8px;
     width: 100%;
+    min-height: 100vh;
     font-family: 'Prompt', sans-serif;
   }
   
