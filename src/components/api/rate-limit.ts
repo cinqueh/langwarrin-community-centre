@@ -7,6 +7,14 @@ const rateLimiter = new RateLimiterMemory({
   duration: Number(process.env.API_RATE_LIMIT_DURATION) || 60, // Default to 60 seconds
 });
 
+// Email-specific rate limiter
+const emailRateLimiter = new RateLimiterMemory({
+  points: (Number(process.env.API_RATE_LIMIT_POINTS) || 10) * 2, // Double the points since two emails will be sent
+  duration: Number(process.env.API_RATE_LIMIT_DURATION) || 60,
+});
+
+export { rateLimiter, emailRateLimiter };
+
 export default async function rateLimitHandler(
   request: Request,
   onSuccess: () => Promise<Response> | Response

@@ -1,8 +1,21 @@
-import IEmailServiceAdapter from '@/backend/service/email/email-adapter'; // Interface for the email service
-import NodeMailerService from '@/backend/service/email/node-mailer-service'; // Concrete implementation of email service
+import IEmailServiceAdapter from '@/backend/service/email/email-adapter'; 
+import NodeMailerService from '@/backend/service/email/node-mailer-service'; 
+import { emailRateLimiter } from '@/components/api/rate-limit';
 
 export async function POST(request: Request) {
     try {
+        const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || request.headers.get('host');
+
+        // Apply the email-specific rate limiter
+        try {
+        await emailRateLimiter.consume(ip as string);
+        } catch {
+        return new Response(
+            JSON.stringify({ error: 'Too Many Requests' }),
+            { status: 429, headers: { 'Content-Type': 'application/json' } }
+        );
+        }
+        
         const { formData, userEmail } = await request.json();
 
         // Use the email service through the interface
