@@ -89,6 +89,9 @@ Experience the Website Builder, an intuitive interface that enables content upda
 ## 🧠 Architecture Diagram
 ![20f980d2-7810-4335-b0d1-b9bed9267b93](https://github.com/user-attachments/assets/269a8628-4dd7-4d51-b17f-2434ef7f9944)
 
+# 🌳 Documentation
+- [Confluence Hub](https://comp30022.atlassian.net/wiki/spaces/SD/overview?homepageId=163956)
+
 ## 🔁 Product Management
 - [User Story](https://comp30022.atlassian.net/wiki/spaces/SD/pages/3735585/User+Story)
 - [Acceptance Criteria](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4128818/Acceptance+Criteria)
