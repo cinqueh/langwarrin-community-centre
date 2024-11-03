@@ -11,12 +11,13 @@
 - [🧱 Website Builder Live Demo (Builder.io Integration)](#-website-builder-live-demo-builderio-integration)
 - [🧑‍💻 Tech Stack](#-tech-stack)
 - [🧠 Architecture Diagram](#-architecture-diagram)
+- [🔁 Product Management](#-product-management)
+- [✅ Functional Requirements](#-functional-requirements)
+- [🤔 Non-Functional Requirements](#-non-functional-requirements)
 - [🥳 Front-End Design](#-front-end-design)
 - [🤖 Back-End Design](#-back-end-design)
 - [🧪 Testing](#-testing)
 - [🚨 Deployment & Security](#-deployment--security)
-- [✅ Functional Requirements](#-functional-requirements)
-- [🤔 Non-Functional Requirements](#-non-functional-requirements)
 - [👥 Team Roles](#-team-roles)
 - [⬇️ Development Setup](#️-development-setup)
 
@@ -88,6 +89,34 @@ Experience the Website Builder, an intuitive interface that enables content upda
 ## 🧠 Architecture Diagram
 ![20f980d2-7810-4335-b0d1-b9bed9267b93](https://github.com/user-attachments/assets/269a8628-4dd7-4d51-b17f-2434ef7f9944)
 
+## 🔁 Product Management
+- [User Story](https://comp30022.atlassian.net/wiki/spaces/SD/pages/3735585/User+Story)
+- [Acceptance Criteria](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4128818/Acceptance+Criteria)
+- [User Persona](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4063235/User+Personas)
+
+## ✅ [Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24903681/Functional+Requirements)
+- **User Experience:**
+  - [x] Migrate all content from the old website.
+  - [x] Implement a slideshow or list of upcoming events.
+  
+- **Course and Class Enrollment:**
+  - [x] Digital membership signup form.
+  - [x] Admin notifications for new submissions.
+  - [x] Email automation for event notifications.
+
+- **Membership System:**
+  - [x] Admin dashboard for member management with search functionalities.
+  - [x] Admin is able to download the Membership database as CSV file for future use, email sending.
+
+- **Room Hire System:**
+  - [x] Online booking requests with email notifications.
+  - [x] Confirmation emails for bookings.
+
+## 🤔 [Non-Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24051725/Non-Functional+Requirements)
+  - Ensure easy navigation and engaging, interactive design.
+  - Make the website appealing to all age groups.
+  - Enable easy content management for the client.
+
 ## 🥳 Front-End Design
 - [Brand Kit](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4587524/Mock-Ups)
 - [Design Process](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4620293/Design+Process)
@@ -119,30 +148,6 @@ Experience the Website Builder, an intuitive interface that enables content upda
 
 ### Deployment Diagram
 ![Deployment Diagram](https://github.com/user-attachments/assets/cb16d3bc-bb8a-4de3-944e-4d30b67910ea)
-
-
-## ✅ [Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24903681/Functional+Requirements)
-- **User Experience:**
-  - [x] Migrate all content from the old website.
-  - [x] Implement a slideshow or list of upcoming events.
-  
-- **Course and Class Enrollment:**
-  - [x] Digital membership signup form.
-  - [x] Admin notifications for new submissions.
-  - [x] Email automation for event notifications.
-
-- **Membership System:**
-  - [x] Admin dashboard for member management with search functionalities.
-  - [x] Admin is able to download the Membership database as CSV file for future use, email sending.
-
-- **Room Hire System:**
-  - [x] Online booking requests with email notifications.
-  - [x] Confirmation emails for bookings.
-
-## 🤔 [Non-Functional Requirements](https://comp30022.atlassian.net/wiki/spaces/SD/pages/24051725/Non-Functional+Requirements)
-  - Ensure easy navigation and engaging, interactive design.
-  - Make the website appealing to all age groups.
-  - Enable easy content management for the client.
 
 ## 👥 [Team Roles](https://comp30022.atlassian.net/wiki/spaces/SD/pages/426021/Team+Managment)
 | Team Member     | Role(s)                        |
