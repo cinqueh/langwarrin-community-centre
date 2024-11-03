@@ -64,19 +64,26 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 60px;
+  top: 100px;
   right: 0;
   background-color: #004223;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   justify-content: center;
   align-items: center;
   gap: 30px;
   z-index: 10;
+  
 }
 
 /* Responsive Styles */
 @media (max-width: 1000px) {
+  .header{
+    position: fixed;
+    width: 100%;
+    z-index: 15;
+  }
+
   .nav {
     display: none;
   }

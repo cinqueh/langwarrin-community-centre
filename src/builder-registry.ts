@@ -46,6 +46,7 @@ import { ConfirmationForm } from "./components/room-booking-form/confirmation-de
 import { ProgramEnrollmentForm } from "./components/program-form/program-form";
 import { ContactForm } from "./components/contact-us/contact-us-card";
 import ProgramGrid from "./components/programs/programs-panel";
+import NewsGrid from "./components/news-section/news-panel";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -195,11 +196,6 @@ const newsCardParameters = [
     name: "title",
     type: "string",
     defaultValue: "Title",
-  },
-  {
-    name: "description",
-    type: "string",
-    defaultValue: "Description",
   },
   {
     name: "linkUrl",
@@ -468,7 +464,8 @@ Builder.registerComponent(TitleCardWithBackButton, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ProgramTitleCard, {
@@ -525,9 +522,19 @@ Builder.registerComponent(ProgramGrid, {
       helperText: "Enter the URL for the back button link.",
     },
   ],
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
 });
 
+Builder.registerComponent(NewsGrid, {
+  name: "Dynamic News Card Grid",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "News",
+      helperText: "This is the layout for news on the homepage.",
+    },
+  ],
+});
 // Header
 // Register Header component with the section model
 
@@ -632,29 +639,35 @@ const informationCardWithButtonParameters = [
 Builder.registerComponent(InformationCardWithButton, {
   name: "Information Card With Button",
   inputs: informationCardWithButtonParameters,
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(InformationCard, {
   name: "Information Card",
   inputs: informationCardParameters,
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(divider, {
   name: "Divider",
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ProgramImageCard, {
-  name: "Program Image Card (with padding)",
+  name: "Image card with space",
   inputs: programImageCardParameters,
-   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(ImageCard, {
-  name: "Image Card (without padding)",
+  name: "Image card without space",
   inputs: programImageCardParameters,
-   image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(DarkGreenProgramCard, {
@@ -680,19 +693,22 @@ Builder.registerComponent(FormDownloadCard, {
 Builder.registerComponent(TitleCard, {
   name: "Title Card",
   inputs: titleCardParameters,
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(RoomBookingCardLeft, {
   name: "Room Booking Card Left",
   inputs: roomBookingParameters,
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 
 Builder.registerComponent(RoomBookingCardRight, {
   name: "Room Booking Card Right",
   inputs: roomBookingParameters,
-  image: "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47"
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2F9d6c22e791704a119e168c0f87fb792a%2F6250119065a44dd69722a77c3ebc2f47",
 });
 // Register the component in Builder.io
 
@@ -1279,17 +1295,7 @@ Builder.register("insertMenu", {
   items: [
     { name: "Information Card" },
     { name: "Information Card With Button" },
-  ],
-});
-
-// program cards
-Builder.register("insertMenu", {
-  name: "Program Cards",
-  items: [
-    { name: "Dynamic Program Card Grid" },
-    { name: "Dark Green Program Card" },
-    { name: "Medium Green Program Card" },
-    { name: "Light Green Program Card" },
+    { name: "Divider" },
   ],
 });
 
@@ -1303,10 +1309,31 @@ Builder.register("insertMenu", {
 });
 
 Builder.register("insertMenu", {
+  name: "Title Cards",
+  items: [
+    { name: "Title Card With Back Button" },
+    { name: "Title Card" },
+    { name: "Green Title Card" },
+    { name: "Program Title Card" },
+  ],
+});
+
+Builder.register("insertMenu", {
   name: "Image Cards",
   items: [
-    { name: "Program Image Card (with padding)" },
-    { name: "Image Card (without padding)" },
+    { name: "Image card with space" },
+    { name: "Image card without space" },
+  ],
+});
+
+// program cards
+Builder.register("insertMenu", {
+  name: "Program Cards",
+  items: [
+    { name: "Dynamic Program Card Grid" },
+    { name: "Dark Green Program Card" },
+    { name: "Medium Green Program Card" },
+    { name: "Light Green Program Card" },
   ],
 });
 
@@ -1332,23 +1359,15 @@ Builder.register("insertMenu", {
 });
 
 Builder.register("insertMenu", {
-  name: "Title Cards",
-  items: [
-    { name: "Title Card With Back Button" },
-    { name: "Title Card" },
-    { name: "Green Title Card" },
-    { name: "Program Title Card" },
-  ],
-});
-
-Builder.register("insertMenu", {
   name: "Home Page Components",
   items: [
-    { name: "Green News Card" },
-    { name: "White News Card" },
+    { name: "Dynamic news card grid" },
     { name: "White Feature Card" }, // program, childcare and room hire on home page
     { name: "MainBanner" },
     { name: "BackgroundSection" },
     { name: "Facebook Embed" },
+    { name: "Green News Card" },
+    { name: "White News Card" },
+    { name: "Dynamic News Card Grid" },
   ],
 });

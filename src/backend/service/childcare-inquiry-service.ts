@@ -14,7 +14,7 @@ export default class ChildcareInquiryService extends DatabaseService<
 
   public async addChildcareInquiry(inquiry: ChildcareInquiryDTO) {
     inquiry.date = new Date();  // Ensure date is set to the current time
-    this.validateData(inquiry, (data) => Boolean(data.child));  // Validate that the child data exists
+    inquiry = this.validateData(inquiry, (data) => Boolean(data.child));  // Validate that the child data exists
     const response = await this.repository.addChildcareInquiry(inquiry);  // Add inquiry to repository
     return this.handleResponse(response, (data) => data);  // Handle repository response
   }

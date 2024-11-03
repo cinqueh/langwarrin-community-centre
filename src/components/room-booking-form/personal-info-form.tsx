@@ -49,11 +49,23 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
     });
   };
 
+  const [showInfo, setShowInfo] = useState("");
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     localStorage.setItem("personalDetailsFormData", JSON.stringify(formData));
-    window.location.href = props.linkUrl;
+    const roomBookingData = localStorage.getItem("roomBookingData");
+    const additionalInfoFormData = localStorage.getItem(
+      "additionalInfoFormData"
+    );
+    if (roomBookingData && additionalInfoFormData) {
+      window.location.href = props.linkUrl;
+    } else {
+      setShowInfo(
+        "Personal details saved. Please fill in the room details and additional info to continue."
+      );
+    }
   };
 
   return (
@@ -161,6 +173,8 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = (props) => {
           <option value="ACT">ACT</option>
         </select>
       </div>
+
+      {showInfo && <p className="alertError">{showInfo}</p>}
 
       <button
         type="submit"

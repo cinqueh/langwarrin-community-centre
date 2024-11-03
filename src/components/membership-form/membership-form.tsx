@@ -98,29 +98,10 @@ const MembershipForm = (props: MembershipFormProps) => {
         },
         body: JSON.stringify(memberDTO),
       });
-
+  
       if (response.ok) {
-        // After successfully submitting the form, trigger the email sending
-        const emailResponse = await fetch("/api/email/membership-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userEmail: formData.email, // The client's email
-            formData, // The form data containing all the details
-          }),
-        });
-
-        if (emailResponse.ok) {
-          setAlertMessage("Form submitted and emails sent successfully!");
-          setAlertType("success");
-        } else {
-          setAlertMessage(
-            "Form submitted, but an error occurred while sending emails."
-          );
-          setAlertType("error");
-        }
+        setAlertMessage("Form submitted and emails sent successfully!");
+        setAlertType("success");
       } else {
         setAlertMessage(
           "An error occurred while submitting the form. Please try again."

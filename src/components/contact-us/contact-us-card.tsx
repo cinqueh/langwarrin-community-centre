@@ -129,27 +129,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
       });
 
       if (response.ok) {
-        // After form submission is successful, send confirmation emails
-        const emailResponse = await fetch("/api/email/inquiry-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userEmail: formData.email, // Client's email
-            formData, // Form data for the email content
-          }),
-        });
-
-        if (emailResponse.ok) {
-          setAlertMessage("Form submitted and emails sent successfully!");
-          setAlertType("success");
-        } else {
-          setAlertMessage(
-            "Form submitted, but an error occurred while sending emails."
-          );
-          setAlertType("error");
-        }
+        setAlertMessage("Form submitted and emails sent successfully!");
+        setAlertType("success");
       } else {
         setAlertMessage(
           "An error occurred while submitting the form. Please try again."
@@ -166,9 +147,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
       setIsLoading(false);
     }
   };
-
+    
   return (
-    <form className={styles.formContainer} onSubmit={handleSubmit}>
+    <form className={styles.formContainer} onSubmit={handleSubmit} id="contactForm">
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.subtitle}>{subtitle}</p>
 
@@ -228,7 +209,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           <option value="complaints">Complaints</option>
         </select>
         <div className={styles.mobileInputWrapper}>
-          <span className={styles.mobilePrefix}>+61 |</span>
+          <span className={styles.mobilePrefix}>+03 |</span>
           <input
             type="tel"
             name="homePhone"

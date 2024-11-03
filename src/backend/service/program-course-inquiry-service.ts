@@ -20,7 +20,7 @@ export default class ProgramCourseInquiryService extends DatabaseService<
     inquiry.date = new Date();
 
     // Make sure emergency data is present
-    this.validateData(inquiry, (data) => Boolean(data.emergencyNumber));
+    inquiry = this.validateData(inquiry, (data) => Boolean(data.emergencyNumber));
 
     const response = await this.repository.addProgramCourseInquiry(inquiry);
     return this.handleResponse(response, (data) => data);

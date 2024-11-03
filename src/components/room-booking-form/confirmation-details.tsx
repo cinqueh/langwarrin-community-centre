@@ -107,23 +107,7 @@ const ConfirmationForm: React.FC<ConfirmationFormProps> = ({
       });
 
       if (response.ok) {
-        // Send email after successful booking submission
-        await fetch("/api/email/room-booking-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userEmail: personalDetails.email,
-            formData: {
-              roomDetails,
-              personalDetails,
-              additionalInfo,
-              totalAmount
-            }
-          })
-        });
-
+        // Email is now sent within the room hire API, so no need to call the email API separately
         localStorage.clear(); // Clear local storage on success
         window.location.href = "/request-a-room/success"; // Redirect on success
       } else {

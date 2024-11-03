@@ -23,7 +23,8 @@
     "rate-limiter-flexible": "^5.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-table": "^7.8.0"
+    "react-table": "^7.8.0",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

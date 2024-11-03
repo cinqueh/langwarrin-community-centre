@@ -1,6 +1,6 @@
 /* Outer container with green background */
 .newsCardOuterContainer {
-  background-color: #38603a; 
+  background-color: #38603a;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -10,8 +10,9 @@
 }
 
 .newsCardImage {
-  width: 100%;
-  height: auto;
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
 }
 
 /* White box container */
@@ -19,16 +20,16 @@
   background-color: #efeee5;
   padding: 20px;
   margin-bottom: 20px;
-  width: 280px;
+  width: 300px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* White box Title styling */
 .whiteNewsCardTitle {
   margin: 10px 0;
   font-size: 18px;
-  color: #2b2b2b; 
+  color: #2b2b2b;
   font-weight: bold;
 }
 
@@ -41,26 +42,45 @@
 
 /* Green box container */
 .greenNewsCardContainer {
-    background-color: 38603a;
-    padding: 20px;
-    margin-bottom: 20px;
-    width: 280px;
-    text-align: center;
-    box-shadow: 4px 4px 0px rgb(255, 255, 255); 
+  background-color: #38603a;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 4px 4px 0px rgb(255, 255, 255);
+}
+
+/* Green box Title styling */
+.greenNewsCardTitle {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #efeee5;
+  font-weight: bold;
+}
+
+/* Green box Description styling */
+.greenNewsCardDescription {
+  font-size: 14px;
+  color: #efeee5;
+  margin-bottom: 15px;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background-color: #38603a;
+  margin: 0 -40px;
+}
+
+@media screen and (max-width: 1055px) {
+  .newsGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
   }
-  
-  /* Green box Title styling */
-  .greenNewsCardTitle {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #EFEEE5; 
-    font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+  .newsGrid {
+    grid-template-columns: 1fr; /* 1 column for very small screens */
   }
-  
-  /* Green box Description styling */
-  .greenNewsCardDescription {
-    font-size: 14px;
-    color: #EFEEE5;
-    margin-bottom: 15px;
-  }
-  
+}
