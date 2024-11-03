@@ -49,7 +49,7 @@ Explore the main website, designed for ease of use and accessibility. This site 
 ## 👩‍💼 [Admin Portal Live Demo](https://langwarrin-community-centre.vercel.app/admin)
 The Admin Portal allows administrators to manage memberships, program enrollments, room bookings, and receive inquiries. It offers search functionalities to simplify management tasks, and admin can download the records in the database as CSV file, as well as sending mass emails through the emailing portal.
 
-> 🔑 To log into the Admin Portal, you need to be signed into the admin Google account. Please refer to 
+> 🔑 To log into the Admin Portal, you need to be signed into the admin Google account. Please refer to [🔐 Authentication](#-authentication)
 
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/69549dbc-b3f5-4bfb-abeb-0329a58d7236">
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/5dbb1288-870b-43ea-90c4-075d15ae550b">
@@ -59,7 +59,7 @@ The Admin Portal allows administrators to manage memberships, program enrollment
 ## 🧱 Website Builder Live Demo (Builder.io Integration)
 Experience the Website Builder, an intuitive interface that enables content updates without requiring technical skills. Admins can customise sections, update events, and modify website content seamlessly.
 
-> 🚨 To customise the website using Builder Integration, you need to run the website locally and log in to [Builder.io](https://www.builder.io/). Please refer to [⬇️ Development Setup](#️-development-setup) to set up the project locally. **Note: The Admin Portal is not customisable.**  
+> 🔑 To log into the [Builder.io](https://www.builder.io/) that is connected to the production website, you need to be signed into the admin Google account. Please refer to [🔐 Authentication](#-authentication)
 
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/6950ccfd-22eb-49fe-b562-69eaa2107c2c">
 
