@@ -1,6 +1,6 @@
 import IEmailServiceAdapter from '@/backend/service/email/email-adapter'; 
 import NodeMailerService from '@/backend/service/email/node-mailer-service'; 
-import { emailRateLimiter } from '@/components/api/rate-limit';
+import { emailRateLimiter } from '@/components/api/rate-limit'; 
 
 export async function POST(request: Request) {
     try {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
             { status: 429, headers: { 'Content-Type': 'application/json' } }
         );
         }
-        
+
         const { formData, userEmail } = await request.json();
 
         // Use the email service through the interface
