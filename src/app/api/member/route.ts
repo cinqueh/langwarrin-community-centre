@@ -105,7 +105,7 @@ export async function POST(request: Request) {
             } catch (emailError) {
                 console.error('Error sending emails:', emailError);
             }
-    
+
             return new Response(
                 JSON.stringify(data),
                 {

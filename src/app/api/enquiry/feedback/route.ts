@@ -86,7 +86,7 @@ export async function POST(request: Request) {
                 console.error('Error sending emails:', error);
                 // Handle email sending errors if necessary
             }
-        
+       
             return new Response(
                 JSON.stringify(data),
                 {
