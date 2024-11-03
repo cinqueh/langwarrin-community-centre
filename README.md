@@ -4,6 +4,7 @@
 ## Table of Contents
 - [Langwarrin Community Centre Website](#langwarrin-community-centre-website)
 - [🚀 Overview](#-overview)
+- [🤝 Tutorial](#-tutorial)
 - [💻 Website Live Demo](#-website-live-demo)
 - [👩‍💼 Admin Portal Live Demo](#-admin-portal-live-demo)
 - [🧱 Website Builder Live Demo (Builder.io Integration)](#-website-builder-live-demo-builderio-integration)
@@ -28,6 +29,10 @@ This project aims to develop a full-stack website for Langwarrin community centr
 - Website Builder (Used by the admin to customise the website)
 
 ![IT Project Final Presentation](https://github.com/user-attachments/assets/8dfa57d0-4318-483d-9fc3-0d334527e234)
+
+## 🤝 Tutorial
+- [Product Tutorial](https://www.canva.com/design/DAGVNNJI6rg/sKF9NLLJkmC8wiUzMUYgnQ/view?utm_content=DAGVNNJI6rg&utm_campaign=designshare&utm_medium=link&utm_source=editor): This document provides a collection of images and step-by-step instructions to guide users through the practical usage of the product from the Admin perspective.
+- [Handover Document](https://docs.google.com/document/d/14hsPGMhCdz77sbyPgamyaoxIJI8SXBFpsNKLtdbS-5k/edit?tab=t.0): This document offers an in-depth overview of the project's technical setup and details, focusing on comprehensive technical explanations. (**Please request access if you would like to view the documentation**)
 
 ## 💻 [Website Live Demo](https://langwarrin-community-centre.vercel.app/)
 Explore the main website, designed for ease of use and accessibility. This site includes interactive elements such as course enrollment, room bookings, and an event calendar to enhance the community's experience.
