@@ -4,7 +4,7 @@
 
 ### Authentication and Authorization
 
-- **Authentication Mechanism**: User authentication is managed using email and password with JWT tokens. Additionally, GitHub, Google, and Discord are supported as third-party authentication providers.
+- **Authentication Mechanism**: Authentication is performed through the Auth.js library, using the OAuth 2.0 protocol. An admin authenticates with a trusted identity provider, Google, issuing a JSON Web Token (JWT) for their session. 
 - **Protection**: JSON Web Tokens (JWTs) are issued with an expiry time of 30 minutes to limit misuse if compromised.
 - **Authorization**: Access controls are role-based, and currently, only one role exists through provided Gmail credentials. 
 - **Access Control**: Strict access routes ensure only authenticated admins can perform CRUD operations, aligning with the least privilege principle.
