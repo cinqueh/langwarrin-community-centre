@@ -12,7 +12,7 @@
 ### Data Protection
 
 - **Sensitive Information**: The platform handles sensitive data such as personal names, emails, contact phone numbers, addresses, and children’s details.
-- **Encryption**: All passwords are encrypted using bcrypt and salted before storage.
+- **Encryption**: Our website does not handle encryption as no sensitive data is stored in the system.
 - **Environment Variables**: API keys and other sensitive information are stored in environment variables, not hard-coded, and distributed to developers on a need-to-know basis.
 - **Dependencies**: External libraries are listed in the `package.json` file, and `npm audit` is regularly used to check for vulnerabilities.
 
