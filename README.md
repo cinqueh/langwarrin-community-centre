@@ -5,6 +5,7 @@
 - [Langwarrin Community Centre Website](#langwarrin-community-centre-website)
 - [🚀 Overview](#-overview)
 - [🤝 Handover](#-handover)
+- [📦 Releases](#-releases)
 - [💻 Website Live Demo](#-website-live-demo)
 - [👩‍💼 Admin Portal Live Demo](#-admin-portal-live-demo)
 - [🧱 Website Builder Live Demo (Builder.io Integration)](#-website-builder-live-demo-builderio-integration)
@@ -17,7 +18,6 @@
 - [✅ Functional Requirements](#-functional-requirements)
 - [🤔 Non-Functional Requirements](#-non-functional-requirements)
 - [👥 Team Roles](#-team-roles)
-- [📦 Releases](#-releases)
 - [⬇️ Development Setup](#️-development-setup)
 
 # 🚀 Overview
@@ -32,6 +32,11 @@ This project aims to develop a full-stack website for Langwarrin community centr
 
 ## 🤝 Handover
 - [Product Tutorial](https://www.canva.com/design/DAGVNNJI6rg/sKF9NLLJkmC8wiUzMUYgnQ/view?utm_content=DAGVNNJI6rg&utm_campaign=designshare&utm_medium=link&utm_source=editor): This document provides a collection of images and step-by-step instructions to guide users through the practical usage of the product from the Admin perspective.
+
+# 📦 Releases 
+- [Release](https://github.com/cinqueh/langwarrin-community-centre/releases)
+- [CI Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/ci.yml)
+- [CD Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/deploy.yml)
 
 ## 💻 [Website Live Demo](https://langwarrin-community-centre.vercel.app/)
 Explore the main website, designed for ease of use and accessibility. This site includes interactive elements such as course enrollment, room bookings, and an event calendar to enhance the community's experience.
@@ -147,11 +152,6 @@ Experience the Website Builder, an intuitive interface that enables content upda
 | **Aarushi Dua** | UX Designer, Database Admin     |
 | **Cindy Shi**   | UI Designer, Frontend Engineer  |
 | **Noel Abraham**| UX Designer, Frontend Engineer  |
-
-# 📦 Releases 
-- [Release](https://github.com/cinqueh/langwarrin-community-centre/releases)
-- [CI Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/ci.yml)
-- [CD Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/deploy.yml)
 
 # ⬇️ Development Setup
 
