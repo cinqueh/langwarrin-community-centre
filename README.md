@@ -16,6 +16,7 @@
 - [✅ Functional Requirements](#-functional-requirements)
 - [🤔 Non-Functional Requirements](#-non-functional-requirements)
 - [👥 Team Roles](#-team-roles)
+- [📦 Releases](#-releases)
 - [⬇️ Development Setup](#️-development-setup)
 
 # 🚀 Overview
@@ -99,6 +100,7 @@ Experience the Website Builder, an intuitive interface that enables content upda
 - [Accessibility Testing](https://comp30022.atlassian.net/wiki/spaces/SD/pages/52494338/Accessibility+Testing)
 - [UX and Usability Testing](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4161538/UX+and+Usability+Testing)
 - [Unit Testing](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4587580/Unit+Testing)
+- [Traceability Matrix](https://comp30022.atlassian.net/wiki/spaces/SD/pages/92438539/Traceability+Matrix)
 
 ## 🚨 Deployment & Security
 - [Deployment](https://comp30022.atlassian.net/wiki/spaces/SD/pages/12943362/Deployment)
@@ -139,6 +141,11 @@ Experience the Website Builder, an intuitive interface that enables content upda
 | **Aarushi Dua** | UX Designer, Database Admin     |
 | **Cindy Shi**   | UI Designer, Frontend Engineer  |
 | **Noel Abraham**| UX Designer, Frontend Engineer  |
+
+# 📦 Releases 
+- [Release](https://github.com/cinqueh/langwarrin-community-centre/releases)
+- [CI Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/ci.yml)
+- [CD Pipeline](https://github.com/cinqueh/langwarrin-community-centre/actions/workflows/deploy.yml)
 
 # ⬇️ Development Setup
 
