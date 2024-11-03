@@ -123,46 +123,39 @@ const ProgramEnrollmentForm = (props: ProgramEnrollmentFormProps) => {
 
     // Send form data to backend API (save program enrollment)
     try {
-        const response = await fetch("/api/enquiry/programcourse", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(programCourseInquiryDTO),
-        });
+      const response = await fetch("/api/enquiry/programcourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(programCourseInquiryDTO),
+      });
 
-        if (response.ok) {
-            // After form submission is successful, send confirmation emails
-            const emailResponse = await fetch("/api/email/program-email", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    userEmail: formData.email, // Client's email
-                    formData, // Form data for the email content
-                }),
-            });
-
-            if (emailResponse.ok) {
-                setAlertMessage("Form submitted and emails sent successfully!");
-                setAlertType("success");
-            } else {
-                setAlertMessage("Form submitted, but an error occurred while sending emails.");
-                setAlertType("error");
-            }
-        } else {
-            setAlertMessage("An error occurred while submitting the form. Please try again.");
-            setAlertType("error");
-        }
-    } catch (error) {
-        console.error("Error submitting form:", error);
-        setAlertMessage("An error occurred while submitting the form. Please try again.");
+      if (response.ok) {
+        setAlertMessage("Form submitted and emails sent successfully!");
+        setAlertType("success");
+        setAgreedToTerms(false);
+        setAgreedToBond(false);
+        setAgreedToAge(false);
+      } else {
+        const errorData = await response.json();
+        setAlertMessage(
+          errorData.error ||
+            "An error occurred while submitting the form. Please try again."
+        );
         setAlertType("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setAlertMessage(
+        "An error occurred while submitting the form. Please try again."
+      );
+      setAlertType("error");
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-};
+  };
+
 
 
   return (
