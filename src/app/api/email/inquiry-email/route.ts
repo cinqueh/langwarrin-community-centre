@@ -7,7 +7,12 @@ export async function POST(request: Request) {
 
         // Use the interface instead of the class directly
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
-        const adminEmail = 'langwarrin.community@gmail.com';
+        const adminEmail = process.env.ADMIN_CONFIRMATION_EMAIL;
+
+        // Check if the adminEmail is undefined and handle it
+        if (!adminEmail) {
+            throw new Error('ADMIN_CONFIRMATION_EMAIL environment variable is not set');
+        }
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://langwarrin-community-centre.vercel.app';
         let adminDashboardLink = '';

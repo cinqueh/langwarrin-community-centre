@@ -7,7 +7,12 @@ export async function POST(request: Request) {
 
         // Use the email service through the interface
         const emailService: IEmailServiceAdapter = NodeMailerService.getInstance();
-        const adminEmail = 'langwarrin.community@gmail.com';
+        const adminEmail = process.env.ADMIN_CONFIRMATION_EMAIL;
+
+        // Check if the adminEmail is undefined and handle it
+        if (!adminEmail) {
+            throw new Error('ADMIN_CONFIRMATION_EMAIL environment variable is not set');
+        }
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://langwarrin-community-centre.vercel.app';
         const adminDashboardLink = `${baseUrl}/admin/room-hire`;
@@ -18,7 +23,6 @@ export async function POST(request: Request) {
             <p><strong>Hire Type:</strong> ${formData.roomDetails.hireType}</p>
             <p><strong>Booking Date:</strong> ${formData.roomDetails.date}</p>
             <p><strong>Time:</strong> ${formData.roomDetails.startTime} to ${formData.roomDetails.endTime}</p>
-            <p><strong>Total Amount:</strong> $${formData.roomDetails.totalAmount}</p>
         `;
 
         // Personal details (HTML formatted)
