@@ -93,44 +93,27 @@ const ChildcareContactForm = (props: ChildcareContactFormProps) => {
     setIsLoading(true);
 
     try {
-        const response = await fetch("/api/enquiry/childcare", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(childcareInquiryDTO),
-        });
-
-        if (response.ok) {
-            // After form submission is successful, send confirmation emails
-            const emailResponse = await fetch("/api/email/childcare-email", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    userEmail: formData.email, // Client's email
-                    formData, // Form data for the email content
-                }),
-            });
-
-            if (emailResponse.ok) {
-                setAlertMessage("Form submitted and emails sent successfully!");
-                setAlertType("success");
-            } else {
-                setAlertMessage("Form submitted, but an error occurred while sending emails.");
-                setAlertType("error");
-            }
-        } else {
-            setAlertMessage("An error occurred while submitting the form. Please try again.");
-            setAlertType("error");
-        }
-    } catch (error) {
-        console.error("Error submitting form:", error);
+      const response = await fetch("/api/enquiry/childcare", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(childcareInquiryDTO),
+      });
+  
+      if (response.ok) {
+        setAlertMessage("Form submitted and emails sent successfully!");
+        setAlertType("success");
+      } else {
         setAlertMessage("An error occurred while submitting the form. Please try again.");
         setAlertType("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setAlertMessage("An error occurred while submitting the form. Please try again.");
+      setAlertType("error");
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
