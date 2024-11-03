@@ -11,6 +11,8 @@
 - [🧱 Website Builder Live Demo (Builder.io Integration)](#-website-builder-live-demo-builderio-integration)
 - [🧑‍💻 Tech Stack](#-tech-stack)
 - [🧠 Architecture Diagram](#-architecture-diagram)
+- [🌳 Documentation](#-documentation)
+- [🔐 Authentication](#-authentication)
 - [🔁 Product Management](#-product-management)
 - [✅ Functional Requirements](#-functional-requirements)
 - [🤔 Non-Functional Requirements](#-non-functional-requirements)
@@ -47,7 +49,7 @@ Explore the main website, designed for ease of use and accessibility. This site 
 ## 👩‍💼 [Admin Portal Live Demo](https://langwarrin-community-centre.vercel.app/admin)
 The Admin Portal allows administrators to manage memberships, program enrollments, room bookings, and receive inquiries. It offers search functionalities to simplify management tasks, and admin can download the records in the database as CSV file, as well as sending mass emails through the emailing portal.
 
-> 🔑 To log into the Admin Portal, you need to be signed into the admin Google account. Please contact a team member to request access to the linked Google account for authentication.
+> 🔑 To log into the Admin Portal, you need to be signed into the admin Google account. Please refer to 
 
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/69549dbc-b3f5-4bfb-abeb-0329a58d7236">
 <img style="width:100%;" alt="image" src="https://github.com/user-attachments/assets/5dbb1288-870b-43ea-90c4-075d15ae550b">
@@ -92,6 +94,10 @@ Experience the Website Builder, an intuitive interface that enables content upda
 # 🌳 Documentation
 - [Confluence Hub](https://comp30022.atlassian.net/wiki/spaces/SD/overview?homepageId=163956)
 
+## 🔐 Authentication
+> To test any functionality with the Website Editor and Admin Portal, you will need login credentials. Only personnel with granted access will be able to view the page below. Please contact a team member if you require access but are unable to see the page.
+- [Shared Credentials](https://comp30022.atlassian.net/wiki/spaces/SD/pages/5079062/Shared+Credentials)
+
 ## 🔁 Product Management
 - [User Story](https://comp30022.atlassian.net/wiki/spaces/SD/pages/3735585/User+Story)
 - [Acceptance Criteria](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4128818/Acceptance+Criteria)
@@ -135,6 +141,7 @@ Experience the Website Builder, an intuitive interface that enables content upda
 - [Database Setup](https://comp30022.atlassian.net/wiki/spaces/SD/pages/3965018/Databases)
 
 ## 🧪 Testing
+- [Test Cases](https://github.com/cinqueh/langwarrin-community-centre/tree/develop/src/tests)
 - [Testing Framework](https://comp30022.atlassian.net/wiki/spaces/SD/pages/491532/Testing)
 - [Testing Plan](https://comp30022.atlassian.net/wiki/spaces/SD/pages/46661701/Testing+Plan)
 - [Integration Testing](https://comp30022.atlassian.net/wiki/spaces/SD/pages/4096023/Integration+Testing)
