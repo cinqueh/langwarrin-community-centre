@@ -65,6 +65,47 @@ describe('MemberService', () => {
             expect(result).toEqual(memberDTO);
         });
 
+        it('should filter out html tags', async () => {
+            const memberDTO: MemberDTO = {
+                memberId: 1,
+                title: "Dr",
+                submitDate: new Date(),
+                person: {
+                    personId: 1,
+                    firstName: "<script>alert()</script>",
+                    surname: "Doe",
+                    email: "john@example.com",
+                }
+            };
+
+            const sanitisedDTO: MemberDTO = {
+                memberId: 1,
+                title: "Dr",
+                submitDate: new Date(),
+                person: {
+                    personId: 1,
+                    firstName: "&lt;script&gt;alert()&lt;/script&gt;",
+                    surname: "Doe",
+                    email: "john@example.com",
+                }
+            };
+
+            const response: PostgrestSingleResponse<MemberDTO> = {
+                data: sanitisedDTO,
+                error: null,
+                status: 201,
+                statusText: "Created",
+                count: null // Ensure count is provided
+            };
+
+            memberRepositoryMock.addMember.mockResolvedValue(response);
+
+            const result = await memberService.addMember(memberDTO);
+
+            expect(memberRepositoryMock.addMember).toHaveBeenCalledWith(sanitisedDTO);
+            expect(result).toEqual(memberDTO);
+        });
+
         it('should throw a DatabaseError on failure', async () => {
             const memberDTO: MemberDTO = {
                 memberId: 1,

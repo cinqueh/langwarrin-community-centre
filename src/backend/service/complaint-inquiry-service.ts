@@ -15,7 +15,7 @@ export default class ComplaintInquiryService extends DatabaseService<
   public async newComplaintInquiry(inquiry: ComplaintInquiryDTO) {
     inquiry.date = new Date();
 
-    this.validateData(inquiry, (data) => Boolean(data.person?.firstName));
+    inquiry = this.validateData(inquiry, (data) => Boolean(data.person?.firstName));
 
     const response = await this.repository.addComplaintInquiry(inquiry);
 

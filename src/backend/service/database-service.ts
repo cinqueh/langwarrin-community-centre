@@ -2,6 +2,7 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { DatabaseError, DataValidationError } from "../util/errors";
 import FormRepository, { BaseRepository } from "../repository/base-repository";
 import Mapper from "../mapper/mapper";
+import xss from "xss";
 
 export abstract class DatabaseService<Repository extends BaseRepository> {
     protected handleResponse<T, Q>(
@@ -16,14 +17,32 @@ export abstract class DatabaseService<Repository extends BaseRepository> {
         }
     }
 
+    protected sanitizeData<T>(data: T): T {
+        for (const key in data) {
+            if (typeof data[key] === "string") {
+                data[key] = xss(data[key] as string) as T[typeof key];
+            } else if (typeof data[key] === "object" && data[key] !== null) {
+                // Recursively sanitize nested objects
+                this.sanitizeData(data[key]);
+            }
+        }
+        return data;
+    }
+
     protected validateData<T>(
         data: T,
         doValidate: (data: T) => boolean
-    ) {
-        if (!doValidate(data)) {
-            const message = `Data validation error. Data is of invalid form: ${data}`;
+    ): T {
+        // Sanitize all string properties, including nested ones
+        const sanitizedData = this.sanitizeData(data);
+    
+        if (!doValidate(sanitizedData)) {
+            const message = `Data validation error. Data is of invalid form: 
+            ${JSON.stringify(sanitizedData)}`;
             throw new DataValidationError(message);
         }
+    
+        return sanitizedData;
     }
 
     protected repository: Repository;
