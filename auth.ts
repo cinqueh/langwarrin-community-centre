@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   session: {
     strategy: "jwt",
-    maxAge: 15 * 60, // sessions expire after 15 minutes
+    maxAge: 30 * 60, // sessions expire after 30 minutes
   },
   pages: {
     signIn: '/admin/sign-in',
