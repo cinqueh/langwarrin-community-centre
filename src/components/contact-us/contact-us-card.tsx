@@ -168,7 +168,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   };
 
   return (
-    <form className={styles.formContainer} onSubmit={handleSubmit}>
+    <form className={styles.formContainer} onSubmit={handleSubmit} id="contactForm">
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.subtitle}>{subtitle}</p>
 
@@ -228,7 +228,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           <option value="complaints">Complaints</option>
         </select>
         <div className={styles.mobileInputWrapper}>
-          <span className={styles.mobilePrefix}>+61 |</span>
+          <span className={styles.mobilePrefix}>+03 |</span>
           <input
             type="tel"
             name="homePhone"

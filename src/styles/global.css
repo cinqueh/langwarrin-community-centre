@@ -5,6 +5,12 @@
   padding: 20px 40px;
 }
 
+@media (max-width: 1000px) {
+  .pageContainer {
+    margin-top: 90px;
+  }
+}
+
 h1 {
   font-size: 120px;
   font-weight: bolder;
